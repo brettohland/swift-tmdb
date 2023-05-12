@@ -1,16 +1,7 @@
-//
-//  HTTP+Client.swift
-//
-//
-//  Created by brett ohland on 07/12/22.
-//
-
 import Foundation
 
 extension HTTP {
-
     struct Client {
-
         let urlSession: URLSession
 
         init(authToken: String) {
@@ -42,8 +33,8 @@ extension HTTP.Client {
 
         switch httpResponse.status.responseCategory {
         case .informational,
-             .success,
-             .redirection:
+             .redirection,
+             .success:
             return data
         case .clientError:
             throw NetworkError.clientError(httpResponse, data)

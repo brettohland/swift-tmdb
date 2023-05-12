@@ -1,10 +1,3 @@
-//
-//  File.swift
-//
-//
-//  Created by brett ohland on 07/13/22.
-//
-
 import Foundation
 
 struct Endpoint<ResponseType: Decodable> {
@@ -20,7 +13,7 @@ extension Endpoint {
         urlComponents.path = "/" + path
         urlComponents.queryItems = queryItems.isEmpty ? nil : queryItems
         guard let url = urlComponents.url else {
-            throw TMDB.RequestError.invalidRequestData
+            throw URLError(.badURL)
         }
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
@@ -28,7 +21,7 @@ extension Endpoint {
         return request
     }
 
-    func responseObject(from request: URLRequest, using client: HTTP.Client) async throws -> ResponseType {
+    static func responseObject(from request: URLRequest, using client: HTTP.Client) async throws -> ResponseType {
         do {
             let data = try await client.data(for: request)
             return try TMDB.decoder.decode(ResponseType.self, from: data)

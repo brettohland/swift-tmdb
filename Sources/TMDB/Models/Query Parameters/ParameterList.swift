@@ -1,15 +1,7 @@
-//
-//  ParameterList.swift
-//
-//
-//  Created by brett ohland on 07/12/22.
-//
-
 import Foundation
 
 public extension TMDB {
     struct ParameterList: QueryValueRepresentable {
-
         let filter: FilterType
         let list: [CustomStringConvertible]
 
@@ -19,7 +11,7 @@ public extension TMDB {
         }
 
         public var queryValue: String {
-            list.map { $0.description }.joined(separator: filter.character)
+            list.map(\.description).joined(separator: filter.character)
         }
     }
 }

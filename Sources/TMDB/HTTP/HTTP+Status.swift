@@ -1,10 +1,3 @@
-//
-//  HTTP+Status.swift
-//
-//
-//  Created by brett ohland on 07/12/22.
-//
-
 import Foundation
 
 extension HTTP {
@@ -97,9 +90,7 @@ extension HTTP {
 }
 
 extension HTTP.Status {
-
     enum Category {
-
         /// 1XX: An informational response indicates that the request was received and understood.
         case informational
 
@@ -118,12 +109,9 @@ extension HTTP.Status {
 }
 
 extension HTTP.Status {
-
     /// Returns the Category for the given HTTPStatusCode
     var responseCategory: Category {
-
         switch rawValue {
-
         case 100 ... 199:
             return .informational
 

@@ -1,10 +1,3 @@
-//
-//  File.swift
-//
-//
-//  Created by brett ohland on 07/13/22.
-//
-
 import Foundation
 
 extension TMDB {
@@ -12,6 +5,12 @@ extension TMDB {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }
+
+    static var noSnakeCaseDecoder: JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
         return decoder
     }
 

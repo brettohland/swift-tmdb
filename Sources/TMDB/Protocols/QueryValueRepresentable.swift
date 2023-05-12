@@ -1,10 +1,3 @@
-//
-//  QueryValueRepresentable.swift
-//
-//
-//  Created by brett ohland on 07/12/22.
-//
-
 import Foundation
 
 public protocol QueryValueRepresentable {
@@ -41,15 +34,15 @@ extension Double: QueryValueRepresentable {
     }
 }
 
-extension Array: QueryValueRepresentable where Element == StringLiteralType {
+extension [StringLiteralType]: QueryValueRepresentable {
     public var queryValue: String {
-        map { $0.description }.joined(separator: ",")
+        map(\.description).joined(separator: ",")
     }
 }
 
 extension Date: QueryValueRepresentable {
     public var queryValue: String {
-        formatted(Date.ReleaseDateFormatStyle())
+        formatted(.iso8601.year().month().day())
     }
 }
 

@@ -1,14 +1,6 @@
-//
-//  Discover+Filter.swift
-//
-//
-//  Created by brett ohland on 07/13/22.
-//
-
 import Foundation
 
 public extension TMDB.Discover {
-
     enum Value {
         case greaterThan
         case lessThan
@@ -134,7 +126,7 @@ extension TMDB.Discover.Filter: TMDBDiscoverFilter {
         case .withWatchProviders(let providers):
             return providers.queryValue
         case .watchRegion(let regions):
-            return regions.map { $0.queryValue }.queryValue
+            return regions.map(\.queryValue).queryValue
         case .withWatchMonetizationTypes(let types):
             return types.queryValue
         case .withoutCompanies(let companies):
@@ -275,7 +267,6 @@ extension TMDB.Discover.TVFilter: TMDBDiscoverTVFilter {
 
     public var value: String {
         switch self {
-
         case .airDateGreaterThan(let value):
             return value.queryValue
         case .airDateLessThan(let value):

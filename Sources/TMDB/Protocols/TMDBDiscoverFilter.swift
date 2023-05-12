@@ -1,10 +1,3 @@
-//
-//  TMDBDiscoverFilter.swift
-//  
-//
-//  Created by brett ohland on 07/15/22.
-//
-
 import Foundation
 
 public protocol TMDBDiscoverFilter: QueryItemEncodable {

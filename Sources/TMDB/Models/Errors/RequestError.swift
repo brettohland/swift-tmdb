@@ -1,10 +1,3 @@
-//
-//  File.swift
-//
-//
-//  Created by brett ohland on 07/13/22.
-//
-
 import Foundation
 
 public extension TMDB {

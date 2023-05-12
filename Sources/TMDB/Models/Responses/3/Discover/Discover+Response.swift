@@ -1,39 +1,29 @@
-//
-//  File.swift
-//
-//
-//  Created by brett ohland on 07/13/22.
-//
-
 import Foundation
 
 public extension TMDB.Discover {
-
     typealias MovieResponse = Response<DiscoverMovie>
     typealias TVResponse = Response<DiscoverTV>
 
     struct Response<Title: Codable>: Decodable {
-        @NilIntegerEncoded
+        @NilInteger
         var page: Int
-        @NilIntegerEncoded
+        @NilInteger
         var totalResults: Int
-        @NilIntegerEncoded
+        @NilInteger
         var totalPages: Int
-        @NilCodableArrayEncoded<Title>
+        @NilCodableArray<Title>
         var results: [Title]
     }
 
     struct DiscoverTV: Codable {
-
         // MARK: Common
 
         let backdropPath: URL?
-        @NilCodableArrayEncoded<Int>
+        @NilCodableArray<Int>
         var genreIds: [Int]
-        @TitleIDEncoded
         var id: Int
-        @LocaleOrNilEncoded
-        var originalLanguage: Locale?
+        @ISO639LocaleString
+        var originalLanguage: Locale
         let overview: String?
         let popularity: Double?
         let posterPath: String?
@@ -44,29 +34,27 @@ public extension TMDB.Discover {
 
         let name: String?
         let originalName: String?
-        @LocaleRegionArrayEncoded
-        var originCountry: [Locale.Region]
-        @ReleaseDateOrNilEncoded
+        @NilCodableArray
+        var originCountry: [Country]
+        @ISO8601YMD
         var firstAirDate: Date?
     }
 
     struct DiscoverMovie: Codable {
-
         // MARK: Common
 
-        @NilBooleanEncoded
+        @NilBoolean
         var adult: Bool
         let backdropPath: String?
-        @NilCodableArrayEncoded<Int>
+        @NilCodableArray<Int>
         var genreIds: [Int]
-        @TitleIDEncoded
         var id: Int
-        @LocaleOrNilEncoded
-        var originalLanguage: Locale?
+        @ISO639LocaleString
+        var originalLanguage: Locale
         let overview: String?
         let popularity: Double?
         let posterPath: String?
-        @NilBooleanEncoded
+        @NilBoolean
         var video: Bool
         let voteAverage: Double?
         let voteCount: Int?
@@ -75,7 +63,7 @@ public extension TMDB.Discover {
 
         let originalTitle: String?
         let title: String?
-        @ReleaseDateOrNilEncoded
+        @ISO8601YMD
         var releaseDate: Date?
     }
 }

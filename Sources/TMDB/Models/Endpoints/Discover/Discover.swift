@@ -1,16 +1,7 @@
-//
-//  Discover.swift
-//
-//
-//  Created by brett ohland on 07/12/22.
-//
-
 import Foundation
 
 public extension TMDB {
-
     struct Discover {
-
         enum MediaType {
             case movie
             case tv

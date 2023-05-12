@@ -1,29 +1,18 @@
-//
-//  TMDBDiscoverTests.swift
-//
-//
-//  Created by brett ohland on 07/15/22.
-//
-
 @testable import TMDB
 import XCTest
 
 final class TMDBDiscoverTests: XCTestCase {
 
-    enum TestError: Error {
-        case fileNotFound
-    }
-
     func testDiscoverMovieResponseDecoding() throws {
         // Arrange
-        guard let payloadURL = Bundle.module.url(forResource: "movie", withExtension: "json") else {
-            throw TestError.fileNotFound
-        }
-        let payload = try Data(contentsOf: payloadURL)
+        let payload = try Utilities.data(inFile: "movie")
 
         // Act
         let response = try TMDB.decoder.decode(TMDB.Discover.MovieResponse.self, from: payload)
-        let firstMovie = response.results[0]
+        guard let firstMovie = response.results.first else {
+            XCTFail("Decoding resulted in an empty array")
+            return
+        }
 
         // Assert
         XCTAssertEqual(response.page, 1)
@@ -49,14 +38,14 @@ final class TMDBDiscoverTests: XCTestCase {
 
     func testDiscoverTVResponseDecoding() throws {
         // Arrange
-        guard let payloadURL = Bundle.module.url(forResource: "tv", withExtension: "json") else {
-            throw TestError.fileNotFound
-        }
-        let payload = try Data(contentsOf: payloadURL)
+        let payload = try Utilities.data(inFile: "tv")
 
         // Act
         let response = try TMDB.decoder.decode(TMDB.Discover.TVResponse.self, from: payload)
-        let firstShow = response.results[0]
+        guard let firstShow = response.results.first else {
+            XCTFail("Decoding resulted in an empty array")
+            return
+        }
 
         // Assert
         XCTAssertEqual(response.page, 1)
@@ -311,7 +300,6 @@ final class TMDBDiscoverTests: XCTestCase {
     }
 
     func testDiscoverTVFilterEncoding() throws {
-
         typealias Filter = TMDB.Discover.TVFilter
 
         var testDateComponents = DateComponents()
@@ -331,7 +319,7 @@ final class TMDBDiscoverTests: XCTestCase {
         )
 
         XCTAssertEqual(
-            Filter.firstAirDateYear(1990).encoded.description,
+            Filter.firstAirDateYear(1_990).encoded.description,
             "first_air_year=1990"
         )
 
@@ -359,9 +347,5 @@ final class TMDBDiscoverTests: XCTestCase {
         XCTAssertEqual(Filter.screenedTheatrically(false).encoded.description, "screened_theatrically=false")
         XCTAssertEqual(Filter.withStatus("a").encoded.description, "with_status=a")
         XCTAssertEqual(Filter.withType("a").encoded.description, "with_type=a")
-
-//    case screenedTheatrically(Bool)
-//    case withStatus(String)
-//    case withType(String)
     }
 }

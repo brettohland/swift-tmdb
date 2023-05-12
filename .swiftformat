@@ -1,0 +1,32 @@
+--swiftversion 5.7
+
+# Follow Xcode indentation settings
+--xcodeindentation enabled
+
+# Configuration
+--decimalgrouping 3,3
+--hexgrouping 2,8
+--hexliteralcase uppercase
+--maxwidth 120
+--patternlet inline
+--redundanttype inferred
+--stripunusedargs closure-only
+--typeblanklines preserve
+--wraparguments before-first
+--wrapcollections before-first
+--wrapparameters before-first
+
+# Strip all comment headers from all files
+--header strip
+
+# Optional Rules
+--enable blankLinesBetweenImports
+--enable blockComments
+--enable sortedSwitchCases
+--enable wrapSwitchCases
+
+# Disabled Rules
+--disable initCoderUnavailable
+
+# Exclude any files within any SwiftGen folders
+--exclude **/SwiftGen/*

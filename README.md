@@ -49,12 +49,12 @@ Here's a list of the endpoints that have been integrated or completed.
     - [ ] GET Get Alternative Names
     - [ ] GET Get Images
 - [ ] CONFIGURATION
-    - [ ] GET Get API Configuration
-    - [ ] GET Get Countries
+    - [x] GET Get API Configuration
+    - [x] GET Get Countries (Not needed. Using `Locale` instead)
     - [ ] GET Get Jobs
-    - [ ] GET Get Languages
+    - [x] GET Get Languages (Not needed, using `Locale` instead)
     - [ ] GET Get Primary Translations
-    - [ ] GET Get Timezones
+    - [x] GET Get Timezones (Not needed, using `TimeZone` and `Locale` instead)
 - [ ] CREDITS
     - [ ] Get details
 - [x] DISCOVER

@@ -1,13 +1,6 @@
-//
-//  File.swift
-//
-//
-//  Created by brett ohland on 07/13/22.
-//
-
 import Foundation
 
-//extension TMDB.Discover.MovieOption: QueryItemEncodable {
+// extension TMDB.Discover.MovieOption: QueryItemEncodable {
 //    var encoded: URLQueryItem {
 //        switch self {
 //        case .language(let payload):
@@ -84,4 +77,4 @@ import Foundation
 //            return URLQueryItem(name: "watch_region", value: payload.map { $0.queryValue }.queryValue)
 //        }
 //    }
-//}
+// }
