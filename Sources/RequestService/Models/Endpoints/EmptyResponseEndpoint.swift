@@ -5,27 +5,25 @@ public extension HTTP {
     struct EmptyResponseEndpoint<RequestBody: Encodable>: HTTPEndpoint {
         public typealias ResponseBody = EmptyResponseBody
 
-        @Dependency(\.httpConfigProvider) private var configurationProvider
-
-        public var httpConfiguration: HTTPConfiguration {
-            configurationProvider.configuration
-        }
-
-        public let path: String
-        public let method: HTTP.Method
-        public let encoder: JSONEncoder
+        public let baseURL: URL
         public let decoder: JSONDecoder
+        public let encoder: JSONEncoder
+        public let method: HTTP.Method = .get
+        public let path: String
+        public let sessionConfiguration: URLSessionConfiguration
 
         public init(
+            baseURL: URL,
             path: String,
-            method: HTTP.Method,
+            sessionConfiguration: URLSessionConfiguration = .default,
             encoder: JSONEncoder = .iso8601SnakeCake,
-            decoder: JSONDecoder = .iso8601SnakeCake
+            decoder: JSONDecoder = .iso8601SnakeCake,
         ) {
-            self.path = path
-            self.method = method
-            self.encoder = encoder
+            self.baseURL = baseURL
             self.decoder = decoder
+            self.encoder = encoder
+            self.path = path
+            self.sessionConfiguration = sessionConfiguration
         }
     }
 }

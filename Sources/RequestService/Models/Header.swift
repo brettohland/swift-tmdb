@@ -18,23 +18,23 @@ extension HTTP.Header {
         switch self {
         case .authorization,
              .authorizationToken:
-            return "Authorization"
+            "Authorization"
         case .contentType:
-            return "Content-Type"
+            "Content-Type"
         case .accept:
-            return "Accept"
+            "Accept"
         }
     }
 
     var value: String {
         switch self {
         case .authorization(let prefix, let value):
-            return "\(prefix) \(value)"
+            "\(prefix) \(value)"
         case .authorizationToken(let token):
-            return "Token \(token)"
+            "Token \(token)"
         case .accept(let encodingType),
              .contentType(let encodingType):
-            return encodingType.rawValue
+            encodingType.rawValue
         }
     }
 }

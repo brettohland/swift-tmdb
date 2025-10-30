@@ -5,6 +5,7 @@ import Foundation
 public extension HTTP {
     enum Error {
         case noBodyForGetRequest
+        case unsupportedHTTPMethod
     }
 }
 
@@ -12,14 +13,18 @@ extension HTTP.Error: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .noBodyForGetRequest:
-            return "Invalid Configuration"
+            "Invalid Configuration"
+        case .unsupportedHTTPMethod:
+            "Unsupported HTTP Method"
         }
     }
 
     public var failureReason: String? {
         switch self {
         case .noBodyForGetRequest:
-            return "HTTP GET requests that include an encoded body is invalid."
+            "HTTP GET requests that include an encoded body is invalid."
+        case .unsupportedHTTPMethod:
+            "The HTTP Method on the URLRequest isn't supported"
         }
     }
 }
@@ -41,11 +46,11 @@ extension HTTP.Client.Error: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidResponseFromServer:
-            return "Bad Response"
+            "Bad Response"
         case .clientError(let response, _):
-            return "Client Error (\(response.responseStatus.intValue))"
+            "Client Error (\(response.responseStatus.intValue))"
         case .serverError(let response, _):
-            return "Server Error (\(response.responseStatus.intValue))"
+            "Server Error (\(response.responseStatus.intValue))"
         }
     }
 

@@ -6,7 +6,7 @@ public protocol TMDBDiscoverFilter: QueryItemEncodable {
 }
 
 public extension TMDBDiscoverFilter {
-    var encoded: URLQueryItem {
+    var queryItem: URLQueryItem {
         URLQueryItem(name: key, value: value)
     }
 }

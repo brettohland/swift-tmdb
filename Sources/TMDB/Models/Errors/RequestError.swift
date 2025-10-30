@@ -10,13 +10,13 @@ public extension TMDB {
         public var errorDescription: String? {
             switch self {
             case .invalidRequestData:
-                return "The data returned by the server was in an incorrect format."
+                "The data returned by the server was in an incorrect format."
             case .errorWithStatus(let status):
-                return "Server error \(status.statusCode): \(status.statusMessage)"
+                "Server error \(status.statusCode): \(status.statusMessage)"
             case .networkError(let networkError):
-                return networkError.localizedDescription
+                networkError.localizedDescription
             case .titleIDMissing:
-                return "The returned title is missing it's ID"
+                "The returned title is missing it's ID"
             }
         }
     }

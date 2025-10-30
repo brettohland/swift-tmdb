@@ -1,9 +1,11 @@
+import Dependencies
 import Foundation
 
 public protocol HTTPEndpoint {
     associatedtype RequestBody: Encodable
     associatedtype ResponseBody: Decodable
-    var httpConfiguration: HTTPConfiguration { get }
+    var sessionConfiguration: URLSessionConfiguration { get }
+    var baseURL: URL { get }
     var path: String { get }
     var method: HTTP.Method { get }
     var encoder: JSONEncoder { get }
@@ -20,7 +22,7 @@ extension HTTPEndpoint {
     func makeURL(queryItems: [URLQueryItem]) throws -> URL {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
-        urlComponents.host = httpConfiguration.host
+        urlComponents.host = baseURL.host
         urlComponents.path = path.normalizePathComponent()
         urlComponents.queryItems = queryItems.isEmpty ? nil : queryItems
         guard let url = urlComponents.url else {
@@ -71,14 +73,20 @@ public extension HTTPEndpoint {
     /// - Returns: The decoded associated ResponseType that was in the response body.
     /// - Throws: ``HTTP.Client.Error``
     func responseObject(from request: URLRequest) async throws -> ResponseBody {
-        let data = try await httpConfiguration.client.data(for: request)
+        let data = try await Dependency(\.httpClient).wrappedValue.data(
+            request: request,
+            configuration: sessionConfiguration,
+        )
         return try decoder.decode(ResponseBody.self, from: data)
     }
 
-    /// Initiates the given ``URLRequest`` using the HTTP Configuration's HTTP Client.
+    /// Initiates the given ``URLRequest`` using the HTTP Configuration's HTTP Client and disregards the response
     /// - Parameter request: The ``URLRequest`` to use in the request
     func response(from request: URLRequest) async throws {
-        try await httpConfiguration.client.data(for: request)
+        _ = try await Dependency(\.httpClient).wrappedValue.data(
+            request: request,
+            configuration: sessionConfiguration,
+        )
     }
 }
 
@@ -92,7 +100,7 @@ public extension HTTPEndpoint {
     /// - Returns: The http body of the response, decoded.
     func requestDecodingResponse(
         withHTTPBody body: RequestBody,
-        andQueryItems queryItems: [URLQueryItem] = []
+        andQueryItems queryItems: [URLQueryItem] = [],
     ) async throws -> ResponseBody {
         guard method != .get else {
             throw HTTP.Error.noBodyForGetRequest
@@ -116,7 +124,7 @@ public extension HTTPEndpoint {
     ///   - queryItems: An array of `URLQueryItem` values to encode into the URL.
     func request(
         withHTTPBody body: RequestBody,
-        andQueryItems queryItems: [URLQueryItem] = []
+        andQueryItems queryItems: [URLQueryItem] = [],
     ) async throws {
         let request = try makeURLRequest(body, queryItems: queryItems)
         return try await response(from: request)

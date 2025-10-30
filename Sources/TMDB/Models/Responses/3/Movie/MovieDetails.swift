@@ -25,9 +25,10 @@ public extension TMDB.Movie {
         @ISO8601YMD
         public var releaseDate: Date?
         public let revenue: Int
-        public let runtime: Int
-        @ISO639LocaleArray
-        public var spokenLanguages: [Locale]
+        @Minutes
+        public var runtime: Measurement<UnitDuration>
+        @ISO639LanguageArray
+        public var spokenLanguages: [Locale.Language]
         public let status: TMDB.ReleaseStatus
         public let tagline: String
         public let title: String

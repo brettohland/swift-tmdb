@@ -1,4 +1,4 @@
---swiftversion 5.7
+--swiftversion 6.2
 
 # Follow Xcode indentation settings
 --xcodeindentation enabled
@@ -15,18 +15,18 @@
 --wraparguments before-first
 --wrapcollections before-first
 --wrapparameters before-first
+--ifdef no-indent
 
 # Strip all comment headers from all files
 --header strip
 
 # Optional Rules
 --enable blankLinesBetweenImports
+--enable blankLineAfterImports
+--enable blankLinesAtEndOfScope
 --enable blockComments
---enable sortedSwitchCases
+--enable sortSwitchCases
 --enable wrapSwitchCases
 
 # Disabled Rules
 --disable initCoderUnavailable
-
-# Exclude any files within any SwiftGen folders
---exclude **/SwiftGen/*

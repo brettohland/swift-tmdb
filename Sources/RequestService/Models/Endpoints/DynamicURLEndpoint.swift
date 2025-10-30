@@ -3,22 +3,22 @@ import Foundation
 
 public extension HTTP {
     struct DynamicURLEndpoint<RequestBody: Encodable, ResponseBody: Decodable>: HTTPEndpoint {
-        @Dependency(\.httpConfigProvider) private var configurationProvider
-
-        public var httpConfiguration: HTTPConfiguration {
-            configurationProvider.configuration
-        }
-
-        public let path: String
-        public let method: HTTP.Method
+        public let baseURL: URL
         public let encoder: JSONEncoder
+        public let method: HTTP.Method
+        public let path: String
+        public let sessionConfiguration: URLSessionConfiguration
         public let decoder: JSONDecoder
 
         public init(
+            baseURL: URL,
             method: HTTP.Method,
+            sessionConfiguration: URLSessionConfiguration = .default,
             encoder: JSONEncoder = .iso8601SnakeCake,
-            decoder: JSONDecoder = .iso8601SnakeCake
+            decoder: JSONDecoder = .iso8601SnakeCake,
         ) {
+            self.baseURL = baseURL
+            self.sessionConfiguration = sessionConfiguration
             path = ""
             self.method = method
             self.encoder = encoder
@@ -37,7 +37,7 @@ public extension HTTP.DynamicURLEndpoint {
     func makeURLRequest(
         _ httpBody: RequestBody,
         queryItems: [URLQueryItem] = [],
-        urlComponentBuilder: @escaping (URLComponents) -> URLComponents
+        urlComponentBuilder: @escaping (URLComponents) -> URLComponents,
     ) throws -> URLRequest {
         guard method != .get else {
             throw HTTP.Error.noBodyForGetRequest
@@ -59,7 +59,7 @@ public extension HTTP.DynamicURLEndpoint {
     /// - Returns: A ``URLRequest``.
     func makeURLRequest(
         queryItems: [URLQueryItem] = [],
-        urlComponentBuilder: @escaping (URLComponents) -> URLComponents
+        urlComponentBuilder: @escaping (URLComponents) -> URLComponents,
     ) throws -> URLRequest {
         let url = try makeURL(queryItems: queryItems)
         let finalURL = try convert(url: url, usingComponentBuilder: urlComponentBuilder)

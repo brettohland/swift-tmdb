@@ -24,9 +24,9 @@ public extension TMDB.ParameterList {
         var character: String {
             switch self {
             case .and:
-                return ","
+                ","
             case .or:
-                return "|"
+                "|"
             }
         }
     }

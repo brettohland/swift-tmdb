@@ -1,30 +1,22 @@
+import Dependencies
+import DependenciesMacros
 import Foundation
+import Utilities
 
 public extension HTTP {
-    /// An HTTPClient which validates the server's HTTP Status Code.
-    struct Client: HTTPClient {
-        public let urlSession: URLSession
+    @DependencyClient
+    struct Client: Sendable {
+        var data: @Sendable (_ request: URLRequest, _ configuration: URLSessionConfiguration?) async throws -> Data
+    }
+}
 
-        public init(configuration: URLSessionConfiguration = .default) {
-            urlSession = URLSession(configuration: configuration)
-        }
-
-        /// Uses the HTTPClient's `URLSession` to make the request to the server. Additionally, handles the decoding of
-        /// the response's status code.
-        /// The call will be considered a success if the server returns a status code inside of the Informational (1XX),
-        /// Redirection (2XX), or Success (3XX) ranges.
-        /// **NOTE:** In all cases, the returned or thrown values will include the HTTP response body. DO NOT LOG THE
-        /// RAW BODY RESPONSE TO THE SYSTEM CONSOLE AS IT MAY CONTAIN PII.
-        /// - Parameter request: A `URLRequest` to call.
-        /// - Returns: The `Data` inside of the body of the response.
-        /// - Throws: Will throw the following ``HTTP.Client.Error`` enums:
-        ///     - ``.invalidResponseFromServer(Data)`` is thrown when the URLResponse from the server is invalid.
-        ///     - ``.clientError(HTTPURLResponse, Data)`` Thrown on Client Error (4XX) status codes
-        ///     - ``.serverError(HTTPURLResponse, Data)`` Thrown on Server Error (5XX) status codes
-        public func data(for request: URLRequest) async throws -> Data {
+extension HTTP.Client: DependencyKey {
+    public static var liveValue: Self {
+        Self { request, sessionConfiguration in
+            let urlSession = URLSession(configuration: sessionConfiguration ?? .default)
             let (data, response) = try await urlSession.data(for: request)
             guard let httpResponse = response as? HTTPURLResponse else {
-                throw Error.invalidResponseFromServer(response, data)
+                throw HTTP.Client.Error.invalidResponseFromServer(response, data)
             }
             switch httpResponse.responseStatus.category {
             case .informational,
@@ -32,10 +24,23 @@ public extension HTTP {
                  .success:
                 return data
             case .clientError:
-                throw Error.clientError(httpResponse, data)
+                throw HTTP.Client.Error.clientError(httpResponse, data)
             case .serverError:
-                throw Error.serverError(httpResponse, data)
+                throw HTTP.Client.Error.serverError(httpResponse, data)
             }
         }
     }
+}
+
+public extension DependencyValues {
+    var httpClient: HTTP.Client {
+        get { self[HTTP.Client.self] }
+        set { self[HTTP.Client.self] = newValue }
+    }
+}
+
+// MARK: - Test/Preview Mocks
+
+extension HTTP.Client: TestDependencyKey {
+    public static var testValue =  Self()
 }

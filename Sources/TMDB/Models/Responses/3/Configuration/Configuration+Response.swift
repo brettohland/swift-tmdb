@@ -30,11 +30,11 @@ public extension TMDB.Configuration {
         public var rawValue: String {
             switch self {
             case .original:
-                return "original"
+                "original"
             case .setHeight(let height):
-                return "h\(height.formatted())"
+                "h\(height.formatted())"
             case .setWidth(let width):
-                return "w\(width.formatted())"
+                "w\(width.formatted())"
             }
         }
 
@@ -68,11 +68,11 @@ public extension TMDB.Configuration {
             let container = try decoder.singleValueContainer()
             let stringValue = try container.decode(String.self)
             guard let imageSize = Self(rawValue: stringValue) else {
-                throw DecodingError.dataCorruptedError(
-                    in: try decoder.unkeyedContainer(),
+                throw try DecodingError.dataCorruptedError(
+                    in: decoder.unkeyedContainer(),
                     debugDescription: """
                     The value found does not match the regex (?<prefix>[wh])(?<digit>\\d*\\b)
-                    """
+                    """,
                 )
             }
             self = imageSize

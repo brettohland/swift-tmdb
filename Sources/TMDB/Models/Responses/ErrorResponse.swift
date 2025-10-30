@@ -1,7 +1,7 @@
 import Foundation
 
 public extension TMDB {
-    struct ErrorResponse: Decodable {
+    struct ErrorResponse: Decodable, Sendable {
         let statusMessage: String
         let statusCode: String
     }

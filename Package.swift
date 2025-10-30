@@ -1,45 +1,110 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 6.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
-import PackageDescription
+@preconcurrency import PackageDescription
 
 let package = Package(
-    name: "TMDB",
-    platforms: [.iOS(.v16), .macOS(.v13), .macCatalyst(.v15), .tvOS(.v15)],
+    name: .tmdb,
+    platforms: [
+        .iOS(.v18),
+        .macOS(.v15),
+        .macCatalyst(.v15),
+        .tvOS(.v15),
+    ],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(name: "TMDB", targets: ["TMDB"]),
+        .library(name: .tmdb, targets: [.tmdb]),
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "0.1.0"),
+        .swiftDependencies,
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "TMDB",
-            dependencies: [
-                .product(name: "Dependencies", package: "swift-dependencies"),
-                .target(name: "RequestService"),
-            ],
-            swiftSettings: [
-                .unsafeFlags(
-                    ["-enable-bare-slash-regex"]
-                ),
-            ]
-        ),
-        .target(
-            name: "RequestService",
-            dependencies: [
-                .product(name: "Dependencies", package: "swift-dependencies"),
-            ]
-        ),
-        .testTarget(
-            name: "TMDBTests",
-            dependencies: ["TMDB"],
-            resources: [
-                .process("JSON"),
-            ]
-        ),
-    ]
+        .tmdb,
+        .requestService,
+        .utilities,
+
+        .tmdbTests,
+    ],
 )
+
+extension String {
+    static let tmdb = "TMDB"
+}
+
+
+    enum TargetNames {
+        static let tmdb = "TMDB"
+        static let dependencies = "Dependencies"
+        static let requestService = "RequestService"
+        static let tmdbTests = "TMDBTests"
+        static let utilities = "Utilities"
+    }
+
+
+// MARK: -  Target Definitions
+
+extension Target {
+    static let tmdb = target(
+        name: TargetNames.tmdb,
+        dependencies: [
+            Dependency.Internal.requestService,
+            Dependency.Internal.utilities,
+            Dependency.External.swiftDependencies,
+        ],
+    )
+    static let requestService = target(
+        name: TargetNames.requestService,
+        dependencies: [
+            Dependency.Internal.utilities,
+            Dependency.External.swiftDependencies,
+            Dependency.External.swiftDependenciesMacros
+        ],
+    )
+    static let utilities = target(
+        name: TargetNames.utilities,
+        resources: [.resources],
+    )
+}
+
+//MARK: - Test Targets
+
+extension Target {
+    static let tmdbTests = testTarget(
+        name: TargetNames.tmdbTests,
+        dependencies: [
+            "TMDB",
+        ],
+        resources: [
+            .process("JSON"),
+        ],
+    )
+}
+
+extension Target.Dependency {
+    enum Internal {
+        static let utilities = Target.Dependency.target(name: TargetNames.utilities)
+        static let requestService = Target.Dependency.target(name: TargetNames.requestService)
+    }
+
+    // External Dependencies
+    enum External {
+        static let swiftDependencies = Target.Dependency.product(
+            name: "Dependencies",
+            package: "swift-dependencies"
+        )
+        static let swiftDependenciesMacros = Target.Dependency.product(
+            name: "DependenciesMacros",
+            package: "swift-dependencies"
+        )
+    }
+}
+
+extension Package.Dependency {
+    static let swiftDependencies = Package.Dependency.package(
+        url: "https://github.com/pointfreeco/swift-dependencies.git",
+        exact: "1.10.0",
+    )
+}
+
+extension Resource {
+    static let resources = process("Resources")
+}

@@ -69,70 +69,70 @@ extension TMDB.Discover.Filter: TMDBDiscoverFilter {
     public var key: String {
         switch self {
         case .language:
-            return "language"
+            "language"
         case .sortBy:
-            return "sort_option"
+            "sort_option"
         case .page:
-            return "page"
+            "page"
         case .voteCountGreaterThan:
-            return "vote_count.gte"
+            "vote_count.gte"
         case .voteAverageGreaterThan:
-            return "vote_average.gte"
+            "vote_average.gte"
         case .withGenres:
-            return "with_genres"
+            "with_genres"
         case .withoutGenres:
-            return "without_genres"
+            "without_genres"
         case .withOriginalLanguage:
-            return "with_original_language"
+            "with_original_language"
         case .withoutKeywords:
-            return "without_keywords"
+            "without_keywords"
         case .withCompanies:
-            return "with_companies"
+            "with_companies"
         case .withKeywords:
-            return "with_keywords"
+            "with_keywords"
         case .withWatchProviders:
-            return "with_watch_providers"
+            "with_watch_providers"
         case .watchRegion:
-            return "watch_region"
+            "watch_region"
         case .withWatchMonetizationTypes:
-            return "with_watch_monetization_types"
+            "with_watch_monetization_types"
         case .withoutCompanies:
-            return "without_companies"
+            "without_companies"
         }
     }
 
     public var value: String {
         switch self {
         case .language(let locale):
-            return locale.queryValue
+            locale.queryValue
         case .sortBy(let option):
-            return option.queryValue
+            option.queryValue
         case .page(let page):
-            return page.queryValue
+            page.queryValue
         case .voteCountGreaterThan(let count):
-            return count.queryValue
+            count.queryValue
         case .voteAverageGreaterThan(let average):
-            return average.queryValue
+            average.queryValue
         case .withGenres(let genres):
-            return genres.queryValue
+            genres.queryValue
         case .withOriginalLanguage(let language):
-            return language.queryValue
+            language.queryValue
         case .withoutKeywords(let keywords):
-            return keywords.queryValue
+            keywords.queryValue
         case .withCompanies(let companies):
-            return companies.queryValue
+            companies.queryValue
         case .withKeywords(let keywords):
-            return keywords.queryValue
+            keywords.queryValue
         case .withWatchProviders(let providers):
-            return providers.queryValue
+            providers.queryValue
         case .watchRegion(let regions):
-            return regions.map(\.queryValue).queryValue
+            regions.map(\.queryValue).queryValue
         case .withWatchMonetizationTypes(let types):
-            return types.queryValue
+            types.queryValue
         case .withoutCompanies(let companies):
-            return companies.queryValue
+            companies.queryValue
         case .withoutGenres(let genres):
-            return genres.queryValue
+            genres.queryValue
         }
     }
 }
@@ -141,94 +141,94 @@ extension TMDB.Discover.MovieFilter: TMDBDiscoverMovieFilter {
     public var key: String {
         switch self {
         case .region:
-            return "region"
+            "region"
         case .voteCountLessThan:
-            return "vote_count.lte"
+            "vote_count.lte"
         case .voteAverageLessThan:
-            return "vote_average.lte"
+            "vote_average.lte"
         case .certificationCountry:
-            return "certification_country"
+            "certification_country"
         case .certification:
-            return "certification"
+            "certification"
         case .certificationLessThan:
-            return "certification.lte"
+            "certification.lte"
         case .certificationGreaterThan:
-            return "certification.gte"
+            "certification.gte"
         case .includeAdult:
-            return "include_adult"
+            "include_adult"
         case .includeVideo:
-            return "include_video"
+            "include_video"
         case .primaryReleaseYear:
-            return "primary_release_year"
+            "primary_release_year"
         case .primaryReleaseDateGreaterThan:
-            return "primary_release_date.gte"
+            "primary_release_date.gte"
         case .primaryReleaseDateLessThan:
-            return "primary_release_date.lte"
+            "primary_release_date.lte"
         case .releaseDateGreaterThan:
-            return "release_date.gte"
+            "release_date.gte"
         case .releaseDateLessThan:
-            return "release_date.lte"
+            "release_date.lte"
         case .withReleaseType:
-            return "with_release_type"
+            "with_release_type"
         case .year:
-            return "year"
+            "year"
         case .withCast:
-            return "with_cast"
+            "with_cast"
         case .withCrew:
-            return "with_crew"
+            "with_crew"
         case .withPeople:
-            return "with_people"
+            "with_people"
         case .withRuntimeGreaterThan:
-            return "with_runtime.gte"
+            "with_runtime.gte"
         case .withRuntimeLessThan:
-            return "with_runtime.lte"
+            "with_runtime.lte"
         }
     }
 
     public var value: String {
         switch self {
         case .region(let value):
-            return value.queryValue
+            value.queryValue
         case .voteCountLessThan(let value):
-            return value.queryValue
+            value.queryValue
         case .voteAverageLessThan(let value):
-            return value.queryValue
+            value.queryValue
         case .certificationCountry(let value):
-            return value.queryValue
+            value.queryValue
         case .certification(let value):
-            return value.queryValue
+            value.queryValue
         case .certificationLessThan(let value):
-            return value.queryValue
+            value.queryValue
         case .certificationGreaterThan(let value):
-            return value.queryValue
+            value.queryValue
         case .includeAdult(let value):
-            return value.queryValue
+            value.queryValue
         case .includeVideo(let value):
-            return value.queryValue
+            value.queryValue
         case .primaryReleaseYear(let value):
-            return value.queryValue
+            value.queryValue
         case .primaryReleaseDateGreaterThan(let value):
-            return value.queryValue
+            value.queryValue
         case .primaryReleaseDateLessThan(let value):
-            return value.queryValue
+            value.queryValue
         case .releaseDateGreaterThan(let value):
-            return value.queryValue
+            value.queryValue
         case .releaseDateLessThan(let value):
-            return value.queryValue
+            value.queryValue
         case .withReleaseType(let value):
-            return value.queryValue
+            value.queryValue
         case .year(let value):
-            return value.queryValue
+            value.queryValue
         case .withCast(let value):
-            return value.queryValue
+            value.queryValue
         case .withCrew(let value):
-            return value.queryValue
+            value.queryValue
         case .withPeople(let value):
-            return value.queryValue
+            value.queryValue
         case .withRuntimeGreaterThan(let value):
-            return value.queryValue
+            value.queryValue
         case .withRuntimeLessThan(let value):
-            return value.queryValue
+            value.queryValue
         }
     }
 }
@@ -237,62 +237,62 @@ extension TMDB.Discover.TVFilter: TMDBDiscoverTVFilter {
     public var key: String {
         switch self {
         case .airDateGreaterThan:
-            return "air_date.gte"
+            "air_date.gte"
         case .airDateLessThan:
-            return "air_date.lte"
+            "air_date.lte"
         case .firstAirDateGreaterThan:
-            return "first_air_date.gte"
+            "first_air_date.gte"
         case .firstAirDateLessThan:
-            return "first_air_date.lte"
+            "first_air_date.lte"
         case .firstAirDateYear:
-            return "first_air_year"
+            "first_air_year"
         case .timezone:
-            return "timezone"
+            "timezone"
         case .withNetworks:
-            return "with_networks"
+            "with_networks"
         case .withRuntimeGreaterThan:
-            return "with_runtime.gte"
+            "with_runtime.gte"
         case .withRuntimeLessThan:
-            return "with_runtime.lte"
+            "with_runtime.lte"
         case .includeNullFirstRunDates:
-            return "include_null_first_run_dates"
+            "include_null_first_run_dates"
         case .screenedTheatrically:
-            return "screened_theatrically"
+            "screened_theatrically"
         case .withStatus:
-            return "with_status"
+            "with_status"
         case .withType:
-            return "with_type"
+            "with_type"
         }
     }
 
     public var value: String {
         switch self {
         case .airDateGreaterThan(let value):
-            return value.queryValue
+            value.queryValue
         case .airDateLessThan(let value):
-            return value.queryValue
+            value.queryValue
         case .firstAirDateGreaterThan(let value):
-            return value.queryValue
+            value.queryValue
         case .firstAirDateLessThan(let value):
-            return value.queryValue
+            value.queryValue
         case .firstAirDateYear(let value):
-            return value.queryValue
+            value.queryValue
         case .timezone(let value):
-            return value.queryValue
+            value.queryValue
         case .withNetworks(let value):
-            return value.queryValue
+            value.queryValue
         case .withRuntimeGreaterThan(let value):
-            return value.queryValue
+            value.queryValue
         case .withRuntimeLessThan(let value):
-            return value.queryValue
+            value.queryValue
         case .includeNullFirstRunDates(let value):
-            return value.queryValue
+            value.queryValue
         case .screenedTheatrically(let value):
-            return value.queryValue
+            value.queryValue
         case .withStatus(let value):
-            return value.queryValue
+            value.queryValue
         case .withType(let value):
-            return value.queryValue
+            value.queryValue
         }
     }
 }
