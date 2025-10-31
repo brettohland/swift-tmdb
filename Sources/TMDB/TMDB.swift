@@ -2,46 +2,9 @@ import Dependencies
 import Foundation
 import RequestService
 
-public struct TMDB {
-    enum Constants {
-        static let baseURL = URL(string: "https://api.themoviedb.org")!
-    }
+public enum TMDB {}
 
-    init() {}
-}
 
-extension TMDB {
-    enum Endpoint {
-        enum v3 {
-            case movieDetails
-        }
-    }
-}
-
-extension TMDB.Endpoint.v3 {
-    var path: String {
-        switch self {
-        case .movieDetails:
-            "3/movie/"
-        }
-    }
-}
-
-public extension TMDB {
-    func movieDetails(movieID: Int) async throws -> TMDB.Movie.Details {
-        let path = TMDB.Endpoint.v3.movieDetails.path
-        let endpoint = HTTP.DynamicURLEndpoint<HTTP.EmptyRequestBody, TMDB.Movie.Details>(
-            baseURL: Constants.baseURL,
-            method: .get,
-        )
-        let request = try endpoint.makeURLRequest { components in
-            var components = components
-            components.path += (path + movieID.formatted(.number.grouping(.never)))
-            return components
-        }
-        return try await endpoint.responseObject(from: request)
-    }
-}
 
 // public struct TMDB {
 //    let httpClient: HTTP.Client

@@ -42,5 +42,5 @@ public extension DependencyValues {
 // MARK: - Test/Preview Mocks
 
 extension HTTP.Client: TestDependencyKey {
-    public static var testValue =  Self()
+    public static let testValue =  Self()
 }

@@ -1,9 +1,9 @@
-import Dependencies
 import Foundation
+import Dependencies
 
 public protocol HTTPEndpoint {
-    associatedtype RequestBody: Encodable
-    associatedtype ResponseBody: Decodable
+    associatedtype RequestBody: Any
+    associatedtype ResponseBody: Any
     var sessionConfiguration: URLSessionConfiguration { get }
     var baseURL: URL { get }
     var path: String { get }
@@ -12,144 +12,273 @@ public protocol HTTPEndpoint {
     var decoder: JSONDecoder { get }
 }
 
-// MARK: = Internal Factories
+// MARK: - Public Factories
 
-extension HTTPEndpoint {
-    /// Builds the URL based on the HTTP Configuration, the current endpoint's parameters, and the provided query items.
-    /// - Parameter queryItems: An array of `URLQueryItem` values.
-    /// - Returns: The build ``URL``
-    /// - Throws: A ``HTTP.URLBuilderError`` with the details of the failure.
-    func makeURL(queryItems: [URLQueryItem]) throws -> URL {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = baseURL.host
-        urlComponents.path = path.normalizePathComponent()
-        urlComponents.queryItems = queryItems.isEmpty ? nil : queryItems
-        guard let url = urlComponents.url else {
-            throw URLError(.badURL)
-        }
-        return url
-    }
-}
+// MARK: URLRequest Factory (No Body)
 
-// MARK: - URLRequest Factories
-
-public extension HTTPEndpoint {
-    /// Factory method to create a ``URLRequest`` instance.
-    /// - Parameters:
-    ///   - queryItems: An array of ``URLQueryItem`` values to include in the URL
-    ///   - httpBody: The `Encodable` body to add to the URLRequest's httpBody
-    /// - Returns: A ``URLRequest``.
-    func makeURLRequest(_ httpBody: RequestBody, queryItems: [URLQueryItem] = []) throws -> URLRequest {
-        guard method != .get else {
-            throw HTTP.Error.noBodyForGetRequest
-        }
-        let url = try makeURL(queryItems: queryItems)
-        var request = URLRequest(url: url)
-        request.httpMethod = method.rawValue
-        if type(of: httpBody) != HTTP.EmptyRequestBody.self {
-            request.httpBody = try encoder.encode(httpBody)
-        }
-        return request
-    }
-
-    /// Factory method to create a ``URLRequest`` instance without an httpBody parameter
-    /// - Parameter queryItems: An array of `URLQueryItem` values to include in the URL.
-    /// - Returns: A ``URLRequest``.
+public extension HTTPEndpoint where RequestBody == Void {
     func makeURLRequest(queryItems: [URLQueryItem] = []) throws -> URLRequest {
-        let url = try makeURL(queryItems: queryItems)
-        var request = URLRequest(url: url)
-        request.httpMethod = method.rawValue
-        return request
+        try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [path],
+            queryItems: queryItems
+        )
+    }
+
+    func makeURLRequest(appending path: some StringProtocol, queryItems: [URLQueryItem] = []) throws -> URLRequest {
+        try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [self.path, path],
+            queryItems: queryItems
+        )
+    }
+
+    func makeURLRequest<Path>(
+        appending paths: Path...,
+        queryItems: [URLQueryItem] = []
+    ) throws -> URLRequest where Path: StringProtocol {
+        try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [path] + paths,
+            queryItems: queryItems
+        )
     }
 }
 
-// MARK: - HTTPClient calls
+// MARK: URLRequest Factory (Encodable Body)
+
+public extension HTTPEndpoint where RequestBody: Encodable {
+    func makeURLRequest(queryItems: [URLQueryItem] = [], httpBody: RequestBody? = nil) throws -> URLRequest {
+        try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [path],
+            queryItems: queryItems,
+            httpBody: httpBody,
+            jsonEncoder: encoder
+        )
+    }
+
+    func makeURLRequest(
+        appending path: some StringProtocol,
+        queryItems: [URLQueryItem] = [],
+        httpBody: RequestBody? = nil
+    ) throws -> URLRequest {
+        try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [self.path, path],
+            queryItems: queryItems,
+            httpBody: httpBody,
+            jsonEncoder: encoder
+        )
+    }
+
+    func makeURLRequest<Path>(
+        appending paths: Path...,
+        queryItems: [URLQueryItem] = [],
+        httpBody: RequestBody? = nil
+    ) throws -> URLRequest where Path: StringProtocol {
+        try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [path] + paths,
+            queryItems: queryItems,
+            httpBody: httpBody,
+            jsonEncoder: encoder
+        )
+    }
+}
+
+// MARK: - Data Request
 
 public extension HTTPEndpoint {
-    /// Fetches and decodes the response from the endpoint using the HTTP Configuration's HTTP Client.
-    /// - Parameters:
-    ///   - request: A ``URLRequest`` to use in the request
-    /// - Returns: The decoded associated ResponseType that was in the response body.
-    /// - Throws: ``HTTP.Client.Error``
-    func responseObject(from request: URLRequest) async throws -> ResponseBody {
-        let data = try await Dependency(\.httpClient).wrappedValue.data(
-            request: request,
-            configuration: sessionConfiguration,
+    @discardableResult
+    func data(fromURLRequest request: URLRequest) async throws -> Data {
+        try await Dependency(\.httpClient).wrappedValue.data(request: request, configuration: sessionConfiguration)
+    }
+}
+
+// MARK: - Request (No Body, No Response)
+
+public extension HTTPEndpoint where RequestBody == Void, ResponseBody == Void {
+    func performRequest(queryItems: [URLQueryItem] = []) async throws {
+        let request = try makeURLRequest(queryItems: queryItems)
+        try await data(fromURLRequest: request)
+    }
+
+    func performRequest(appending path: some StringProtocol, queryItems: [URLQueryItem] = []) async throws {
+        let request = try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [self.path, path],
+            queryItems: queryItems
         )
+        try await data(fromURLRequest: request)
+    }
+
+    func performRequest<Path>(
+        appending paths: Path...,
+        queryItems: [URLQueryItem] = []
+    ) async throws where Path: StringProtocol {
+        let request = try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [path] + paths,
+            queryItems: queryItems
+        )
+        try await data(fromURLRequest: request)
+    }
+}
+
+// MARK: - Request (Encodable Body, No Response)
+
+public extension HTTPEndpoint where RequestBody: Encodable, ResponseBody == Void {
+    func performRequest(queryItems: [URLQueryItem] = [], httpBody: RequestBody? = nil) async throws {
+        let request = try makeURLRequest(queryItems: queryItems, httpBody: httpBody)
+        try await data(fromURLRequest: request)
+    }
+
+    func performRequest(
+        appending path: some StringProtocol,
+        queryItems: [URLQueryItem] = [],
+        httpBody: RequestBody? = nil
+    ) async throws {
+        let request = try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [self.path, path],
+            queryItems: queryItems,
+            httpBody: httpBody,
+            jsonEncoder: encoder
+        )
+        try await data(fromURLRequest: request)
+    }
+
+    func performRequest<Path>(
+        appending paths: Path...,
+        queryItems: [URLQueryItem] = [],
+        httpBody: RequestBody? = nil
+    ) async throws where Path: StringProtocol {
+        let request = try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [path] + paths,
+            queryItems: queryItems,
+            httpBody: httpBody,
+            jsonEncoder: encoder
+        )
+        try await data(fromURLRequest: request)
+    }
+}
+
+// MARK: - Response (No Response)
+
+public extension HTTPEndpoint where ResponseBody == Void {
+    func performRequest(_ request: URLRequest) async throws {
+        try await data(fromURLRequest: request)
+    }
+}
+
+// MARK: - Response (Data Response)
+
+public extension HTTPEndpoint where ResponseBody == Data {
+    func performRequest(_ request: URLRequest) async throws -> ResponseBody {
+        try await data(fromURLRequest: request)
+    }
+}
+
+public extension HTTPEndpoint where RequestBody == Void, ResponseBody == Data {
+    func performRequest(queryItems: [URLQueryItem] = []) async throws -> ResponseBody {
+        let request = try makeURLRequest(queryItems: queryItems)
+        return try await performRequest(request)
+    }
+}
+
+// MARK: - Response (Request Decodable)
+
+public extension HTTPEndpoint where ResponseBody: Decodable {
+    func performRequest(_ request: URLRequest) async throws -> ResponseBody {
+        let data = try await data(fromURLRequest: request)
         return try decoder.decode(ResponseBody.self, from: data)
     }
-
-    /// Initiates the given ``URLRequest`` using the HTTP Configuration's HTTP Client and disregards the response
-    /// - Parameter request: The ``URLRequest`` to use in the request
-    func response(from request: URLRequest) async throws {
-        _ = try await Dependency(\.httpClient).wrappedValue.data(
-            request: request,
-            configuration: sessionConfiguration,
-        )
-    }
 }
 
-// MARK: - Combination URLResponse Factory & Response Decoding
+// MARK: - Response (No Body, Decodable Response)
 
-public extension HTTPEndpoint {
-    /// Initiate an HTTP Request with the given body and query items, the response from the server is decoded.
-    /// - Parameters:
-    ///   - body: The `Encodable` body to add to the request.
-    ///   - queryItems: An array of `URLQueryItem` values to encode into the URL.
-    /// - Returns: The http body of the response, decoded.
-    func requestDecodingResponse(
-        withHTTPBody body: RequestBody,
-        andQueryItems queryItems: [URLQueryItem] = [],
+public extension HTTPEndpoint where RequestBody == Void, ResponseBody: Decodable {
+    func performRequest(queryItems: [URLQueryItem] = []) async throws -> ResponseBody {
+        let request = try makeURLRequest(queryItems: queryItems)
+        return try await performRequest(request)
+    }
+
+    func performRequest(
+        appending path: some StringProtocol,
+        queryItems: [URLQueryItem] = []
     ) async throws -> ResponseBody {
-        guard method != .get else {
-            throw HTTP.Error.noBodyForGetRequest
-        }
-        let request = try makeURLRequest(body, queryItems: queryItems)
-        return try await responseObject(from: request)
+        let request = try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [self.path, path],
+            queryItems: queryItems
+        )
+        return try await performRequest(request)
     }
 
-    /// Initiate an HTTP Request with the given body and query items, the response from the server is decoded.
-    /// - Parameters:
-    ///   - queryItems: An array of `URLQueryItem` values to encode into the URL.
-    /// - Returns: The http body of the response, decoded.
-    func requestDecodingResponse(withQueryItems queryItems: [URLQueryItem] = []) async throws -> ResponseBody {
-        let request = try makeURLRequest(queryItems: queryItems)
-        return try await responseObject(from: request)
-    }
-
-    /// Initiate an HTTP Request with the given body and query items, the response from the server is decoded.
-    /// - Parameters:
-    ///   - body: The `Encodable` body to add to the request.
-    ///   - queryItems: An array of `URLQueryItem` values to encode into the URL.
-    func request(
-        withHTTPBody body: RequestBody,
-        andQueryItems queryItems: [URLQueryItem] = [],
-    ) async throws {
-        let request = try makeURLRequest(body, queryItems: queryItems)
-        return try await response(from: request)
-    }
-
-    /// Initiate an HTTP Request with the given body and query items, the response from the server is decoded.
-    /// - Parameters:
-    ///   - queryItems: An array of `URLQueryItem` values to encode into the URL.
-    /// - Returns: The http body of the response, decoded.
-    func request(withQueryItems queryItems: [URLQueryItem] = []) async throws {
-        let request = try makeURLRequest(queryItems: queryItems)
-        try await response(from: request)
+    func performRequest<Path>(
+        appending paths: Path...,
+        queryItems: [URLQueryItem] = []
+    ) async throws -> ResponseBody where Path: StringProtocol {
+        let request = try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [path] + paths,
+            queryItems: queryItems
+        )
+        return try await performRequest(request)
     }
 }
 
-// MARK: - Private Utility Methods
+// MARK: - Response (Encodable Body, Decodable Response)
 
-private extension String {
-    static var slashCharacterSet: CharacterSet {
-        .init(charactersIn: "/")
+public extension HTTPEndpoint where RequestBody: Encodable, ResponseBody: Decodable {
+    func performRequest(queryItems: [URLQueryItem] = [], httpBody: RequestBody? = nil) async throws -> ResponseBody {
+        let request = try makeURLRequest(queryItems: queryItems, httpBody: httpBody)
+        return try await performRequest(request)
     }
 
-    /// Normalizes a string for use as a `path` component for use on a `URLComponent` instance.
-    /// - Returns: A ``String`` path component with a leading `/` character, but no trailing `/` character.
-    func normalizePathComponent() -> String {
-        "/" + trimmingCharacters(in: Self.slashCharacterSet)
+    func performRequest(
+        appending path: some StringProtocol,
+        queryItems: [URLQueryItem] = [],
+        httpBody: RequestBody? = nil
+    ) async throws -> ResponseBody {
+        let request = try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [self.path, path],
+            queryItems: queryItems,
+            httpBody: httpBody,
+            jsonEncoder: encoder
+        )
+        return try await performRequest(request)
+    }
+
+    func performRequest<Path>(
+        appending paths: Path...,
+        queryItems: [URLQueryItem] = [],
+        httpBody: RequestBody? = nil
+    ) async throws -> ResponseBody where Path: StringProtocol {
+        let request = try URLRequestFactory.makeURLRequest(
+            baseURL: baseURL,
+            method: method,
+            appending: [path] + paths,
+            queryItems: queryItems,
+            httpBody: httpBody,
+            jsonEncoder: encoder
+        )
+        return try await performRequest(request)
     }
 }

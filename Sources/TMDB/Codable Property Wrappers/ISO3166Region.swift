@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-public struct ISO3166Region {
+public struct ISO3166Region: Equatable {
     public let wrappedValue: Locale.Region
     public init(wrappedValue: Locale.Region) {
         self.wrappedValue = wrappedValue

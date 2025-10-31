@@ -1,9 +1,5 @@
 import Foundation
 
-public extension TMDB {
-    enum Movie {}
-}
-
 public extension TMDB.Movie {
     struct Details: Equatable, Identifiable {
         public let adult: Bool
