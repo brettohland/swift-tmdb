@@ -6,7 +6,7 @@ import Utilities
 public extension HTTP {
     @DependencyClient
     struct Client: Sendable {
-        var data: @Sendable (_ request: URLRequest, _ configuration: URLSessionConfiguration?) async throws -> Data
+        public var data: @Sendable (_ request: URLRequest, _ configuration: URLSessionConfiguration?) async throws -> Data
     }
 }
 
@@ -18,7 +18,7 @@ extension HTTP.Client: DependencyKey {
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw HTTP.Client.Error.invalidResponseFromServer(response, data)
             }
-            switch httpResponse.responseStatus.category {
+            switch  httpResponse.responseStatus.category {
             case .informational,
                  .redirection,
                  .success:

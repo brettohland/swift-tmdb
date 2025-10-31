@@ -9,7 +9,7 @@ public extension HTTP {
     }
 }
 
-extension HTTP.Error: LocalizedError {
+extension HTTP.Error: Error  {
     public var errorDescription: String? {
         switch self {
         case .noBodyForGetRequest:
@@ -42,7 +42,7 @@ public extension HTTP.Client {
     }
 }
 
-extension HTTP.Client.Error: LocalizedError {
+extension HTTP.Client.Error: Error {
     public var errorDescription: String? {
         switch self {
         case .invalidResponseFromServer:

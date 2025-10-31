@@ -4,7 +4,7 @@
 @preconcurrency import PackageDescription
 
 let package = Package(
-    name: .tmdb,
+    name: "TMDBSwifty",
     platforms: [
         .iOS(.v18),
         .macOS(.v15),
@@ -18,8 +18,9 @@ let package = Package(
         .swiftDependencies,
     ],
     targets: [
-        .tmdb,
         .requestService,
+        .sharedModels,
+        .tmdb,
         .utilities,
 
         .tmdbTests,
@@ -30,15 +31,14 @@ extension String {
     static let tmdb = "TMDB"
 }
 
-
-    enum TargetNames {
-        static let tmdb = "TMDB"
-        static let dependencies = "Dependencies"
-        static let requestService = "RequestService"
-        static let tmdbTests = "TMDBTests"
-        static let utilities = "Utilities"
-    }
-
+enum TargetNames {
+    static let dependencies = "Dependencies"
+    static let requestService = "RequestService"
+    static let tmdb = "TMDB"
+    static let tmdbTests = "TMDBTests"
+    static let utilities = "Utilities"
+    static let sharedModels = "SharedModels"
+}
 
 // MARK: -  Target Definitions
 
@@ -46,6 +46,7 @@ extension Target {
     static let tmdb = target(
         name: TargetNames.tmdb,
         dependencies: [
+            Dependency.Internal.sharedModels,
             Dependency.Internal.requestService,
             Dependency.Internal.utilities,
             Dependency.External.swiftDependencies,
@@ -54,24 +55,42 @@ extension Target {
     static let requestService = target(
         name: TargetNames.requestService,
         dependencies: [
+            Dependency.Internal.sharedModels,
             Dependency.Internal.utilities,
             Dependency.External.swiftDependencies,
-            Dependency.External.swiftDependenciesMacros
+            Dependency.External.swiftDependenciesMacros,
+        ],
+//        swiftSettings: [
+//            .defaultIsolation(MainActor.self),
+//            .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+//            .enableUpcomingFeature("InferIsolatedConformances"),
+//        ]
+    )
+    static let sharedModels = target(
+        name: TargetNames.sharedModels,
+        dependencies: [
+            // NO INTERNAL DEPENDENCIES!
+            Dependency.External.swiftDependencies,
         ],
     )
     static let utilities = target(
         name: TargetNames.utilities,
-        resources: [.resources],
+        dependencies: [
+            // NO INTERNAL DEPENDENCIES!
+            Dependency.External.swiftDependencies,
+        ],
     )
 }
 
-//MARK: - Test Targets
+// MARK: - Test Targets
 
 extension Target {
     static let tmdbTests = testTarget(
         name: TargetNames.tmdbTests,
         dependencies: [
-            "TMDB",
+            Dependency.Internal.tmdb,
+            Dependency.Internal.sharedModels,
+            Dependency.External.swiftDependencies,
         ],
         resources: [
             .process("JSON"),
@@ -81,19 +100,21 @@ extension Target {
 
 extension Target.Dependency {
     enum Internal {
-        static let utilities = Target.Dependency.target(name: TargetNames.utilities)
         static let requestService = Target.Dependency.target(name: TargetNames.requestService)
+        static let sharedModels = Target.Dependency.target(name: TargetNames.sharedModels)
+        static let tmdb = Target.Dependency.target(name: TargetNames.tmdb)
+        static let utilities = Target.Dependency.target(name: TargetNames.utilities)
     }
 
     // External Dependencies
     enum External {
         static let swiftDependencies = Target.Dependency.product(
             name: "Dependencies",
-            package: "swift-dependencies"
+            package: "swift-dependencies",
         )
         static let swiftDependenciesMacros = Target.Dependency.product(
             name: "DependenciesMacros",
-            package: "swift-dependencies"
+            package: "swift-dependencies",
         )
     }
 }

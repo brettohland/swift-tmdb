@@ -98,7 +98,8 @@ public extension HTTPEndpoint where RequestBody: Encodable {
 public extension HTTPEndpoint {
     @discardableResult
     func data(fromURLRequest request: URLRequest) async throws -> Data {
-        try await Dependency(\.httpClient).wrappedValue.data(request: request, configuration: sessionConfiguration)
+//        try await Dependency(\.httpClient).wrappedValue.data(request: request, configuration: sessionConfiguration)
+        throw HTTP.Error.unsupportedHTTPMethod
     }
 }
 

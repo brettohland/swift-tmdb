@@ -1,6 +1,8 @@
 import Foundation
+import SharedModels
+import TMDB
 
-actor TestUtilities {
+enum TestUtilities {
     private static func getData(forName name: String, fileExtension: String) throws -> Data {
         guard let payloadURL = Bundle.module.url(forResource: name, withExtension: fileExtension) else {
             throw TestError.fileNotFound

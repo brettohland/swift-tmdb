@@ -2,8 +2,8 @@ import Dependencies
 import Foundation
 import RequestService
 
-public enum TMDB {}
 
+public enum TMDB {}
 
 
 // public struct TMDB {
