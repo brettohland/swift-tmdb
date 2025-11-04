@@ -1,7 +1,6 @@
 import Dependencies
 import DependenciesMacros
 import Foundation
-import Utilities
 
 public extension HTTP {
     @DependencyClient

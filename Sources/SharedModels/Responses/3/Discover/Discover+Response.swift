@@ -1,29 +1,43 @@
 import Foundation
 
-public extension TMDBInternal.Discover {
-    typealias MovieResponse = Response<DiscoverMovie>
-    typealias TVResponse = Response<DiscoverTV>
+public protocol DiscoverType: Codable {}
 
-    struct Response<Title: Codable>: Decodable {
+public extension TMDBInternal.Discover {
+    typealias MovieResponse = PaginatedResponse<DiscoverMovie>
+    typealias TVResponse = PaginatedResponse<DiscoverTV>
+
+    struct PaginatedResponse<Wrapped: DiscoverType>: Codable {
         @NilInteger
-        var page: Int
+        public var page: Int
         @NilInteger
-        var totalResults: Int
+        public var totalResults: Int
         @NilInteger
-        var totalPages: Int
-        @NilCodableArray<Title>
-        var results: [Title]
+        public var totalPages: Int
+        @NilCodableArray<Wrapped>
+        public var results: [Wrapped]
+
+        public init(
+            page: Int,
+            totalResults: Int,
+            totalPages: Int,
+            results: [Wrapped]
+        ) {
+            _page = NilInteger(wrappedValue: page)
+            _totalResults = NilInteger(wrappedValue: totalResults)
+            _totalPages = NilInteger(wrappedValue: totalPages)
+            _results = NilCodableArray(wrappedValue: results)
+        }
     }
 
-    struct DiscoverTV: Codable {
+    struct DiscoverTV: Codable, DiscoverType {
         // MARK: Common
 
         let backdropPath: URL?
         @NilCodableArray<Int>
         var genreIds: [Int]
         var id: Int
-        @ISO639LocaleString
-        var originalLanguage: Locale
+        @LanguageCode
+        var originalLanguage: Locale.Language
         let overview: String?
         let popularity: Double?
         let posterPath: String?
@@ -34,13 +48,12 @@ public extension TMDBInternal.Discover {
 
         let name: String?
         let originalName: String?
-        @NilCodableArray
-        var originCountry: [Country]
+        var originCountry: [Locale.Region]
         @ISO8601YMD
         var firstAirDate: Date?
     }
 
-    struct DiscoverMovie: Codable {
+    struct DiscoverMovie: Codable, DiscoverType {
         // MARK: Common
 
         @NilBoolean
@@ -49,8 +62,8 @@ public extension TMDBInternal.Discover {
         @NilCodableArray<Int>
         var genreIds: [Int]
         var id: Int
-        @ISO639LocaleString
-        var originalLanguage: Locale
+        @LanguageCode
+        var originalLanguage: Locale.Language
         let overview: String?
         let popularity: Double?
         let posterPath: String?

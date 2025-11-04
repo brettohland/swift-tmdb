@@ -18,6 +18,7 @@ let package = Package(
         .swiftDependencies,
     ],
     targets: [
+        .mocks,
         .requestService,
         .sharedModels,
         .tmdb,
@@ -38,19 +39,20 @@ enum TargetNames {
     static let tmdbTests = "TMDBTests"
     static let utilities = "Utilities"
     static let sharedModels = "SharedModels"
+    static let mocks = "Mocks"
 }
 
 // MARK: -  Target Definitions
 
 extension Target {
-    static let tmdb = target(
-        name: TargetNames.tmdb,
+    static let mocks = target(
+        name: TargetNames.mocks,
         dependencies: [
             Dependency.Internal.sharedModels,
-            Dependency.Internal.requestService,
-            Dependency.Internal.utilities,
-            Dependency.External.swiftDependencies,
         ],
+        resources: [
+            .process("JSON")
+        ]
     )
     static let requestService = target(
         name: TargetNames.requestService,
@@ -60,16 +62,21 @@ extension Target {
             Dependency.External.swiftDependencies,
             Dependency.External.swiftDependenciesMacros,
         ],
-//        swiftSettings: [
-//            .defaultIsolation(MainActor.self),
-//            .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-//            .enableUpcomingFeature("InferIsolatedConformances"),
-//        ]
     )
     static let sharedModels = target(
         name: TargetNames.sharedModels,
         dependencies: [
             // NO INTERNAL DEPENDENCIES!
+            Dependency.External.swiftDependencies,
+            Dependency.External.swiftDependenciesMacros,
+        ],
+    )
+    static let tmdb = target(
+        name: TargetNames.tmdb,
+        dependencies: [
+            Dependency.Internal.sharedModels,
+            Dependency.Internal.requestService,
+            Dependency.Internal.utilities,
             Dependency.External.swiftDependencies,
         ],
     )
@@ -88,13 +95,11 @@ extension Target {
     static let tmdbTests = testTarget(
         name: TargetNames.tmdbTests,
         dependencies: [
+            Dependency.Internal.mocks,
             Dependency.Internal.tmdb,
             Dependency.Internal.sharedModels,
             Dependency.External.swiftDependencies,
-        ],
-        resources: [
-            .process("JSON"),
-        ],
+        ]
     )
 }
 
@@ -104,6 +109,7 @@ extension Target.Dependency {
         static let sharedModels = Target.Dependency.target(name: TargetNames.sharedModels)
         static let tmdb = Target.Dependency.target(name: TargetNames.tmdb)
         static let utilities = Target.Dependency.target(name: TargetNames.utilities)
+        static let mocks = Target.Dependency.target(name: TargetNames.mocks)
     }
 
     // External Dependencies

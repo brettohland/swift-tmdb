@@ -16,14 +16,14 @@ public extension TMDBInternal.Movie {
         public let popularity: Double
         public let posterPath: String
         public let productionCompanies: [TMDBInternal.ProductionCompany]
-        @ISO3166RegionArray
+        @RegionArray
         public var productionCountries: [Locale.Region]
         @ISO8601YMD
         public var releaseDate: Date?
         public let revenue: Int
         @Minutes
         public var runtime: Measurement<UnitDuration>
-        @ISO639LanguageArray
+        @LanguageArray
         public var spokenLanguages: [Locale.Language]
         public let status: TMDBInternal.ReleaseStatus
         public let tagline: String

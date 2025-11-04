@@ -7,16 +7,8 @@ public extension TMDBInternal.Movie {
     }
 
     struct Title: Equatable, Codable {
-        @ISO31661RegionIdentifier
         var iso31661: Locale.Region
         let title: String
         let type: String
     }
 }
-
-//extension TMDBInternal.Movie.AlternativeTitle.Title: Codable {
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case titles
-//    }
-//}

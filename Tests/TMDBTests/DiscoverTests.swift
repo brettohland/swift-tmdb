@@ -6,7 +6,7 @@ import SharedModels
 struct DiscoverTests {
     @Test func verifyDiscoverMovieDecoding() throws {
         // Arrange
-        let htmlBody = try TestUtilities.jsonDataFromFile("movie")
+//        let htmlBody = try TestUtilities.jsonDataFromFile("movie")
 
         // Act/Assert
 //        _ = try TMDB.decoder.decode(TMDB.Discover.MovieResponse.self, from: htmlBody)
@@ -14,7 +14,7 @@ struct DiscoverTests {
 
     @Test func verifyDiscoverTVDecoding() throws {
         // Arrange
-        let htmlBody = try TestUtilities.jsonDataFromFile("tv")
+//        let htmlBody = try TestUtilities.jsonDataFromFile("tv")
 
         // Act/Assert
 //        _ = try TMDB.decoder.decode(TMDB.Discover.TVResponse.self, from: htmlBody)

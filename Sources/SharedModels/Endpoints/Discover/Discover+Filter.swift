@@ -69,7 +69,7 @@ public extension TMDBInternal.Discover {
     }
 }
 
-extension TMDBInternal.Discover.Filter: TMDBDiscoverFilter {
+extension TMDBInternal.Discover.Filter: TMDBDiscoverMovieFilter, TMDBDiscoverTVFilter {
     public var key: String {
         switch self {
         case .language:
