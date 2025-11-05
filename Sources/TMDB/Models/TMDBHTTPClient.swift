@@ -44,10 +44,14 @@ public extension DependencyValues {
 
 extension TMDB.Client.HTTPClient: TestDependencyKey {
     public static var testValue: Self {
-        Self { _, _ in
-            Data()
+        Self { request, _ in
+            try PathMatchingService.dataFromURLRequest(request)
         }
     }
 
-    public static let previewValue = Self()
+    public static var previewValue : Self {
+        Self { request, _ in
+            try PathMatchingService.dataFromURLRequest(request)
+        }
+    }
 }

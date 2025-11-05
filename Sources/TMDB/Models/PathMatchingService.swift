@@ -14,7 +14,7 @@ enum PathMatchingService {
         guard let url = request.url else {
             throw MatchingError.missingURL
         }
-        switch url.pathComponents.first {
+        switch url.pathComponents[1] {
         case "3":
             return try handleV3Path(url)
         case "4":
@@ -94,7 +94,7 @@ extension TMDBInternal.V3Endpoints.Movies: RegexComparable {
         case .details:
             /^\/3\/movie\/\d+$/
         case .alternativeTitles:
-            /^\/3\/movie\/\d+\/alternative_title$/
+            /^\/3\/movie\/\d+\/alternative_titles$/
         }
     }
 }

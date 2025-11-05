@@ -19,7 +19,7 @@ extension TMDBInternal.V3Endpoints.Configuration: EndpointFactory {
             paths.append("configuration")
         case .countries:
             // /3/configuration/countries
-            paths += ["configuration", "details"]
+            paths += ["configuration", "countries"]
         }
         return URLFactory.makeURL(baseURL: baseURL, appending: paths)
     }
