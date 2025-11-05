@@ -21,8 +21,6 @@ struct DiscoverEndpointTests {
         } operation: {
             try await TMDB.Client.Discover.movies()
         }
-
-
     }
 
     @Test func discoverTV() async throws {

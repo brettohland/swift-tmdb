@@ -1,6 +1,4 @@
 import Foundation
-import SharedModels
-import TMDB
 
 enum MockUtilities {
     private static func getData(forName name: String, fileExtension: String) throws -> Data {

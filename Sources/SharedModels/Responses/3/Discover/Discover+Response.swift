@@ -2,6 +2,10 @@ import Foundation
 
 public protocol DiscoverType: Codable {}
 
+public extension TMDBInternal {
+    enum Discover{}
+}
+
 public extension TMDBInternal.Discover {
     typealias MovieResponse = PaginatedResponse<DiscoverMovie>
     typealias TVResponse = PaginatedResponse<DiscoverTV>

@@ -4,22 +4,6 @@ import SharedModels
 @testable import TMDB
 
 struct DiscoverTests {
-    @Test func verifyDiscoverMovieDecoding() throws {
-        // Arrange
-//        let htmlBody = try TestUtilities.jsonDataFromFile("movie")
-
-        // Act/Assert
-//        _ = try TMDB.decoder.decode(TMDB.Discover.MovieResponse.self, from: htmlBody)
-    }
-
-    @Test func verifyDiscoverTVDecoding() throws {
-        // Arrange
-//        let htmlBody = try TestUtilities.jsonDataFromFile("tv")
-
-        // Act/Assert
-//        _ = try TMDB.decoder.decode(TMDB.Discover.TVResponse.self, from: htmlBody)
-    }
-
     @Test func discoverTMDBDiscoverFilterQuery() throws {
         #expect(
             TMDBInternal.Discover.Filter.language(Locale(identifier: "en_US")).queryItem.description == "language=en_US",

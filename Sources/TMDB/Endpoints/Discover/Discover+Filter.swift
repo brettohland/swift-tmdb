@@ -1,8 +1,5 @@
 import Foundation
-
-public extension TMDBInternal {
-    enum Discover {}
-}
+import SharedModels
 
 public extension TMDBInternal.Discover {
     enum Value {
@@ -69,7 +66,7 @@ public extension TMDBInternal.Discover {
     }
 }
 
-extension TMDBInternal.Discover.Filter: TMDBDiscoverMovieFilter, TMDBDiscoverTVFilter {
+extension TMDBInternal.Discover.Filter: DiscoverMovieFilter, DiscoverTVFilter {
     public var key: String {
         switch self {
         case .language:
@@ -141,7 +138,7 @@ extension TMDBInternal.Discover.Filter: TMDBDiscoverMovieFilter, TMDBDiscoverTVF
     }
 }
 
-extension TMDBInternal.Discover.MovieFilter: TMDBDiscoverMovieFilter {
+extension TMDBInternal.Discover.MovieFilter: DiscoverMovieFilter {
     public var key: String {
         switch self {
         case .region:
@@ -237,7 +234,7 @@ extension TMDBInternal.Discover.MovieFilter: TMDBDiscoverMovieFilter {
     }
 }
 
-extension TMDBInternal.Discover.TVFilter: TMDBDiscoverTVFilter {
+extension TMDBInternal.Discover.TVFilter: DiscoverTVFilter {
     public var key: String {
         switch self {
         case .airDateGreaterThan:

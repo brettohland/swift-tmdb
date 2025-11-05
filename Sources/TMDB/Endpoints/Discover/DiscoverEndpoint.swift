@@ -1,7 +1,32 @@
-import Dependencies
 import Foundation
 import RequestService
 import SharedModels
+
+extension TMDBInternal.V3Endpoints {
+    enum Discover {
+        case movie(filters: [DiscoverMovieFilter])
+        case tv(filters: [DiscoverTVFilter])
+    }
+}
+
+extension TMDBInternal.V3Endpoints.Discover: EndpointFactory {
+    public func makeURL(baseURL: URL) -> URL {
+        // /3/discover
+        var paths = ["3", "discover"]
+        var queryItems: [URLQueryItem] = []
+        switch self {
+        case .movie(let filters):
+            // /3/discover/movie
+            paths.append("movie")
+            queryItems = filters.map(\.queryItem)
+        case .tv(let filters):
+            // /3/discover/tv
+            paths.append("tv")
+            queryItems = filters.map(\.queryItem)
+        }
+        return URLFactory.makeURL(baseURL: baseURL, appending: paths, queryItems: queryItems)
+    }
+}
 
 public extension TMDB.Client {
     enum Discover {}
@@ -10,7 +35,7 @@ public extension TMDB.Client {
 // MARK: - Discover Movies
 
 public extension TMDB.Client.Discover {
-    static func movies(filters: TMDBDiscoverMovieFilter...) async throws -> TMDBInternal.Discover.MovieResponse {
+    static func movies(filters: DiscoverMovieFilter...) async throws -> TMDBInternal.Discover.MovieResponse {
         let endpoint = TMDBEndpoint<HTTP.EmptyRequestBody, TMDBInternal.Discover.MovieResponse>(
             endpoint: TMDBInternal.V3Endpoints.Discover.movie(filters: filters),
             httpMethod: .get,
@@ -30,7 +55,7 @@ public extension TMDB.Client.Discover {
 // MARK: - Discover TV
 
 public extension TMDB.Client.Discover {
-    static func tv(filters: TMDBDiscoverTVFilter...) async throws -> TMDBInternal.Discover.TVResponse {
+    static func tv(filters: DiscoverTVFilter...) async throws -> TMDBInternal.Discover.TVResponse {
         let endpoint = TMDBEndpoint<HTTP.EmptyRequestBody, TMDBInternal.Discover.TVResponse>(
             endpoint: TMDBInternal.V3Endpoints.Discover.tv(filters: filters),
             httpMethod: .get,
