@@ -1,7 +1,4 @@
-import Dependencies
 import Foundation
-import RequestService
-import SharedModels
 
 public extension TMDB {
     enum Client {
@@ -49,6 +46,8 @@ enum TMDBError: Error {
     case alreadyInitialized
     case apiKeyMissing
 }
+
+
 
 extension TMDB.Client {
     struct Configuration: Sendable {

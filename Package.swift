@@ -59,8 +59,6 @@ extension Target {
         dependencies: [
             Dependency.Internal.sharedModels,
             Dependency.Internal.utilities,
-            Dependency.External.swiftDependencies,
-            Dependency.External.swiftDependenciesMacros,
         ],
     )
     static let sharedModels = target(
@@ -78,6 +76,7 @@ extension Target {
             Dependency.Internal.requestService,
             Dependency.Internal.utilities,
             Dependency.External.swiftDependencies,
+            Dependency.External.swiftDependenciesMacros,
         ],
     )
     static let utilities = target(

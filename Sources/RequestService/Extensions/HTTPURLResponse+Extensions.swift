@@ -1,6 +1,6 @@
 import Foundation
 
-extension HTTPURLResponse {
+public extension HTTPURLResponse {
     var responseStatus: HTTP.ResponseStatus {
         .init(statusCode: statusCode)
     }

@@ -15,11 +15,11 @@ extension TMDBInternal.V3Endpoints.Configuration: EndpointFactory {
         var paths = ["3"]
         switch self {
         case .details:
-            // /3/details
-            paths.append("details")
-        case .countries:
             // /3/configuration
             paths.append("configuration")
+        case .countries:
+            // /3/configuration/countries
+            paths += ["configuration", "details"]
         }
         return URLFactory.makeURL(baseURL: baseURL, appending: paths)
     }
