@@ -72,6 +72,7 @@ extension Target {
     static let tmdb = target(
         name: TargetNames.tmdb,
         dependencies: [
+            Dependency.Internal.mocks,
             Dependency.Internal.sharedModels,
             Dependency.Internal.requestService,
             Dependency.Internal.utilities,

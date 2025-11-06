@@ -9,44 +9,45 @@ public extension TMDBInternal.Discover {
 
     enum Filter {
         case language(Locale)
-        case sortBy(SortOption)
         case page(Int)
-        case voteCountGreaterThan(Int)
+        case sortBy(SortOption)
         case voteAverageGreaterThan(Double)
-        case withGenres([String])
-        case withoutGenres([String])
-        case withOriginalLanguage(Locale)
+        case voteCountGreaterThan(Int)
+        case watchRegion(Locale.Region)
+        case withCompanies([LogicalOperator<String>])
+        case withGenres([LogicalOperator<String>])
+        case withKeywords([LogicalOperator<String>])
+        case withOriginCountry(Locale.Region)
+        case withOriginalLanguage(Locale.Language)
+        case withWatchMonetizationTypes([LogicalOperator<MonetizationType>])
+        case withWatchProviders([LogicalOperator<String>])
+        case withoutGenres([LogicalOperator<String>])
         case withoutKeywords([String])
-        case withCompanies([String])
-        case withKeywords([String])
-        case withWatchProviders(TMDBInternal.ParameterList)
-        case watchRegion([Locale.Region])
-        case withWatchMonetizationTypes([String])
-        case withoutCompanies(TMDBInternal.ParameterList)
+        case withoutCompanies([String])
     }
 
     enum MovieFilter {
-        case region(Locale)
-        case voteCountLessThan(Int)
-        case voteAverageLessThan(Double)
-        case certificationCountry(String)
         case certification(String)
-        case certificationLessThan(String)
+        case certificationCountry(Locale.Region)
         case certificationGreaterThan(String)
+        case certificationLessThan(String)
         case includeAdult(Bool)
         case includeVideo(Bool)
-        case primaryReleaseYear(Int)
         case primaryReleaseDateGreaterThan(Date)
         case primaryReleaseDateLessThan(Date)
+        case primaryReleaseYear(Int)
+        case region(Locale)
         case releaseDateGreaterThan(Date)
         case releaseDateLessThan(Date)
-        case withReleaseType(TMDBInternal.ParameterList)
-        case year(Int)
-        case withCast([String])
-        case withCrew([String])
-        case withPeople([String])
+        case voteAverageLessThan(Double)
+        case voteCountLessThan(Int)
+        case withCast([LogicalOperator<String>])
+        case withCrew([LogicalOperator<String>])
+        case withPeople([LogicalOperator<String>])
+        case withReleaseType([LogicalOperator<ReleaseType>])
         case withRuntimeGreaterThan(Int)
         case withRuntimeLessThan(Int)
+        case year(Int)
     }
 
     enum TVFilter {
@@ -63,6 +64,32 @@ public extension TMDBInternal.Discover {
         case screenedTheatrically(Bool)
         case withStatus(String)
         case withType(String)
+    }
+
+    // TODO: Ask Trav what the hell these mean
+    enum ReleaseType: Int, CustomStringConvertible {
+        case release1 = 1
+        case release2
+        case release3
+        case release4
+        case release5
+        case release6
+
+        public var description: String {
+            String(rawValue)
+        }
+    }
+
+    enum MonetizationType: String, CustomStringConvertible {
+        case flatRate = "flatrate"
+        case free
+        case ads
+        case rent
+        case buy
+
+        public var description: String {
+            rawValue
+        }
     }
 }
 
@@ -99,6 +126,8 @@ extension TMDBInternal.Discover.Filter: DiscoverMovieFilter, DiscoverTVFilter {
             "with_watch_monetization_types"
         case .withoutCompanies:
             "without_companies"
+        case .withOriginCountry:
+            "with_origin_country"
         }
     }
 
@@ -126,14 +155,16 @@ extension TMDBInternal.Discover.Filter: DiscoverMovieFilter, DiscoverTVFilter {
             keywords.queryValue
         case .withWatchProviders(let providers):
             providers.queryValue
-        case .watchRegion(let regions):
-            regions.map(\.queryValue).queryValue
+        case .watchRegion(let region):
+            region.queryValue
         case .withWatchMonetizationTypes(let types):
             types.queryValue
         case .withoutCompanies(let companies):
             companies.queryValue
         case .withoutGenres(let genres):
             genres.queryValue
+        case .withOriginCountry(let country):
+            country.queryValue
         }
     }
 }
@@ -217,7 +248,7 @@ extension TMDBInternal.Discover.MovieFilter: DiscoverMovieFilter {
         case .releaseDateLessThan(let value):
             value.queryValue
         case .withReleaseType(let value):
-            value.queryValue
+            value.map(\.description).queryValue
         case .year(let value):
             value.queryValue
         case .withCast(let value):
