@@ -4,105 +4,107 @@ import Testing
 @testable import TMDB
 
 struct DiscoverTests {
-    @Test func verifyCommonFilters() throws {
-        typealias Filter = TMDBInternal.Discover.Filter
+    @Test func verifyMovieFilters() throws {
+        typealias MovieFilter = TMDBInternal.Discover.MovieFilter
+        let testDate = Date(timeIntervalSince1970: 0)
+        let testDateString = "1970-01-01"
         #expect(
-            Filter.language(Locale(identifier: "en_US")).queryItem.description == "language=en_US",
+            MovieFilter.language(Locale(identifier: "en_US")).queryItem.description == "language=en_US",
         )
         #expect(
-            Filter.sortBy(.popularity(isAscending: true)).queryItem.description == "sort_option=popularity.asc",
+            MovieFilter.sortBy(.popularity(isAscending: true)).queryItem.description == "sort_option=popularity.asc",
         )
         #expect(
-            Filter.sortBy(.popularity(isAscending: false)).queryItem.description == "sort_option=popularity.desc",
+            MovieFilter.sortBy(.popularity(isAscending: false)).queryItem.description == "sort_option=popularity.desc",
         )
         #expect(
-            Filter.sortBy(.averageVote(isAscending: true)).queryItem.description == "sort_option=average_vote.asc",
+            MovieFilter.sortBy(.averageVote(isAscending: true)).queryItem.description == "sort_option=average_vote.asc",
         )
         #expect(
-            Filter.sortBy(.averageVote(isAscending: false)).queryItem.description == "sort_option=average_vote.desc",
+            MovieFilter.sortBy(.averageVote(isAscending: false)).queryItem.description == "sort_option=average_vote.desc",
         )
         #expect(
-            Filter.sortBy(.originalTitle(isAscending: true)).queryItem.description == "sort_option=original_title.asc",
+            MovieFilter.sortBy(.originalTitle(isAscending: true)).queryItem.description == "sort_option=original_title.asc",
         )
         #expect(
-            Filter.sortBy(.originalTitle(isAscending: false)).queryItem
+            MovieFilter.sortBy(.originalTitle(isAscending: false)).queryItem
                 .description == "sort_option=original_title.desc",
         )
         #expect(
-            Filter.sortBy(.primaryReleaseDate(isAscending: true)).queryItem
+            MovieFilter.sortBy(.primaryReleaseDate(isAscending: true)).queryItem
                 .description == "sort_option=primary_release_date.asc",
         )
         #expect(
-            Filter.sortBy(.primaryReleaseDate(isAscending: false)).queryItem
+            MovieFilter.sortBy(.primaryReleaseDate(isAscending: false)).queryItem
                 .description == "sort_option=primary_release_date.desc",
         )
         #expect(
-            Filter.sortBy(.releaseDate(isAscending: true)).queryItem.description == "sort_option=release_date.asc",
+            MovieFilter.sortBy(.releaseDate(isAscending: true)).queryItem.description == "sort_option=release_date.asc",
         )
         #expect(
-            Filter.sortBy(.releaseDate(isAscending: false)).queryItem.description == "sort_option=release_date.desc",
+            MovieFilter.sortBy(.releaseDate(isAscending: false)).queryItem.description == "sort_option=release_date.desc",
         )
         #expect(
-            Filter.sortBy(.revenue(isAscending: true)).queryItem.description == "sort_option=revenue.asc",
+            MovieFilter.sortBy(.revenue(isAscending: true)).queryItem.description == "sort_option=revenue.asc",
         )
         #expect(
-            Filter.sortBy(.revenue(isAscending: false)).queryItem.description == "sort_option=revenue.desc",
+            MovieFilter.sortBy(.revenue(isAscending: false)).queryItem.description == "sort_option=revenue.desc",
         )
         #expect(
-            Filter.sortBy(.voteCount(isAscending: true)).queryItem.description == "sort_option=vote_count.asc",
+            MovieFilter.sortBy(.voteCount(isAscending: true)).queryItem.description == "sort_option=vote_count.asc",
         )
         #expect(
-            Filter.sortBy(.voteCount(isAscending: false)).queryItem.description == "sort_option=vote_count.desc",
+            MovieFilter.sortBy(.voteCount(isAscending: false)).queryItem.description == "sort_option=vote_count.desc",
         )
         #expect(
-            Filter.page(1).queryItem.description == "page=1",
+            MovieFilter.page(1).queryItem.description == "page=1",
         )
         #expect(
-            Filter.voteCountGreaterThan(1).queryItem.description == "vote_count.gte=1",
+            MovieFilter.voteCountGreaterThan(1).queryItem.description == "vote_count.gte=1",
         )
         #expect(
-            Filter.voteAverageGreaterThan(1.1).queryItem.description == "vote_average.gte=1.1",
+            MovieFilter.voteAverageGreaterThan(1.1).queryItem.description == "vote_average.gte=1.1",
         )
         #expect(
-            Filter.withGenres([.and("a"), .and("b"), .and("c")]).queryItem.description == "with_genres=a,b,c",
+            MovieFilter.withGenres([.and("a"), .and("b"), .and("c")]).queryItem.description == "with_genres=a,b,c",
         )
         #expect(
-            Filter.withGenres([.and("a"), .or("b")]).queryItem.description == "with_genres=a|b",
+            MovieFilter.withGenres([.and("a"), .or("b")]).queryItem.description == "with_genres=a|b",
         )
         #expect(
-            Filter.withoutGenres([.and("a"), .and("b"), .and("c")]).queryItem.description == "without_genres=a,b,c",
+            MovieFilter.withoutGenres([.and("a"), .and("b"), .and("c")]).queryItem.description == "without_genres=a,b,c",
         )
         #expect(
-            Filter.withoutGenres([.and("a"), .or("b")]).queryItem.description == "without_genres=a|b",
+            MovieFilter.withoutGenres([.and("a"), .or("b")]).queryItem.description == "without_genres=a|b",
         )
         #expect(
-            Filter.withOriginalLanguage(Locale.Language(identifier: "en")).queryItem
+            MovieFilter.withOriginalLanguage(Locale.Language(identifier: "en")).queryItem
                 .description == "with_original_language=en",
         )
         #expect(
-            Filter.withoutKeywords(["a", "b", "c"]).queryItem.description == "without_keywords=a,b,c",
+            MovieFilter.withoutKeywords(["a", "b", "c"]).queryItem.description == "without_keywords=a,b,c",
         )
         #expect(
-            Filter.withOriginCountry(Locale.Region("us")).queryItem.description == "with_origin_country=us",
+            MovieFilter.withOriginCountry(Locale.Region("us")).queryItem.description == "with_origin_country=us",
         )
         #expect(
-            Filter.withCompanies([.and("a"), .and("b"), .and("c")]).queryItem.description == "with_companies=a,b,c",
+            MovieFilter.withCompanies([.and("a"), .and("b"), .and("c")]).queryItem.description == "with_companies=a,b,c",
         )
         #expect(
-            Filter.withKeywords([.and("a"), .and("b"), .and("c")]).queryItem.description == "with_keywords=a,b,c",
+            MovieFilter.withKeywords([.and("a"), .and("b"), .and("c")]).queryItem.description == "with_keywords=a,b,c",
         )
         #expect(
-            Filter.withWatchProviders([.and("a"), .and("b"), .and("c")]).queryItem
+            MovieFilter.withWatchProviders([.and("a"), .and("b"), .and("c")]).queryItem
                 .description == "with_watch_providers=a,b,c",
         )
         #expect(
-            Filter.withWatchProviders([.and("a"), .or("b")]).queryItem.description == "with_watch_providers=a|b",
+            MovieFilter.withWatchProviders([.and("a"), .or("b")]).queryItem.description == "with_watch_providers=a|b",
         )
         #expect(
-            Filter.watchRegion(Locale.Region("us")).queryItem.description == "watch_region=us",
+            MovieFilter.watchRegion(Locale.Region("us")).queryItem.description == "watch_region=us",
         )
         #expect(
-            Filter.withWatchMonetizationTypes(
+            MovieFilter.withWatchMonetizationTypes(
                 [
                     .and(.free),
                     .and(.ads),
@@ -112,7 +114,7 @@ struct DiscoverTests {
             ).queryItem.description == "with_watch_monetization_types=free,ads,flatrate,rent",
         )
         #expect(
-            Filter.withWatchMonetizationTypes(
+            MovieFilter.withWatchMonetizationTypes(
                 [
                     .and(.free),
                     .and(.ads),
@@ -122,16 +124,11 @@ struct DiscoverTests {
             ).queryItem.description == "with_watch_monetization_types=free,ads,flatrate|rent",
         )
         #expect(
-            Filter.withoutCompanies(["a", "b", "c"]).queryItem.description == "without_companies=a,b,c",
+            MovieFilter.withoutCompanies(["a", "b", "c"]).queryItem.description == "without_companies=a,b,c",
         )
         #expect(
-            Filter.withoutCompanies(["a", "b", "c"]).queryItem.description == "without_companies=a,b,c",
+            MovieFilter.withoutCompanies(["a", "b", "c"]).queryItem.description == "without_companies=a,b,c",
         )
-    }
-
-    @Test func verifyMovieFilters() throws {
-        typealias MovieFilter = TMDBInternal.Discover.MovieFilter
-
         #expect(
             MovieFilter.certification("a").queryItem.description == "certification=a",
         )
@@ -157,8 +154,247 @@ struct DiscoverTests {
             MovieFilter.includeVideo(false).queryItem.description == "include_video=false",
         )
         #expect(
-            MovieFilter.primaryReleaseDateGreaterThan(Date(timeIntervalSince1970: 0)).queryItem
-                .description == "primary_release_date.gte=1970-01-01",
+            MovieFilter.primaryReleaseDateGreaterThan(testDate).queryItem
+                .description == "primary_release_date.gte=\(testDateString)",
+        )
+        #expect(
+            MovieFilter.primaryReleaseDateLessThan(testDate).queryItem
+                .description == "primary_release_date.lte=\(testDateString)",
+        )
+        #expect(
+            MovieFilter.primaryReleaseYear(0).queryItem.description == "primary_release_year=0",
+        )
+        #expect(
+            MovieFilter.region(Locale(languageCode: .english, languageRegion: .canada)).queryItem
+                .description == "region=en_CA",
+        )
+        #expect(
+            MovieFilter.releaseDateGreaterThan(testDate).queryItem
+                .description == "release_date.gte=\(testDateString)",
+        )
+        #expect(
+            MovieFilter.releaseDateLessThan(testDate).queryItem
+                .description == "release_date.lte=\(testDateString)",
+        )
+        #expect(
+            MovieFilter.voteCountLessThan(0).queryItem.description == "vote_count.lte=0",
+        )
+        #expect(
+            MovieFilter.voteAverageLessThan(0).queryItem.description == "vote_average.lte=0.0",
+        )
+        #expect(
+            MovieFilter.withCast([.and("a"), .and("b")]).queryItem.description == "with_cast=a,b",
+        )
+        #expect(
+            MovieFilter.withCast([.and("a"), .or("b")]).queryItem.description == "with_cast=a|b",
+        )
+        #expect(
+            MovieFilter.withCrew([.and("a"), .and("b")]).queryItem.description == "with_crew=a,b",
+        )
+        #expect(
+            MovieFilter.withCrew([.and("a"), .or("b")]).queryItem.description == "with_crew=a|b",
+        )
+        #expect(
+            MovieFilter.withPeople([.and("a"), .and("b")]).queryItem.description == "with_people=a,b",
+        )
+        #expect(
+            MovieFilter.withPeople([.and("a"), .or("b")]).queryItem.description == "with_people=a|b",
+        )
+        #expect(
+            MovieFilter.withReleaseType([.and(.release1), .and(.release2)]).queryItem
+                .description == "with_release_type=1,2",
+        )
+        #expect(
+            MovieFilter.withReleaseType([.and(.release1), .or(.release2)]).queryItem
+                .description == "with_release_type=1|2",
+        )
+        #expect(
+            MovieFilter.withRuntimeGreaterThan(0).queryItem.description == "with_runtime.gte=0",
+        )
+        #expect(
+            MovieFilter.withRuntimeLessThan(0).queryItem.description == "with_runtime.lte=0",
+        )
+        #expect(
+            MovieFilter.year(0).queryItem.description == "year=0",
         )
     }
+
+    @Test func verifyTVFilters() throws {
+        typealias TVFilter = TMDBInternal.Discover.TVFilter
+        let testDate = Date(timeIntervalSince1970: 0)
+        let testDateString = "1970-01-01"
+        #expect(
+            TVFilter.language(Locale(identifier: "en_US")).queryItem.description == "language=en_US",
+        )
+        #expect(
+            TVFilter.sortBy(.popularity(isAscending: true)).queryItem.description == "sort_option=popularity.asc",
+        )
+        #expect(
+            TVFilter.sortBy(.popularity(isAscending: false)).queryItem.description == "sort_option=popularity.desc",
+        )
+        #expect(
+            TVFilter.sortBy(.averageVote(isAscending: true)).queryItem.description == "sort_option=average_vote.asc",
+        )
+        #expect(
+            TVFilter.sortBy(.averageVote(isAscending: false)).queryItem.description == "sort_option=average_vote.desc",
+        )
+        #expect(
+            TVFilter.sortBy(.originalTitle(isAscending: true)).queryItem.description == "sort_option=original_title.asc",
+        )
+        #expect(
+            TVFilter.sortBy(.originalTitle(isAscending: false)).queryItem
+                .description == "sort_option=original_title.desc",
+        )
+        #expect(
+            TVFilter.sortBy(.primaryReleaseDate(isAscending: true)).queryItem
+                .description == "sort_option=primary_release_date.asc",
+        )
+        #expect(
+            TVFilter.sortBy(.primaryReleaseDate(isAscending: false)).queryItem
+                .description == "sort_option=primary_release_date.desc",
+        )
+        #expect(
+            TVFilter.sortBy(.releaseDate(isAscending: true)).queryItem.description == "sort_option=release_date.asc",
+        )
+        #expect(
+            TVFilter.sortBy(.releaseDate(isAscending: false)).queryItem.description == "sort_option=release_date.desc",
+        )
+        #expect(
+            TVFilter.sortBy(.revenue(isAscending: true)).queryItem.description == "sort_option=revenue.asc",
+        )
+        #expect(
+            TVFilter.sortBy(.revenue(isAscending: false)).queryItem.description == "sort_option=revenue.desc",
+        )
+        #expect(
+            TVFilter.sortBy(.voteCount(isAscending: true)).queryItem.description == "sort_option=vote_count.asc",
+        )
+        #expect(
+            TVFilter.sortBy(.voteCount(isAscending: false)).queryItem.description == "sort_option=vote_count.desc",
+        )
+        #expect(
+            TVFilter.page(1).queryItem.description == "page=1",
+        )
+        #expect(
+            TVFilter.voteCountGreaterThan(1).queryItem.description == "vote_count.gte=1",
+        )
+        #expect(
+            TVFilter.voteAverageGreaterThan(1.1).queryItem.description == "vote_average.gte=1.1",
+        )
+        #expect(
+            TVFilter.withGenres([.and("a"), .and("b"), .and("c")]).queryItem.description == "with_genres=a,b,c",
+        )
+        #expect(
+            TVFilter.withGenres([.and("a"), .or("b")]).queryItem.description == "with_genres=a|b",
+        )
+        #expect(
+            TVFilter.withoutGenres([.and("a"), .and("b"), .and("c")]).queryItem.description == "without_genres=a,b,c",
+        )
+        #expect(
+            TVFilter.withoutGenres([.and("a"), .or("b")]).queryItem.description == "without_genres=a|b",
+        )
+        #expect(
+            TVFilter.withOriginalLanguage(Locale.Language(identifier: "en")).queryItem
+                .description == "with_original_language=en",
+        )
+        #expect(
+            TVFilter.withoutKeywords(["a", "b", "c"]).queryItem.description == "without_keywords=a,b,c",
+        )
+        #expect(
+            TVFilter.withOriginCountry(Locale.Region("us")).queryItem.description == "with_origin_country=us",
+        )
+        #expect(
+            TVFilter.withCompanies([.and("a"), .and("b"), .and("c")]).queryItem.description == "with_companies=a,b,c",
+        )
+        #expect(
+            TVFilter.withKeywords([.and("a"), .and("b"), .and("c")]).queryItem.description == "with_keywords=a,b,c",
+        )
+        #expect(
+            TVFilter.withWatchProviders([.and("a"), .and("b"), .and("c")]).queryItem
+                .description == "with_watch_providers=a,b,c",
+        )
+        #expect(
+            TVFilter.withWatchProviders([.and("a"), .or("b")]).queryItem.description == "with_watch_providers=a|b",
+        )
+        #expect(
+            TVFilter.watchRegion(Locale.Region("us")).queryItem.description == "watch_region=us",
+        )
+        #expect(
+            TVFilter.withWatchMonetizationTypes(
+                [
+                    .and(.free),
+                    .and(.ads),
+                    .and(.flatRate),
+                    .and(.rent),
+                ],
+            ).queryItem.description == "with_watch_monetization_types=free,ads,flatrate,rent",
+        )
+        #expect(
+            TVFilter.withWatchMonetizationTypes(
+                [
+                    .and(.free),
+                    .and(.ads),
+                    .and(.flatRate),
+                    .or(.rent),
+                ],
+            ).queryItem.description == "with_watch_monetization_types=free,ads,flatrate|rent",
+        )
+        #expect(
+            TVFilter.withoutCompanies(["a", "b", "c"]).queryItem.description == "without_companies=a,b,c",
+        )
+        #expect(
+            TVFilter.withoutCompanies(["a", "b", "c"]).queryItem.description == "without_companies=a,b,c",
+        )
+        #expect(
+            TVFilter.airDateGreaterThan(testDate).queryItem.description == "air_date.gte=\(testDateString)",
+        )
+        #expect(
+            TVFilter.airDateLessThan(testDate).queryItem.description == "air_date.lte=\(testDateString)",
+        )
+        #expect(
+            TVFilter.firstAirDateGreaterThan(testDate).queryItem.description == "first_air_date.gte=\(testDateString)",
+        )
+        #expect(
+            TVFilter.firstAirDateLessThan(testDate).queryItem.description == "first_air_date.lte=\(testDateString)",
+        )
+        #expect(
+            TVFilter.firstAirDateYear(0).queryItem.description == "first_air_date_year=0",
+        )
+        #expect(
+            TVFilter.timezone(.gmt).queryItem.description == "timezone=GMT",
+        )
+        #expect(
+            TVFilter.withNetworks(["a", "b"]).queryItem.description == "with_networks=a,b",
+        )
+        #expect(
+            TVFilter.withRuntimeGreaterThan(0).queryItem.description == "with_runtime.gte=0",
+        )
+        #expect(
+            TVFilter.withRuntimeLessThan(0).queryItem.description == "with_runtime.lte=0",
+        )
+        #expect(
+            TVFilter.includeNullFirstAirDates(true).queryItem.description == "include_null_first_air_dates=true",
+        )
+        #expect(
+            TVFilter.includeNullFirstAirDates(false).queryItem.description == "include_null_first_air_dates=false",
+        )
+        #expect(
+            TVFilter.screenedTheatrically(true).queryItem.description == "screened_theatrically=true",
+        )
+        #expect(
+            TVFilter.screenedTheatrically(false).queryItem.description == "screened_theatrically=false",
+        )
+        #expect(
+            TVFilter.withStatus([.and(.status0), .and(.status1)]).queryItem.description == "with_status=0,1",
+        )
+        #expect(
+            TVFilter.withStatus([.and(.status0), .or(.status1)]).queryItem.description == "with_status=0|1",
+        )
+        #expect(
+            TVFilter.withType([.and(.release1), .and(.release2)]).queryItem.description == "with_type=1,2",
+        )
+        #expect(
+            TVFilter.withType([.and(.release1), .or(.release2)]).queryItem.description == "with_type=1|2",
+        )
+    }
+
 }

@@ -2,12 +2,9 @@ import Foundation
 import SharedModels
 
 public extension TMDBInternal.Discover {
-    enum Value {
-        case greaterThan
-        case lessThan
-    }
+    enum MovieFilter {
 
-    enum Filter {
+        // Common filters
         case language(Locale)
         case page(Int)
         case sortBy(SortOption)
@@ -24,9 +21,8 @@ public extension TMDBInternal.Discover {
         case withoutGenres([LogicalOperator<String>])
         case withoutKeywords([String])
         case withoutCompanies([String])
-    }
 
-    enum MovieFilter {
+        // Movie filters
         case certification(String)
         case certificationCountry(Locale.Region)
         case certificationGreaterThan(String)
@@ -51,6 +47,26 @@ public extension TMDBInternal.Discover {
     }
 
     enum TVFilter {
+
+        // Common filters
+        case language(Locale)
+        case page(Int)
+        case sortBy(SortOption)
+        case voteAverageGreaterThan(Double)
+        case voteCountGreaterThan(Int)
+        case watchRegion(Locale.Region)
+        case withCompanies([LogicalOperator<String>])
+        case withGenres([LogicalOperator<String>])
+        case withKeywords([LogicalOperator<String>])
+        case withOriginCountry(Locale.Region)
+        case withOriginalLanguage(Locale.Language)
+        case withWatchMonetizationTypes([LogicalOperator<MonetizationType>])
+        case withWatchProviders([LogicalOperator<String>])
+        case withoutGenres([LogicalOperator<String>])
+        case withoutKeywords([String])
+        case withoutCompanies([String])
+
+        // TV Filters
         case airDateGreaterThan(Date)
         case airDateLessThan(Date)
         case firstAirDateGreaterThan(Date)
@@ -60,10 +76,10 @@ public extension TMDBInternal.Discover {
         case withNetworks([String])
         case withRuntimeGreaterThan(Int)
         case withRuntimeLessThan(Int)
-        case includeNullFirstRunDates(Bool)
+        case includeNullFirstAirDates(Bool)
         case screenedTheatrically(Bool)
-        case withStatus(String)
-        case withType(String)
+        case withStatus([LogicalOperator<ReleaseStatus>])
+        case withType([LogicalOperator<ReleaseType>])
     }
 
     // TODO: Ask Trav what the hell these mean
@@ -74,6 +90,19 @@ public extension TMDBInternal.Discover {
         case release4
         case release5
         case release6
+
+        public var description: String {
+            String(rawValue)
+        }
+    }
+
+    enum ReleaseStatus: Int, CustomStringConvertible {
+        case status0 = 0
+        case status1
+        case status2
+        case status3
+        case status4
+        case status5
 
         public var description: String {
             String(rawValue)
@@ -93,7 +122,10 @@ public extension TMDBInternal.Discover {
     }
 }
 
-extension TMDBInternal.Discover.Filter: DiscoverMovieFilter, DiscoverTVFilter {
+extension TMDBInternal.Discover.MovieFilter: QueryItemEncodable {
+    public var queryItem: URLQueryItem {
+        URLQueryItem(name: key, value: value)
+    }
     public var key: String {
         switch self {
         case .language:
@@ -128,50 +160,6 @@ extension TMDBInternal.Discover.Filter: DiscoverMovieFilter, DiscoverTVFilter {
             "without_companies"
         case .withOriginCountry:
             "with_origin_country"
-        }
-    }
-
-    public var value: String {
-        switch self {
-        case .language(let locale):
-            locale.queryValue
-        case .sortBy(let option):
-            option.queryValue
-        case .page(let page):
-            page.queryValue
-        case .voteCountGreaterThan(let count):
-            count.queryValue
-        case .voteAverageGreaterThan(let average):
-            average.queryValue
-        case .withGenres(let genres):
-            genres.queryValue
-        case .withOriginalLanguage(let language):
-            language.queryValue
-        case .withoutKeywords(let keywords):
-            keywords.queryValue
-        case .withCompanies(let companies):
-            companies.queryValue
-        case .withKeywords(let keywords):
-            keywords.queryValue
-        case .withWatchProviders(let providers):
-            providers.queryValue
-        case .watchRegion(let region):
-            region.queryValue
-        case .withWatchMonetizationTypes(let types):
-            types.queryValue
-        case .withoutCompanies(let companies):
-            companies.queryValue
-        case .withoutGenres(let genres):
-            genres.queryValue
-        case .withOriginCountry(let country):
-            country.queryValue
-        }
-    }
-}
-
-extension TMDBInternal.Discover.MovieFilter: DiscoverMovieFilter {
-    public var key: String {
-        switch self {
         case .region:
             "region"
         case .voteCountLessThan:
@@ -219,6 +207,38 @@ extension TMDBInternal.Discover.MovieFilter: DiscoverMovieFilter {
 
     public var value: String {
         switch self {
+        case .language(let locale):
+            locale.queryValue
+        case .sortBy(let option):
+            option.queryValue
+        case .page(let page):
+            page.queryValue
+        case .voteCountGreaterThan(let count):
+            count.queryValue
+        case .voteAverageGreaterThan(let average):
+            average.queryValue
+        case .withGenres(let genres):
+            genres.queryValue
+        case .withOriginalLanguage(let language):
+            language.queryValue
+        case .withoutKeywords(let keywords):
+            keywords.queryValue
+        case .withCompanies(let companies):
+            companies.queryValue
+        case .withKeywords(let keywords):
+            keywords.queryValue
+        case .withWatchProviders(let providers):
+            providers.queryValue
+        case .watchRegion(let region):
+            region.queryValue
+        case .withWatchMonetizationTypes(let types):
+            types.queryValue
+        case .withoutCompanies(let companies):
+            companies.queryValue
+        case .withoutGenres(let genres):
+            genres.queryValue
+        case .withOriginCountry(let country):
+            country.queryValue
         case .region(let value):
             value.queryValue
         case .voteCountLessThan(let value):
@@ -265,9 +285,45 @@ extension TMDBInternal.Discover.MovieFilter: DiscoverMovieFilter {
     }
 }
 
-extension TMDBInternal.Discover.TVFilter: DiscoverTVFilter {
+extension TMDBInternal.Discover.TVFilter: QueryItemEncodable {
+    public var queryItem: URLQueryItem {
+        URLQueryItem(name: key, value: value)
+    }
+
     public var key: String {
         switch self {
+        case .language:
+            "language"
+        case .sortBy:
+            "sort_option"
+        case .page:
+            "page"
+        case .voteCountGreaterThan:
+            "vote_count.gte"
+        case .voteAverageGreaterThan:
+            "vote_average.gte"
+        case .withGenres:
+            "with_genres"
+        case .withoutGenres:
+            "without_genres"
+        case .withOriginalLanguage:
+            "with_original_language"
+        case .withoutKeywords:
+            "without_keywords"
+        case .withCompanies:
+            "with_companies"
+        case .withKeywords:
+            "with_keywords"
+        case .withWatchProviders:
+            "with_watch_providers"
+        case .watchRegion:
+            "watch_region"
+        case .withWatchMonetizationTypes:
+            "with_watch_monetization_types"
+        case .withoutCompanies:
+            "without_companies"
+        case .withOriginCountry:
+            "with_origin_country"
         case .airDateGreaterThan:
             "air_date.gte"
         case .airDateLessThan:
@@ -277,7 +333,7 @@ extension TMDBInternal.Discover.TVFilter: DiscoverTVFilter {
         case .firstAirDateLessThan:
             "first_air_date.lte"
         case .firstAirDateYear:
-            "first_air_year"
+            "first_air_date_year"
         case .timezone:
             "timezone"
         case .withNetworks:
@@ -286,8 +342,8 @@ extension TMDBInternal.Discover.TVFilter: DiscoverTVFilter {
             "with_runtime.gte"
         case .withRuntimeLessThan:
             "with_runtime.lte"
-        case .includeNullFirstRunDates:
-            "include_null_first_run_dates"
+        case .includeNullFirstAirDates:
+            "include_null_first_air_dates"
         case .screenedTheatrically:
             "screened_theatrically"
         case .withStatus:
@@ -299,6 +355,38 @@ extension TMDBInternal.Discover.TVFilter: DiscoverTVFilter {
 
     public var value: String {
         switch self {
+        case .language(let locale):
+            locale.queryValue
+        case .sortBy(let option):
+            option.queryValue
+        case .page(let page):
+            page.queryValue
+        case .voteCountGreaterThan(let count):
+            count.queryValue
+        case .voteAverageGreaterThan(let average):
+            average.queryValue
+        case .withGenres(let genres):
+            genres.queryValue
+        case .withOriginalLanguage(let language):
+            language.queryValue
+        case .withoutKeywords(let keywords):
+            keywords.queryValue
+        case .withCompanies(let companies):
+            companies.queryValue
+        case .withKeywords(let keywords):
+            keywords.queryValue
+        case .withWatchProviders(let providers):
+            providers.queryValue
+        case .watchRegion(let region):
+            region.queryValue
+        case .withWatchMonetizationTypes(let types):
+            types.queryValue
+        case .withoutCompanies(let companies):
+            companies.queryValue
+        case .withoutGenres(let genres):
+            genres.queryValue
+        case .withOriginCountry(let country):
+            country.queryValue
         case .airDateGreaterThan(let value):
             value.queryValue
         case .airDateLessThan(let value):
@@ -317,7 +405,7 @@ extension TMDBInternal.Discover.TVFilter: DiscoverTVFilter {
             value.queryValue
         case .withRuntimeLessThan(let value):
             value.queryValue
-        case .includeNullFirstRunDates(let value):
+        case .includeNullFirstAirDates(let value):
             value.queryValue
         case .screenedTheatrically(let value):
             value.queryValue

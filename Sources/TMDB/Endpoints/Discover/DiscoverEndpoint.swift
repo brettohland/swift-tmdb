@@ -4,8 +4,8 @@ import SharedModels
 
 extension TMDBInternal.V3Endpoints {
     enum Discover {
-        case movie(filters: [DiscoverMovieFilter])
-        case tv(filters: [DiscoverTVFilter])
+        case movie(filters: [TMDBInternal.Discover.MovieFilter])
+        case tv(filters: [TMDBInternal.Discover.TVFilter])
     }
 }
 
@@ -35,7 +35,7 @@ public extension TMDB.Client {
 // MARK: - Discover Movies
 
 public extension TMDB.Client.Discover {
-    static func movies(filters: DiscoverMovieFilter...) async throws -> TMDBInternal.Discover.MovieResponse {
+    static func movies(filters: TMDBInternal.Discover.MovieFilter...) async throws -> TMDBInternal.Discover.MovieResponse {
         let endpoint = TMDBEndpoint<HTTP.EmptyRequestBody, TMDBInternal.Discover.MovieResponse>(
             endpoint: TMDBInternal.V3Endpoints.Discover.movie(filters: filters),
             httpMethod: .get,
@@ -55,7 +55,7 @@ public extension TMDB.Client.Discover {
 // MARK: - Discover TV
 
 public extension TMDB.Client.Discover {
-    static func tv(filters: DiscoverTVFilter...) async throws -> TMDBInternal.Discover.TVResponse {
+    static func tv(filters: TMDBInternal.Discover.TVFilter...) async throws -> TMDBInternal.Discover.TVResponse {
         let endpoint = TMDBEndpoint<HTTP.EmptyRequestBody, TMDBInternal.Discover.TVResponse>(
             endpoint: TMDBInternal.V3Endpoints.Discover.tv(filters: filters),
             httpMethod: .get,
