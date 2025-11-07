@@ -30,7 +30,7 @@ extension TMDB.V3Endpoints.Discover: EndpointFactory {
 
 extension TMDB {
     static func discoverMovies(filters: TMDB.Discover.MovieFilter...) async throws -> TMDB.Discover.MovieResponse {
-        let endpoint = TMDBEndpoint<HTTP.EmptyRequestBody, TMDB.Discover.MovieResponse>(
+        let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.MovieResponse>(
             endpoint: TMDB.V3Endpoints.Discover.movie(filters: filters),
             httpMethod: .get,
         )
@@ -38,7 +38,7 @@ extension TMDB {
     }
 
     static func discoverMovies() async throws -> TMDB.Discover.MovieResponse {
-        let endpoint = TMDBEndpoint<HTTP.EmptyRequestBody, TMDB.Discover.MovieResponse>(
+        let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.MovieResponse>(
             endpoint: TMDB.V3Endpoints.Discover.movie(filters: []),
             httpMethod: .get,
         )
@@ -50,7 +50,7 @@ extension TMDB {
 
 extension TMDB {
     static func discoverTV(filters: TMDB.Discover.TVFilter...) async throws -> TMDB.Discover.TVResponse {
-        let endpoint = TMDBEndpoint<HTTP.EmptyRequestBody, TMDB.Discover.TVResponse>(
+        let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.TVResponse>(
             endpoint: TMDB.V3Endpoints.Discover.tv(filters: filters),
             httpMethod: .get,
         )
@@ -58,7 +58,7 @@ extension TMDB {
     }
 
     static func discoverTV() async throws -> TMDB.Discover.TVResponse {
-        let endpoint = TMDBEndpoint<HTTP.EmptyRequestBody, TMDB.Discover.TVResponse>(
+        let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.TVResponse>(
             endpoint: TMDB.V3Endpoints.Discover.tv(filters: []),
             httpMethod: .get,
         )

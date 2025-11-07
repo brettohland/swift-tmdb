@@ -27,7 +27,7 @@ extension TMDB.V3Endpoints.Configuration: EndpointFactory {
 extension TMDB {
     enum APIConfiguration {
         static func details() async throws -> TMDB.Configuration.Response {
-            let endpoint = TMDBEndpoint<HTTP.EmptyRequestBody, TMDB.Configuration.Response>(
+            let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Configuration.Response>(
                 endpoint: TMDB.V3Endpoints.Configuration.details,
                 httpMethod: .get,
             )
@@ -35,7 +35,7 @@ extension TMDB {
         }
 
         static func countries() async throws -> [Locale.Region] {
-            let endpoint = TMDBEndpoint<HTTP.EmptyRequestBody, TMDB.Configuration.CountriesResponse>(
+            let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Configuration.CountriesResponse>(
                 endpoint: TMDB.V3Endpoints.Configuration.countries,
                 httpMethod: .get,
             )

@@ -1,5 +1,4 @@
 import Foundation
-import Mocks
 import RegexBuilder
 
 enum PathMatchingService {

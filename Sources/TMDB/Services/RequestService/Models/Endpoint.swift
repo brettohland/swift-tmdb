@@ -1,28 +1,46 @@
-// import Foundation
-//
-// extension HTTP {
-//    struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable>: HTTPEndpoint {
-//         let sessionConfiguration: URLSessionConfiguration
-//         let baseURL: URL
-//         let path: String
-//         let method: HTTP.Method
-//         let encoder: JSONEncoder
-//         let decoder: JSONDecoder
-//
-//         init(
-//            baseURL: URL,
-//            path: String,
-//            method: HTTP.Method,
-//            sessionConfiguration: URLSessionConfiguration = .default,
-//            encoder: JSONEncoder = .iso8601SnakeCake,
-//            decoder: JSONDecoder = .iso8601SnakeCake,
-//        ) {
-//            self.baseURL = baseURL
-//            self.decoder = decoder
-//            self.encoder = encoder
-//            self.method = method
-//            self.path = path
-//            self.sessionConfiguration = sessionConfiguration
-//        }
-//    }
-// }
+internal import Dependencies
+import Foundation
+
+struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable> {
+    let endpoint: EndpointFactory
+    let httpMethod: HTTP.Method
+    let encoder: JSONEncoder
+    let decoder: JSONDecoder
+
+    @Dependency(\.sdkConfigurationStore.configuration) private var sdkConfiguration
+    @Dependency(\.httpClient) private var httpClient
+
+    init(
+        endpoint: EndpointFactory,
+        httpMethod: HTTP.Method,
+        encoder: JSONEncoder = .iso8601SnakeCake,
+        decoder: JSONDecoder = .iso8601SnakeCake,
+    ) {
+        self.decoder = decoder
+        self.encoder = encoder
+        self.endpoint = endpoint
+        self.httpMethod = httpMethod
+    }
+
+    func data(forRequest request: URLRequest) async throws -> Data {
+        let sessionConfiguration = try await sdkConfiguration().urlSessionConfiguration
+        return try await httpClient.data(request: request, configuration: sessionConfiguration)
+    }
+
+    func decodedResponse(forRequest request: URLRequest) async throws -> ResponseBody {
+        let apiKey = try await sdkConfiguration().apiKey
+        var urlRequest = request
+        urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+        let data = try await data(forRequest: urlRequest)
+        return try decoder.decode(ResponseBody.self, from: data)
+    }
+
+    func decodedResponse() async throws -> ResponseBody {
+        let baseURL = TMDB.Constants.baseURL
+        let finalURL = endpoint.makeURL(baseURL: baseURL)
+        var request = URLRequest(url: finalURL)
+        request.httpMethod = httpMethod.rawValue
+        return try await decodedResponse(forRequest: request)
+    }
+}

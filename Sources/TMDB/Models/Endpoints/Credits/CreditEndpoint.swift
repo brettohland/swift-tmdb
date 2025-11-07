@@ -20,7 +20,7 @@ extension TMDB.V3Endpoints.Credits: EndpointFactory {
 
 extension TMDB {
     static func credits(forID id: Int) async throws -> TMDB.Credits.Details {
-        let endpoint = TMDBEndpoint<HTTP.EmptyRequestBody, TMDB.Credits.Details>(
+        let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Credits.Details>(
             endpoint: TMDB.V3Endpoints.Credits.details(id: id),
             httpMethod: .get,
         )

@@ -32,7 +32,8 @@ let package = Package(
             ],
             swiftSettings: [
                 .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-                .enableUpcomingFeature("InferIsolatedConformances")
+                .enableUpcomingFeature("InferIsolatedConformances"),
+                .enableUpcomingFeature("FullTypedThrows"),
             ]
         ),
         .testTarget(name: "TMDBTests", dependencies: ["TMDB"]),

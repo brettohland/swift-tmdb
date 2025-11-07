@@ -1,6 +1,6 @@
 import Foundation
 
-enum TMDBClientError {
+public enum HTTPError {
     /// The ``URLResponse`` from the server could not be cast to an ``HTTPURLResponse``.
     case invalidResponseFromServer(URLResponse, Data)
     /// The HTTP Status Code of the response was in the Client Error (4XX) range.
@@ -9,8 +9,8 @@ enum TMDBClientError {
     case serverError(HTTPURLResponse, Data)
 }
 
-extension TMDBClientError: Error {
-    var errorDescription: String? {
+extension HTTPError: Error {
+    public var errorDescription: String? {
         switch self {
         case .invalidResponseFromServer:
             "Bad Response"
@@ -21,7 +21,7 @@ extension TMDBClientError: Error {
         }
     }
 
-    var failureReason: String? {
+    public var failureReason: String? {
         switch self {
         case .invalidResponseFromServer:
             return "The URLResponse from the server was invalid."

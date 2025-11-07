@@ -2,7 +2,7 @@ import Foundation
 
 public extension TMDB {
     struct Movie: Sendable {
-        public let adult: Bool
+        public let isAdult: Bool
         public let backdropPath: String
         public let belongsToCollection: TitleCollection
         public let budget: Int
@@ -31,12 +31,68 @@ public extension TMDB {
         public let video: Bool
         public let voteAverage: Double
         public let voteCount: Int
+
+        public init(
+            isAdult: Bool,
+            backdropPath: String,
+            belongsToCollection: TitleCollection,
+            budget: Int,
+            genres: [Genre],
+            homepage: URL,
+            id: Int,
+            imdbID: String,
+            originalLanguage: Locale.Region,
+            originalTitle: String,
+            overview: String,
+            popularity: Double,
+            posterPath: String,
+            productionCompanies: [ProductionCompany],
+            productionCountries: [Locale.Region],
+            releaseDate: Date? = nil,
+            revenue: Int,
+            runtime: Measurement<UnitDuration>,
+            spokenLanguages: [Locale.Language],
+            status: ReleaseStatus,
+            tagline: String,
+            title: String,
+            video: Bool,
+            voteAverage: Double,
+            voteCount: Int
+        ) {
+            self.isAdult = isAdult
+            self.backdropPath = backdropPath
+            self.belongsToCollection = belongsToCollection
+            self.budget = budget
+            self.genres = genres
+            self.homepage = homepage
+            self.id = id
+            self.imdbID = imdbID
+            self.originalLanguage = originalLanguage
+            self.originalTitle = originalTitle
+            self.overview = overview
+            self.popularity = popularity
+            self.posterPath = posterPath
+            self.productionCompanies = productionCompanies
+            _productionCountries = RegionArray(wrappedValue: productionCountries)
+            _releaseDate = ISO8601YMD(wrappedValue: releaseDate)
+            self.revenue = revenue
+            _runtime = Minutes(wrappedValue: runtime)
+            _spokenLanguages = LanguageArray(wrappedValue: spokenLanguages)
+            self.status = status
+            self.tagline = tagline
+            self.title = title
+            self.video = video
+            self.voteAverage = voteAverage
+            self.voteCount = voteCount
+        }
     }
+
+
 }
 
 extension TMDB.Movie: Codable {
     enum CodingKeys: String, CodingKey {
-        case adult
+        case isAdult = "adult"
         case backdropPath
         case belongsToCollection
         case budget
