@@ -1,15 +1,14 @@
 import Dependencies
 import Foundation
-import SharedModels
 import Testing
 @testable import TMDB
 
 struct ConfigurationEndpointTests {
     @Test func details() async throws {
-        _ = try await TMDB.Client.APIConfiguration.details()
+        _ = try await TMDB.APIConfiguration.details()
     }
 
     @Test func countries() async throws {
-        _ = try await TMDB.Client.APIConfiguration.countries()
+        _ = try await TMDB.APIConfiguration.countries()
     }
 }

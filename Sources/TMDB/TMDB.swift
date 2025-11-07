@@ -1,43 +1,36 @@
 import Foundation
 
+@MainActor
+public final class TMDB {
+    private static var apiKey: String?
+    private static var isInitialized = false
 
-public enum TMDB {}
+    public static func initialize(configuration: TMDBConfiguration) throws {
+        guard isInitialized == false else {
+            throw TMDBInitializationError.alreadyInitialized
+        }
+        apiKey = configuration.apiKey
+        isInitialized = true
+    }
 
+    public static func initialize(apiKey: String) throws {
+        let configuration = TMDBConfiguration(apiKey: apiKey)
+        try initialize(configuration: configuration)
+    }
 
-// public struct TMDB {
-//    let httpClient: HTTP.Client
-//
-//    public init(authToken: String) {
-//        httpClient = HTTP.Client(authToken: authToken)
-//    }
-//
-//    let discover = Discover()
-//    let configuration = Configuration()
-// }
-//
-// public extension TMDB {
-//    enum v3 {}
-// }
-//
-//// MARK: - Discover endpoints
-//
-// public extension TMDB {
-//    func discoverMovie(with options: [TMDBDiscoverMovieFilter] = []) async throws -> TMDB.Discover.MovieResponse {
-//        let request = try discover.movie.makeURLRequest(with: options.map(\.encoded))
-//        return try await Endpoint.responseObject(from: request, using: httpClient)
-//    }
-//
-//    func discoverTV(with options: [TMDBDiscoverTVFilter] = []) async throws -> TMDB.Discover.TVResponse {
-//        let request = try discover.tv.makeURLRequest(with: options.map(\.encoded))
-//        return try await Endpoint.responseObject(from: request, using: httpClient)
-//    }
-// }
-//
-//// MARK: - Configuration
-//
-// public extension TMDB {
-//    func apiConfiguration() async throws -> TMDB.Configuration.ApiResponse {
-//        let request = try configuration.api.makeURLRequest()
-//        return try await Endpoint.responseObject(from: request, using: httpClient)
-//    }
-// }
+    public static func checkForAPIKey() throws {
+        guard
+            let apiKey,
+            apiKey.isEmpty == false
+        else {
+            throw TMDBInitializationError.apiKeyMissing
+        }
+    }
+
+    public static func checkIsInitialized() throws {
+        guard isInitialized else {
+            throw TMDBInitializationError.alreadyInitialized
+        }
+    }
+}
+

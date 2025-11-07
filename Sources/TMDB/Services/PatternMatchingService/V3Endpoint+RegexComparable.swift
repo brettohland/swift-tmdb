@@ -1,7 +1,6 @@
 import Foundation
-import SharedModels
 
-extension TMDBInternal.V3Endpoints.Configuration: RegexComparable {
+extension TMDB.V3Endpoints.Configuration: RegexComparable {
     var pattern: Regex<Substring> {
         switch self {
         case .details:
@@ -12,7 +11,7 @@ extension TMDBInternal.V3Endpoints.Configuration: RegexComparable {
     }
 }
 
-extension TMDBInternal.V3Endpoints.Movies: RegexComparable {
+extension TMDB.V3Endpoints.Movies: RegexComparable {
     var pattern: Regex<Substring> {
         switch self {
         case .details:
@@ -23,7 +22,7 @@ extension TMDBInternal.V3Endpoints.Movies: RegexComparable {
     }
 }
 
-extension TMDBInternal.V3Endpoints.Discover: RegexComparable {
+extension TMDB.V3Endpoints.Discover: RegexComparable {
     var pattern: Regex<Substring> {
         switch self {
         case .movie:

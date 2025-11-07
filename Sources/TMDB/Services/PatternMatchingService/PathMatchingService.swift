@@ -1,7 +1,6 @@
 import Foundation
 import Mocks
 import RegexBuilder
-import SharedModels
 
 enum PathMatchingService {
     enum MatchingError: Error {
@@ -25,25 +24,25 @@ enum PathMatchingService {
     }
 
     static func handleV3Path(_ url: URL) throws -> Data {
-        if url.relativePath.contains(TMDBInternal.V3Endpoints.Configuration.details.pattern) {
-            return try TMDBInternal.Configuration.Response.mockData()
+        if url.relativePath.contains(TMDB.V3Endpoints.Configuration.details.pattern) {
+            return try TMDB.Configuration.Response.mockData()
         }
 
-        if url.relativePath.contains(TMDBInternal.V3Endpoints.Configuration.countries.pattern) {
-            return try TMDBInternal.Configuration.CountriesResponse.mockData()
+        if url.relativePath.contains(TMDB.V3Endpoints.Configuration.countries.pattern) {
+            return try TMDB.Configuration.CountriesResponse.mockData()
         }
 
-        if url.relativePath.contains(TMDBInternal.V3Endpoints.Movies.details(id: 0).pattern) {
-            return try TMDBInternal.Movie.Details.mockData()
+        if url.relativePath.contains(TMDB.V3Endpoints.Movies.details(id: 0).pattern) {
+            return try TMDB.Movie.mockData()
         }
 
-        if url.relativePath.contains(TMDBInternal.V3Endpoints.Movies.alternativeTitles(id: 0).pattern) {
-            return try TMDBInternal.Movie.AlternativeTitle.mockData()
+        if url.relativePath.contains(TMDB.V3Endpoints.Movies.alternativeTitles(id: 0).pattern) {
+            return try TMDB.AlternativeTitle.mockData()
         }
 
-        if url.relativePath.contains(TMDBInternal.V3Endpoints.Discover.movie(filters: []).pattern) {
-            let movie = try TMDBInternal.Discover.DiscoverMovie.mock()
-            let response = TMDBInternal.Discover.PaginatedResponse<TMDBInternal.Discover.DiscoverMovie>(
+        if url.relativePath.contains(TMDB.V3Endpoints.Discover.movie(filters: []).pattern) {
+            let movie = try TMDB.Discover.DiscoverMovie.mock()
+            let response = TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverMovie>(
                 page: 1,
                 totalResults: 1,
                 totalPages: 1,
@@ -52,9 +51,9 @@ enum PathMatchingService {
             return try JSONEncoder().encode(response)
         }
 
-        if url.relativePath.contains(TMDBInternal.V3Endpoints.Discover.tv(filters: []).pattern) {
-            let show = try TMDBInternal.Discover.DiscoverTV.mock()
-            let response = TMDBInternal.Discover.PaginatedResponse<TMDBInternal.Discover.DiscoverTV>(
+        if url.relativePath.contains(TMDB.V3Endpoints.Discover.tv(filters: []).pattern) {
+            let show = try TMDB.Discover.DiscoverTV.mock()
+            let response = TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverTV>(
                 page: 1,
                 totalResults: 1,
                 totalPages: 1,
@@ -72,4 +71,3 @@ enum PathMatchingService {
         throw MatchingError.unsupportedAPIVersion
     }
 }
-

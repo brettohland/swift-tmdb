@@ -1,26 +1,18 @@
 import Foundation
 import Testing
 @testable import TMDB
-import SharedModels
 
 struct PathMatchingServiceTests {
 
-
-
-
-    @Test func matchV3Paths() async throws {
-
-
-
-    }
+    @Test func matchV3Paths() async throws {}
 
 }
 
-extension TMDBInternal.V3Endpoints.Configuration: RawRepresentable {
+extension TMDB.V3Endpoints.Configuration: RawRepresentable {
     public init?(rawValue: String) {
         nil
     }
-    
+
     public var rawValue: String {
         switch self {
         case .details:
@@ -31,7 +23,7 @@ extension TMDBInternal.V3Endpoints.Configuration: RawRepresentable {
     }
 }
 
-extension TMDBInternal.V3Endpoints.Movies: RawRepresentable {
+extension TMDB.V3Endpoints.Movies: RawRepresentable {
     public init?(rawValue: String) {
         nil
     }

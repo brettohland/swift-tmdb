@@ -1,11 +1,10 @@
 import Foundation
-import SharedModels
 import Testing
 @testable import TMDB
 
 struct DiscoverTests {
     @Test func verifyMovieFilters() throws {
-        typealias MovieFilter = TMDBInternal.Discover.MovieFilter
+        typealias MovieFilter = TMDB.Discover.MovieFilter
         let testDate = Date(timeIntervalSince1970: 0)
         let testDateString = "1970-01-01"
         #expect(
@@ -21,10 +20,12 @@ struct DiscoverTests {
             MovieFilter.sortBy(.averageVote(isAscending: true)).queryItem.description == "sort_option=average_vote.asc",
         )
         #expect(
-            MovieFilter.sortBy(.averageVote(isAscending: false)).queryItem.description == "sort_option=average_vote.desc",
+            MovieFilter.sortBy(.averageVote(isAscending: false)).queryItem
+                .description == "sort_option=average_vote.desc",
         )
         #expect(
-            MovieFilter.sortBy(.originalTitle(isAscending: true)).queryItem.description == "sort_option=original_title.asc",
+            MovieFilter.sortBy(.originalTitle(isAscending: true)).queryItem
+                .description == "sort_option=original_title.asc",
         )
         #expect(
             MovieFilter.sortBy(.originalTitle(isAscending: false)).queryItem
@@ -42,7 +43,8 @@ struct DiscoverTests {
             MovieFilter.sortBy(.releaseDate(isAscending: true)).queryItem.description == "sort_option=release_date.asc",
         )
         #expect(
-            MovieFilter.sortBy(.releaseDate(isAscending: false)).queryItem.description == "sort_option=release_date.desc",
+            MovieFilter.sortBy(.releaseDate(isAscending: false)).queryItem
+                .description == "sort_option=release_date.desc",
         )
         #expect(
             MovieFilter.sortBy(.revenue(isAscending: true)).queryItem.description == "sort_option=revenue.asc",
@@ -72,7 +74,8 @@ struct DiscoverTests {
             MovieFilter.withGenres([.and("a"), .or("b")]).queryItem.description == "with_genres=a|b",
         )
         #expect(
-            MovieFilter.withoutGenres([.and("a"), .and("b"), .and("c")]).queryItem.description == "without_genres=a,b,c",
+            MovieFilter.withoutGenres([.and("a"), .and("b"), .and("c")]).queryItem
+                .description == "without_genres=a,b,c",
         )
         #expect(
             MovieFilter.withoutGenres([.and("a"), .or("b")]).queryItem.description == "without_genres=a|b",
@@ -88,7 +91,8 @@ struct DiscoverTests {
             MovieFilter.withOriginCountry(Locale.Region("us")).queryItem.description == "with_origin_country=us",
         )
         #expect(
-            MovieFilter.withCompanies([.and("a"), .and("b"), .and("c")]).queryItem.description == "with_companies=a,b,c",
+            MovieFilter.withCompanies([.and("a"), .and("b"), .and("c")]).queryItem
+                .description == "with_companies=a,b,c",
         )
         #expect(
             MovieFilter.withKeywords([.and("a"), .and("b"), .and("c")]).queryItem.description == "with_keywords=a,b,c",
@@ -220,7 +224,7 @@ struct DiscoverTests {
     }
 
     @Test func verifyTVFilters() throws {
-        typealias TVFilter = TMDBInternal.Discover.TVFilter
+        typealias TVFilter = TMDB.Discover.TVFilter
         let testDate = Date(timeIntervalSince1970: 0)
         let testDateString = "1970-01-01"
         #expect(
@@ -239,7 +243,8 @@ struct DiscoverTests {
             TVFilter.sortBy(.averageVote(isAscending: false)).queryItem.description == "sort_option=average_vote.desc",
         )
         #expect(
-            TVFilter.sortBy(.originalTitle(isAscending: true)).queryItem.description == "sort_option=original_title.asc",
+            TVFilter.sortBy(.originalTitle(isAscending: true)).queryItem
+                .description == "sort_option=original_title.asc",
         )
         #expect(
             TVFilter.sortBy(.originalTitle(isAscending: false)).queryItem

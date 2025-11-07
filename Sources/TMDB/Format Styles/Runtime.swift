@@ -1,12 +1,12 @@
 import Foundation
 
-public struct Runtime: FormatStyle {
-    public typealias FormatInput = Measurement<UnitDuration>
-    public typealias FormatOutput = String
+struct Runtime: FormatStyle {
+    typealias FormatInput = Measurement<UnitDuration>
+    typealias FormatOutput = String
 
     let style: Date.ComponentsFormatStyle.Style
 
-    public func format(_ value: Measurement<UnitDuration>) -> String {
+    func format(_ value: Measurement<UnitDuration>) -> String {
         let seconds = value.converted(to: .seconds).value
         let now = Date.now
         let then = now.addingTimeInterval(seconds)
@@ -14,7 +14,7 @@ public struct Runtime: FormatStyle {
     }
 }
 
-public extension FormatStyle where Self == Measurement<UnitDuration>.FormatStyle {
+extension FormatStyle where Self == Measurement<UnitDuration>.FormatStyle {
     static func runtime(style: Date.ComponentsFormatStyle.Style = .condensedAbbreviated) -> Runtime {
         Runtime(style: style)
     }

@@ -1,7 +1,5 @@
 import Dependencies
 import Foundation
-import RequestService
-import SharedModels
 
 struct TMDBEndpoint<RequestBody: Encodable, ResponseBody: Decodable> {
     let endpoint: EndpointFactory
@@ -34,7 +32,7 @@ struct TMDBEndpoint<RequestBody: Encodable, ResponseBody: Decodable> {
     }
 
     func decodedResponse() async throws -> ResponseBody {
-        let baseURL = TMDB.Client.Constants.baseURL
+        let baseURL = TMDB.Constants.baseURL
         let finalURL = endpoint.makeURL(baseURL: baseURL)
         var request = URLRequest(url: finalURL)
         request.httpMethod = httpMethod.rawValue

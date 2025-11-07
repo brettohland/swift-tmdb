@@ -1,6 +1,0 @@
-import Foundation
-
-public extension TMDBInternal {
-    enum V3Endpoints {}
-}
-

@@ -1,18 +1,17 @@
 import Dependencies
 import DependenciesMacros
 import Foundation
-import RequestService
 
-public extension TMDB.Client {
+extension TMDB {
     @DependencyClient
     struct HTTPClient: Sendable {
-        public var data: @Sendable (_ request: URLRequest, _ configuration: URLSessionConfiguration?) async throws
+        var data: @Sendable (_ request: URLRequest, _ configuration: URLSessionConfiguration?) async throws
             -> Data
     }
 }
 
-extension TMDB.Client.HTTPClient: DependencyKey {
-    public static var liveValue: Self {
+extension TMDB.HTTPClient: DependencyKey {
+    static var liveValue: Self {
         Self { request, sessionConfiguration in
             let urlSession = URLSession(configuration: sessionConfiguration ?? .default)
             let (data, response) = try await urlSession.data(for: request)
@@ -33,23 +32,23 @@ extension TMDB.Client.HTTPClient: DependencyKey {
     }
 }
 
-public extension DependencyValues {
-    var httpClient: TMDB.Client.HTTPClient {
-        get { self[TMDB.Client.HTTPClient.self] }
-        set { self[TMDB.Client.HTTPClient.self] = newValue }
+extension DependencyValues {
+    var httpClient: TMDB.HTTPClient {
+        get { self[TMDB.HTTPClient.self] }
+        set { self[TMDB.HTTPClient.self] = newValue }
     }
 }
 
 // MARK: - Test/Preview Mocks
 
-extension TMDB.Client.HTTPClient: TestDependencyKey {
-    public static var testValue: Self {
+extension TMDB.HTTPClient: TestDependencyKey {
+    static var testValue: Self {
         Self { request, _ in
             try PathMatchingService.dataFromURLRequest(request)
         }
     }
 
-    public static var previewValue : Self {
+    static var previewValue: Self {
         Self { request, _ in
             try PathMatchingService.dataFromURLRequest(request)
         }

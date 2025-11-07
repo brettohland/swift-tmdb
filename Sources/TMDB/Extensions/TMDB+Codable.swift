@@ -1,6 +1,6 @@
 import Foundation
 
-public extension TMDB {
+extension TMDB {
     static var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
