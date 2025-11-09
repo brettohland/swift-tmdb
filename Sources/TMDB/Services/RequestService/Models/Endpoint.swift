@@ -9,6 +9,7 @@ struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable> {
 
     @Dependency(\.sdkConfigurationStore.configuration) private var sdkConfiguration
     @Dependency(\.httpClient) private var httpClient
+    @Dependency(\.logger) private var logger
 
     init(
         endpoint: EndpointFactory,
@@ -33,7 +34,14 @@ struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable> {
         urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
         let data = try await data(forRequest: urlRequest)
-        return try decoder.decode(ResponseBody.self, from: data)
+        let decodedData = try decoder.decode(ResponseBody.self, from: data)
+        logger.info(
+            """
+            Request successful:
+            URL: \(urlRequest.url?.absoluteString ?? "Unknown")
+            Decoded Body: \(data.prettyJSON ?? "Unknown")
+            """)
+        return decodedData
     }
 
     func decodedResponse() async throws -> ResponseBody {

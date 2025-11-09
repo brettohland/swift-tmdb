@@ -57,7 +57,7 @@ public extension TMDB {
             title: String,
             video: Bool,
             voteAverage: Double,
-            voteCount: Int
+            voteCount: Int,
         ) {
             self.isAdult = isAdult
             self.backdropPath = backdropPath
@@ -86,7 +86,6 @@ public extension TMDB {
             self.voteCount = voteCount
         }
     }
-
 
 }
 

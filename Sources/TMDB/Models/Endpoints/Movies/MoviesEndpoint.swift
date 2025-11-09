@@ -21,6 +21,7 @@ extension TMDB.V3Endpoints.Movies: EndpointFactory {
 }
 
 // MARK: Public /3/movie/ endpoints
+
 public extension TMDB {
     /// Make a request to the TMDB API's `/3/movie/{id}` endpoint
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
@@ -33,7 +34,7 @@ public extension TMDB {
         )
         return try await endpoint.decodedResponse()
     }
-    
+
     /// Make a request to the TMDB API's `/3/movie/{id}/alternative_titles` endpoint and returns only the
     /// array of alternative titles.
     ///
@@ -53,7 +54,7 @@ public extension TMDB {
         }
         return response.titles
     }
-    
+
     /// Make a request to the TMDB API's `/3/movie/{id}/alternative_titles` endpoint and returns only the
     /// array of alternative titles.
     ///

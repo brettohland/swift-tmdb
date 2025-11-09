@@ -34,7 +34,7 @@ let package = Package(
                 .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
                 .enableUpcomingFeature("InferIsolatedConformances"),
                 .enableUpcomingFeature("FullTypedThrows"),
-            ]
+            ],
         ),
         .testTarget(name: "TMDBTests", dependencies: ["TMDB"]),
     ],

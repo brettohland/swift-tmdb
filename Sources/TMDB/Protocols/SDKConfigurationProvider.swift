@@ -40,7 +40,11 @@ extension TMDB.SDKConfigurationProvider: TestDependencyKey {
     static var testValue: TMDB.SDKConfigurationProvider {
         TMDB.SDKConfigurationProvider(
             configuration: {
-                return .init(apiKey: "", urlSessionConfiguration: .default)
+                TMDBConfiguration(
+                    apiKey: "",
+                    urlSessionConfiguration: .default,
+                    minimumLoggingLevel: .debug,
+                )
             },
             setConfiguration: { _ in
                 runtimeWarning("Attempting to set the API key during testing, nothing will happen")
@@ -52,7 +56,7 @@ extension TMDB.SDKConfigurationProvider: TestDependencyKey {
         TMDB.SDKConfigurationProvider(
             configuration: {
                 // Returning a random, non-nil response so that tests will work correctly
-                return .init(apiKey: "", urlSessionConfiguration: .default)
+                .init(apiKey: "", urlSessionConfiguration: .default)
             },
             setConfiguration: { _ in
                 // No-op since it really doesn't matter what we do in tests here

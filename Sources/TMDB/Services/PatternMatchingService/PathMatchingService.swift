@@ -1,4 +1,5 @@
 import Foundation
+internal import Dependencies
 import RegexBuilder
 
 enum PathMatchingService {
@@ -23,7 +24,9 @@ enum PathMatchingService {
     }
 
     static func handleV3Path(_ url: URL) throws -> Data {
+        let logger = Dependency(\.logger).wrappedValue
         if url.relativePath.contains(TMDB.V3Endpoints.Configuration.details.pattern) {
+            logger.debug("Matched configuration endpoint")
             return try TMDB.Configuration.Response.mockData()
         }
 

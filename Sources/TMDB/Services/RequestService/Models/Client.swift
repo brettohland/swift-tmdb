@@ -15,6 +15,7 @@ extension TMDB {
 extension TMDB.HTTPClient: DependencyKey {
     static var liveValue: Self {
         TMDB.HTTPClient { request, sessionConfiguration in
+            let logger = Dependency(\.logger).wrappedValue
             let urlSession = URLSession(configuration: sessionConfiguration)
             let (data, response) = try await urlSession.data(for: request)
             guard let httpResponse = response as? HTTPURLResponse else {
@@ -26,9 +27,13 @@ extension TMDB.HTTPClient: DependencyKey {
                  .success:
                 return data
             case .clientError:
-                throw TMDBRequestError.networkError(.clientError(httpResponse, data))
+                let error = TMDBRequestError.networkError(.clientError(httpResponse, data))
+                logger.error("URLRequest failure", error: error)
+                throw error
             case .serverError:
-                throw TMDBRequestError.networkError(.serverError(httpResponse, data))
+                let error = TMDBRequestError.networkError(.serverError(httpResponse, data))
+                logger.error("URLRequest failure", error: error)
+                throw error
             }
         }
     }

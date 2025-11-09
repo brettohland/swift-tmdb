@@ -1,6 +1,6 @@
 import Foundation
 
-public enum HTTPError {
+public enum HTTPError: Equatable {
     /// The ``URLResponse`` from the server could not be cast to an ``HTTPURLResponse``.
     case invalidResponseFromServer(URLResponse, Data)
     /// The HTTP Status Code of the response was in the Client Error (4XX) range.
