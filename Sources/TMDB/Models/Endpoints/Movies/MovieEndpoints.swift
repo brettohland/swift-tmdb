@@ -12,8 +12,10 @@ extension TMDB.V3Endpoints.Movies: EndpointFactory {
         var paths: [any StringProtocol] = ["3", "movie"]
         switch self {
         case .details(let id):
+            // /3/movies/{ID}
             paths.append(String(id))
         case .alternativeTitles(let id):
+            // /3/movies/{ID}/alternative_titles
             paths += [String(id), "alternative_titles"]
         }
         return URLFactory.makeURL(baseURL: baseURL, appending: paths)

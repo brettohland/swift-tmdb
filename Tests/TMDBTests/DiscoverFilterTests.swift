@@ -205,11 +205,11 @@ struct DiscoverTests {
             MovieFilter.withPeople([.and("a"), .or("b")]).queryItem.description == "with_people=a|b",
         )
         #expect(
-            MovieFilter.withReleaseType([.and(.release1), .and(.release2)]).queryItem
+            MovieFilter.withReleaseType([.and(.premier), .and(.limitedTheatrical)]).queryItem
                 .description == "with_release_type=1,2",
         )
         #expect(
-            MovieFilter.withReleaseType([.and(.release1), .or(.release2)]).queryItem
+            MovieFilter.withReleaseType([.and(.premier), .or(.limitedTheatrical)]).queryItem
                 .description == "with_release_type=1|2",
         )
         #expect(
@@ -389,16 +389,16 @@ struct DiscoverTests {
             TVFilter.screenedTheatrically(false).queryItem.description == "screened_theatrically=false",
         )
         #expect(
-            TVFilter.withStatus([.and(.status0), .and(.status1)]).queryItem.description == "with_status=0,1",
+            TVFilter.withStatus([.and(.returningSeries), .and(.planned)]).queryItem.description == "with_status=0,1",
         )
         #expect(
-            TVFilter.withStatus([.and(.status0), .or(.status1)]).queryItem.description == "with_status=0|1",
+            TVFilter.withStatus([.and(.returningSeries), .or(.planned)]).queryItem.description == "with_status=0|1",
         )
         #expect(
-            TVFilter.withType([.and(.release1), .and(.release2)]).queryItem.description == "with_type=1,2",
+            TVFilter.withType([.and(.premier), .and(.limitedTheatrical)]).queryItem.description == "with_type=1,2",
         )
         #expect(
-            TVFilter.withType([.and(.release1), .or(.release2)]).queryItem.description == "with_type=1|2",
+            TVFilter.withType([.and(.premier), .or(.limitedTheatrical)]).queryItem.description == "with_type=1|2",
         )
     }
 

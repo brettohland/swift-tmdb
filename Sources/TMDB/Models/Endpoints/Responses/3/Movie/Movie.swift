@@ -25,7 +25,7 @@ public extension TMDB {
         public var runtime: Measurement<UnitDuration>
         @LanguageArray
         public var spokenLanguages: [Locale.Language]
-        public let status: ReleaseStatus
+        public let status: String
         public let tagline: String
         public let title: String
         public let video: Bool
@@ -52,7 +52,7 @@ public extension TMDB {
             revenue: Int,
             runtime: Measurement<UnitDuration>,
             spokenLanguages: [Locale.Language],
-            status: ReleaseStatus,
+            status: String,
             tagline: String,
             title: String,
             video: Bool,
