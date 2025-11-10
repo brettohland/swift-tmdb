@@ -24,25 +24,23 @@ enum PathMatchingService {
     }
 
     static func handleV3Path(_ url: URL) throws -> Data {
-        let logger = Dependency(\.logger).wrappedValue
-        if url.relativePath.contains(TMDB.V3Endpoints.Configuration.details.pattern) {
-            logger.debug("Matched configuration endpoint")
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Configuration.details) {
             return try TMDB.Configuration.Response.mockData()
         }
 
-        if url.relativePath.contains(TMDB.V3Endpoints.Configuration.countries.pattern) {
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Configuration.countries) {
             return try TMDB.Configuration.CountriesResponse.mockData()
         }
 
-        if url.relativePath.contains(TMDB.V3Endpoints.Movies.details(id: 0).pattern) {
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.details(id: 0)) {
             return try TMDB.Movie.mockData()
         }
 
-        if url.relativePath.contains(TMDB.V3Endpoints.Movies.alternativeTitles(id: 0).pattern) {
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.alternativeTitles(id: 0)) {
             return try TMDB.AlternativeTitle.mockData()
         }
 
-        if url.relativePath.contains(TMDB.V3Endpoints.Discover.movie(filters: []).pattern) {
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Discover.movie(filters: [])) {
             let movie = try TMDB.Discover.DiscoverMovie.mock()
             let response = TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverMovie>(
                 page: 1,
@@ -53,7 +51,7 @@ enum PathMatchingService {
             return try JSONEncoder().encode(response)
         }
 
-        if url.relativePath.contains(TMDB.V3Endpoints.Discover.tv(filters: []).pattern) {
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Discover.tv(filters: [])) {
             let show = try TMDB.Discover.DiscoverTV.mock()
             let response = TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverTV>(
                 page: 1,
@@ -66,10 +64,22 @@ enum PathMatchingService {
             return try encoder.encode(response)
         }
 
+        Dependency(\.logger).wrappedValue.critical("Failed to match any known endpoints to \(url.path())")
         throw MatchingError.unsupportedAPIVersion
     }
 
+    static func doesURLMatchPath(_ url: URL, path: RegexComparable) throws -> Bool {
+        switch try url.relativePath.contains(path.pattern()) {
+        case true:
+            Dependency(\.logger).wrappedValue.debug("Matched \(path.patternString) in \(url.path)")
+            return true
+        case false:
+            return false
+        }
+    }
+
     static func handleV4Paths(_ url: URL) throws -> Data {
+        Dependency(\.logger).wrappedValue.critical("V4 Paths are not supported at this time")
         throw MatchingError.unsupportedAPIVersion
     }
 }

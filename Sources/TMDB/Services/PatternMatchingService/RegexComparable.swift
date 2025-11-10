@@ -1,5 +1,11 @@
 import Foundation
 
 protocol RegexComparable {
-    var pattern: Regex<Substring> { get }
+    var patternString: String { get }
+}
+
+extension RegexComparable {
+    func pattern() throws -> Regex<Substring> {
+        try Regex(patternString)
+    }
 }

@@ -80,7 +80,7 @@ extension EndpointFactoryTests {
 
     func checkURLFactory(_ factory: any EndpointFactory, againstPattern path: any RegexComparable) throws {
         let url = factory.makeURL(baseURL: TMDB.Constants.baseURL)
-        guard url.relativePath.contains(path.pattern) else {
+        guard try url.relativePath.contains(path.pattern()) else {
             throw URLError(.badURL)
         }
     }

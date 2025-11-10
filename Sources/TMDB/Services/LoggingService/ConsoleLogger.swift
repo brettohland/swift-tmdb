@@ -1,7 +1,7 @@
 internal import Dependencies
 import Foundation
 
-enum PreviewLoggingService {
+enum ConsoleLogger {
     static func log(
         level: TMDB.LoggingLevel,
         message: String,
@@ -12,10 +12,7 @@ enum PreviewLoggingService {
         Task {
             do {
                 let configuration = try await Dependency(\.sdkConfigurationStore).wrappedValue.configuration()
-                guard
-                    ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1",
-                    level >= configuration.minimumLoggingLevel
-                else {
+                guard level >= configuration.minimumLoggingLevel else {
                     return
                 }
                 let filename = URL(fileURLWithPath: file).deletingLastPathComponent().lastPathComponent

@@ -16,35 +16,34 @@ extension TMDB {
 }
 
 extension TMDB.LoggingService {
-    func debug(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
+    func debug(_ message: String, file: String = #filePath, function: String = #function, line: Int = #line) {
         log(level: .debug, message: message, file: file, function: function, line: line)
     }
 
-    func info(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
-        log(level: .debug, message: message, file: file, function: function, line: line)
+    func info(_ message: String, file: String = #filePath, function: String = #function, line: Int = #line) {
+        log(level: .info, message: message, file: file, function: function, line: line)
     }
 
-    func notice(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
-        log(level: .debug, message: message, file: file, function: function, line: line)
+    func notice(_ message: String, file: String = #filePath, function: String = #function, line: Int = #line) {
+        log(level: .notice, message: message, file: file, function: function, line: line)
     }
 
-    func warn(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
-        log(level: .debug, message: message, file: file, function: function, line: line)
+    func warning(_ message: String, file: String = #filePath, function: String = #function, line: Int = #line) {
+        log(level: .warning, message: message, file: file, function: function, line: line)
     }
 
-    func error(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
-        log(level: .debug, message: message, file: file, function: function, line: line)
+    func error(_ message: String, file: String = #filePath, function: String = #function, line: Int = #line) {
+        log(level: .error, message: message, file: file, function: function, line: line)
     }
 
-    func critical(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
-        log(level: .debug, message: message, file: file, function: function, line: line)
+    func critical(_ message: String, file: String = #filePath, function: String = #function, line: Int = #line) {
+        log(level: .critical, message: message, file: file, function: function, line: line)
     }
 }
 
 // MARK: - Error Logging
 
 extension TMDB.LoggingService {
-
     func log(level: TMDB.LoggingLevel, message: String, error: any Error, file: String, function: String, line: Int) {
         let errorMessage = error is LocalizedError ? error.localizedDescription : "\(self)"
         let finalMessage = """
@@ -58,7 +57,7 @@ extension TMDB.LoggingService {
     func debug(
         _ message: String,
         error: any Error,
-        file: String = #file,
+        file: String = #filePath,
         function: String = #function,
         line: Int = #line,
     ) {
@@ -68,7 +67,7 @@ extension TMDB.LoggingService {
     func info(
         _ message: String,
         error: any Error,
-        file: String = #file,
+        file: String = #filePath,
         function: String = #function,
         line: Int = #line,
     ) {
@@ -78,7 +77,7 @@ extension TMDB.LoggingService {
     func notice(
         _ message: String,
         error: any Error,
-        file: String = #file,
+        file: String = #filePath,
         function: String = #function,
         line: Int = #line,
     ) {
@@ -88,7 +87,7 @@ extension TMDB.LoggingService {
     func warn(
         _ message: String,
         error: any Error,
-        file: String = #file,
+        file: String = #filePath,
         function: String = #function,
         line: Int = #line,
     ) {
@@ -98,7 +97,7 @@ extension TMDB.LoggingService {
     func error(
         _ message: String,
         error: any Error,
-        file: String = #file,
+        file: String = #filePath,
         function: String = #function,
         line: Int = #line,
     ) {
@@ -108,7 +107,7 @@ extension TMDB.LoggingService {
     func critical(
         _ message: String,
         error: any Error,
-        file: String = #file,
+        file: String = #filePath,
         function: String = #function,
         line: Int = #line,
     ) {
@@ -134,15 +133,28 @@ extension TMDB.LoggingService: DependencyKey {
 
 extension TMDB.LoggingService: TestDependencyKey {
     static var testValue: TMDB.LoggingService {
-        TMDB.LoggingService { _, _, _, _, _ in
-            // We no-op so that no logs are thrown during testing
+        TMDB.LoggingService { level, message, file, function, line in
+            // Tests only send values to the console, but avoid any debug logging (this can be tweaked as needed)
+            withDependencies {
+                $0.sdkConfigurationStore.configuration = {
+                    TMDBConfiguration(apiKey: "", minimumLoggingLevel: .info)
+                }
+            } operation: {
+                ConsoleLogger.log(level: level, message: message, file: file, function: function, line: line)
+            }
         }
     }
 
     static var previewValue: TMDB.LoggingService {
         TMDB.LoggingService { level, message, file, function, line in
-            // Preview logging service only sends logs to the console
-            PreviewLoggingService.log(level: level, message: message, file: file, function: function, line: line)
+            // Previews only send values to the console, and limit them to .notice and above
+            withDependencies {
+                $0.sdkConfigurationStore.configuration = {
+                    TMDBConfiguration(apiKey: "", minimumLoggingLevel: .notice)
+                }
+            } operation: {
+                ConsoleLogger.log(level: level, message: message, file: file, function: function, line: line)
+            }
         }
     }
 }

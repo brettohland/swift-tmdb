@@ -35,7 +35,7 @@ struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable> {
         urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
         let data = try await data(forRequest: urlRequest)
         let decodedData = try decoder.decode(ResponseBody.self, from: data)
-        logger.info(
+        logger.debug(
             """
             Request successful:
             URL: \(urlRequest.url?.absoluteString ?? "Unknown")
