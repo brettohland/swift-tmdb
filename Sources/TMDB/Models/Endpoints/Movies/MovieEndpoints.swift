@@ -29,7 +29,7 @@ public extension TMDB {
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
     /// - Returns: ``TMDB.Movie``
     /// - Throws: ``TMDBClientError``, ``TMDBServerError``, or ``TMDBRequestError``
-    static func movieDetails(_ id: Int) async throws -> Movie {
+    public static func movieDetails(id: Int) async throws -> Movie {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Movie>(
             endpoint: V3Endpoints.Movies.details(id: id),
             httpMethod: .get,
@@ -43,7 +43,7 @@ public extension TMDB {
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
     /// - Returns: ``[TMDB.AlternativeTitle]``
     /// - Throws: ``TMDBClientError``, ``TMDBServerError``, or ``TMDBRequestError``
-    static func alternativeMovieTitles(_ id: Int) async throws -> [AlternativeTitle] {
+    static func alternativeMovieTitles(id: Int) async throws -> [AlternativeTitle] {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, AlternativeMovieTitlesResponse>(
             endpoint: V3Endpoints.Movies.alternativeTitles(id: id),
             httpMethod: .get,
@@ -64,6 +64,6 @@ public extension TMDB {
     /// - Returns: ``[TMDB.AlternativeTitle]``
     /// - Throws: ``TMDBClientError``, ``TMDBServerError``, or ``TMDBRequestError``
     static func alternativeMovieTitles(movie: Movie) async throws -> [AlternativeTitle] {
-        try await alternativeMovieTitles(movie.id)
+        try await alternativeMovieTitles(id: movie.id)
     }
 }
