@@ -1,5 +1,6 @@
 import Foundation
 
+/// Decodes/Encodes ISO-8601 "yyyy-MM-DD" string values into `Date` objects
 @propertyWrapper
 public struct ISO8601YMD: Equatable, Sendable {
     public let wrappedValue: Date?

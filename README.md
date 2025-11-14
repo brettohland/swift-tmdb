@@ -1,206 +1,173 @@
-# A Modern TMDB Swift Package
+# TMDBSwifty: A Modern TMDB SDK
 
-Use this package to access TMDB's API. [You'll first need to get your own API key](https://developers.themoviedb.org/3/getting-started/introduction).
+A TMDB SDK that targets iOS/iPadOS 26 and uses Swift 6.2.
 
-Note: Currently, this package **only** supports the v4 auth (API Read Access Token).
+Additionally, with the use of PointFree's Dependencies framework, there's in-built support for Testing and
+SwiftUI Previews.
 
-The initial goals for this package is to support the un-authenticated, read-only APIs.
+## Dependencies
+
+Internally, the package uses [Point Free's Dependencies](https://github.com/pointfreeco/swift-dependencies) in order
+to support the ability for the TMDBSwifty SDK to provide real data when run in Testing or SwiftUI Preview environments.
+
+## Quick Start
+
+### Get Your API Key
+All requests to the TMDB API requires an API Key. Follow TMDB's [Getting Started](https://developer.themoviedb.org/docs/getting-started)
+guide to get one.
+
+### Initialize TMDBSwifty
+
+Initialize the TMDB client with your TMDB API Key. This only needs to be done once, and it'd be best to do it as early
+in your app's lifecycle as possible.
+
+For example, if you're using the SwiftUI app lifecycle:
+
+```swift
+import SwiftUI
+import TMDB
+
+@main
+struct TMDBSwifty_IntegrationApp: App {
+    init() {
+        initializeTMDB()
+    }
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+
+    private func initializeTMDB() {
+        Task {
+            do {
+                try await TMDB.initialize(apiKey: "APIKEYHERE")
+            } catch {
+                print("Unable to initialize", error)
+            }
+        }
+    }
+}
+
+```
+
+### Getting Data
+
+After initialization, there are two ways to use the TMDBSwifty module to request data from the TMDB API.
+
+#### Using Static Methods
+
+As an example, you can request a movie's details by calling the static `movieDetails` method on the `TMDB` enum:
+
+```swift
+import SwiftUI
+import TMDB
+
+struct MovieDetails: View {
+    @State private var movie: TMDB.Movie?
+
+    var body: some View {
+        VStack {
+            if let movie {
+                Text(movie.title)
+                    .font(.title)
+                Text(movie.runtime, format: .runtime)
+            } else {
+                Text("Loading movie details")
+                ProgressView()
+            }
+        }
+        .padding()
+        .task {
+            do {
+                let movie = try await TMDB.movieDetails(id: 278)
+                withAnimation {
+                    self.movie = movie
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+}
+```
+
+This view will show the details of
+
+#### (Optional) Using Dependency Clients
+
+TMDBSwifty also exposes a `DependencyClient` via PointFree's [https://github.com/pointfreeco/swift-dependencies] package.
+To use the client, you'll need to import the `TMDBDependencies` as well as the `TMDB` module.
+
+```swift
+import SwiftUI
+import TMDB
+import TMDBDependencies
+
+struct MovieDetails: View {
+    @Dependency(\.tmdbMovies.movieDetails) var movieDetails
+
+    @State private var movie: TMDB.Movie?
+
+    var body: some View {
+        VStack {
+            if let movie {
+                Text(movie.title)
+                    .font(.title)
+                Text(movie.runtime, format: .runtime)
+            } else {
+                Text("Loading movie details")
+                ProgressView()
+            }
+        }
+        .padding()
+        .task {
+            do {
+                let movie = try await movieDetails(1)
+                withAnimation {
+                    self.movie = movie
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+}
+
+```
+## Advanced Usage
+
+### Discovery Filters
+
+The [Discover Movies](https://developer.themoviedb.org/reference/discover-movie) and [Discover TV](https://developer.themoviedb.org/reference/discover-tv)
+endpoints include optional filters which allow for complex querying of data from the TMDB API.
+
+These filters are first-class value types in TMDBSwifty and can be composited easily to replicate complex functionality.
+
+[See filters documenation for more details](#)
+
+### Format Styles
+
+TMDBSwifty also includes custom [Format Style](https://developer.apple.com/documentation/Foundation/FormatStyle) implementations
+which allow for easy display of data coming from the TMDB API.
+
+- [Runtime FormatStyle](#)
 
 ---
 
-## Endpoints List
+## Supported Endpoints
 
-Here's a list of the endpoints that have been integrated or completed.
+### V3
 
-### v3
-
-- [ ] ACCOUNT (Low Priority)
-    - [ ] GET Get Details
-    - [ ] GET Get Created Lists
-    - [ ] GET Get Favorite Movies
-    - [ ] GET Get Favorite TV Shows
-    - [ ] POST Mark as Favorite
-    - [ ] GET Get Rated Movies
-    - [ ] GET Get Rated TV Shows
-    - [ ] GET Get Rated TV Episodes
-    - [ ] GET Get Movie Watchlist
-    - [ ] GET Get TV Show Watchlist
-    - [ ] POST Add to Watchlist
-- [ ] AUTHENTICATION (Low Priority)
-    - [ ] GET Create Guest Session
-    - [ ] GET Create Request Token
-    - [ ] POST Create Session
-    - [ ] POST Create Session With Login
-    - [ ] POST Create Session (from v4 access token)
-    - [ ] DELETE Delete Session
-- [ ] CERTIFICATIONS
-    - [ ] GET Get Movie Certifications
-    - [ ] GET Get TV Certifications
-- [ ] CHANGES (Low Priority)
-    - [ ] GET Get Movie Change List
-    - [ ] GET Get TV Change List
-    - [ ] GET Get Person Change List
-- [ ] COLLECTIONS
-    - [ ] GET Get Details
-    - [ ] GET Get Images
-    - [ ] GET Get Translations
-- [ ] COMPANIES
-    - [ ] GET Get Details
-    - [ ] GET Get Alternative Names
-    - [ ] GET Get Images
-- [ ] CONFIGURATION
-    - [x] GET Get API Configuration
-    - [x] GET Get Countries (Not needed. Using `Locale` instead)
-    - [ ] GET Get Jobs
-    - [x] GET Get Languages (Not needed, using `Locale` instead)
-    - [ ] GET Get Primary Translations
-    - [x] GET Get Timezones (Not needed, using `TimeZone` and `Locale` instead)
-- [ ] CREDITS
-    - [ ] Get details
-- [x] DISCOVER
-    - [x] GET Movie Discover
-    - [x] GET TV Discover
-- [ ] FIND
-    - [ ] GET Find by ID
-- [ ] GENRES
-    - [ ] GET Get Movie List
-    - [ ] GET Get TV List
-- [ ] GUEST SESSIONS
-    - [ ] GET Get Rated Movies
-    - [ ] GET Get Rated TV Shows
-    - [ ] GET Get Rated TV Episodes
-- [ ] KEYWORDS
-    - [ ] GET Get Details
-    - [ ] GET Get Movies
-- [ ] MOVIES
-    - [ ] GET Get Details
-    - [ ] GET Get Account States
-    - [ ] GET Get Alternative Titles
-    - [ ] GET Get Changes
-    - [ ] GET Get Credits
-    - [ ] GET Get External IDs
-    - [ ] GET Get Images
-    - [ ] GET Get Keywords
-    - [ ] GET Get Lists
-    - [ ] GET Get Recommendations
-    - [ ] GET Get Release Dates
-    - [ ] GET Get Reviews
-    - [ ] GET Get Similar Movies
-    - [ ] GET Get Translations
-    - [ ] GET Get Videos
-    - [ ] GET Get Watch Providers
-    - [ ] POST Rate Movie
-    - [ ] DELETE Delete Rating
-    - [ ] GET Get Latest
-    - [ ] GET Get Now Playing
-    - [ ] GET Get Popular
-    - [ ] GET Get Top Rated
-    - [ ] GET Get Upcoming    
-- [ ] NETWORKS
-    - [ ] GET Get Details
-    - [ ] GET Get Alternative Names
-    - [ ] GET Get Images
-- [ ] TRENDING
-    - [ ] GET Get Trending
-- [ ] PEOPLE
-    - [ ] GET Get Details
-    - [ ] GET Get Changes
-    - [ ] GET Get Movie Credits
-    - [ ] GET Get TV Credits
-    - [ ] GET Get Combined Credits
-    - [ ] GET Get External IDs
-    - [ ] GET Get Images
-    - [ ] GET Get Tagged Images
-    - [ ] GET Get Translations
-    - [ ] GET Get Latest
-    - [ ] GET Get Popular
-- [ ] REVIEWS
-    - [ ] GET Get Details
-- [ ] SEARCH
-    - [ ] GET Search Companies
-    - [ ] GET Search Collections
-    - [ ] GET Search Keywords
-    - [ ] GET Search Movies
-    - [ ] GET Multi Search
-    - [ ] GET Search People
-    - [ ] GET Search TV Shows
-- [ ] TV
-    - [ ] GET Get Details
-    - [ ] GET Get Account States
-    - [ ] GET Get Aggregate Credits
-    - [ ] GET Get Alternative Titles
-    - [ ] GET Get Changes
-    - [ ] GET Get Content Ratings
-    - [ ] GET Get Credits
-    - [ ] GET Get Episode Groups
-    - [ ] GET Get External IDs
-    - [ ] GET Get Images
-    - [ ] GET Get Keywords
-    - [ ] GET Get Recommendations
-    - [ ] GET Get Reviews
-    - [ ] GET Get Screened Theatrically
-    - [ ] GET Get Similar TV Shows
-    - [ ] GET Get Translations
-    - [ ] GET Get Videos
-    - [ ] GET Get Watch Providers
-    - [ ] POST Rate TV Show
-    - [ ] DELETE Delete Rating
-    - [ ] GET Get Latest
-    - [ ] GET Get TV Airing Today
-    - [ ] GET Get TV On The Air
-    - [ ] GET Get Popular
-    - [ ] GET Get Top Rated
-- [ ] TV SEASONS
-    - [ ] GET Get Details
-    - [ ] GET Get Account States
-    - [ ] GET Get Aggregate Credits
-    - [ ] GET Get Changes
-    - [ ] GET Get Credits
-    - [ ] GET Get External IDs
-    - [ ] GET Get Images
-    - [ ] GET Get Translations
-    - [ ] GET Get Videos
-- [ ] TV EPISODES
-    - [ ] GET Get Details
-    - [ ] GET Get Account States
-    - [ ] GET Get Changes
-    - [ ] GET Get Credits
-    - [ ] GET Get External IDs
-    - [ ] GET Get Images
-    - [ ] GET Get Translations
-    - [ ] POST Rate TV Episode
-    - [ ] DELETE Delete Rating
-    - [ ] GET Get Videos    
-- [ ] TV EPISODE GROUPS
-    - [ ] GET Get Details
-- [ ] WATCH PROVIDERS
-    - [ ] GET Get Available Regions
-    - [ ] GET Get Movie Providers
-    - [ ] GET Get TV Providers
-
-### v4
-
-- [ ] Account (Low Priority)
-    - [ ] Get Lists
-    - [ ] GET Get Favorite Movies
-    - [ ] GET Get Favorite TV Shows
-    - [ ] GET Get Movie Recommendations
-    - [ ] GET Get TV Show Recommendations
-    - [ ] GET Get Movie Watchlist
-    - [ ] GET Get TV Show Watchlist
-    - [ ] GET Get Rated Movies
-    - [ ] GET Get Rated TV Shows
-- [ ] Auth (Low Priority)
-    - [ ] POST Create Request Token
-    - [ ] POST Create Access Token
-    - [ ] DELETE Delete Access Token
-- [ ] List (Low Priority)
-    - [ ] GET Get List
-    - [ ] POST Create List
-    - [ ] PUT Update List
-    - [ ] GET Clear List
-    - [ ] DELETE Delete List
-    - [ ] POST Add Items
-    - [ ] PUT Update Items
-    - [ ] DELETE Remove Items
-    - [ ] GET Check Item Status
+- Configuration
+    - [Configuration Details](https://developer.themoviedb.org/reference/configuration-details)
+    - [Countries](https://developer.themoviedb.org/reference/configuration-countries)
+- Credits
+    - [Credit Details](https://developer.themoviedb.org/reference/credit-details)
+- Discover
+    - [Movies](https://developer.themoviedb.org/reference/discover-movie)
+    - [TV](https://developer.themoviedb.org/reference/discover-tv)
+- Movies
+    - [Movie Details](https://developer.themoviedb.org/reference/movie-details)
+    - [Alternative Titles](https://developer.themoviedb.org/reference/movie-alternative-titles)

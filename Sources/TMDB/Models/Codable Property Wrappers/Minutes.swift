@@ -1,5 +1,6 @@
 import Foundation
 
+/// Decodes/Encodes `Int` minutes values into a `Measurement<UnitDuration.minutes>` object
 @propertyWrapper
 public struct Minutes: Sendable {
     public let wrappedValue: Measurement<UnitDuration>

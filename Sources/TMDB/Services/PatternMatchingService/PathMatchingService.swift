@@ -25,11 +25,11 @@ enum PathMatchingService {
 
     static func handleV3Path(_ url: URL) throws -> Data {
         if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Configuration.details) {
-            return try TMDB.Configuration.Response.mockData()
+            return try TMDB.ConfigurationResponse.mockData()
         }
 
         if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Configuration.countries) {
-            return try TMDB.Configuration.CountriesResponse.mockData()
+            return try CountriesResponse.mockData()
         }
 
         if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.details(id: 0)) {

@@ -24,23 +24,25 @@ extension TMDB.V3Endpoints.Configuration: EndpointFactory {
 
 }
 
-extension TMDB {
-    enum APIConfiguration {
-        static func details() async throws -> TMDB.Configuration.Response {
-            let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Configuration.Response>(
-                endpoint: TMDB.V3Endpoints.Configuration.details,
-                httpMethod: .get,
-            )
-            return try await endpoint.decodedResponse()
-        }
+public extension TMDB {
+    /// `/3/configuration/details`
+    /// - Returns: The configuration response from the backend
+    static func apiConfigurationDetails() async throws -> TMDB.ConfigurationResponse {
+        let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.ConfigurationResponse>(
+            endpoint: TMDB.V3Endpoints.Configuration.details,
+            httpMethod: .get,
+        )
+        return try await endpoint.decodedResponse()
+    }
 
-        static func countries() async throws -> [Locale.Region] {
-            let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Configuration.CountriesResponse>(
-                endpoint: TMDB.V3Endpoints.Configuration.countries,
-                httpMethod: .get,
-            )
-            let response = try await endpoint.decodedResponse()
-            return response.countries
-        }
+    /// `/3/configuration/countries`
+    /// - Returns: An array of countries supported by the API
+    static func supportedCountries() async throws -> [Locale.Region] {
+        let endpoint = Endpoint<HTTP.EmptyRequestBody, CountriesResponse>(
+            endpoint: TMDB.V3Endpoints.Configuration.countries,
+            httpMethod: .get,
+        )
+        let response = try await endpoint.decodedResponse()
+        return response.countries
     }
 }

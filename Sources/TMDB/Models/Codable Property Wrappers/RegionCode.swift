@@ -1,15 +1,16 @@
 import Foundation
 
+/// Decodes/Encodes ISO 3166:1 region strings into a `Locale.Region` value
 @propertyWrapper
-struct RegionCode: Equatable {
-    let wrappedValue: Locale.Region
-    init(wrappedValue: Locale.Region) {
+public struct RegionCode: Equatable {
+    public let wrappedValue: Locale.Region
+    public init(wrappedValue: Locale.Region) {
         self.wrappedValue = wrappedValue
     }
 }
 
 extension RegionCode: Decodable {
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let regionIdentifier = try container.decode(String.self)
         wrappedValue = Locale.Region(regionIdentifier)
@@ -17,7 +18,7 @@ extension RegionCode: Decodable {
 }
 
 extension RegionCode: Encodable {
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(wrappedValue.identifier)
     }

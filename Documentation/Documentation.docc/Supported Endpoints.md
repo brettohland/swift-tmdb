@@ -1,3 +1,0 @@
-#  Supported TMDB Endpoints
-
-## Topics

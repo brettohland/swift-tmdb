@@ -22,48 +22,59 @@ extension TMDB.V3Endpoints.Movies: EndpointFactory {
     }
 }
 
-// MARK: Public /3/movie/ endpoints
+// MARK: - Public /3/movie/ endpoints
+
+// MARK: Movie details
 
 public extension TMDB {
-    /// Make a request to the TMDB API's `/3/movie/{id}` endpoint
+    /// `/3/movie/{id}`
+    ///
+    /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-details)
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
-    /// - Returns: ``TMDB.Movie``
-    /// - Throws: ``TMDBClientError``, ``TMDBServerError``, or ``TMDBRequestError``
-    public static func movieDetails(id: Int) async throws -> Movie {
+    /// - Returns: ``TMDB/Movie``
+    /// - Throws: ``TMDBRequestError``
+    static func movieDetails(id: Int) async throws(TMDBRequestError) -> Movie {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Movie>(
             endpoint: V3Endpoints.Movies.details(id: id),
             httpMethod: .get,
         )
-        return try await endpoint.decodedResponse()
+        do {
+            return try await endpoint.decodedResponse()
+        } catch {
+            throw .systemError(error)
+        }
     }
+}
 
-    /// Make a request to the TMDB API's `/3/movie/{id}/alternative_titles` endpoint and returns only the
-    /// array of alternative titles.
+// MARK: Alternative Titles
+
+public extension TMDB {
+    /// `/3/movie/{id}/alternative_titles`
     ///
+    /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-alternative-titles)
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
-    /// - Returns: ``[TMDB.AlternativeTitle]``
-    /// - Throws: ``TMDBClientError``, ``TMDBServerError``, or ``TMDBRequestError``
-    static func alternativeMovieTitles(id: Int) async throws -> [AlternativeTitle] {
+    /// - Returns: An array of ``TMDB/AlternativeTitle`` values
+    /// - Throws: ``TMDBRequestError
+    static func alternativeMovieTitles(id: Int) async throws(TMDBRequestError) -> [AlternativeTitle] {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, AlternativeMovieTitlesResponse>(
             endpoint: V3Endpoints.Movies.alternativeTitles(id: id),
             httpMethod: .get,
         )
-        let response = try await endpoint.decodedResponse()
-
-        // Verify that our alternative titles match
-        guard response.id == id else {
-            throw TMDBRequestError.invalidRequestData
+        do {
+            let response = try await endpoint.decodedResponse()
+            return response.titles
+        } catch {
+            throw .systemError(error)
         }
-        return response.titles
     }
 
-    /// Make a request to the TMDB API's `/3/movie/{id}/alternative_titles` endpoint and returns only the
-    /// array of alternative titles.
+    /// `/3/movie/{id}/alternative_titles`
     ///
-    /// - Parameter movie: ``TMDB.Movie``
-    /// - Returns: ``[TMDB.AlternativeTitle]``
-    /// - Throws: ``TMDBClientError``, ``TMDBServerError``, or ``TMDBRequestError``
-    static func alternativeMovieTitles(movie: Movie) async throws -> [AlternativeTitle] {
+    /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-alternative-titles)
+    /// - Parameter movie: ``TMDB/Movie``
+    /// - Returns: An array of ``TMDB/AlternativeTitle`` values
+    /// - Throws: ``TMDBRequestError
+    static func alternativeMovieTitles(movie: Movie) async throws(TMDBRequestError) -> [AlternativeTitle] {
         try await alternativeMovieTitles(id: movie.id)
     }
 }

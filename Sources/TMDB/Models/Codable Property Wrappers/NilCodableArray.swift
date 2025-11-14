@@ -1,15 +1,16 @@
 import Foundation
 
+/// Decodes/Encodes `null` key values into empty arrays
 @propertyWrapper
-struct NilCodableArray<T: Codable> {
-    let wrappedValue: [T]
-    init(wrappedValue: [T]) {
+public struct NilCodableArray<T: Codable> where T: Sendable {
+    public let wrappedValue: [T]
+    public init(wrappedValue: [T]) {
         self.wrappedValue = wrappedValue
     }
 }
 
 extension NilCodableArray: Decodable {
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let array = try container.decode([T].self)
         wrappedValue = array
@@ -17,7 +18,7 @@ extension NilCodableArray: Decodable {
 }
 
 extension NilCodableArray: Encodable {
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         guard wrappedValue.isEmpty == false else {
             return

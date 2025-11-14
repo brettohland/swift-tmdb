@@ -4,7 +4,7 @@
 @preconcurrency import PackageDescription
 
 let package = Package(
-    name: "TMDBSwifty",
+    name: "swift-tmdb",
     platforms: [
         .iOS(.v18),
         .macOS(.v15),
@@ -13,8 +13,12 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "TMDBSwifty",
+            name: "TMDB",
             targets: ["TMDB"],
+        ),
+        .library(
+            name: "TMDBDependencies",
+            targets: ["TMDBDependencies"],
         ),
     ],
     dependencies: [
@@ -29,6 +33,19 @@ let package = Package(
             ],
             resources: [
                 .process("Services/MockingService/JSON"),
+            ],
+            swiftSettings: [
+                .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+                .enableUpcomingFeature("InferIsolatedConformances"),
+                .enableUpcomingFeature("FullTypedThrows"),
+            ],
+        ),
+        .target(
+            name: "TMDBDependencies",
+            dependencies: [
+                "TMDB",
+                .product(name: "Dependencies", package: "swift-dependencies"),
+                .product(name: "DependenciesMacros", package: "swift-dependencies"),
             ],
             swiftSettings: [
                 .enableUpcomingFeature("NonisolatedNonsendingByDefault"),

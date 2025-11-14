@@ -1,9 +1,10 @@
 import Foundation
 
+/// Decodes/Encodes bare ISO-631:1 string values into `Locale.Language` objects
 @propertyWrapper
-struct LanguageCode {
-    let wrappedValue: Locale.Language
-    init(wrappedValue: Locale.Language) {
+public struct LanguageCode: Sendable {
+    public let wrappedValue: Locale.Language
+    public init(wrappedValue: Locale.Language) {
         self.wrappedValue = wrappedValue
     }
 }
@@ -11,7 +12,7 @@ struct LanguageCode {
 extension LanguageCode: Equatable {}
 
 extension LanguageCode: Decodable {
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let stringValue = try container.decode(String.self)
         wrappedValue = Locale.Language(identifier: stringValue)
@@ -19,7 +20,7 @@ extension LanguageCode: Decodable {
 }
 
 extension LanguageCode: Encodable {
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         guard let languageCode = wrappedValue.languageCode else {
             throw EncodingError.invalidValue(

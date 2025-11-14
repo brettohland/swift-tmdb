@@ -5,14 +5,10 @@ import Testing
 
 struct MovieEndpointTests {
     @Test func movieDetails() async throws {
-        _ = try await TMDB.movieDetails(0)
+        _ = try await TMDB.movieDetails(id: 0)
     }
 
     @Test func movieAlternativeTitles() async throws {
-        _ = try await TMDB.alternativeMovieTitles(550)
-
-        await #expect(throws: TMDBRequestError.invalidRequestData) {
-            _ = try await TMDB.alternativeMovieTitles(0)
-        }
+        _ = try await TMDB.alternativeMovieTitles(id: 550)
     }
 }

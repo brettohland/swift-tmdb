@@ -5,10 +5,10 @@ import Testing
 
 struct ConfigurationEndpointTests {
     @Test func details() async throws {
-        _ = try await TMDB.APIConfiguration.details()
+        _ = try await TMDB.apiConfigurationDetails()
     }
 
     @Test func countries() async throws {
-        _ = try await TMDB.APIConfiguration.countries()
+        _ = try await TMDB.supportedCountries()
     }
 }

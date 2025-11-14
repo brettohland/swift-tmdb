@@ -3,7 +3,8 @@ internal import Dependencies
 
 /// The top level namespace for the TMDBSwifty package
 ///
-/// You must call ``TMDB/initialize(configuration:)`` or ``TMDB/initialize(apiKey:urlSessionConfiguration:)`` before making any calls to the TMDB API.
+/// You must call ``TMDB/initialize(configuration:)`` or ``TMDB/initialize(apiKey:urlSessionConfiguration:)`` before
+/// making any calls to the TMDB API.
 /// This is because all requests to TMDB require an API key.
 @MainActor
 public enum TMDB {
@@ -28,7 +29,7 @@ public enum TMDB {
     /// Initialize the TMDBSwifty SDK with individual configuration parameters.
     /// - Parameters:
     ///   - apiKey: `String` value from the TMDB website which will be used to authenticate against the TMDB API
-    ///   - urlSessionConfiguration: An optional ``URLSessionConfiguration`` object to use during requests.
+    ///   - urlSessionConfiguration: An optional URLSessionConfiguration object to use during requests.
     /// - Throws: ``TMDBInitializationError``
     ///
     /// If no `urlSessionConfiguration` property is included, the framework will use the `.default` static property.

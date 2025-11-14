@@ -1,12 +1,12 @@
 import Foundation
 
-extension TMDB.Configuration.Response: MockableResponse {
+extension TMDB.ConfigurationResponse: MockableResponse {
     static var mockFilename: String {
         "Details"
     }
 }
 
-extension TMDB.Configuration.CountriesResponse: MockableResponse {
+extension CountriesResponse: MockableResponse {
     static var mockFilename: String {
         "Countries"
     }

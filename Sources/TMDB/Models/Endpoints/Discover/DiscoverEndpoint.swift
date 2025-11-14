@@ -28,7 +28,11 @@ extension TMDB.V3Endpoints.Discover: EndpointFactory {
 
 // MARK: - Discover Movies
 
-extension TMDB {
+public extension TMDB {
+    /// `/3/discover/movie`
+    /// `
+    /// - Parameter filters: A parameter list of zero or more filters to include in the search
+    /// - Returns: ``TMDB/Discover/MovieResponse``
     static func discoverMovies(filters: TMDB.Discover.MovieFilter...) async throws -> TMDB.Discover.MovieResponse {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.MovieResponse>(
             endpoint: TMDB.V3Endpoints.Discover.movie(filters: filters),
@@ -37,6 +41,8 @@ extension TMDB {
         return try await endpoint.decodedResponse()
     }
 
+    /// `/3/discover/movie`
+    /// - Returns: A paginated response value
     static func discoverMovies() async throws -> TMDB.Discover.MovieResponse {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.MovieResponse>(
             endpoint: TMDB.V3Endpoints.Discover.movie(filters: []),
@@ -48,7 +54,11 @@ extension TMDB {
 
 // MARK: - Discover TV
 
-extension TMDB {
+public extension TMDB {
+    /// `/3/discover/tv`
+    ///
+    /// - Parameter filters: A parameter list of zero or more filters to include in the search
+    /// - Returns: A paginated response value
     static func discoverTV(filters: TMDB.Discover.TVFilter...) async throws -> TMDB.Discover.TVResponse {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.TVResponse>(
             endpoint: TMDB.V3Endpoints.Discover.tv(filters: filters),
@@ -57,6 +67,9 @@ extension TMDB {
         return try await endpoint.decodedResponse()
     }
 
+    /// `/3/discover/tv`
+    ///
+    /// - Returns: A paginated response value
     static func discoverTV() async throws -> TMDB.Discover.TVResponse {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.TVResponse>(
             endpoint: TMDB.V3Endpoints.Discover.tv(filters: []),
