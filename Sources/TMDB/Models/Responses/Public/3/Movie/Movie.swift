@@ -4,10 +4,11 @@ public extension TMDB {
     struct Movie: Sendable {
         public let isAdult: Bool
         public let backdropPath: String
-        public let belongsToCollection: TitleCollection
+        public let belongsToCollection: TitleCollection?
         public let budget: Int
         public let genres: [Genre]
-        public let homepage: URL
+        @EmptyStringNullable
+        public var homepage: URL?
         public let id: Int
         public let imdbID: String
         public let originalLanguage: Locale.Region

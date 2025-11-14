@@ -1,6 +1,6 @@
 import Foundation
 
-/// Represents errors from the TMDBSwifty SDK
+/// Errors thrown during requests
 public enum TMDBRequestError: Error {
     /// The request to the TMDB API failed
     case networkError(TMDBAPIError)

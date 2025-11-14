@@ -3,7 +3,7 @@ import OSLog
 internal import Dependencies
 
 enum OSLoggingService {
-    static let logger = Logger(subsystem: "com.tmdbswifty", category: "TMDBSDK")
+    static let logger = Logger(subsystem: "com.swift-tmdb", category: "TMDB")
     static func log(
         level: TMDB.LoggingLevel,
         message: String,

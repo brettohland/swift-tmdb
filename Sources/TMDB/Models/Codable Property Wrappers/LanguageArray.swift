@@ -29,9 +29,9 @@ extension LanguageArray: Encodable {
 
 /// Decodes/Encodes custom ISO 639:1 objects from the TMDB API into a `Locale.Language` object
 @propertyWrapper
-public struct LanguageWrapper: Sendable {
-    public let wrappedValue: Locale.Language
-    public init(wrappedValue: Locale.Language) {
+struct LanguageWrapper: Sendable {
+    let wrappedValue: Locale.Language
+    init(wrappedValue: Locale.Language) {
         self.wrappedValue = wrappedValue
     }
 }
@@ -51,7 +51,7 @@ private extension LanguageWrapper {
 }
 
 extension LanguageWrapper: Decodable {
-    public init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DecodingKeys.self)
         let stringValue = try container.decode(String.self, forKey: .iso639)
         wrappedValue = Locale.Language(identifier: stringValue)
@@ -61,7 +61,7 @@ extension LanguageWrapper: Decodable {
 extension LanguageWrapper: Encodable {
     private static let enUSLocale = Locale(languageCode: .english, languageRegion: .unitedStates)
 
-    public func encode(to encoder: Encoder) throws {
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: EncodingKeys.self)
         guard
             let languageCode = wrappedValue.languageCode,

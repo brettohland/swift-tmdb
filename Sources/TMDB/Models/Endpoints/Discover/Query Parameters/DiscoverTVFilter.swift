@@ -1,12 +1,28 @@
 import Foundation
 
 public extension TMDB.Discover {
+    /// Filters which can be included in the ``TMDB/discoverTV(filters:)`` method to filter your TMDB API request
+    ///
+    /// See [TMDB's developer documentation](https://developer.themoviedb.org/reference/discover-movie) for details.
+    ///
+    /// The filters will be added as URL query parameters in the order they're included in the parameter list.
+    ///
+    /// ## LogicOperators
+    /// Filters which use the ``TMDB/Discover/LogicalOperator`` type will be converted into a comma or pipe separated
+    /// list. With the first operator being disregarded.
+    ///
+    /// For example, both of these filter lists will result in a final url query parameter of
+    /// `with_release_type=4,5`
+    /// ```swift
+    /// try await TMDB.discoverMovie(filters: .withReleaseType([.and(.digital), .and(.physical)]))
+    /// try await TMDB.discoverMovie(filters: .withReleaseType([.or(.digital), .and(.physical)]))
+    /// ```
     enum TVFilter {
 
         // Common filters
         case language(Locale)
         case page(Int)
-        case sortBy(SortOption)
+        case sortBy(SortOption, SortOptionOrder)
         case voteAverageGreaterThan(Double)
         case voteCountGreaterThan(Int)
         case watchRegion(Locale.Region)
@@ -110,8 +126,8 @@ extension TMDB.Discover.TVFilter: QueryItemEncodable {
         switch self {
         case .language(let locale):
             locale.queryValue
-        case .sortBy(let option):
-            option.queryValue
+        case .sortBy(let option, let order):
+            "\(option.rawValue).\(order.rawValue)"
         case .page(let page):
             page.queryValue
         case .voteCountGreaterThan(let count):

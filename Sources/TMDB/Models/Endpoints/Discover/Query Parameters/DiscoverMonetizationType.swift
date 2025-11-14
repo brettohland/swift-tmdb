@@ -12,5 +12,4 @@ public extension TMDB.Discover {
             rawValue
         }
     }
-
 }

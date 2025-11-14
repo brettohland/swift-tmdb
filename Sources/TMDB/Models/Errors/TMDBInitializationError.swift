@@ -1,9 +1,9 @@
 import Foundation
 
-/// Errors throws during the initialization of the TMDBSwifty SDK
+/// Errors throws during the initialization
 public enum TMDBInitializationError: Error {
-    /// The TMDBSwifty SDK has already been initialized
+    /// The module has already been initialized
     case alreadyInitialized
-    /// The TMDBSwifty SDK has not been initialized
+    /// The module has not yet been initialized
     case notYetInitialized
 }

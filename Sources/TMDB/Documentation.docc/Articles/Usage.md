@@ -4,9 +4,9 @@ Instructions on initialization and usage of the `swift-tmdb` package.
 
 ## Requirements
 
-TMDBSwifty requires a TMDB API Key in order to function. 
+`swift-tmdb` requires a TMDB API Key in order to function. 
 
-Follow their [Getting Started](https://developer.themoviedb.org/docs/getting-started) guild in order to get your key.
+Follow their [Getting Started](https://developer.themoviedb.org/docs/getting-started) guide in order to get your key.
 
 > Warning: 
 [Follow the best security practices](https://nshipster.com/secrets/) with your TMDB API Key and do not store it inside of your source code repository.
@@ -23,7 +23,7 @@ import SwiftUI
 import TMDB
 
 @main
-struct TMDBSwifty_IntegrationApp: App {
+struct MyApp: App {
     init() {
         initializeTMDB()
     }
@@ -50,7 +50,7 @@ struct TMDBSwifty_IntegrationApp: App {
 
 ## Getting Data
 
-After initialization, there are two ways to use the TMDBSwifty module to request data from the TMDB API.
+After initialization, there are two ways to use the module to request data from the TMDB API.
 
 ### Using Static Methods
 
@@ -88,12 +88,15 @@ struct MovieDetails: View {
     }
 }
 ```
-Calling this method is safe to do from SwiftUI Previews or from unit test cases. TMDBSwifty uses [PointFree's Dependencies](https://github.com/pointfreeco/swift-dependencies) module to provide your previews or tests with mock data.
+Calling this method is safe to do from SwiftUI Previews or from unit test cases. `swift-tmdb` uses [PointFree's Dependencies](https://github.com/pointfreeco/swift-dependencies) 
+module to provide your previews or tests with mock data.
 
 #### (Optional) Using Dependency Clients
 
-TMDBSwifty also exposes a `DependencyClient` via PointFree's [https://github.com/pointfreeco/swift-dependencies] package.
-To use the client, you'll need to import the `TMDBDependencies` as well as the `TMDB` module.
+By including the `TMDBDependencies` module, a `DependencyClient` via PointFree's [https://github.com/pointfreeco/swift-dependencies] 
+package will be exposed.
+
+The `swift-dependencies` module is included when importing `TMDBDependencies`.
 
 ```swift
 import SwiftUI
@@ -132,4 +135,5 @@ struct MovieDetails: View {
 
 ```
 
-Calling this method is safe to do from SwiftUI Previews or from unit test cases. TMDBSwifty uses [PointFree's Dependencies](https://github.com/pointfreeco/swift-dependencies) module to provide your previews or tests with mock data.
+Calling this method is safe to do from SwiftUI Previews or from unit test cases. `swift-tmdb` uses [PointFree's Dependencies](https://github.com/pointfreeco/swift-dependencies) 
+module to provide your previews or tests with mock data.

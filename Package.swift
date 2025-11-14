@@ -6,10 +6,10 @@
 let package = Package(
     name: "swift-tmdb",
     platforms: [
-        .iOS(.v18),
-        .macOS(.v15),
-        .macCatalyst(.v15),
-        .tvOS(.v15),
+        .iOS(.v26),
+        .macOS(.v26),
+        .macCatalyst(.v26),
+        .tvOS(.v26),
     ],
     products: [
         .library(
@@ -23,6 +23,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-dependencies.git", exact: "1.10.0"),
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
     ],
     targets: [
         .target(

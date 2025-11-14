@@ -22,8 +22,8 @@ Adding overview text here
 - ``TMDB/apiConfigurationDetails()`` 
 - ``TMDB/credits(forID:)``
 - ``TMDB/credits(forMovie:)``
-- ``TMDB/discoverMovies()``
-- ``TMDB/discoverMovies(filters:)``
+- ``TMDB/discoverMovie()``
+- ``TMDB/discoverMovie(filters:)``
 - ``TMDB/discoverTV()``
 - ``TMDB/discoverTV(filters:)``
 - ``TMDB/supportedCountries()`` 
@@ -64,6 +64,11 @@ Adding overview text here
 
 - ``TMDB/Configuration/ChangeKey``
 - ``TMDB/Configuration/ImageSize``
+
+### Discover Filters
+
+- ``TMDB/Discover/MovieFilter``
+- ``TMDB/Discover/TVFilter``
 
 ### Format Styles
 

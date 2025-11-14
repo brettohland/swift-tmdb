@@ -1,34 +1,20 @@
 import Foundation
 
 public extension TMDB.Discover {
-    enum SortOption: QueryValueRepresentable {
-        case popularity(isAscending: Bool)
-        case releaseDate(isAscending: Bool)
-        case revenue(isAscending: Bool)
-        case primaryReleaseDate(isAscending: Bool)
-        case originalTitle(isAscending: Bool)
-        case averageVote(isAscending: Bool)
-        case voteCount(isAscending: Bool)
+    /// Options of how to sort the results based of various properties
+    enum SortOption: String, Sendable {
+        case popularity
+        case releaseDate = "release_date"
+        case revenue
+        case primaryReleaseDate = "primary_release_date"
+        case originalTitle = "original_title"
+        case averageVote = "average_vote"
+        case voteCount = "vote_count"
+    }
 
-        var queryValue: String {
-            let ascending = ".asc"
-            let descending = ".desc"
-            switch self {
-            case .popularity(let isAscending):
-                return "popularity" + (isAscending ? ascending : descending)
-            case .releaseDate(let isAscending):
-                return "release_date" + (isAscending ? ascending : descending)
-            case .revenue(let isAscending):
-                return "revenue" + (isAscending ? ascending : descending)
-            case .primaryReleaseDate(let isAscending):
-                return "primary_release_date" + (isAscending ? ascending : descending)
-            case .originalTitle(let isAscending):
-                return "original_title" + (isAscending ? ascending : descending)
-            case .averageVote(let isAscending):
-                return "average_vote" + (isAscending ? ascending : descending)
-            case .voteCount(let isAscending):
-                return "vote_count" + (isAscending ? ascending : descending)
-            }
-        }
+    /// How to sort the results, either descending or ascending order
+    enum SortOptionOrder: String, Sendable {
+        case ascending = "asc"
+        case descending = "desc"
     }
 }

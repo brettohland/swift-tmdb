@@ -1,7 +1,7 @@
 import Foundation
 
 public extension TMDB.Credits {
-    struct Media: Codable, Identifiable, Sendable{
+    struct Media: Codable, Identifiable, Sendable {
         public let adult: Bool
         public let backdropPath: String
         public let id: Int
