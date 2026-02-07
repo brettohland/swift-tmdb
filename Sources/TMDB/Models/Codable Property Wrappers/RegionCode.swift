@@ -2,7 +2,7 @@ import Foundation
 
 /// Decodes/Encodes ISO 3166:1 region strings into a `Locale.Region` value
 @propertyWrapper
-public struct RegionCode: Equatable {
+public struct RegionCode: Equatable, Sendable {
     public let wrappedValue: Locale.Region
     public init(wrappedValue: Locale.Region) {
         self.wrappedValue = wrappedValue

@@ -1,0 +1,23 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "id": 1245,
+      "name": "Scarlett Johansson",
+      "profile_path": "/6NsMbJXRlDZuDzatN2akFdGuTvx.jpg",
+      "popularity": 156.789,
+      "known_for_department": "Acting",
+      "adult": false
+    },
+    {
+      "id": 500,
+      "name": "Tom Cruise",
+      "profile_path": "/eOh4ubpOm2Igdg0QH2ghj0mFtC.jpg",
+      "popularity": 145.234,
+      "known_for_department": "Acting",
+      "adult": false
+    }
+  ],
+  "total_pages": 500,
+  "total_results": 10000
+}

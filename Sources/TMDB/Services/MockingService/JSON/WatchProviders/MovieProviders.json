@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "provider_id": 8,
+      "provider_name": "Netflix",
+      "logo_path": "/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg",
+      "display_priority": 0
+    },
+    {
+      "provider_id": 9,
+      "provider_name": "Amazon Prime Video",
+      "logo_path": "/emthp39XA2YScoYL1p0sdbAH2WA.jpg",
+      "display_priority": 1
+    },
+    {
+      "provider_id": 337,
+      "provider_name": "Disney Plus",
+      "logo_path": "/7rwgEs15tFwyR9NPQ5vpzxTj19Q.jpg",
+      "display_priority": 2
+    },
+    {
+      "provider_id": 350,
+      "provider_name": "Apple TV Plus",
+      "logo_path": "/6uhKBfmtzFqOcLousHwZuzcrScK.jpg",
+      "display_priority": 3
+    },
+    {
+      "provider_id": 15,
+      "provider_name": "Hulu",
+      "logo_path": "/zxrVdFjIjLqkfnwyghnfywTn3Lh.jpg",
+      "display_priority": 4
+    },
+    {
+      "provider_id": 386,
+      "provider_name": "Peacock",
+      "logo_path": "/8Gt1iClBlzTeQs8WQm8UrCoIxnQ.jpg",
+      "display_priority": 5
+    }
+  ]
+}

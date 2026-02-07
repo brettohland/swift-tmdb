@@ -1,0 +1,45 @@
+[
+  {
+    "department": "Acting",
+    "jobs": [
+      "Actor",
+      "Voice",
+      "Cameo",
+      "Stunt Double"
+    ]
+  },
+  {
+    "department": "Directing",
+    "jobs": [
+      "Director",
+      "Assistant Director",
+      "First Assistant Director"
+    ]
+  },
+  {
+    "department": "Production",
+    "jobs": [
+      "Producer",
+      "Executive Producer",
+      "Line Producer",
+      "Co-Producer"
+    ]
+  },
+  {
+    "department": "Writing",
+    "jobs": [
+      "Writer",
+      "Screenplay",
+      "Story",
+      "Novel"
+    ]
+  },
+  {
+    "department": "Camera",
+    "jobs": [
+      "Director of Photography",
+      "Camera Operator",
+      "Steadicam Operator"
+    ]
+  }
+]

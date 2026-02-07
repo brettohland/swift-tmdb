@@ -32,6 +32,66 @@ enum PathMatchingService {
             return try CountriesResponse.mockData()
         }
 
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Configuration.jobs) {
+            return try TMDB.Configuration.JobDepartment.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Configuration.languages) {
+            return try TMDB.Configuration.Language.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Configuration.primaryTranslations) {
+            return try MockUtilities.jsonDataFromFile("PrimaryTranslations")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Configuration.timezones) {
+            return try TMDB.Configuration.Timezone.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Certifications.movieList) {
+            return try TMDB.MovieCertifications.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Certifications.tvList) {
+            return try TMDB.TVCertifications.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Genres.movieList) {
+            return try TMDB.GenreList.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Genres.tvList) {
+            return try MockUtilities.jsonDataFromFile("TVGenres")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Trending.all(timeWindow: .day)) {
+            return try MockUtilities.jsonDataFromFile("TrendingAll")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Trending.movie(timeWindow: .day)) {
+            return try MockUtilities.jsonDataFromFile("TrendingMovies")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Trending.tv(timeWindow: .day)) {
+            return try MockUtilities.jsonDataFromFile("TrendingTV")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Trending.person(timeWindow: .day)) {
+            return try MockUtilities.jsonDataFromFile("TrendingPeople")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.WatchProviders.regions) {
+            return try TMDB.WatchProviderRegions.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.WatchProviders.movie) {
+            return try TMDB.WatchProviderList.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.WatchProviders.tv) {
+            return try MockUtilities.jsonDataFromFile("TVProviders")
+        }
+
         if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.details(id: 0)) {
             return try TMDB.Movie.mockData()
         }
