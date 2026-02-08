@@ -5,7 +5,12 @@ public extension TMDB.Configuration {
     ///
     /// [Details on TMDB's site](https://developer.themoviedb.org/reference/configuration-timezones)
     struct Timezone: Codable, Sendable {
-        @RegionCode public var iso31661: Locale.Region
+        @RegionCode public var regionCode: Locale.Region
         public let zones: [String]
+
+        enum CodingKeys: String, CodingKey {
+            case regionCode = "iso31661"
+            case zones
+        }
     }
 }

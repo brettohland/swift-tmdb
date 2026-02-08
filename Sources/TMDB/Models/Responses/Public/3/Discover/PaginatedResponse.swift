@@ -1,7 +1,7 @@
 import Foundation
 
 public extension TMDB.Discover {
-    struct PaginatedResponse<Wrapped: DiscoverType>: Codable, Sendable {
+    struct PaginatedResponse<Wrapped: Discoverable>: Codable, Sendable {
         @NilInteger
         public var page: Int
         @NilInteger

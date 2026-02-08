@@ -5,8 +5,14 @@ public extension TMDB.Configuration {
     ///
     /// [Details on TMDB's site](https://developer.themoviedb.org/reference/configuration-languages)
     struct Language: Codable, Sendable {
-        @LanguageCode public var iso6391: Locale.Language
+        @LanguageCode public var languageCode: Locale.Language
         public let englishName: String
         public let name: String
+
+        enum CodingKeys: String, CodingKey {
+            case languageCode = "iso6391"
+            case englishName
+            case name
+        }
     }
 }

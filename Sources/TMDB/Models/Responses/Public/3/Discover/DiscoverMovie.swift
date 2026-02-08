@@ -1,13 +1,13 @@
 import Foundation
 
 public extension TMDB.Discover {
-    struct DiscoverMovie: Codable, DiscoverType {
+    struct DiscoverMovie: Codable, Discoverable {
         // MARK: Common
 
         @NilBoolean
-        public var adult: Bool
+        public var isAdult: Bool
         public let backdropPath: String?
-        public let genreIds: [Int]
+        public let genreIDs: [Int]
         public let id: Int
         @LanguageCode
         public var originalLanguage: Locale.Language
@@ -15,7 +15,7 @@ public extension TMDB.Discover {
         public let popularity: Double?
         public let posterPath: String?
         @NilBoolean
-        public var video: Bool
+        public var isVideo: Bool
         public let voteAverage: Double?
         public let voteCount: Int?
 
@@ -25,5 +25,22 @@ public extension TMDB.Discover {
         public let title: String?
         @ISO8601YMD
         public var releaseDate: Date?
+
+        enum CodingKeys: String, CodingKey {
+            case isAdult = "adult"
+            case backdropPath
+            case genreIDs = "genreIds"
+            case id
+            case originalLanguage
+            case overview
+            case popularity
+            case posterPath
+            case isVideo = "video"
+            case voteAverage
+            case voteCount
+            case originalTitle
+            case title
+            case releaseDate
+        }
     }
 }

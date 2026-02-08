@@ -317,6 +317,18 @@ TMDB.Network
 
 ## Implementation Patterns
 
+### Naming Conventions (Swift API Design Guidelines)
+
+When creating response models, follow these naming rules:
+
+- **Booleans**: Use assertion form (`isAdult`, `isVideo`), map via CodingKeys (`case isAdult = "adult"`)
+- **Acronyms**: Use uppercase (`genreIDs`, `imdbID`), map via CodingKeys (`case genreIDs = "genreIds"`)
+- **ISO codes**: Use descriptive names (`regionCode`, `languageCode`), map via CodingKeys
+- **Redundant prefixes**: Remove type name from properties (`id` not `providerId`)
+- **Protocols**: Use `-able`/`-ible` suffixes for capability protocols (`Discoverable`)
+
+**Important**: When adding CodingKeys to a struct with property wrappers, you MUST list ALL properties in the CodingKeys enum, not just the renamed ones.
+
 ### Standard Endpoint Implementation (9 Steps)
 
 Follow this pattern for each new endpoint:

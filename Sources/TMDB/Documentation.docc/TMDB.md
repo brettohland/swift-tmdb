@@ -19,7 +19,7 @@ Adding overview text here
 - ``TMDB/movieDetails(id:)``
 - ``TMDB/alternativeMovieTitles(id:)``
 - ``TMDB/alternativeMovieTitles(movie:)``
-- ``TMDB/apiConfigurationDetails()`` 
+- ``TMDB/configurationDetails()`` 
 - ``TMDB/credits(forID:)``
 - ``TMDB/credits(forMovie:)``
 - ``TMDB/discoverMovie()``

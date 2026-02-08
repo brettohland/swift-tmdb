@@ -2,7 +2,7 @@ import Foundation
 
 public extension TMDB {
     /// Represents a trending result that can be a movie, TV show, or person
-    struct TrendingResult: Sendable, DiscoverType {
+    struct TrendingResult: Sendable, Discoverable {
         public let id: Int
         public let mediaType: String
         public let title: String?
@@ -19,8 +19,8 @@ public extension TMDB {
         public let releaseDate: Date?
         public let firstAirDate: Date?
         @NilBoolean
-        public var adult: Bool
-        public let genreIds: [Int]?
+        public var isAdult: Bool
+        public let genreIDs: [Int]?
         public let knownForDepartment: String?
     }
 }
@@ -29,7 +29,9 @@ extension TMDB.TrendingResult: Codable {
     enum CodingKeys: String, CodingKey {
         case id, mediaType, title, name, originalTitle, originalName, overview
         case posterPath, backdropPath, profilePath, popularity, voteAverage, voteCount
-        case releaseDate, firstAirDate, adult, genreIds, knownForDepartment
+        case releaseDate, firstAirDate, knownForDepartment
+        case isAdult = "adult"
+        case genreIDs = "genreIds"
     }
 
     public init(from decoder: Decoder) throws {
@@ -60,8 +62,8 @@ extension TMDB.TrendingResult: Codable {
             firstAirDate = nil
         }
 
-        _adult = try container.decodeIfPresent(NilBoolean.self, forKey: .adult) ?? NilBoolean(wrappedValue: false)
-        genreIds = try container.decodeIfPresent([Int].self, forKey: .genreIds)
+        _isAdult = try container.decodeIfPresent(NilBoolean.self, forKey: .isAdult) ?? NilBoolean(wrappedValue: false)
+        genreIDs = try container.decodeIfPresent([Int].self, forKey: .genreIDs)
         knownForDepartment = try container.decodeIfPresent(String.self, forKey: .knownForDepartment)
     }
 
@@ -89,8 +91,8 @@ extension TMDB.TrendingResult: Codable {
             try container.encode(firstAirDate.formatted(.iso8601.year().month().day()), forKey: .firstAirDate)
         }
 
-        try container.encode(_adult, forKey: .adult)
-        try container.encodeIfPresent(genreIds, forKey: .genreIds)
+        try container.encode(_isAdult, forKey: .isAdult)
+        try container.encodeIfPresent(genreIDs, forKey: .genreIDs)
         try container.encodeIfPresent(knownForDepartment, forKey: .knownForDepartment)
     }
 }

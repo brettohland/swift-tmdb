@@ -13,6 +13,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Use `let` for all properties in decoded structs** - The only exception is properties using property wrappers (`@NilBoolean`, `@ISO8601YMD`, `@LanguageCode`, `@RegionCode`, `@Minutes`, etc.) which require `var` per Swift's rules.
 - **Never use `Bool?` in decoded structs** - Always use the `@NilBoolean` property wrapper instead, which decodes missing or null values as `false`. In custom Codable implementations, decode via `_propertyName = try container.decodeIfPresent(NilBoolean.self, forKey: .key) ?? NilBoolean(wrappedValue: false)` and encode via `try container.encode(_propertyName, forKey: .key)`.
 
+## Swift API Design Guidelines
+
+This project follows the [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/) for all public-facing names:
+- **Boolean properties** use assertion form: `isAdult`, `isVideo` (not `adult`, `video`)
+- **Acronyms** are uniformly uppercased: `genreIDs`, `imdbID` (not `genreIds`, `imdbId`)
+- **ISO code properties** use descriptive role names: `regionCode`, `languageCode` (not `iso31661`, `iso6391`)
+- **Redundant type prefixes** are removed: `WatchProvider.id` (not `providerId`), `Credits.Details.type` (not `creditType`)
+- **Protocols** describing capability use `-able` suffix: `Discoverable` (not `DiscoverType`)
+- When renaming a decoded property, add a `CodingKeys` enum mapping the new name to the original JSON key. If any property wrapper is present on the struct, ALL properties must appear in `CodingKeys`.
+
 ## Build and Test Commands
 
 ### Building

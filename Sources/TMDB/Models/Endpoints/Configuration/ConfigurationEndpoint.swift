@@ -43,7 +43,7 @@ extension TMDB.V3Endpoints.Configuration: EndpointFactory {
 public extension TMDB {
     /// `/3/configuration/details`
     /// - Returns: The configuration response from the backend
-    static func apiConfigurationDetails() async throws -> TMDB.ConfigurationResponse {
+    static func configurationDetails() async throws -> TMDB.ConfigurationResponse {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.ConfigurationResponse>(
             endpoint: TMDB.V3Endpoints.Configuration.details,
             httpMethod: .get,

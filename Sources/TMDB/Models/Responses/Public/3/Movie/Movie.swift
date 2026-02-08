@@ -29,7 +29,7 @@ public extension TMDB {
         public let status: String
         public let tagline: String
         public let title: String
-        public let video: Bool
+        public let isVideo: Bool
         public let voteAverage: Double
         public let voteCount: Int
     }
@@ -59,7 +59,7 @@ extension TMDB.Movie: Codable {
         case status
         case tagline
         case title
-        case video
+        case isVideo = "video"
         case voteAverage
         case voteCount
     }

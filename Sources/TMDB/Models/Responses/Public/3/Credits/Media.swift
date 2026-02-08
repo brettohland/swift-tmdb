@@ -2,7 +2,7 @@ import Foundation
 
 public extension TMDB.Credits {
     struct Media: Codable, Identifiable, Sendable {
-        public let adult: Bool
+        public let isAdult: Bool
         public let backdropPath: String
         public let id: Int
         public let name: String
@@ -22,7 +22,7 @@ public extension TMDB.Credits {
         public let seasons: [Season]
 
         enum CodingKeys: String, CodingKey {
-            case adult
+            case isAdult = "adult"
             case backdropPath
             case id
             case name
