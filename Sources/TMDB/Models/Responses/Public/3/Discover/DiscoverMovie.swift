@@ -7,8 +7,8 @@ public extension TMDB.Discover {
         @NilBoolean
         public var adult: Bool
         public let backdropPath: String?
-        public var genreIds: [Int]
-        public var id: Int
+        public let genreIds: [Int]
+        public let id: Int
         @LanguageCode
         public var originalLanguage: Locale.Language
         public let overview: String?

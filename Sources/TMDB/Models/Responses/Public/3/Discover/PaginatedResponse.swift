@@ -8,6 +8,6 @@ public extension TMDB.Discover {
         public var totalResults: Int
         @NilInteger
         public var totalPages: Int
-        public var results: [Wrapped]
+        public let results: [Wrapped]
     }
 }

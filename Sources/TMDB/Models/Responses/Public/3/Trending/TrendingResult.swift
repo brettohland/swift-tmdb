@@ -16,9 +16,10 @@ public extension TMDB {
         public let popularity: Double?
         public let voteAverage: Double?
         public let voteCount: Int?
-        public var releaseDate: Date?
-        public var firstAirDate: Date?
-        public let adult: Bool?
+        public let releaseDate: Date?
+        public let firstAirDate: Date?
+        @NilBoolean
+        public var adult: Bool
         public let genreIds: [Int]?
         public let knownForDepartment: String?
     }
@@ -59,7 +60,7 @@ extension TMDB.TrendingResult: Codable {
             firstAirDate = nil
         }
 
-        adult = try container.decodeIfPresent(Bool.self, forKey: .adult)
+        _adult = try container.decodeIfPresent(NilBoolean.self, forKey: .adult) ?? NilBoolean(wrappedValue: false)
         genreIds = try container.decodeIfPresent([Int].self, forKey: .genreIds)
         knownForDepartment = try container.decodeIfPresent(String.self, forKey: .knownForDepartment)
     }
@@ -88,7 +89,7 @@ extension TMDB.TrendingResult: Codable {
             try container.encode(firstAirDate.formatted(.iso8601.year().month().day()), forKey: .firstAirDate)
         }
 
-        try container.encodeIfPresent(adult, forKey: .adult)
+        try container.encode(_adult, forKey: .adult)
         try container.encodeIfPresent(genreIds, forKey: .genreIds)
         try container.encodeIfPresent(knownForDepartment, forKey: .knownForDepartment)
     }

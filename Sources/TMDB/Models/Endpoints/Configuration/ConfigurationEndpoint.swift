@@ -68,7 +68,7 @@ public extension TMDB {
     static func jobDepartments() async throws -> [TMDB.Configuration.JobDepartment] {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, [TMDB.Configuration.JobDepartment]>(
             endpoint: TMDB.V3Endpoints.Configuration.jobs,
-            httpMethod: .get
+            httpMethod: .get,
         )
         return try await endpoint.decodedResponse()
     }
@@ -79,7 +79,7 @@ public extension TMDB {
     static func supportedLanguages() async throws -> [TMDB.Configuration.Language] {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, [TMDB.Configuration.Language]>(
             endpoint: TMDB.V3Endpoints.Configuration.languages,
-            httpMethod: .get
+            httpMethod: .get,
         )
         return try await endpoint.decodedResponse()
     }
@@ -90,7 +90,7 @@ public extension TMDB {
     static func primaryTranslations() async throws -> [String] {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, [String]>(
             endpoint: TMDB.V3Endpoints.Configuration.primaryTranslations,
-            httpMethod: .get
+            httpMethod: .get,
         )
         return try await endpoint.decodedResponse()
     }
@@ -101,7 +101,7 @@ public extension TMDB {
     static func timezones() async throws -> [TMDB.Configuration.Timezone] {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, [TMDB.Configuration.Timezone]>(
             endpoint: TMDB.V3Endpoints.Configuration.timezones,
-            httpMethod: .get
+            httpMethod: .get,
         )
         return try await endpoint.decodedResponse()
     }

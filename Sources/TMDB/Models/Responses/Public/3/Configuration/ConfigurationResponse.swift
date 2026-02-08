@@ -6,6 +6,6 @@ public extension TMDB {
     /// [Details on TMDB's site](https://developer.themoviedb.org/reference/configuration-details)
     struct ConfigurationResponse: Codable, Sendable {
         public let images: ImageConfiguration?
-        public var changeKeys: [TMDB.Configuration.ChangeKey]
+        public let changeKeys: [TMDB.Configuration.ChangeKey]
     }
 }

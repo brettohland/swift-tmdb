@@ -33,7 +33,7 @@ public extension TMDB {
     static func watchProviderRegions() async throws -> TMDB.WatchProviderRegions {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.WatchProviderRegions>(
             endpoint: V3Endpoints.WatchProviders.regions,
-            httpMethod: .get
+            httpMethod: .get,
         )
         return try await endpoint.decodedResponse()
     }
@@ -44,7 +44,7 @@ public extension TMDB {
     static func movieWatchProviders() async throws -> TMDB.WatchProviderList {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.WatchProviderList>(
             endpoint: V3Endpoints.WatchProviders.movie,
-            httpMethod: .get
+            httpMethod: .get,
         )
         return try await endpoint.decodedResponse()
     }
@@ -55,7 +55,7 @@ public extension TMDB {
     static func tvWatchProviders() async throws -> TMDB.WatchProviderList {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.WatchProviderList>(
             endpoint: V3Endpoints.WatchProviders.tv,
-            httpMethod: .get
+            httpMethod: .get,
         )
         return try await endpoint.decodedResponse()
     }

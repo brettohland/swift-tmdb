@@ -6,6 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `swift-tmdb` is a modern Swift package providing a type-safe wrapper around the TMDB API (The Movie Database). It targets iOS/iPadOS 26+ and uses Swift 6.2 with strict concurrency enabled. The package is designed to automatically provide mocked responses during unit testing and SwiftUI previews using PointFree's Dependencies framework.
 
+## Important Notes
+
+- **Ignore the `docs/` folder** - It contains a generated DocC static site for GitHub Pages. Do not modify, search, or include in any work.
+- **Run SwiftFormat after modifying Swift files** - Run `swiftformat --exclude docs Sources Tests` before finishing work to ensure code conforms to the project's `.swiftformat` configuration.
+- **Use `let` for all properties in decoded structs** - The only exception is properties using property wrappers (`@NilBoolean`, `@ISO8601YMD`, `@LanguageCode`, `@RegionCode`, `@Minutes`, etc.) which require `var` per Swift's rules.
+- **Never use `Bool?` in decoded structs** - Always use the `@NilBoolean` property wrapper instead, which decodes missing or null values as `false`. In custom Codable implementations, decode via `_propertyName = try container.decodeIfPresent(NilBoolean.self, forKey: .key) ?? NilBoolean(wrappedValue: false)` and encode via `try container.encode(_propertyName, forKey: .key)`.
+
 ## Build and Test Commands
 
 ### Building

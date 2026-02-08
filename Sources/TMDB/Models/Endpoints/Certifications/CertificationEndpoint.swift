@@ -29,7 +29,7 @@ public extension TMDB {
     static func movieCertifications() async throws -> TMDB.MovieCertifications {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.MovieCertifications>(
             endpoint: V3Endpoints.Certifications.movieList,
-            httpMethod: .get
+            httpMethod: .get,
         )
         return try await endpoint.decodedResponse()
     }
@@ -40,7 +40,7 @@ public extension TMDB {
     static func tvCertifications() async throws -> TMDB.TVCertifications {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.TVCertifications>(
             endpoint: V3Endpoints.Certifications.tvList,
-            httpMethod: .get
+            httpMethod: .get,
         )
         return try await endpoint.decodedResponse()
     }

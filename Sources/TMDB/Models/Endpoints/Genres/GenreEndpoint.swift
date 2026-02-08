@@ -29,7 +29,7 @@ public extension TMDB {
     static func movieGenres() async throws -> TMDB.GenreList {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.GenreList>(
             endpoint: V3Endpoints.Genres.movieList,
-            httpMethod: .get
+            httpMethod: .get,
         )
         return try await endpoint.decodedResponse()
     }
@@ -40,7 +40,7 @@ public extension TMDB {
     static func tvGenres() async throws -> TMDB.GenreList {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.GenreList>(
             endpoint: V3Endpoints.Genres.tvList,
-            httpMethod: .get
+            httpMethod: .get,
         )
         return try await endpoint.decodedResponse()
     }

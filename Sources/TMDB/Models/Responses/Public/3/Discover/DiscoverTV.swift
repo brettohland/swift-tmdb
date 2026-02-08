@@ -5,8 +5,8 @@ public extension TMDB.Discover {
         // MARK: Common
 
         public let backdropPath: URL?
-        public var genreIds: [Int]
-        public var id: Int
+        public let genreIds: [Int]
+        public let id: Int
         @LanguageCode
         public var originalLanguage: Locale.Language
         public let overview: String?
@@ -19,7 +19,7 @@ public extension TMDB.Discover {
 
         public let name: String?
         public let originalName: String?
-        public var originCountry: [Locale.Region]
+        public let originCountry: [Locale.Region]
         @ISO8601YMD
         public var firstAirDate: Date?
     }
