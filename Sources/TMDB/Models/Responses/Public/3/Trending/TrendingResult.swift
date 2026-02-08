@@ -27,9 +27,22 @@ public extension TMDB {
 
 extension TMDB.TrendingResult: Codable {
     enum CodingKeys: String, CodingKey {
-        case id, mediaType, title, name, originalTitle, originalName, overview
-        case posterPath, backdropPath, profilePath, popularity, voteAverage, voteCount
-        case releaseDate, firstAirDate, knownForDepartment
+        case id
+        case mediaType
+        case title
+        case name
+        case originalTitle
+        case originalName
+        case overview
+        case posterPath
+        case backdropPath
+        case profilePath
+        case popularity
+        case voteAverage
+        case voteCount
+        case releaseDate
+        case firstAirDate
+        case knownForDepartment
         case isAdult = "adult"
         case genreIDs = "genreIds"
     }

@@ -12,6 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Run SwiftFormat after modifying Swift files** - Run `swiftformat --exclude docs Sources Tests` before finishing work to ensure code conforms to the project's `.swiftformat` configuration.
 - **Use `let` for all properties in decoded structs** - The only exception is properties using property wrappers (`@NilBoolean`, `@ISO8601YMD`, `@LanguageCode`, `@RegionCode`, `@Minutes`, etc.) which require `var` per Swift's rules.
 - **Never use `Bool?` in decoded structs** - Always use the `@NilBoolean` property wrapper instead, which decodes missing or null values as `false`. In custom Codable implementations, decode via `_propertyName = try container.decodeIfPresent(NilBoolean.self, forKey: .key) ?? NilBoolean(wrappedValue: false)` and encode via `try container.encode(_propertyName, forKey: .key)`.
+- **Define each enum case on its own line** - Never use comma-separated case lists (e.g., `case a, b, c`). Each case must be on a separate line.
 
 ## Swift API Design Guidelines
 
