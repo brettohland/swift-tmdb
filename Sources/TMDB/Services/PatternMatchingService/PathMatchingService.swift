@@ -92,12 +92,87 @@ enum PathMatchingService {
             return try MockUtilities.jsonDataFromFile("TVProviders")
         }
 
-        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.details(id: 0)) {
-            return try TMDB.Movie.mockData()
+        // Movie sub-endpoints (must come before details match)
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.credits(id: 0)) {
+            return try TMDB.MovieCredits.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.images(id: 0)) {
+            return try TMDB.ImageCollection.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.videos(id: 0)) {
+            return try TMDB.VideoCollection.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.reviews(id: 0)) {
+            return try MockUtilities.jsonDataFromFile("MovieReviews")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.keywords(id: 0)) {
+            return try MockUtilities.jsonDataFromFile("MovieKeywords")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.similar(id: 0)) {
+            return try MockUtilities.jsonDataFromFile("SimilarMovies")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.recommendations(id: 0)) {
+            return try MockUtilities.jsonDataFromFile("MovieRecommendations")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.releaseDates(id: 0)) {
+            return try MockUtilities.jsonDataFromFile("MovieReleaseDates")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.externalIDs(id: 0)) {
+            return try TMDB.ExternalIDs.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.translations(id: 0)) {
+            return try MockUtilities.jsonDataFromFile("MovieTranslations")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.watchProviders(id: 0)) {
+            return try TMDB.MovieWatchProviderResult.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.changes(id: 0)) {
+            return try TMDB.ChangeCollection.mockData()
         }
 
         if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.alternativeTitles(id: 0)) {
             return try TMDB.AlternativeTitle.mockData()
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.details(id: 0)) {
+            return try TMDB.Movie.mockData()
+        }
+
+        // Movie list endpoints
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.latest) {
+            return try MockUtilities.jsonDataFromFile("MovieLatest")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.nowPlaying) {
+            return try MockUtilities.jsonDataFromFile("MoviesNowPlaying")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.popular) {
+            return try MockUtilities.jsonDataFromFile("PopularMovies")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.topRated) {
+            return try MockUtilities.jsonDataFromFile("TopRatedMovies")
+        }
+
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Movies.upcoming) {
+            return try MockUtilities.jsonDataFromFile("UpcomingMovies")
+        }
+
+        // Review endpoint
+        if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Reviews.details(id: "0")) {
+            return try TMDB.Review.mockData()
         }
 
         if try doesURLMatchPath(url, path: TMDB.V3Endpoints.Discover.movie(filters: [])) {

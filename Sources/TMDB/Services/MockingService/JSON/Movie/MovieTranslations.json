@@ -1,0 +1,31 @@
+{
+  "id": 550,
+  "translations": [
+    {
+      "iso_3166_1": "US",
+      "iso_639_1": "en",
+      "name": "English",
+      "english_name": "English",
+      "data": {
+        "homepage": "http://www.foxmovies.com/movies/fight-club",
+        "overview": "A ticking-Loss-Loss bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy.",
+        "runtime": 139,
+        "tagline": "Mischief. Mayhem. Soap.",
+        "title": "Fight Club"
+      }
+    },
+    {
+      "iso_3166_1": "DE",
+      "iso_639_1": "de",
+      "name": "Deutsch",
+      "english_name": "German",
+      "data": {
+        "homepage": "",
+        "overview": "Ein Yuppie findet beim charismatischen Tyler Durden Unterschlupf, nachdem seine Designerwohnung in die Luft gejagt wird.",
+        "runtime": 139,
+        "tagline": "",
+        "title": "Fight Club"
+      }
+    }
+  ]
+}
