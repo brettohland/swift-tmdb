@@ -8,7 +8,7 @@ extension TMDB.V3Endpoints {
 
 extension TMDB.V3Endpoints.Credits: EndpointFactory {
     func makeURL(baseURL: URL) -> URL {
-        var paths: [String] = []
+        var paths = ["3"]
         switch self {
         case .details(id: let id):
             paths += ["credit", String(id)]
