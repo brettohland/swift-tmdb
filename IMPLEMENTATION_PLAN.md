@@ -1,7 +1,7 @@
 # TMDB API v3 Read-Only Endpoints - Implementation Plan
 
-**Status:** Phase 1 Complete ✅ | Phase 2 Next
-**Last Updated:** 2026-02-07
+**Status:** Phase 2 Complete ✅ | Phase 3 Next
+**Last Updated:** 2026-02-09
 **Target:** 110 total endpoints (9 existing + 101 new)
 
 ---
@@ -9,8 +9,8 @@
 ## Table of Contents
 1. [Progress Overview](#progress-overview)
 2. [Phase 1: Foundation & Configuration](#phase-1-foundation--configuration-complete-)
-3. [Phase 2: Movies - Complete Coverage](#phase-2-movies---complete-coverage-next)
-4. [Phase 3: Search & Discovery](#phase-3-search--discovery)
+3. [Phase 2: Movies - Complete Coverage](#phase-2-movies---complete-coverage-complete-)
+4. [Phase 3: Search & Discovery](#phase-3-search--discovery-next)
 5. [Phase 4: TV Shows - Complete Coverage](#phase-4-tv-shows---complete-coverage)
 6. [Phase 5: People & Supporting Features](#phase-5-people--supporting-features)
 7. [Implementation Patterns](#implementation-patterns)
@@ -24,11 +24,11 @@
 |-------|-----------|--------|----------------|
 | **Current** | 9 | ✅ Complete | v0.1.0 (shipped) |
 | **Phase 1** | 15 | ✅ Complete | v0.2.0 (ready) |
-| **Phase 2** | 20 | 📋 Next | v0.3.0 |
-| **Phase 3** | 12 | ⏳ Planned | v0.4.0 |
+| **Phase 2** | 20 | ✅ Complete | v0.3.0 (ready) |
+| **Phase 3** | 12 | 📋 Next | v0.4.0 |
 | **Phase 4** | 41 | ⏳ Planned | v0.5.0 |
 | **Phase 5** | 13 | ⏳ Planned | v0.6.0 |
-| **Total** | **110** | **24/110 (22%)** | |
+| **Total** | **110** | **44/110 (40%)** | |
 
 ---
 
@@ -134,69 +134,127 @@ Tests/TMDBTests/Endpoint Tests/
 
 ---
 
-## Phase 2: Movies - Complete Coverage (NEXT)
+## Phase 2: Movies - Complete Coverage (COMPLETE ✅)
 
-**Priority:** HIGH
-**Complexity:** MEDIUM
-**Estimated Effort:** 3-4 weeks
-**Target Release:** v0.3.0
+**Completed:** 2026-02-08
+**Endpoints Implemented:** 20
+**Tests Added:** 19 (49 total, all passing)
 
-### Goals
-- Complete all read-only movie endpoints
-- Implement shared response models (Images, Videos, Credits)
-- Add movie list endpoints (now playing, popular, etc.)
-
-### Endpoints to Implement (20 total)
+### Implemented Endpoints
 
 #### Movie Details (15 endpoints)
-- ⏳ `GET /3/movie/{id}/credits` - Cast and crew
-- ⏳ `GET /3/movie/{id}/images` - Posters, backdrops, logos
-- ⏳ `GET /3/movie/{id}/videos` - Trailers, clips, teasers
-- ⏳ `GET /3/movie/{id}/reviews` - User reviews
-- ⏳ `GET /3/movie/{id}/keywords` - Associated keywords
-- ⏳ `GET /3/movie/{id}/similar` - Similar movies
-- ⏳ `GET /3/movie/{id}/recommendations` - Recommended movies
-- ⏳ `GET /3/movie/{id}/release_dates` - Release dates by country
-- ⏳ `GET /3/movie/{id}/external_ids` - IMDb, Facebook, Instagram IDs
-- ⏳ `GET /3/movie/{id}/translations` - Available translations
-- ⏳ `GET /3/movie/{id}/watch/providers` - Streaming availability
-- ⏳ `GET /3/movie/{id}/changes` - Change log
-- ⏳ `GET /3/movie/latest` - Latest added movie
+- ✅ `GET /3/movie/{id}/credits` → `TMDB.movieCredits(id:)`
+- ✅ `GET /3/movie/{id}/images` → `TMDB.movieImages(id:)`
+- ✅ `GET /3/movie/{id}/videos` → `TMDB.movieVideos(id:)`
+- ✅ `GET /3/movie/{id}/reviews` → `TMDB.movieReviews(id:)`
+- ✅ `GET /3/movie/{id}/keywords` → `TMDB.movieKeywords(id:)`
+- ✅ `GET /3/movie/{id}/similar` → `TMDB.similarMovies(id:)`
+- ✅ `GET /3/movie/{id}/recommendations` → `TMDB.movieRecommendations(id:)`
+- ✅ `GET /3/movie/{id}/release_dates` → `TMDB.movieReleaseDates(id:)`
+- ✅ `GET /3/movie/{id}/external_ids` → `TMDB.movieExternalIDs(id:)`
+- ✅ `GET /3/movie/{id}/translations` → `TMDB.movieTranslations(id:)`
+- ✅ `GET /3/movie/{id}/watch/providers` → `TMDB.movieWatchProviders(id:)`
+- ✅ `GET /3/movie/{id}/changes` → `TMDB.movieChanges(id:)`
+- ✅ `GET /3/movie/{id}/alternative_titles` → `TMDB.alternativeMovieTitles(id:)`
+- ✅ `GET /3/movie/latest` → `TMDB.latestMovie()`
 
 #### Movie Lists (4 endpoints)
-- ⏳ `GET /3/movie/now_playing` - Currently in theaters
-- ⏳ `GET /3/movie/popular` - Popular movies
-- ⏳ `GET /3/movie/top_rated` - Top rated movies
-- ⏳ `GET /3/movie/upcoming` - Upcoming releases
+- ✅ `GET /3/movie/now_playing` → `TMDB.moviesNowPlaying()`
+- ✅ `GET /3/movie/popular` → `TMDB.popularMovies()`
+- ✅ `GET /3/movie/top_rated` → `TMDB.topRatedMovies()`
+- ✅ `GET /3/movie/upcoming` → `TMDB.upcomingMovies()`
 
 #### Supporting (1 endpoint)
-- ⏳ `GET /3/review/{id}` - Individual review details
+- ✅ `GET /3/review/{id}` → `TMDB.reviewDetails(id:)`
 
-### Key Models to Create
+### Files Created
 
-**Shared Models** (reusable for TV in Phase 4):
-```swift
-TMDB.ImageCollection
-TMDB.ImageDetails
-TMDB.VideoCollection
-TMDB.VideoDetails
-TMDB.MovieCredits
-TMDB.CastMember
-TMDB.CrewMember
-TMDB.Review
-TMDB.ExternalIDs
-TMDB.Translation
+**Endpoints:** 2 files
+```
+Sources/TMDB/Models/Endpoints/
+├── Movies/MovieEndpoints.swift
+└── Reviews/ReviewEndpoint.swift
 ```
 
-### Implementation Notes
-- Reuse `PaginatedResponse<T>` for movie lists
-- Share `ImageCollection`, `VideoCollection`, `Credits` models with TV endpoints
-- Use existing `@ISO8601YMD` property wrapper for dates
-- Movie lists return paginated `Movie` objects
+**Response Models:** 14 files
+```
+Sources/TMDB/Models/Responses/Public/3/
+├── Movie/
+│   ├── AlternativeTitle.swift
+│   ├── CastMember.swift
+│   ├── ChangeCollection.swift
+│   ├── CrewMember.swift
+│   ├── ExternalIDs.swift
+│   ├── ImageCollection.swift
+│   ├── Keyword.swift
+│   ├── Movie.swift
+│   ├── MovieCredits.swift
+│   ├── MovieWatchProviderResult.swift
+│   ├── ReleaseDateResult.swift
+│   ├── TranslationCollection.swift
+│   └── VideoCollection.swift
+└── Review/
+    └── Review.swift
+```
+
+**Mock Data:** 20 JSON files
+```
+Sources/TMDB/Services/MockingService/JSON/
+├── Movie/ (19 files)
+│   ├── AlternativeTitles.json
+│   ├── MovieChanges.json
+│   ├── MovieCredits.json
+│   ├── MovieDetails.json
+│   ├── MovieExternalIDs.json
+│   ├── MovieImages.json
+│   ├── MovieKeywords.json
+│   ├── MovieLatest.json
+│   ├── MovieRecommendations.json
+│   ├── MovieReleaseDates.json
+│   ├── MovieReviews.json
+│   ├── MovieTranslations.json
+│   ├── MovieVideos.json
+│   ├── MovieWatchProviders.json
+│   ├── MoviesNowPlaying.json
+│   ├── PopularMovies.json
+│   ├── SimilarMovies.json
+│   ├── TopRatedMovies.json
+│   └── UpcomingMovies.json
+└── Review/
+    └── ReviewDetails.json
+```
+
+**Mock Conformances:** 2 files
+```
+Sources/TMDB/Services/MockingService/Extensions/
+├── MovieEndpoint+MovkableResponse.swift
+└── Review+MockableResponse.swift
+```
+
+**Dependency Client:** 1 file
+```
+Sources/TMDBDependencies/Clients/
+└── MoviesClient.swift
+```
+
+**Tests:** 2 test files
+```
+Tests/TMDBTests/Endpoint Tests/
+├── Movies/MovieEndpointTests.swift
+└── Reviews/ReviewEndpointTests.swift
+```
+
+### Key Accomplishments
+- ✅ 17 new response models (shared models reusable for TV in Phase 4)
+- ✅ Shared `ImageCollection`, `VideoCollection`, `Credits` models ready for reuse
+- ✅ `PaginatedResponse<T>` and `DatedPaginatedResponse<T>` used for list endpoints
+- ✅ `MoviesClient` dependency wrapper for PointFree Dependencies integration
+- ✅ All 49 tests passing (18 movie + 1 review + 30 existing)
+- ✅ Build successful with no warnings
 
 ---
 
-## Phase 3: Search & Discovery
+## Phase 3: Search & Discovery (NEXT)
 
 **Priority:** HIGH
 **Complexity:** MEDIUM
@@ -510,6 +568,23 @@ public init(from decoder: Decoder) throws {
    - Minimum one test per endpoint
    - Use `#expect()` assertions with meaningful checks
 
+### Phase 2 Insights
+
+1. **Table-Driven Mock Route Registry**
+   - Refactored `PathMatchingService` from long if/else chains to a table-driven approach
+   - Each endpoint category registers its routes as an array of `(pattern, data)` tuples
+
+2. **DatedPaginatedResponse**
+   - Movie lists like now playing and upcoming use `DatedPaginatedResponse<T>` which includes date range metadata alongside pagination
+
+3. **Shared Models for Reuse**
+   - `ImageCollection`, `VideoCollection`, `TranslationCollection`, `ExternalIDs`, `ChangeCollection` designed for reuse in TV endpoints (Phase 4)
+   - `CastMember`, `CrewMember` shared across credit types
+
+4. **Swift API Design Guidelines Applied Broadly**
+   - Renamed boolean properties (`isAdult`, `isVideo`), acronyms (`genreIDs`, `imdbID`), ISO codes (`regionCode`, `languageCode`)
+   - CodingKeys required for all properties when any property is renamed
+
 ### Build & Test Commands
 
 ```bash
@@ -530,34 +605,29 @@ swift test --filter MovieEndpointTests/movieCredits
 
 ## Next Steps
 
-### Immediate (Phase 2 - Movies)
+### Immediate (Phase 3 - Search & Discovery)
 
-1. **Start with Shared Models** (needed by multiple endpoints):
-   - `ImageCollection` / `ImageDetails`
-   - `VideoCollection` / `VideoDetails`
-   - `MovieCredits` / `CastMember` / `CrewMember`
-   - `Review`
-   - `ExternalIDs`
-   - `Translation`
+1. **Implement Search Endpoints** (7 endpoints)
+   - Movie, TV, person, multi, collection, company, keyword search
+   - Define `SearchFilter` query parameter types
 
-2. **Implement Movie Detail Endpoints** (15 endpoints)
-   - Follow 9-step pattern for each
-   - Reuse shared models
+2. **Implement Supporting Endpoints** (5 endpoints)
+   - Find by external ID, keyword details/movies, collection details/images
 
-3. **Implement Movie List Endpoints** (4 endpoints)
-   - Use `PaginatedResponse<Movie>`
+3. **Key Models to Create:**
+   - `TMDB.Search.MultiResult`
+   - `TMDB.Collection`
+   - `TMDB.Keyword` (already exists from Phase 2, may need extension)
+   - `TMDB.FindResult`
 
-4. **Add Review Endpoint** (1 endpoint)
-
-5. **Test & Release v0.3.0**
+4. **Test & Release v0.4.0**
 
 ### Timeline Estimate
 
-- **Phase 2:** 3-4 weeks (20 endpoints)
 - **Phase 3:** 2-3 weeks (12 endpoints)
 - **Phase 4:** 4-5 weeks (41 endpoints)
 - **Phase 5:** 2-3 weeks (13 endpoints)
-- **Total:** 14-18 weeks for 101 new endpoints
+- **Total:** 8-11 weeks for remaining 66 endpoints
 
 ---
 
@@ -567,8 +637,8 @@ swift test --filter MovieEndpointTests/movieCredits
 |---------|---------|--------|
 | v0.1.0 | Initial 9 endpoints | ✅ Shipped |
 | v0.2.0 | Phase 1 - Foundation (15) | ✅ Ready |
-| v0.3.0 | Phase 2 - Movies (20) | 📋 Next |
-| v0.4.0 | Phase 3 - Search (12) | ⏳ Planned |
+| v0.3.0 | Phase 2 - Movies (20) | ✅ Ready |
+| v0.4.0 | Phase 3 - Search (12) | 📋 Next |
 | v0.5.0 | Phase 4 - TV (41) | ⏳ Planned |
 | v0.6.0 | Phase 5 - People (13) | ⏳ Planned |
 | v1.0.0 | Auth + Account (future) | 💡 Deferred |
@@ -594,6 +664,6 @@ Requires:
 
 ---
 
-**Document Version:** 1.0
-**Last Updated:** 2026-02-07
-**Next Review:** Start of Phase 2
+**Document Version:** 1.1
+**Last Updated:** 2026-02-09
+**Next Review:** Start of Phase 3
