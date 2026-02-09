@@ -18,6 +18,10 @@ enum PathMatchingService {
             + TMDB.V3Endpoints.Reviews.mockRoutes
             + TMDB.V3Endpoints.Trending.mockRoutes
             + TMDB.V3Endpoints.WatchProviders.mockRoutes
+            + TMDB.V3Endpoints.Search.mockRoutes
+            + TMDB.V3Endpoints.Find.mockRoutes
+            + TMDB.V3Endpoints.Keywords.mockRoutes
+            + TMDB.V3Endpoints.Collections.mockRoutes
 
     static func dataFromURLRequest(_ request: URLRequest) throws -> Data {
         guard let url = request.url else {

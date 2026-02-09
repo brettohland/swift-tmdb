@@ -1,0 +1,36 @@
+{
+  "id": 2150,
+  "backdrops": [
+    {
+      "aspect_ratio": 1.778,
+      "height": 2160,
+      "width": 3840,
+      "file_path": "/gmqgxJsPMrQBBUWGSnOEIDvDlBq.jpg",
+      "vote_average": 5.39,
+      "vote_count": 6,
+      "iso_639_1": "en"
+    }
+  ],
+  "logos": [
+    {
+      "aspect_ratio": 2.5,
+      "height": 200,
+      "width": 500,
+      "file_path": "/shrekLogo.png",
+      "vote_average": 5.0,
+      "vote_count": 2,
+      "iso_639_1": "en"
+    }
+  ],
+  "posters": [
+    {
+      "aspect_ratio": 0.667,
+      "height": 3000,
+      "width": 2000,
+      "file_path": "/xRPaJMnQhHPceTGswlhUPsNPGxa.jpg",
+      "vote_average": 5.25,
+      "vote_count": 8,
+      "iso_639_1": "en"
+    }
+  ]
+}

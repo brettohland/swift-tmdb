@@ -219,3 +219,77 @@ extension TMDB.V3Endpoints.WatchProviders: MockRouteProvider {
         ]
     }
 }
+
+// MARK: - Search
+
+extension TMDB.V3Endpoints.Search: MockRouteProvider {
+    static var mockRoutes: [MockRoute] {
+        [
+            MockRoute(pattern: "^/3/search/movie$") {
+                try MockUtilities.jsonDataFromFile("SearchMovies")
+            },
+            MockRoute(pattern: "^/3/search/tv$") {
+                try MockUtilities.jsonDataFromFile("SearchTV")
+            },
+            MockRoute(pattern: "^/3/search/person$") {
+                try MockUtilities.jsonDataFromFile("SearchPerson")
+            },
+            MockRoute(pattern: "^/3/search/multi$") {
+                try MockUtilities.jsonDataFromFile("SearchMulti")
+            },
+            MockRoute(pattern: "^/3/search/collection$") {
+                try MockUtilities.jsonDataFromFile("SearchCollections")
+            },
+            MockRoute(pattern: "^/3/search/company$") {
+                try MockUtilities.jsonDataFromFile("SearchCompanies")
+            },
+            MockRoute(pattern: "^/3/search/keyword$") {
+                try MockUtilities.jsonDataFromFile("SearchKeywords")
+            },
+        ]
+    }
+}
+
+// MARK: - Find
+
+extension TMDB.V3Endpoints.Find: MockRouteProvider {
+    static var mockRoutes: [MockRoute] {
+        [
+            MockRoute(pattern: "^/3/find/[^/]+$") {
+                try TMDB.FindResult.mockData()
+            },
+        ]
+    }
+}
+
+// MARK: - Keywords
+
+extension TMDB.V3Endpoints.Keywords: MockRouteProvider {
+    static var mockRoutes: [MockRoute] {
+        [
+            // Sub-endpoint must come before details
+            MockRoute(pattern: "^/3/keyword/\\d+/movies$") {
+                try MockUtilities.jsonDataFromFile("KeywordMovies")
+            },
+            MockRoute(pattern: "^/3/keyword/\\d+$") {
+                try MockUtilities.jsonDataFromFile("KeywordDetails")
+            },
+        ]
+    }
+}
+
+// MARK: - Collections
+
+extension TMDB.V3Endpoints.Collections: MockRouteProvider {
+    static var mockRoutes: [MockRoute] {
+        [
+            // Sub-endpoint must come before details
+            MockRoute(pattern: "^/3/collection/\\d+/images$") {
+                try MockUtilities.jsonDataFromFile("CollectionImages")
+            },
+            MockRoute(pattern: "^/3/collection/\\d+$") {
+                try TMDB.Collection.mockData()
+            },
+        ]
+    }
+}

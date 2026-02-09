@@ -1,6 +1,6 @@
 # TMDB API v3 Read-Only Endpoints - Implementation Plan
 
-**Status:** Phase 2 Complete ✅ | Phase 3 Next
+**Status:** Phase 3 Complete ✅ | Phase 4 Next
 **Last Updated:** 2026-02-09
 **Target:** 110 total endpoints (9 existing + 101 new)
 
@@ -25,10 +25,10 @@
 | **Current** | 9 | ✅ Complete | v0.1.0 (shipped) |
 | **Phase 1** | 15 | ✅ Complete | v0.2.0 (ready) |
 | **Phase 2** | 20 | ✅ Complete | v0.3.0 (ready) |
-| **Phase 3** | 12 | 📋 Next | v0.4.0 |
-| **Phase 4** | 41 | ⏳ Planned | v0.5.0 |
+| **Phase 3** | 12 | ✅ Complete | v0.4.0 (ready) |
+| **Phase 4** | 41 | 📋 Next | v0.5.0 |
 | **Phase 5** | 13 | ⏳ Planned | v0.6.0 |
-| **Total** | **110** | **44/110 (40%)** | |
+| **Total** | **110** | **56/110 (51%)** | |
 
 ---
 
@@ -254,43 +254,107 @@ Tests/TMDBTests/Endpoint Tests/
 
 ---
 
-## Phase 3: Search & Discovery (NEXT)
+## Phase 3: Search & Discovery (COMPLETE ✅)
 
-**Priority:** HIGH
-**Complexity:** MEDIUM
-**Estimated Effort:** 2-3 weeks
-**Target Release:** v0.4.0
+**Completed:** 2026-02-09
+**Endpoints Implemented:** 12
+**Tests Added:** 12 (61 total, all passing)
 
-### Endpoints to Implement (12 total)
+### Implemented Endpoints
 
 #### Search (7 endpoints)
-- ⏳ `GET /3/search/movie` - Search movies
-- ⏳ `GET /3/search/tv` - Search TV shows
-- ⏳ `GET /3/search/person` - Search people
-- ⏳ `GET /3/search/multi` - Search all types
-- ⏳ `GET /3/search/collection` - Search collections
-- ⏳ `GET /3/search/company` - Search companies
-- ⏳ `GET /3/search/keyword` - Search keywords
+- ✅ `GET /3/search/movie` → `TMDB.searchMovies(query:page:)`
+- ✅ `GET /3/search/tv` → `TMDB.searchTV(query:page:)`
+- ✅ `GET /3/search/person` → `TMDB.searchPeople(query:page:)`
+- ✅ `GET /3/search/multi` → `TMDB.searchMulti(query:page:)`
+- ✅ `GET /3/search/collection` → `TMDB.searchCollections(query:page:)`
+- ✅ `GET /3/search/company` → `TMDB.searchCompanies(query:page:)`
+- ✅ `GET /3/search/keyword` → `TMDB.searchKeywords(query:page:)`
 
 #### Supporting (5 endpoints)
-- ⏳ `GET /3/find/{external_id}` - Find by IMDb/TVDB ID
-- ⏳ `GET /3/keyword/{id}` - Keyword details
-- ⏳ `GET /3/keyword/{id}/movies` - Movies with keyword
-- ⏳ `GET /3/collection/{id}` - Collection details
-- ⏳ `GET /3/collection/{id}/images` - Collection images
+- ✅ `GET /3/find/{external_id}` → `TMDB.find(externalID:source:)`
+- ✅ `GET /3/keyword/{id}` → `TMDB.keywordDetails(id:)`
+- ✅ `GET /3/keyword/{id}/movies` → `TMDB.keywordMovies(id:page:)`
+- ✅ `GET /3/collection/{id}` → `TMDB.collectionDetails(id:)`
+- ✅ `GET /3/collection/{id}/images` → `TMDB.collectionImages(id:)`
 
-### Key Models
-```swift
-TMDB.Search.SearchFilter (query parameters)
-TMDB.Search.MultiResult
-TMDB.Collection
-TMDB.Keyword
-TMDB.FindResult
+### Files Created
+
+**Endpoints:** 4 files
 ```
+Sources/TMDB/Models/Endpoints/
+├── Search/SearchEndpoint.swift
+├── Find/FindEndpoint.swift
+├── Keywords/KeywordEndpoint.swift
+└── Collections/CollectionEndpoint.swift
+```
+
+**Response Models:** 6 new files + 1 modified
+```
+Sources/TMDB/Models/Responses/Public/3/
+├── Search/
+│   ├── MultiSearchResult.swift
+│   ├── SearchPerson.swift
+│   ├── SearchCollection.swift
+│   └── SearchCompany.swift
+├── Collection/
+│   └── Collection.swift
+├── Find/
+│   └── FindResult.swift
+└── Movie/
+    └── Keyword.swift (modified: added Discoverable conformance)
+```
+
+**Mock Data:** 12 JSON files
+```
+Sources/TMDB/Services/MockingService/JSON/
+├── Search/ (7 files)
+│   ├── SearchMovies.json
+│   ├── SearchTV.json
+│   ├── SearchPerson.json
+│   ├── SearchMulti.json
+│   ├── SearchCollections.json
+│   ├── SearchCompanies.json
+│   └── SearchKeywords.json
+├── Find/
+│   └── FindByID.json
+├── Keywords/
+│   ├── KeywordDetails.json
+│   └── KeywordMovies.json
+└── Collections/
+    ├── CollectionDetails.json
+    └── CollectionImages.json
+```
+
+**Mock Conformances:** 3 files
+```
+Sources/TMDB/Services/MockingService/Extensions/
+├── Search+MockableResponse.swift
+├── Collection+MockableResponse.swift
+└── Find+MockableResponse.swift
+```
+
+**Tests:** 4 test files
+```
+Tests/TMDBTests/Endpoint Tests/
+├── Search/SearchEndpointTests.swift
+├── Find/FindEndpointTests.swift
+├── Keywords/KeywordEndpointTests.swift
+└── Collections/CollectionEndpointTests.swift
+```
+
+### Key Accomplishments
+- ✅ 6 new response models + `ExternalSource` enum
+- ✅ `MultiSearchResult` with custom Codable for polymorphic results (same pattern as `TrendingResult`)
+- ✅ `FindResult` with nested `FindPerson`, `FindTVEpisode`, `FindTVSeason` types
+- ✅ Reused `DiscoverMovie`, `DiscoverTV`, `ImageCollection`, `PaginatedResponse<T>` from earlier phases
+- ✅ Added `Discoverable` conformance to `Keyword` for use in `PaginatedResponse<Keyword>`
+- ✅ All 61 tests passing (12 new + 49 existing)
+- ✅ Build successful with no warnings
 
 ---
 
-## Phase 4: TV Shows - Complete Coverage
+## Phase 4: TV Shows - Complete Coverage (NEXT)
 
 **Priority:** HIGH
 **Complexity:** MEDIUM-HIGH
@@ -585,6 +649,24 @@ public init(from decoder: Decoder) throws {
    - Renamed boolean properties (`isAdult`, `isVideo`), acronyms (`genreIDs`, `imdbID`), ISO codes (`regionCode`, `languageCode`)
    - CodingKeys required for all properties when any property is renamed
 
+### Phase 3 Insights
+
+1. **Type Reuse Maximized**
+   - `DiscoverMovie`, `DiscoverTV`, `ImageCollection`, `PaginatedResponse<T>` all reused from earlier phases
+   - Only needed to add `Discoverable` conformance to existing `Keyword` type
+
+2. **Polymorphic Decoding Pattern**
+   - `MultiSearchResult` uses the same flat-struct-with-optional-fields pattern as `TrendingResult`
+   - Custom Codable handles optional date fields that may be missing entirely from JSON
+
+3. **ExternalSource Enum**
+   - `ExternalSource` uses raw string values matching TMDB API parameters (e.g., `imdb_id`, `tvdb_id`)
+   - Passed as query parameter on the find endpoint
+
+4. **Nested Types for Find**
+   - `FindPerson`, `FindTVEpisode`, `FindTVSeason` are lightweight types specific to the find response
+   - Differ from full person/episode/season models that will be created in later phases
+
 ### Build & Test Commands
 
 ```bash
@@ -605,29 +687,35 @@ swift test --filter MovieEndpointTests/movieCredits
 
 ## Next Steps
 
-### Immediate (Phase 3 - Search & Discovery)
+### Immediate (Phase 4 - TV Shows)
 
-1. **Implement Search Endpoints** (7 endpoints)
-   - Movie, TV, person, multi, collection, company, keyword search
-   - Define `SearchFilter` query parameter types
+1. **Implement TV Series Endpoints** (18 endpoints)
+   - TV series details, credits, aggregate credits, images, videos
+   - Reviews, keywords, similar, recommendations
+   - Alternative titles, content ratings, episode groups
+   - External IDs, translations, watch providers, changes, latest
 
-2. **Implement Supporting Endpoints** (5 endpoints)
-   - Find by external ID, keyword details/movies, collection details/images
+2. **Implement TV Series Lists** (4 endpoints)
+   - Airing today, on the air, popular, top rated
 
-3. **Key Models to Create:**
-   - `TMDB.Search.MultiResult`
-   - `TMDB.Collection`
-   - `TMDB.Keyword` (already exists from Phase 2, may need extension)
-   - `TMDB.FindResult`
+3. **Implement TV Seasons** (9 endpoints)
+   - Season details, credits, external IDs, images, translations, videos, watch providers, changes
 
-4. **Test & Release v0.4.0**
+4. **Implement TV Episodes** (9 endpoints + 1 episode groups)
+   - Episode details, credits, external IDs, images, translations, videos, changes
+
+5. **Key Models to Create:**
+   - `TMDB.TVSeries`, `TMDB.TVSeason`, `TMDB.TVEpisode`
+   - `TMDB.ContentRating`, `TMDB.EpisodeGroup`
+   - Reuse `ImageCollection`, `VideoCollection`, `Credits`, etc. from Phase 2
+
+6. **Test & Release v0.5.0**
 
 ### Timeline Estimate
 
-- **Phase 3:** 2-3 weeks (12 endpoints)
 - **Phase 4:** 4-5 weeks (41 endpoints)
 - **Phase 5:** 2-3 weeks (13 endpoints)
-- **Total:** 8-11 weeks for remaining 66 endpoints
+- **Total:** 6-8 weeks for remaining 54 endpoints
 
 ---
 
@@ -638,8 +726,8 @@ swift test --filter MovieEndpointTests/movieCredits
 | v0.1.0 | Initial 9 endpoints | ✅ Shipped |
 | v0.2.0 | Phase 1 - Foundation (15) | ✅ Ready |
 | v0.3.0 | Phase 2 - Movies (20) | ✅ Ready |
-| v0.4.0 | Phase 3 - Search (12) | 📋 Next |
-| v0.5.0 | Phase 4 - TV (41) | ⏳ Planned |
+| v0.4.0 | Phase 3 - Search (12) | ✅ Ready |
+| v0.5.0 | Phase 4 - TV (41) | 📋 Next |
 | v0.6.0 | Phase 5 - People (13) | ⏳ Planned |
 | v1.0.0 | Auth + Account (future) | 💡 Deferred |
 
@@ -664,6 +752,6 @@ Requires:
 
 ---
 
-**Document Version:** 1.1
+**Document Version:** 1.2
 **Last Updated:** 2026-02-09
-**Next Review:** Start of Phase 3
+**Next Review:** Start of Phase 4
