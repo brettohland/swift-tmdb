@@ -7,6 +7,21 @@ and in SwiftUI Previews.
 
 [See the Usage guide in the documentation](https://brettohland.github.io/swift-tmdb/documentation/tmdb/usage)
 
+## Products
+
+The package provides two library products:
+
+- **`TMDB`** (default) includes mock JSON data for automatic mocked responses in tests and SwiftUI Previews.
+- **`TMDBCore`** excludes the mock JSON data for smaller production bundles. Use `withDependencies` to provide your own test doubles.
+
+```swift
+// Full experience (automatic mocking):
+.product(name: "TMDB", package: "swift-tmdb")
+
+// Smaller bundle (no mock data):
+.product(name: "TMDBCore", package: "swift-tmdb")
+```
+
 ## Dependencies
 
 Internally, the package uses [Point Free's Dependencies](https://github.com/pointfreeco/swift-dependencies) in order

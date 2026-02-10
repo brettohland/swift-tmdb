@@ -14,6 +14,10 @@ let package = Package(
     products: [
         .library(
             name: "TMDB",
+            targets: ["TMDB", "TMDBMocking"],
+        ),
+        .library(
+            name: "TMDBCore",
             targets: ["TMDB"],
         ),
         .library(
@@ -32,13 +36,17 @@ let package = Package(
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 .product(name: "DependenciesMacros", package: "swift-dependencies"),
             ],
-            resources: [
-                .process("Services/MockingService/JSON"),
-            ],
             swiftSettings: [
                 .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
                 .enableUpcomingFeature("InferIsolatedConformances"),
                 .enableUpcomingFeature("FullTypedThrows"),
+            ],
+        ),
+        .target(
+            name: "TMDBMocking",
+            dependencies: ["TMDB"],
+            resources: [
+                .process("JSON"),
             ],
         ),
         .target(
@@ -54,6 +62,6 @@ let package = Package(
                 .enableUpcomingFeature("FullTypedThrows"),
             ],
         ),
-        .testTarget(name: "TMDBTests", dependencies: ["TMDB"]),
+        .testTarget(name: "TMDBTests", dependencies: ["TMDB", "TMDBMocking"]),
     ],
 )
