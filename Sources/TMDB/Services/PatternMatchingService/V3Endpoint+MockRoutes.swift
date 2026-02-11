@@ -67,7 +67,9 @@ extension TMDB.V3Endpoints.Discover: MockRouteProvider {
                     totalPages: 1,
                     results: [movie],
                 )
-                return try JSONEncoder().encode(response)
+                let encoder = JSONEncoder()
+                encoder.keyEncodingStrategy = .convertToSnakeCase
+                return try encoder.encode(response)
             },
             MockRoute(pattern: "^/3/discover/tv$") {
                 let show = try TMDB.Discover.DiscoverTV.mock()
@@ -137,7 +139,7 @@ extension TMDB.V3Endpoints.Movies: MockRouteProvider {
                 try MockUtilities.jsonDataFromFile("SimilarMovies")
             },
             MockRoute(pattern: "^/3/movie/\\d+/translations$") {
-                try MockUtilities.jsonDataFromFile("MovieTranslations")
+                try TMDB.TranslationCollection.mockData()
             },
             MockRoute(pattern: "^/3/movie/\\d+/videos$") {
                 try TMDB.VideoCollection.mockData()
@@ -187,7 +189,7 @@ extension TMDB.V3Endpoints.Trending: MockRouteProvider {
     static var mockRoutes: [MockRoute] {
         [
             MockRoute(pattern: "^/3/trending/all/(?:day|week)$") {
-                try MockUtilities.jsonDataFromFile("TrendingAll")
+                try TMDB.TrendingResult.mockData()
             },
             MockRoute(pattern: "^/3/trending/movie/(?:day|week)$") {
                 try MockUtilities.jsonDataFromFile("TrendingMovies")
@@ -196,7 +198,7 @@ extension TMDB.V3Endpoints.Trending: MockRouteProvider {
                 try MockUtilities.jsonDataFromFile("TrendingTV")
             },
             MockRoute(pattern: "^/3/trending/person/(?:day|week)$") {
-                try MockUtilities.jsonDataFromFile("TrendingPeople")
+                try TMDB.TrendingPerson.mockData()
             },
         ]
     }
@@ -232,16 +234,16 @@ extension TMDB.V3Endpoints.Search: MockRouteProvider {
                 try MockUtilities.jsonDataFromFile("SearchTV")
             },
             MockRoute(pattern: "^/3/search/person$") {
-                try MockUtilities.jsonDataFromFile("SearchPerson")
+                try TMDB.SearchPerson.mockData()
             },
             MockRoute(pattern: "^/3/search/multi$") {
-                try MockUtilities.jsonDataFromFile("SearchMulti")
+                try TMDB.MultiSearchResult.mockData()
             },
             MockRoute(pattern: "^/3/search/collection$") {
-                try MockUtilities.jsonDataFromFile("SearchCollections")
+                try TMDB.SearchCollection.mockData()
             },
             MockRoute(pattern: "^/3/search/company$") {
-                try MockUtilities.jsonDataFromFile("SearchCompanies")
+                try TMDB.SearchCompany.mockData()
             },
             MockRoute(pattern: "^/3/search/keyword$") {
                 try MockUtilities.jsonDataFromFile("SearchKeywords")
@@ -272,7 +274,7 @@ extension TMDB.V3Endpoints.Keywords: MockRouteProvider {
                 try MockUtilities.jsonDataFromFile("KeywordMovies")
             },
             MockRoute(pattern: "^/3/keyword/\\d+$") {
-                try MockUtilities.jsonDataFromFile("KeywordDetails")
+                try TMDB.Keyword.mockData()
             },
         ]
     }

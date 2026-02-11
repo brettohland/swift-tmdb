@@ -5,11 +5,13 @@ import Testing
 
 struct ConfigurationEndpointTests {
     @Test func details() async throws {
-        _ = try await TMDB.configurationDetails()
+        let config = try await TMDB.configurationDetails()
+        #expect(!config.changeKeys.isEmpty)
     }
 
     @Test func countries() async throws {
-        _ = try await TMDB.supportedCountries()
+        let countries = try await TMDB.supportedCountries()
+        #expect(!countries.isEmpty)
     }
 
     @Test func jobs() async throws {

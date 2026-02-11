@@ -20,7 +20,7 @@ public extension TMDB {
         public var isAdult: Bool
         public let gender: Int?
         public let popularity: Double?
-        public let profilePath: String?
+        public let profilePath: URL?
         public let knownForDepartment: String?
 
         enum CodingKeys: String, CodingKey {
@@ -45,7 +45,7 @@ public extension TMDB {
         public let episodeNumber: Int
         public let seasonNumber: Int
         public let showID: Int
-        public let stillPath: String?
+        public let stillPath: URL?
 
         enum CodingKeys: String, CodingKey {
             case id
@@ -67,7 +67,7 @@ public extension TMDB {
         public let overview: String
         @ISO8601YMD
         public var airDate: Date?
-        public let posterPath: String?
+        public let posterPath: URL?
         public let seasonNumber: Int
         public let showID: Int
 

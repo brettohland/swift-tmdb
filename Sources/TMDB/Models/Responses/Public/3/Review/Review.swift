@@ -32,7 +32,7 @@ public extension TMDB {
     struct ReviewAuthor: Codable, Sendable {
         public let name: String
         public let username: String
-        public let avatarPath: String?
+        public let avatarPath: URL?
         public let rating: Double?
     }
 }

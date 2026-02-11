@@ -9,7 +9,7 @@ public extension TMDB {
         public let gender: Int?
         public let knownForDepartment: String?
         public let popularity: Double?
-        public let profilePath: String?
+        public let profilePath: URL?
         public let knownFor: [MultiSearchResult]
 
         enum CodingKeys: String, CodingKey {

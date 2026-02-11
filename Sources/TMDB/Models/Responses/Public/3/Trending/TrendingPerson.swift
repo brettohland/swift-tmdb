@@ -5,10 +5,10 @@ public extension TMDB {
     struct TrendingPerson: Codable, Sendable, Discoverable {
         public let id: Int
         public let name: String
-        public let profilePath: String?
+        public let profilePath: URL?
         public let popularity: Double
         public let knownForDepartment: String?
-        public let isAdult: Bool
+        @NilBoolean public var isAdult: Bool
 
         enum CodingKeys: String, CodingKey {
             case id

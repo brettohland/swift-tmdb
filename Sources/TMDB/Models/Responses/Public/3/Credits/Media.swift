@@ -2,15 +2,15 @@ import Foundation
 
 public extension TMDB.Credits {
     struct Media: Codable, Identifiable, Sendable {
-        public let isAdult: Bool
-        public let backdropPath: String
+        @NilBoolean public var isAdult: Bool
+        public let backdropPath: URL
         public let id: Int
         public let name: String
         @LanguageCode
         public var originalLanguage: Locale.Language
         public let originalName: String
         public let overview: String
-        public let posterPath: String
+        public let posterPath: URL
         public let mediaType: String
         public let genreIDs: [Int]
         public let popularity: Double

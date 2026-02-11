@@ -23,19 +23,23 @@ public extension TMDB {
     ///
     /// - Parameter id: The TMDB identifier for the movie or tv show
     /// - Return: ``TMDB/Credits/Details`` value
-    static func credits(forID id: Int) async throws -> Credits.Details {
+    static func credits(forID id: Int) async throws(TMDBRequestError) -> Credits.Details {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, Credits.Details>(
             endpoint: TMDB.V3Endpoints.Credits.details(id: id),
             httpMethod: .get,
         )
-        return try await endpoint.decodedResponse()
+        do {
+            return try await endpoint.decodedResponse()
+        } catch {
+            throw .systemError(error)
+        }
     }
 
     /// `/3/credit/{id}`
     ///
     /// - Parameter movie: The ``TMDB/Movie`` value to use for lookup
     /// - Returns: ``TMDB/Credits/Details``
-    static func credits(forMovie movie: Movie) async throws -> Credits.Details {
+    static func credits(forMovie movie: Movie) async throws(TMDBRequestError) -> Credits.Details {
         try await credits(forID: movie.id)
     }
 }

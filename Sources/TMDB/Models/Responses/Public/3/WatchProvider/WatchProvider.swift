@@ -5,7 +5,7 @@ public extension TMDB {
     struct WatchProvider: Codable, Identifiable, Sendable {
         public let id: Int
         public let name: String
-        public let logoPath: String
+        public let logoPath: URL
         public let displayPriority: Int
 
         enum CodingKeys: String, CodingKey {

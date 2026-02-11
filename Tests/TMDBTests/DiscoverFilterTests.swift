@@ -2,7 +2,7 @@ import Foundation
 import Testing
 @testable import TMDB
 
-struct DiscoverTests {
+struct DiscoverFilterTests {
     @Test func verifyMovieFilters() throws {
         typealias MovieFilter = TMDB.Discover.MovieFilter
         let testDate = Date(timeIntervalSince1970: 0)

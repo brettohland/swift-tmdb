@@ -30,33 +30,45 @@ public extension TMDB {
     /// `/3/watch/providers/regions`
     /// [API Documentation](https://developer.themoviedb.org/reference/watch-providers-available-regions)
     /// - Returns: Available regions for watch providers
-    static func watchProviderRegions() async throws -> TMDB.WatchProviderRegions {
+    static func watchProviderRegions() async throws(TMDBRequestError) -> TMDB.WatchProviderRegions {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.WatchProviderRegions>(
             endpoint: V3Endpoints.WatchProviders.regions,
             httpMethod: .get,
         )
-        return try await endpoint.decodedResponse()
+        do {
+            return try await endpoint.decodedResponse()
+        } catch {
+            throw .systemError(error)
+        }
     }
 
     /// `/3/watch/providers/movie`
     /// [API Documentation](https://developer.themoviedb.org/reference/watch-providers-movie-list)
     /// - Returns: Movie watch providers
-    static func movieWatchProviders() async throws -> TMDB.WatchProviderList {
+    static func movieWatchProviders() async throws(TMDBRequestError) -> TMDB.WatchProviderList {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.WatchProviderList>(
             endpoint: V3Endpoints.WatchProviders.movie,
             httpMethod: .get,
         )
-        return try await endpoint.decodedResponse()
+        do {
+            return try await endpoint.decodedResponse()
+        } catch {
+            throw .systemError(error)
+        }
     }
 
     /// `/3/watch/providers/tv`
     /// [API Documentation](https://developer.themoviedb.org/reference/watch-providers-tv-list)
     /// - Returns: TV watch providers
-    static func tvWatchProviders() async throws -> TMDB.WatchProviderList {
+    static func tvWatchProviders() async throws(TMDBRequestError) -> TMDB.WatchProviderList {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.WatchProviderList>(
             endpoint: V3Endpoints.WatchProviders.tv,
             httpMethod: .get,
         )
-        return try await endpoint.decodedResponse()
+        do {
+            return try await endpoint.decodedResponse()
+        } catch {
+            throw .systemError(error)
+        }
     }
 }

@@ -10,7 +10,7 @@ public extension TMDB {
         public let name: String
         public let originalName: String
         public let popularity: Double
-        public let profilePath: String?
+        public let profilePath: URL?
         public let castID: Int
         public let character: String
         public let creditID: String

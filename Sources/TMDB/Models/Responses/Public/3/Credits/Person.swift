@@ -2,7 +2,7 @@ import Foundation
 
 public extension TMDB.Credits {
     struct Person: Codable, Identifiable, Sendable {
-        public let isAdult: Bool
+        @NilBoolean public var isAdult: Bool
         public let id: Int
         public let name: String
         public let originalName: String
@@ -10,7 +10,7 @@ public extension TMDB.Credits {
         public let popularity: Double
         public let gender: Int
         public let knownForDepartment: String
-        public let profilePath: String
+        public let profilePath: URL
 
         enum CodingKeys: String, CodingKey {
             case isAdult = "adult"

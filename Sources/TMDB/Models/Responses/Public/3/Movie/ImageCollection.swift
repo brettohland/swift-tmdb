@@ -12,7 +12,7 @@ public extension TMDB {
         public let aspectRatio: Double
         public let height: Int
         public let width: Int
-        public let filePath: String
+        public let filePath: URL
         public let voteAverage: Double
         public let voteCount: Int
         public let languageCode: String?

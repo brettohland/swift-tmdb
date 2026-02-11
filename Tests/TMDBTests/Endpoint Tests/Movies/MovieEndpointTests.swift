@@ -12,6 +12,11 @@ struct MovieEndpointTests {
         _ = try await TMDB.alternativeMovieTitles(id: 550)
     }
 
+    @Test func movieAlternativeTitlesForMovie() async throws {
+        let movie = try TMDB.Movie.mock()
+        _ = try await TMDB.alternativeMovieTitles(movie: movie)
+    }
+
     @Test func movieCredits() async throws {
         let credits = try await TMDB.movieCredits(id: 550)
         #expect(!credits.cast.isEmpty)

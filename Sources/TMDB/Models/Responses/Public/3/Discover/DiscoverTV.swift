@@ -11,7 +11,7 @@ public extension TMDB.Discover {
         public var originalLanguage: Locale.Language
         public let overview: String?
         public let popularity: Double?
-        public let posterPath: String?
+        public let posterPath: URL?
         public let voteAverage: Double?
         public let voteCount: Int?
 

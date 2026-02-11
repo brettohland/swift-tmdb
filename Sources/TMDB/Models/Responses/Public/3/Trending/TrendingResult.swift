@@ -10,9 +10,9 @@ public extension TMDB {
         public let originalTitle: String?
         public let originalName: String?
         public let overview: String?
-        public let posterPath: String?
-        public let backdropPath: String?
-        public let profilePath: String?
+        public let posterPath: URL?
+        public let backdropPath: URL?
+        public let profilePath: URL?
         public let popularity: Double?
         public let voteAverage: Double?
         public let voteCount: Int?
@@ -56,9 +56,9 @@ extension TMDB.TrendingResult: Codable {
         originalTitle = try container.decodeIfPresent(String.self, forKey: .originalTitle)
         originalName = try container.decodeIfPresent(String.self, forKey: .originalName)
         overview = try container.decodeIfPresent(String.self, forKey: .overview)
-        posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
-        backdropPath = try container.decodeIfPresent(String.self, forKey: .backdropPath)
-        profilePath = try container.decodeIfPresent(String.self, forKey: .profilePath)
+        posterPath = try container.decodeIfPresent(URL.self, forKey: .posterPath)
+        backdropPath = try container.decodeIfPresent(URL.self, forKey: .backdropPath)
+        profilePath = try container.decodeIfPresent(URL.self, forKey: .profilePath)
         popularity = try container.decodeIfPresent(Double.self, forKey: .popularity)
         voteAverage = try container.decodeIfPresent(Double.self, forKey: .voteAverage)
         voteCount = try container.decodeIfPresent(Int.self, forKey: .voteCount)

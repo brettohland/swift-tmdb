@@ -6,14 +6,14 @@ public extension TMDB.Discover {
 
         @NilBoolean
         public var isAdult: Bool
-        public let backdropPath: String?
+        public let backdropPath: URL?
         public let genreIDs: [Int]
         public let id: Int
         @LanguageCode
         public var originalLanguage: Locale.Language
         public let overview: String?
         public let popularity: Double?
-        public let posterPath: String?
+        public let posterPath: URL?
         @NilBoolean
         public var isVideo: Bool
         public let voteAverage: Double?

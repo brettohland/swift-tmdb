@@ -28,7 +28,7 @@ nonisolated(unsafe) let rw = (
         }
         return UnsafeMutableRawPointer(mutating: #dsohandle)
     }(),
-    log: OSLog(subsystem: "com.apple.runtime-issues", category: "NuvoAirClinic"),
+    log: OSLog(subsystem: "com.apple.runtime-issues", category: "TMDB"),
 )
 #endif
 

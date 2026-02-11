@@ -8,7 +8,7 @@ public extension TMDB.Credits {
         public let id: Int
         public let name: String
         public let overview: String
-        public let posterPath: String
+        public let posterPath: URL
         public let seasonNumber: Int
         public let showID: Int
 

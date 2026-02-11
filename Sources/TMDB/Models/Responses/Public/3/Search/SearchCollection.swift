@@ -5,7 +5,7 @@ public extension TMDB {
         public let id: Int
         public let name: String
         public let overview: String
-        public let posterPath: String?
-        public let backdropPath: String?
+        public let posterPath: URL?
+        public let backdropPath: URL?
     }
 }

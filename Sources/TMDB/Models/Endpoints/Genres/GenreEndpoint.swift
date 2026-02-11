@@ -26,22 +26,30 @@ public extension TMDB {
     /// `/3/genre/movie/list`
     /// [API Documentation](https://developer.themoviedb.org/reference/genre-movie-list)
     /// - Returns: Movie genre list
-    static func movieGenres() async throws -> TMDB.GenreList {
+    static func movieGenres() async throws(TMDBRequestError) -> TMDB.GenreList {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.GenreList>(
             endpoint: V3Endpoints.Genres.movieList,
             httpMethod: .get,
         )
-        return try await endpoint.decodedResponse()
+        do {
+            return try await endpoint.decodedResponse()
+        } catch {
+            throw .systemError(error)
+        }
     }
 
     /// `/3/genre/tv/list`
     /// [API Documentation](https://developer.themoviedb.org/reference/genre-tv-list)
     /// - Returns: TV genre list
-    static func tvGenres() async throws -> TMDB.GenreList {
+    static func tvGenres() async throws(TMDBRequestError) -> TMDB.GenreList {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.GenreList>(
             endpoint: V3Endpoints.Genres.tvList,
             httpMethod: .get,
         )
-        return try await endpoint.decodedResponse()
+        do {
+            return try await endpoint.decodedResponse()
+        } catch {
+            throw .systemError(error)
+        }
     }
 }
