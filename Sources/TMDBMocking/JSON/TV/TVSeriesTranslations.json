@@ -1,0 +1,617 @@
+{
+    "id": 1396,
+    "translations": [
+        {
+            "iso_3166_1": "US",
+            "iso_639_1": "en",
+            "name": "English",
+            "english_name": "English",
+            "data": {
+                "name": "",
+                "overview": "Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime.",
+                "homepage": "",
+                "tagline": "Change the equation."
+            }
+        },
+        {
+            "iso_3166_1": "DE",
+            "iso_639_1": "de",
+            "name": "Deutsch",
+            "english_name": "German",
+            "data": {
+                "name": "",
+                "overview": "Ein krebskranker Chemielehrer tut sich mit einem ehemaligen Sch\u00fcler zusammen, um die Zukunft seiner Familie durch die Herstellung und den Verkauf von Meth zu sichern.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "FR",
+            "iso_639_1": "fr",
+            "name": "Fran\u00e7ais",
+            "english_name": "French",
+            "data": {
+                "name": "",
+                "overview": "Un professeur de chimie atteint d'un cancer s'associe \u00e0 un ancien \u00e9l\u00e8ve pour fabriquer et vendre de la m\u00e9thamph\u00e9tamine afin d'assurer l'avenir financier de sa famille.",
+                "homepage": "",
+                "tagline": "Souviens-toi de mon nom."
+            }
+        },
+        {
+            "iso_3166_1": "NL",
+            "iso_639_1": "nl",
+            "name": "Nederlands",
+            "english_name": "Dutch",
+            "data": {
+                "name": "",
+                "overview": "Walter White is scheikundeleraar. Op het moment dat zijn vrouw zwanger is van hun tweede kind, stort Walters wereld in. De dokter heeft namelijk vastgesteld dat hij terminaal ziek is. Walter heeft longkanker en lijkt niet lang meer te zullen leven. Om ervoor te zorgen dat zijn gezin na zijn dood niet in een financi\u00eble crisis belandt, besluit Walter over te schakelen naar een leven als crimineel. Met de hulp van Jesse Pinkman, een uitgevallen leerling die in zijn klas heeft gezeten, maakt en verkoopt hij de drug crystal meth.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "TR",
+            "iso_639_1": "tr",
+            "name": "T\u00fcrk\u00e7e",
+            "english_name": "Turkish",
+            "data": {
+                "name": "",
+                "overview": "Kanserden \u00f6lece\u011fini \u00f6\u011frenen bir kimya \u00f6\u011fretmeni, ailesinin gelece\u011fini garanti alt\u0131na almak i\u00e7in metamfetamin \u00fcretip satmak \u00fczere eski bir \u00f6\u011frencisiyle kafa kafaya verir.",
+                "homepage": "",
+                "tagline": "Tehlike benim!"
+            }
+        },
+        {
+            "iso_3166_1": "SK",
+            "iso_639_1": "sk",
+            "name": "Sloven\u010dina",
+            "english_name": "Slovak",
+            "data": {
+                "name": "Pern\u00edkov\u00fd tatko",
+                "overview": "Stredo\u0161kolsk\u00e9mu u\u010dite\u013eovi ch\u00e9mie je diagnostikovan\u00e1 rakovina a tak sa rozhodne pred svojou smr\u0165ou zaopatri\u0165 v\u00fdrobou metam\u00adfetam\u00ednu svoju rodinu. Seri\u00e1l vynik\u00e1 \u00faplne fam\u00f3znou premenou hlavnej postavy z oby\u010dajn\u00e9ho \u010dloveka na k\u013e\u00fa\u010dov\u00fa postavu drogov\u00e9ho obchodu a skuto\u010dn\u00e9ho bossa.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "RU",
+            "iso_639_1": "ru",
+            "name": "P\u0443\u0441\u0441\u043a\u0438\u0439",
+            "english_name": "Russian",
+            "data": {
+                "name": "\u0412\u043e \u0432\u0441\u0435 \u0442\u044f\u0436\u043a\u0438\u0435",
+                "overview": "\u0412\u0441\u044f \u0436\u0438\u0437\u043d\u044c \u043d\u0435\u043c\u043e\u043b\u043e\u0434\u043e\u0433\u043e \u0448\u043a\u043e\u043b\u044c\u043d\u043e\u0433\u043e \u0443\u0447\u0438\u0442\u0435\u043b\u044f \u0445\u0438\u043c\u0438\u0438 \u0423\u043e\u043b\u0442\u0435\u0440\u0430 \u0423\u0430\u0439\u0442\u0430 \u2014 \u044d\u0442\u043e \u0431\u043e\u0440\u044c\u0431\u0430. \u0415\u0433\u043e \u0437\u0430\u0440\u043f\u043b\u0430\u0442\u044b \u043d\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442 \u043d\u0430 \u0441\u043e\u0434\u0435\u0440\u0436\u0430\u043d\u0438\u0435 \u0431\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u043e\u0439 \u0436\u0435\u043d\u044b \u0438 \u0441\u044b\u043d\u0430-\u0438\u043d\u0432\u0430\u043b\u0438\u0434\u0430, \u043f\u043e\u044d\u0442\u043e\u043c\u0443 \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u0432\u044b\u043d\u0443\u0436\u0434\u0435\u043d \u043f\u043e\u0434\u0440\u0430\u0431\u0430\u0442\u044b\u0432\u0430\u0442\u044c \u043d\u0430 \u0430\u0432\u0442\u043e\u043c\u043e\u0439\u043a\u0435. \u041d\u043e \u0432\u0441\u0451 \u043c\u0435\u043d\u044f\u0435\u0442\u0441\u044f, \u043a\u043e\u0433\u0434\u0430 \u0423\u043e\u043b\u0442\u0435\u0440\u0443 \u0441\u0442\u0430\u0432\u044f\u0442 \u0441\u0442\u0440\u0430\u0448\u043d\u044b\u0439 \u0434\u0438\u0430\u0433\u043d\u043e\u0437 \u2014 \u043d\u0435\u043e\u043f\u0435\u0440\u0430\u0431\u0435\u043b\u044c\u043d\u044b\u0439 \u0440\u0430\u043a \u043b\u0451\u0433\u043a\u0438\u0445.",
+                "homepage": "",
+                "tagline": "\u00ab\u0417\u0430\u043f\u043e\u043c\u043d\u0438\u0442\u0435 \u041c\u043e\u0451 \u0418\u043c\u044f\u00bb"
+            }
+        },
+        {
+            "iso_3166_1": "HU",
+            "iso_639_1": "hu",
+            "name": "Magyar",
+            "english_name": "Hungarian",
+            "data": {
+                "name": "Tot\u00e1l sz\u00edv\u00e1s",
+                "overview": "Egy k\u00f6z\u00e9piskolai k\u00e9miatan\u00e1rn\u00e1l r\u00e1kot \u00e1llap\u00edtanak meg. Csal\u00e1dja j\u00f6v\u0151j\u00e9nek biztos\u00edt\u00e1sa \u00e9rdek\u00e9ben \u00f6sszefog volt di\u00e1kj\u00e1val, hogy metamfetamint \u00e1ll\u00edtsanak el\u0151 \u00e9s adjanak el.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "CN",
+            "iso_639_1": "zh",
+            "name": "\u666e\u901a\u8bdd",
+            "english_name": "Mandarin",
+            "data": {
+                "name": "\u7edd\u547d\u6bd2\u5e08",
+                "overview": "\u65b0\u58a8\u897f\u54e5\u5dde\u7684\u9ad8\u4e2d\u5316\u5b66\u8001\u5e08\u6c83\u5c14\u7279\u00b7H\u00b7\u6000\u7279\u662f\u62ee\u636e\u5bb6\u5ead\u7684\u552f\u4e00\u7ecf\u6d4e\u6765\u6e90\u3002\u4ed6\u5927\u534a\u751f\u5b89\u5206\u5b88\u5df1\uff0c\u5162\u5162\u4e1a\u4e1a\uff0c\u5374\u572850\u5c81\u751f\u65e5\u4e4b\u9645\u7a81\u7136\u5f97\u77e5\u81ea\u5df1\u7f79\u60a3\u80ba\u764c\u665a\u671f\u7684\u5669\u8017\uff0c\u539f\u672c\u4fbf\u4e0d\u751a\u987a\u610f\u7684\u4eba\u751f\u987f\u65f6\u96ea\u4e0a\u52a0\u971c\u3002\u4e3a\u4e86\u4fdd\u969c\u6000\u5b55\u7684\u59bb\u5b50\u65af\u51ef\u52d2\u548c\u6b8b\u75be\u7684\u513f\u5b50\u5c0f\u6c83\u7279\u80fd\u5728\u81ea\u5df1\u6b7b\u540e\u8863\u98df\u65e0\u5fe7\uff0c\u6c83\u5c14\u7279\u51b3\u610f\u94e4\u800c\u8d70\u9669\u3002\u4ed6\u4e3b\u52a8\u627e\u5230\u66fe\u7ecf\u7684\u5b66\u751f\u3001\u800c\u4eca\u7684\u6bd2\u8d29\u5c0f\u6df7\u6df7\u6770\u897f\u00b7\u5e73\u514b\u66fc\u8c08\u5408\u4f5c\uff0c\u5e76\u8fd0\u7528\u5a34\u719f\u9ad8\u8d85\u7684\u5316\u5b66\u6280\u672f\u63d0\u70bc\u51fa\u9ad8\u7eaf\u5ea6\u51b0\u6bd2\u4ea4\u7ed9\u540e\u8005\u8d29\u552e\u3002\u5b70\u6599\u4e8b\u6001\u7684\u53d1\u5c55\u5374\u5728\u5e73\u514b\u66fc\u5e26\u56de\u6bd2\u54c1\u4f9b\u9500\u5546\u75af\u72c2\u5c0f\u516b\u53ca\u5176\u8868\u5f1f\u540e\u6025\u8f6c\u76f4\u4e0b\uff0c\u6c83\u5c14\u7279\u7684\u4eba\u751f\u4e5f\u7531\u6b64\u5f7b\u5e95\u6b65\u5411\u5931\u63a7\u3002\u4ed6\u88ab\u8feb\u5f00\u59cb\u4e86\u6559\u4e66\u4e0e\u5236\u6bd2\u7684\u53cc\u91cd\u751f\u6d3b\uff0c\u9010\u6e10\u5760\u843d\u81f3\u4e07\u52ab\u4e0d\u590d\u7684\u6df1\u6e0a\u3002",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "ES",
+            "iso_639_1": "es",
+            "name": "Espa\u00f1ol",
+            "english_name": "Spanish",
+            "data": {
+                "name": "",
+                "overview": "Un profesor de qu\u00edmica con c\u00e1ncer terminal se asocia con un exalumno suyo para fabricar y vender metanfetamina a fin de que su familia no pase apuros econ\u00f3micos.",
+                "homepage": "",
+                "tagline": "Recuerda mi nombre"
+            }
+        },
+        {
+            "iso_3166_1": "GR",
+            "iso_639_1": "el",
+            "name": "\u03b5\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac",
+            "english_name": "Greek",
+            "data": {
+                "name": "",
+                "overview": "\u0388\u03bd\u03b1\u03c2 \u03ba\u03b1\u03b8\u03b7\u03b3\u03b7\u03c4\u03ae\u03c2 \u03c0\u03bf\u03c5 \u03c0\u03ac\u03c3\u03c7\u03b5\u03b9 \u03b1\u03c0\u03cc \u03ba\u03b1\u03c1\u03ba\u03af\u03bd\u03bf \u03c3\u03c5\u03bd\u03b5\u03c1\u03b3\u03ac\u03b6\u03b5\u03c4\u03b1\u03b9 \u03bc\u03b5 \u03ad\u03bd\u03b1\u03bd \u03c0\u03c1\u03ce\u03b7\u03bd \u03bc\u03b1\u03b8\u03b7\u03c4\u03ae \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03b5\u03be\u03b1\u03c3\u03c6\u03b1\u03bb\u03af\u03c3\u03b5\u03b9 \u03c4\u03bf \u03bc\u03ad\u03bb\u03bb\u03bf\u03bd \u03c4\u03b7\u03c2 \u03bf\u03b9\u03ba\u03bf\u03b3\u03ad\u03bd\u03b5\u03b9\u03ac\u03c2 \u03c4\u03bf\u03c5, \u03c0\u03b1\u03c1\u03b1\u03c3\u03ba\u03b5\u03c5\u03ac\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03c0\u03bf\u03c5\u03bb\u03ce\u03bd\u03c4\u03b1\u03c2 \u03bc\u03b5\u03b8\u03b1\u03bc\u03c6\u03b5\u03c4\u03b1\u03bc\u03af\u03bd\u03b7.",
+                "homepage": "",
+                "tagline": "\u039d\u03b1 \u03b8\u03c5\u03bc\u03ac\u03c3\u03b1\u03b9 \u03c4\u03bf \u03cc\u03bd\u03bf\u03bc\u03ac \u03bc\u03bf\u03c5"
+            }
+        },
+        {
+            "iso_3166_1": "PT",
+            "iso_639_1": "pt",
+            "name": "Portugu\u00eas",
+            "english_name": "Portuguese",
+            "data": {
+                "name": "Ruptura Total",
+                "overview": "Um professor do secund\u00e1rio com cancro do pulm\u00e3o terminal junta-se a um ex-aluno para fabricar e vender metanfetaminas como forma de garantir o futuro da sua fam\u00edlia.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "IT",
+            "iso_639_1": "it",
+            "name": "Italiano",
+            "english_name": "Italian",
+            "data": {
+                "name": "Breaking Bad",
+                "overview": "Un insegnante di chimica con un cancro allo stadio terminale comincia a produrre e spacciare metanfetamina con un suo ex studente per assicurare un futuro alla famiglia.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "BG",
+            "iso_639_1": "bg",
+            "name": "\u0431\u044a\u043b\u0433\u0430\u0440\u0441\u043a\u0438 \u0435\u0437\u0438\u043a",
+            "english_name": "Bulgarian",
+            "data": {
+                "name": "\u0412 \u043e\u0431\u0443\u0432\u043a\u0438\u0442\u0435 \u043d\u0430 \u0421\u0430\u0442\u0430\u043d\u0430\u0442\u0430",
+                "overview": "\u041e\u0431\u0438\u043a\u043d\u043e\u0432\u0435\u043d\u0438\u044f \u0438 \u043d\u0435\u0445\u0430\u0440\u0438\u0437\u043c\u0430\u0442\u0438\u0447\u0435\u043d \u0443\u0447\u0438\u0442\u0435\u043b \u043f\u043e \u0445\u0438\u043c\u0438\u044f \u2013 \u0423\u043e\u043b\u0442\u044a\u0440 \u043e\u0442\u043a\u0440\u0438\u0432\u0430 \u043d\u043e\u0432\u0430 \u0441\u0442\u0440\u0430\u0441\u0442 \u0432 \u0436\u0438\u0432\u043e\u0442\u0430 \u0441\u0438, \u0441\u043b\u0435\u0434 \u043a\u0430\u0442\u043e \u0440\u0430\u0437\u0431\u0438\u0440\u0430, \u0447\u0435 \u0435 \u0431\u043e\u043b\u0435\u043d \u043e\u0442 \u0440\u0430\u043a \u0432 \u043f\u043e\u0441\u043b\u0435\u0434\u0435\u043d \u0441\u0442\u0430\u0434\u0438\u0439.\u00a0\u041e\u0441\u0432\u0435\u043d \u0447\u0435 \u0435 \u043f\u043e\u0436\u044a\u043d\u0430\u043b \u043c\u043d\u043e\u0436\u0435\u0441\u0442\u0432\u043e \u0443\u0441\u043f\u0435\u0445\u0438 \u0432 \u0445\u0438\u043c\u0438\u044f\u0442\u0430, \u0423\u043e\u043b\u0442\u044a\u0440 \u043e\u0431\u0443\u0447\u0430\u0432\u0430 \u0430\u043f\u0430\u0442\u0438\u0447\u043d\u0438 \u0433\u0438\u043c\u043d\u0430\u0437\u0438\u0441\u0442\u0438 \u0438 \u0440\u0430\u0431\u043e\u0442\u0438 \u043d\u0430 \u043d\u0435\u043f\u044a\u043b\u0435\u043d \u0440\u0430\u0431\u043e\u0442\u0435\u043d \u0434\u0435\u043d \u0432 \u0435\u0434\u043d\u0430 \u0430\u0432\u0442\u043e\u043c\u0438\u0432\u043a\u0430, \u0437\u0430 \u0434\u0430 \u0438\u0437\u0434\u044a\u0440\u0436\u0430 \u0441\u0435\u043c\u0435\u0439\u0441\u0442\u0432\u043e\u0442\u043e \u0441\u0438. \u0414\u043e\u0445\u043e\u0434\u0438\u0442\u0435 \u043d\u0430 \u0436\u0435\u043d\u0430 \u043c\u0443 \u0441\u0430 \u0441\u044a\u0432\u0441\u0435\u043c \u0441\u043a\u0440\u043e\u043c\u043d\u0438, \u0430 \u0441\u0438\u043d\u044a\u0442 \u0438\u043c \u0423\u043e\u043b\u0442\u044a\u0440 \u043c\u043b\u0430\u0434\u0448\u0438 - \u0442\u0432\u044a\u0440\u0434\u043e\u0433\u043b\u0430\u0432 17-\u0433\u043e\u0434\u0438\u0448\u0435\u043d \u0442\u0438\u0439\u043d\u0435\u0439\u0434\u0436\u044a\u0440, \u0441\u0442\u0440\u0430\u0434\u0430 \u043e\u0442 \u0446\u0435\u0440\u0435\u0431\u0440\u0430\u043b\u043d\u0430 \u043f\u0430\u0440\u0430\u043b\u0438\u0437\u0430. \u0417\u0430 \u0434\u0430 \u043e\u0441\u0438\u0433\u0443\u0440\u0438 \u043f\u0440\u0435\u0445\u0440\u0430\u043d\u0430\u0442\u0430 \u043d\u0430 \u043b\u044e\u0431\u0438\u043c\u0438\u0442\u0435 \u0441\u0438 \u0445\u043e\u0440\u0430\u00a0\u0423\u043e\u043b\u0442\u044a\u0440 \u0441\u0438 \u043f\u043e\u0441\u0442\u0430\u0432\u044f \u043d\u043e\u0432\u0438 \u0446\u0435\u043b\u0438 \u0438 \u0441\u0435 \u043e\u0442\u0434\u0430\u0432\u0430 \u043d\u0430 \u0432\u044a\u043b\u043d\u0443\u0432\u0430\u0449 \u043f\u0440\u0435\u0441\u0442\u044a\u043f\u0435\u043d \u0436\u0438\u0432\u043e\u0442.",
+                "homepage": "",
+                "tagline": "\u0417\u0430\u043f\u043e\u043c\u043d\u0435\u0442\u0435 \u0438\u043c\u0435\u0442\u043e \u043c\u0438"
+            }
+        },
+        {
+            "iso_3166_1": "RO",
+            "iso_639_1": "ro",
+            "name": "Rom\u00e2n\u0103",
+            "english_name": "Romanian",
+            "data": {
+                "name": "",
+                "overview": "Dram\u0103 premiat\u0103 cu dou\u0103 statuete Emmy de mare audien\u021b\u0103, serialul spune povestea lui Walter, un profesor de chimie care, lovit \u00een plin de criza de la mijlocul vie\u021bii - cea mai grav\u0103 criz\u0103 din c\u00e2te s-au v\u0103zut vreodat\u0103 -, \u00eencepe s\u0103 \u00eencalce legea prin fapte de o gravitate din ce \u00een ce mai mare.",
+                "homepage": "",
+                "tagline": "Aminte\u0219te-\u021bi numele meu."
+            }
+        },
+        {
+            "iso_3166_1": "KR",
+            "iso_639_1": "ko",
+            "name": "\ud55c\uad6d\uc5b4/\uc870\uc120\ub9d0",
+            "english_name": "Korean",
+            "data": {
+                "name": "\ube0c\ub808\uc774\ud0b9 \ubc30\ub4dc",
+                "overview": "2008\ub144 1\uc6d4 AMC\uc5d0\uc11c \ubc29\uc601\uc744 \uc2dc\uc791\ud55c \ubc94\uc8c4 \uc2a4\ub9b4\ub7ec. Breaking Bad\ub294 \ub9c9\uac00\uae30\ub97c \ub73b\ud558\ub294 \ubbf8\uad6d \ub0a8\ubd80 \uc9c0\ubc29\uc758 \uc18d\uc5b4\uc774\ub2e4. \ud55c\ub54c \ub178\ubca8\ud654\ud559\uc0c1\uae4c\uc9c0 \ubc14\ub77c \ubcfc \uc815\ub3c4\ub85c \ub6f0\uc5b4\ub09c \uacfc\ud559\uc790\uc600\ub358 \uace0\ub4f1\ud559\uad50 \ud654\ud559 \uad50\uc0ac \uc6d4\ud130 \ud654\uc774\ud2b8\ub294 \uc790\uc2e0\uc758 50\uc138 \uc0dd\uc77c \ub0a0\uc5d0 \ud3d0\uc554 3\uae30 \uc9c4\ub2e8\uc744 \ubc1b\ub294\ub2e4. \uc5b4\ub290 \ub0a0 \ub3d9\uc11c\uc640 \ud568\uaed8 \ub9c8\uc57d \ub2e8\uc18d \ud604\uc7a5\uc744 \ucc38\uad00\ud55c \uadf8\ub294 \ud604\uc7a5\uc5d0\uc11c \ub2ec\uc544\ub098\ub294 \uc61b \uc81c\uc790 \uc81c\uc2dc\ub97c \ubc1c\uacac\ud55c\ub2e4. \ub1cc\uc131\ub9c8\ube44\uc5d0 \uac78\ub9b0 \uace0\ub4f1\ud559\uc0dd \uc544\ub4e4\uacfc \uc784\uc2e0\ud55c \uc544\ub0b4\ub97c \uc704\ud574 \uc81c\uc2dc\uc5d0\uac8c \ub3d9\uc5c5\uc744 \uc81c\uc758\ud55c \uc6d4\ud130\ub294 \uc790\uc2e0\uc758 \ud654\ud559\uc9c0\uc2dd\uc744 \uc774\uc6a9\ud574 \uc804\ub840\uc5c6\ub294 \uace0\uc21c\ub3c4 \uace0\ud488\uc9c8\uc758 \uba54\uc2a4\uc554\ud398\ud0c0\ubbfc\uc744 \uc81c\uc870\ud55c\ub2e4.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "IL",
+            "iso_639_1": "he",
+            "name": "\u05e2\u05b4\u05d1\u05b0\u05e8\u05b4\u05d9\u05ea",
+            "english_name": "Hebrew",
+            "data": {
+                "name": "\u05e9\u05d5\u05d1\u05e8 \u05e9\u05d5\u05e8\u05d5\u05ea",
+                "overview": "\u05e1\u05d3\u05e8\u05ea \u05d3\u05e8\u05de\u05d4 \u05d4\u05de\u05ea\u05de\u05e7\u05d3\u05ea \u05d1\u05d5\u05d5\u05dc\u05d8\u05e8 \u05d5\u05d5\u05d9\u05d8, \u05de\u05d5\u05e8\u05d4 \u05dc\u05db\u05d9\u05de\u05d9\u05d4 \u05d1\u05ea\u05d9\u05db\u05d5\u05df \u05e9\u05e1\u05d5\u05d1\u05dc \u05de\u05de\u05e7\u05e8\u05d4 \u05d7\u05de\u05d5\u05e8 \u05e9\u05dc \u05de\u05e9\u05d1\u05e8 \u05d0\u05de\u05e6\u05e2 \u05d4\u05d7\u05d9\u05d9\u05dd, \u05d1\u05e0\u05d5\u05e1\u05e3 \u05d4\u05d5\u05d0 \u05de\u05ea\u05d1\u05e9\u05e8 \u05e9\u05d4\u05d9\u05e0\u05d5 \u05d2\u05d5\u05e1\u05e1 \u05de\u05de\u05d7\u05dc\u05d4 \u05e7\u05e9\u05d4. \u05e2\u05dc \u05de\u05e0\u05ea \u05dc\u05de\u05de\u05df \u05d0\u05ea \u05d4\u05d8\u05d9\u05e4\u05d5\u05dc\u05d9\u05dd \u05d4\u05d9\u05e7\u05e8\u05d9\u05dd \u05d5\u05dc\u05d3\u05d0\u05d5\u05d2 \u05dc\u05e2\u05ea\u05d9\u05d3 \u05de\u05e9\u05e4\u05d7\u05ea\u05d5 \u05d4\u05d5\u05d0 \u05d7\u05d5\u05d1\u05e8 \u05dc\u05ea\u05dc\u05de\u05d9\u05d3 \u05dc\u05e9\u05e2\u05d1\u05e8 \u05d5\u05d4\u05d5\u05e4\u05da \u05dc\u05d9\u05e6\u05e8\u05df \u05d5\u05e1\u05d5\u05d7\u05e8 \u05d1\u05de\u05ea\u05d0\u05de\u05e4\u05d8\u05de\u05d9\u05df.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "PL",
+            "iso_639_1": "pl",
+            "name": "Polski",
+            "english_name": "Polish",
+            "data": {
+                "name": "",
+                "overview": "G\u0142\u00f3wnym bohaterem jest Walter White, nauczyciel chemii mieszkaj\u0105cy w Nowym Meksyku wraz z \u017con\u0105 oraz nastoletnim synem cierpi\u0105cym na pora\u017cenie m\u00f3zgowe. Kiedy u Waltera zostaje zdiagnozowany rak w trzecim stadium, lekarze rokuj\u0105, \u017ce pozosta\u0142y mu dwa lata \u017cycia. Dzi\u0119ki tym prognozom Walter wyzbywa si\u0119 wszelkich l\u0119k\u00f3w i pragn\u0105c zabezpieczy\u0107 swoj\u0105 rodzin\u0119 finansowo decyduje si\u0119 wkroczy\u0107 do niebezpiecznego \u015bwiata narkotyk\u00f3w i zbrodni.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "DK",
+            "iso_639_1": "da",
+            "name": "Dansk",
+            "english_name": "Danish",
+            "data": {
+                "name": "",
+                "overview": "Efter at v\u00e6re blevet diagnosticeret med kr\u00e6ft og givet blot to \u00e5r tilbage at leve i fors\u00f8ger kemil\u00e6reren Walter at sikre sin families fremtidige \u00f8konomiske situation ved at sl\u00e5 sig sammen med en tidligere studerende, Jesse, for at producere og s\u00e6lge det ulovlige stof amfetamin. Mens Walter langsomt bygger sit imperium op, begynder hans kone Skyler at undre sig over hans uregelm\u00e6ssige adf\u00e6rd, og politiet s\u00e6tter jagten ind p\u00e5 kvarterets nye bagmand.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "CZ",
+            "iso_639_1": "cs",
+            "name": "\u010cesk\u00fd",
+            "english_name": "Czech",
+            "data": {
+                "name": "Pern\u00edkov\u00fd t\u00e1ta",
+                "overview": "Co se stane, kdy\u017e u st\u0159edo\u0161kolsk\u00e9ho oce\u0148ovan\u00e9ho u\u010ditele chemie diagnostikuj\u00ed rakovinu plic v pokro\u010dil\u00e9m st\u00e1diu? D\u00e1 se na krimin\u00e1ln\u00ed dr\u00e1hu jako drogov\u00fd dealer, aby stihl vyd\u011blat co nejv\u00edce pen\u011bz pro svou t\u011bhotnou \u017eenu...",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "JP",
+            "iso_639_1": "ja",
+            "name": "\u65e5\u672c\u8a9e",
+            "english_name": "Japanese",
+            "data": {
+                "name": "\u30d6\u30ec\u30a4\u30ad\u30f3\u30b0\u30fb\u30d0\u30c3\u30c9",
+                "overview": "\u5bb6\u65cf\u306b\u91d1\u3092\u6b8b\u3057\u305f\u3044\u2015\u3002\u30ac\u30f3\u3067\u4f59\u547d\u5ba3\u544a\u3055\u308c\u305f\u51b4\u3048\u306a\u3044\u9ad8\u6821\u306e\u5316\u5b66\u6559\u5e2b\u304c\u3001\u5143\u6559\u3048\u5b50\u3068\u7d44\u307f\u30c9\u30e9\u30c3\u30b0\u7cbe\u88fd\u3068\u58f2\u8cb7\u306b\u624b\u3092\u67d3\u3081\u308b\u3002",
+                "homepage": "",
+                "tagline": "\u79c1\u306e\u540d\u306f\u2026"
+            }
+        },
+        {
+            "iso_3166_1": "UA",
+            "iso_639_1": "uk",
+            "name": "\u0423\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0438\u0439",
+            "english_name": "Ukrainian",
+            "data": {
+                "name": "\u041f\u0443\u0441\u0442\u0438\u0442\u0438\u0441\u044f \u0431\u0435\u0440\u0435\u0433\u0430",
+                "overview": "\u0428\u043a\u0456\u043b\u044c\u043d\u0438\u0439 \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u0445\u0456\u043c\u0456\u0457 \u0412\u043e\u043b\u0442\u0435\u0440 \u0412\u0430\u0439\u0442 \u0434\u0456\u0437\u043d\u0430\u0454\u0442\u044c\u0441\u044f, \u0449\u043e \u0445\u0432\u043e\u0440\u0438\u0439 \u043d\u0430 \u0440\u0430\u043a \u043b\u0435\u0433\u0435\u043d\u0456\u0432. \u0417 \u043e\u0433\u043b\u044f\u0434\u0443 \u043d\u0430 \u0441\u043a\u043b\u0430\u0434\u043d\u0438\u0439 \u0444\u0456\u043d\u0430\u043d\u0441\u043e\u0432\u0438\u0439 \u0441\u0442\u0430\u043d \u0441\u043f\u0440\u0430\u0432 \u0441\u0456\u043c'\u0457, \u0430 \u0442\u0430\u043a\u043e\u0436 \u043f\u0435\u0440\u0441\u043f\u0435\u043a\u0442\u0438\u0432\u0438, \u0412\u043e\u043b\u0442\u0435\u0440 \u0432\u0438\u0440\u0456\u0448\u0443\u0454 \u0437\u0430\u0439\u043d\u044f\u0442\u0438\u0441\u044f \u0432\u0438\u0433\u043e\u0442\u043e\u0432\u043b\u0435\u043d\u043d\u044f\u043c \u043c\u0435\u0442\u0430\u043c\u0444\u0435\u0442\u0430\u043c\u0456\u043d\u0443. \u0414\u043b\u044f \u0446\u044c\u043e\u0433\u043e \u0432\u0456\u043d \u0437\u0430\u043b\u0443\u0447\u0430\u0454 \u0441\u0432\u043e\u0433\u043e \u043a\u043e\u043b\u0438\u0448\u043d\u044c\u043e\u0433\u043e \u0443\u0447\u043d\u044f \u0414\u0436\u0435\u0441\u0441\u0456 \u041f\u0456\u043d\u043a\u043c\u0430\u043d\u0430, \u043a\u043e\u043b\u0438\u0441\u044c \u0432\u0438\u043a\u043b\u044e\u0447\u0435\u043d\u043e\u0433\u043e \u0437\u0456 \u0448\u043a\u043e\u043b\u0438 \u0437\u0430 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0433\u043e \u0441\u043f\u0440\u0438\u044f\u043d\u043d\u044f \u0412\u0430\u0439\u0442\u0430. \u041f\u0456\u043d\u043a\u043c\u0430\u043d \u0441\u0430\u043c \u0437\u0430\u0439\u043c\u0430\u0432\u0441\u044f \u00ab\u0432\u0430\u0440\u0456\u043d\u043d\u044f\u043c \u043c\u0435\u0442\u0443\u00bb, \u0430\u043b\u0435 \u043d\u0430\u043f\u0435\u0440\u0435\u0434\u043e\u0434\u043d\u0456, \u0432 \u0445\u043e\u0434\u0456 \u0440\u0435\u0439\u0434\u0443 \u0423\u0411\u041d, \u0432\u0456\u043d \u043f\u043e\u0437\u0431\u0443\u0432\u0441\u044f \u043d\u0430\u043f\u0430\u0440\u043d\u0438\u043a\u0430 \u0456 \u043b\u0430\u0431\u043e\u0440\u0430\u0442\u043e\u0440\u0456\u0457.",
+                "homepage": "",
+                "tagline": "\u042f\u043a \u0434\u0430\u043b\u0435\u043a\u043e \u0442\u0438 \u0433\u043e\u0442\u043e\u0432\u0438\u0439 \u0437\u0430\u0439\u0442\u0438 \u0437\u0430\u0440\u0430\u0434\u0438 \u0440\u043e\u0434\u0438\u043d\u0438?"
+            }
+        },
+        {
+            "iso_3166_1": "SE",
+            "iso_639_1": "sv",
+            "name": "svenska",
+            "english_name": "Swedish",
+            "data": {
+                "name": "",
+                "overview": "I Vince Giligans geniala serie f\u00e5r vi f\u00f6lja en cancersjuk kemil\u00e4rare som sl\u00e5r sig ihop med en tidigare student f\u00f6r att tillverka och s\u00e4lja metamfetamin f\u00f6r att trygga sin familjs framtid efter sin kommande bortg\u00e5ng. Hyllad av kritiker som den b\u00e4sta serien genom tiderna.",
+                "homepage": "",
+                "tagline": "\u00c4ndra ekvationen."
+            }
+        },
+        {
+            "iso_3166_1": "BS",
+            "iso_639_1": "bs",
+            "name": "Bosanski",
+            "english_name": "Bosnian",
+            "data": {
+                "name": "",
+                "overview": "Walter White je srednjovje\u010dni profesor kemije koji jednog dana doznaje da boluje od neizlje\u010divog raka plu\u0107a, a prognoze nisu sjajne. Uz sve to, ima hendikepirano dijete i trudnu \u017eenu. Prije nego umre, odlu\u010duje da \u0107e se pobrinuti za svoju obitelj pa u podrumu stvori laboratorij za proizvodnju droge. Seriju je stvorio Vince Gilligan koji je radio i na \u201eDosjeima X\u201c, omiljenoj seriji svih zaljubljenika u misti\u010dno i natprirodno. Mnogi kriti\u010dari pohvalili su odli\u010dnu glumu, a serija je op\u0107enito dobro prihva\u0107ena i spada me\u0111u favorite svih fanova pomaknutog humora.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "HR",
+            "iso_639_1": "hr",
+            "name": "Hrvatski",
+            "english_name": "Croatian",
+            "data": {
+                "name": "Na putu prema dolje",
+                "overview": "'Na putu prema dolje' prati neobi\u010dan i opasan \u017eivotni put nimalo karizmati\u010dnog i isprva vrlo prosje\u010dnog profesora kemije, Waltera Whitea, \u010diji \u017eivot se potpuno preokrene kada sazna da je obolio od karcinoma.",
+                "homepage": "",
+                "tagline": "Upamti moje ime."
+            }
+        },
+        {
+            "iso_3166_1": "LT",
+            "iso_639_1": "lt",
+            "name": "Lietuvi\u0173",
+            "english_name": "Lithuanian",
+            "data": {
+                "name": "Br\u0119stantis blogis",
+                "overview": "Chemijos mokytojas su \u017emona ir ne\u012fgaliu paaugliu s\u016bnumi gyvena Naujojoje Meksikoje. Netik\u0117tai jam nustatomas tre\u010dios stadijos v\u0117\u017eys, medikai teigia, kad gyventi beliko metai. \u0160i \u017einia ram\u0173 vyri\u0161k\u012f i\u0161laisvina i\u0161 bet koki\u0173 baimi\u0173 ir visuomen\u0117s norm\u0173. Nor\u0117damas u\u017etikrinti \u0161eimai ger\u0105 materialin\u0119 ateit\u012f, jis pradeda gaminti auk\u0161\u010diausios kokyb\u0117s amfetamin\u0105. Mirtina diagnoz\u0117 tyk\u0173 namis\u0117d\u0105 paver\u010dia narkotik\u0173 pasaulio karaliuku.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "EE",
+            "iso_639_1": "et",
+            "name": "Eesti",
+            "english_name": "Estonian",
+            "data": {
+                "name": "Halvale teele",
+                "overview": "\"Halvale teele\" on huumorivarjundiga draamasari keemia\u00f5petaja Walter White'ist (rolli eest Emmy auhinna v\u00f5itnud Bryan Cranston), keda on tabanud pingeline keskeakriis. Lisaks erivajadustega teismelisele pojale ja naisele, kes temasse k\u00fclmalt suhtub, diagnoositakse tal ravimatu kopsuv\u00e4hk. J\u00f5udnud otsusele, et tema elu v\u00e4\u00e4rtus on \u00e4\u00e4rmiselt kaheldav, otsustab ta oma endise \u00f5pilase, narkomaanist eluheidiku Jesse Pinkmaniga (Aaron Paul) hakata keetma metamfetamiini, ja kus oleks seda parem teha, kui keset k\u00f5rbe ja vagunelamus?",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "SA",
+            "iso_639_1": "ar",
+            "name": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629",
+            "english_name": "Arabic",
+            "data": {
+                "name": "\u0627\u062e\u062a\u0644\u0627\u0644 \u0636\u0627\u0644",
+                "overview": "\u0645\u062f\u0631\u0633 \u0643\u064a\u0645\u064a\u0627\u0621 \u0641\u064a \u0645\u062f\u0631\u0633\u0629 \u062b\u0627\u0646\u0648\u064a\u0629 \u0639\u0644\u0649 \u0648\u0634\u0643 \u0627\u0644\u0648\u0641\u0627\u0629 \u0628\u0633\u0628\u0628 \u0627\u0644\u0633\u0631\u0637\u0627\u0646\u060c \u064a\u0634\u062a\u0631\u0643 \u0645\u0639 \u0637\u0627\u0644\u0628 \u0633\u0627\u0628\u0642 \u0641\u064a \u0635\u0646\u0627\u0639\u0629 \u0648\u0628\u064a\u0639 \u0639\u0642\u0627\u0631 \"\u0627\u0644\u0645\u064a\u062b\" \u0644\u062a\u0623\u0645\u064a\u0646 \u0645\u0633\u062a\u0642\u0628\u0644 \u0623\u0633\u0631\u062a\u0647.",
+                "homepage": "",
+                "tagline": "\u0647\u0627\u064a\u0632\u0646\u0628\u0631\u063a"
+            }
+        },
+        {
+            "iso_3166_1": "IR",
+            "iso_639_1": "fa",
+            "name": "\u0641\u0627\u0631\u0633\u06cc",
+            "english_name": "Persian",
+            "data": {
+                "name": "\u0628\u0631\u06cc\u06a9\u06cc\u0646\u06af \u0628\u062f",
+                "overview": "\u062f\u0627\u0633\u062a\u0627\u0646 \u0633\u0631\u06cc\u0627\u0644 \u062f\u0631\u0628\u0627\u0631\u0647 \u06cc\u06a9 \u0645\u0639\u0644\u0645 \u0634\u06cc\u0645\u06cc \u0645\u06cc\u0627\u0646\u0633\u0627\u0644 \u0627\u0633\u062a \u06a9\u0647 \u0645\u062a\u0648\u062c\u0647 \u0645\u06cc\u200c\u0634\u0648\u062f \u06a9\u0647 \u062f\u0627\u0631\u0627\u06cc \u0633\u0631\u0637\u0627\u0646 \u0631\u06cc\u0647 \u0627\u0633\u062a \u0648 \u06f2 \u0633\u0627\u0644 \u0628\u06cc\u0634\u062a\u0631 \u0648\u0642\u062a \u0628\u0631\u0627\u06cc \u0632\u0646\u062f\u06af\u06cc \u0646\u062f\u0627\u0631\u062f. \u0627\u0648 \u06a9\u0647 \u0648\u0636\u0639 \u0645\u0627\u0644\u06cc \u062e\u0648\u0628\u06cc \u0646\u062f\u0627\u0631\u062f \u0648 \u062f\u0627\u0631\u0627\u06cc \u0647\u0645\u0633\u0631 \u0648 \u067e\u0633\u0631\u06cc \u0645\u0639\u0644\u0648\u0644 \u0645\u06cc\u200c\u0628\u0627\u0634\u062f\u060c \u0628\u0647 \u0627\u06cc\u0646 \u0641\u06a9\u0631 \u0645\u06cc\u200c\u0627\u0641\u062a\u062f \u06a9\u0647 \u0628\u0627\u06cc\u062f \u0642\u0628\u0644 \u0627\u0632 \u0645\u0631\u062f\u0646 \u0632\u0646\u062f\u06af\u06cc \u062e\u0627\u0646\u0648\u0627\u062f\u0647 \u062e\u0648\u062f \u0631\u0627 \u062a\u0627\u0645\u06cc\u0646 \u06a9\u0646\u062f. \u067e\u0633 \u0628\u0627 \u062a\u0648\u062c\u0647 \u0628\u0647 \u0622\u0634\u0646\u0627\u06cc\u06cc\u0634 \u0628\u0647 \u0639\u0644\u0645 \u0634\u06cc\u0645\u06cc\u060c \u0647\u0645\u0631\u0627\u0647 \u0628\u0627 \u06cc\u06a9\u06cc \u0627\u0632 \u0634\u0627\u06af\u0631\u062f\u0627\u0646 \u0633\u0627\u0628\u0642\u0634 \u0634\u0631\u0648\u0639 \u0628\u0647 \u0633\u0627\u062e\u062a \u0648 \u0641\u0631\u0648\u0634 \u0645\u0648\u0627\u062f \u0645\u062e\u062f\u0631 \u0645\u06cc\u200c\u06a9\u0646\u062f\u2026",
+                "homepage": "",
+                "tagline": "\u0646\u0627\u0645 \u0645\u0646 \u0631\u0627 \u0628\u0647 \u062e\u0627\u0637\u0631 \u0628\u0633\u067e\u0627\u0631"
+            }
+        },
+        {
+            "iso_3166_1": "FI",
+            "iso_639_1": "fi",
+            "name": "suomi",
+            "english_name": "Finnish",
+            "data": {
+                "name": "",
+                "overview": "Parhaan miespuolisen draaman\u00e4yttelij\u00e4n Emmyn voittanut Bryan Cranston esitt\u00e4\u00e4 Walter Whitea, taitavaa kemisti\u00e4, joka on p\u00e4\u00e4tynyt kohtalon oikuista opettajaksi ja osa-aikaiseksi autopesulaty\u00f6ntekij\u00e4ksi. Kaikki muuttuu, kun Walter kuulee sairastavansa parantumatonta sy\u00f6p\u00e4\u00e4. H\u00e4n miettii keinoja turvata perheens\u00e4 toimeentulo jatkossakin ja keksii yll\u00e4tt\u00e4v\u00e4n ratkaisun: huumekaupan. Walter ottaa kemistintaitonsa k\u00e4ytt\u00f6\u00f6n ja l\u00e4htee rikoksen poluille johtoajatuksenaan, ettei h\u00e4nell\u00e4 ole mit\u00e4\u00e4n h\u00e4vitt\u00e4v\u00e4\u00e4. Vaarallisiin huumekuvioihin sekaantuminen ei kuitenkaan tee kiltist\u00e4 Walterista hirvi\u00f6t\u00e4, p\u00e4invastoin.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "TH",
+            "iso_639_1": "th",
+            "name": "\u0e20\u0e32\u0e29\u0e32\u0e44\u0e17\u0e22",
+            "english_name": "Thai",
+            "data": {
+                "name": "\u0e14\u0e31\u0e1a\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e0a\u0e19 \u0e04\u0e19\u0e14\u0e35\u0e41\u0e15\u0e01",
+                "overview": "\u0e04\u0e23\u0e39\u0e2a\u0e2d\u0e19\u0e40\u0e04\u0e21\u0e35\u0e43\u0e19\u0e42\u0e23\u0e07\u0e40\u0e23\u0e35\u0e22\u0e19\u0e21\u0e31\u0e18\u0e22\u0e21\u0e0b\u0e36\u0e48\u0e07\u0e01\u0e33\u0e25\u0e31\u0e07\u0e43\u0e01\u0e25\u0e49\u0e15\u0e32\u0e22\u0e14\u0e49\u0e27\u0e22\u0e42\u0e23\u0e04\u0e21\u0e30\u0e40\u0e23\u0e47\u0e07\u0e15\u0e49\u0e2d\u0e07\u0e21\u0e32\u0e23\u0e48\u0e27\u0e21\u0e21\u0e37\u0e2d\u0e01\u0e31\u0e1a\u0e2d\u0e14\u0e35\u0e15\u0e19\u0e31\u0e01\u0e40\u0e23\u0e35\u0e22\u0e19 \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e04\u0e27\u0e32\u0e21\u0e21\u0e31\u0e48\u0e19\u0e04\u0e07\u0e43\u0e2b\u0e49\u0e01\u0e31\u0e1a\u0e04\u0e23\u0e2d\u0e1a\u0e04\u0e23\u0e31\u0e27\u0e01\u0e48\u0e2d\u0e19\u0e17\u0e35\u0e48\u0e40\u0e02\u0e32\u0e08\u0e30\u0e15\u0e32\u0e22\u0e14\u0e49\u0e27\u0e22\u0e01\u0e32\u0e23\u0e1c\u0e25\u0e34\u0e15\u0e22\u0e32\u0e44\u0e2d\u0e0b\u0e4c\u0e02\u0e32\u0e22",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "BR",
+            "iso_639_1": "pt",
+            "name": "Portugu\u00eas",
+            "english_name": "Portuguese",
+            "data": {
+                "name": "",
+                "overview": "Ao saber que tem c\u00e2ncer, um professor passa a fabricar metanfetamina pelo futuro da fam\u00edlia, mudando o destino de todos.",
+                "homepage": "",
+                "tagline": "Se Lembre do meu Nome"
+            }
+        },
+        {
+            "iso_3166_1": "CA",
+            "iso_639_1": "fr",
+            "name": "Fran\u00e7ais",
+            "english_name": "French",
+            "data": {
+                "name": "Breaking Bad : Le chimiste",
+                "overview": "En phase terminale d'un cancer, un professeur de chimie s'allie \u00e0 un ancien \u00e9l\u00e8ve pour assurer l'avenir de sa famille en fabriquant et en vendant de la m\u00e9thamph\u00e9tamine.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "MX",
+            "iso_639_1": "es",
+            "name": "Espa\u00f1ol",
+            "english_name": "Spanish",
+            "data": {
+                "name": "",
+                "overview": "Un profesor de Qu\u00edmica de secundaria con c\u00e1ncer terminal se asocia a un exestudiante para asegurar el futuro de su familia al fabricar y vender metanfetamina.",
+                "homepage": "",
+                "tagline": "Vive libre o muere."
+            }
+        },
+        {
+            "iso_3166_1": "RS",
+            "iso_639_1": "sr",
+            "name": "Srpski",
+            "english_name": "Serbian",
+            "data": {
+                "name": "\u0427\u0438\u0441\u0442\u0430 \u0445\u0435\u043c\u0438\u0458\u0430",
+                "overview": "\u0412\u043e\u043b\u0442\u0435\u0440 \u0412\u0430\u0458\u0442 \u0458\u0435 \u043f\u0440\u043e\u0444\u0435\u0441\u043e\u0440 \u0445\u0435\u043c\u0438\u0458\u0435 \u0443 \u0441\u0440\u0435\u0434\u045a\u043e\u0458 \u0448\u043a\u043e\u043b\u0438, \u043a\u043e\u0458\u0438 \u0441\u0435 \u043e\u043a\u0440\u0435\u045b\u0435 \u0434\u0440\u0443\u0433\u043e\u0458 \u0441\u0442\u0440\u0430\u043d\u0438 \u0437\u0430\u043a\u043e\u043d\u0430 \u0434\u0430 \u0431\u0438 \u043f\u0440\u0435\u0445\u0440\u0430\u043d\u0438\u043e \u0442\u0440\u0443\u0434\u043d\u0443 \u0436\u0435\u043d\u0443 \u0438 \u0441\u0438\u043d\u0430 \u0441\u0430 \u043f\u0430\u0440\u0430\u043b\u0438\u0437\u043e\u043c, \u043d\u0430\u043a\u043e\u043d \u0448\u0442\u043e \u043c\u0443 \u0458\u0435 \u043f\u043e\u0441\u0442\u0430\u0432\u0459\u0435\u043d\u0430 \u0434\u0438\u0458\u0430\u0433\u043d\u043e\u0437\u0430 \u0440\u0430\u043a\u0430 \u043f\u043b\u0443\u045b\u0430 \u0443 \u043f\u043e\u043e\u0434\u043c\u0430\u043a\u043b\u043e\u0458 \u0444\u0430\u0437\u0438.",
+                "homepage": "",
+                "tagline": "\u0423\u043f\u0430\u043c\u0442\u0438 \u043c\u043e\u0458\u0435 \u0438\u043c\u0435."
+            }
+        },
+        {
+            "iso_3166_1": "TW",
+            "iso_639_1": "zh",
+            "name": "\u666e\u901a\u8bdd",
+            "english_name": "Mandarin",
+            "data": {
+                "name": "\u7d55\u547d\u6bd2\u5e2b",
+                "overview": "\u4e00\u540d\u5373\u5c07\u6b7b\u65bc\u764c\u75c7\u7684\u9ad8\u4e2d\u5316\u5b78\u8001\u5e2b\u8207\u4ed6\u904e\u53bb\u7684\u5b78\u751f\u4e00\u8d77\u5408\u4f5c\uff0c\u900f\u904e\u88fd\u9020\u53ca\u8ca9\u8ce3\u51b0\u6bd2\u4fdd\u969c\u4ed6\u5bb6\u4eba\u7684\u672a\u4f86\u3002",
+                "homepage": "",
+                "tagline": "\u6539\u8b8a\u65b9\u7a0b\u5f0f\u3002"
+            }
+        },
+        {
+            "iso_3166_1": "VN",
+            "iso_639_1": "vi",
+            "name": "Ti\u1ebfng Vi\u1ec7t",
+            "english_name": "Vietnamese",
+            "data": {
+                "name": "T\u1eadp l\u00e0m ng\u01b0\u1eddi x\u1ea5u",
+                "overview": "M\u1ed9t gi\u00e1o vi\u00ean d\u1ea1y h\u00f3a \u1edf tr\u01b0\u1eddng trung h\u1ecdc m\u1eafc b\u1ec7nh ung th\u01b0 b\u1eaft tay v\u1edbi m\u1ed9t c\u1ef1u h\u1ecdc sinh \u0111\u1ec3 b\u1ea3o v\u1ec7 t\u01b0\u01a1ng lai c\u1ee7a gia \u0111\u00ecnh b\u1eb1ng c\u00e1ch s\u1ea3n xu\u1ea5t v\u00e0 b\u00e1n ma t\u00fay \u0111\u00e1.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "NO",
+            "iso_639_1": "no",
+            "name": "Norsk",
+            "english_name": "Norwegian",
+            "data": {
+                "name": "Breaking Bad",
+                "overview": "En kreftsyk kjemil\u00e6rer sl\u00e5r seg sammen med en tidligere elev for \u00e5 produsere og selge metamfetamin slik at han kan sikre familiens framtid.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "ES",
+            "iso_639_1": "ca",
+            "name": "Catal\u00e0",
+            "english_name": "Catalan",
+            "data": {
+                "name": "Breaking Bad",
+                "overview": "Walter White \u00e9s un aplicat professor d'institut, pare de Walter White Jr, un jove discapacitat i marit de Skyler White qui est\u00e0 embarassada. Quan la vida ja era prou complicada per a Walter, li diagnostiquen un c\u00e0ncer de pulm\u00f3 terminal, i aix\u00f2 el porta a infringir la llei tot instal\u00b7lant un laboratori de metamfetamina amb el seu antic estudiant Jesse Pinkman per aix\u00ed assegurar el benestar econ\u00f2mic de la seva fam\u00edlia quan ell ja no hi sigui.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "ID",
+            "iso_639_1": "id",
+            "name": "Bahasa indonesia",
+            "english_name": "Indonesian",
+            "data": {
+                "name": "",
+                "overview": "Ketika Walter White, seorang guru kimia New Mexico, didiagnosis dengan kanker stadium III dan diberi prognosis hanya dua tahun lagi untuk hidup. Dia dipenuhi dengan rasa tidak takut dan keinginan yang tak henti-hentinya untuk mengamankan masa depan keuangan keluarganya dengan biaya berapa pun ketika dia memasuki dunia narkoba dan kejahatan yang berbahaya.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "LV",
+            "iso_639_1": "lv",
+            "name": "Latvie\u0161u",
+            "english_name": "Latvian",
+            "data": {
+                "name": "P\u0101rk\u0101pt robe\u017eu",
+                "overview": "Valteram Vaitam, \u0145\u016bmeksikas \u0161tata \u0137\u012bmijas skolot\u0101jam, tiek diagnostic\u0113ts III stadijas v\u0113zis, un vi\u0146am tiek prognoz\u0113ti tikai divi gadi l\u012bdz m\u016b\u017ea beig\u0101m. Vi\u0146u p\u0101r\u0146em bezbail\u012bbas saj\u016bta un nerimsto\u0161a v\u0113lme par katru cenu nodro\u0161in\u0101t \u0123imenes finansi\u0101lo n\u0101kotni, kas ved vi\u0146u iesaist\u012bties b\u012bstamaj\u0101 narkotiku un noziedz\u012bbas pasaul\u0113.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "GE",
+            "iso_639_1": "ka",
+            "name": "\u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8",
+            "english_name": "Georgian",
+            "data": {
+                "name": "\u10db\u10eb\u10d8\u10db\u10d4 \u10d3\u10d0\u10dc\u10d0\u10e8\u10d0\u10e3\u10da\u10d8",
+                "overview": "\u10e3\u10dd\u10da\u10e2\u10d4\u10e0 \u10e3\u10d0\u10d8\u10e2\u10d8 \u10e5\u10d8\u10db\u10d8\u10d8\u10e1 \u10db\u10d0\u10e1\u10ec\u10d0\u10d5\u10da\u10d4\u10d1\u10d4\u10da\u10d8\u10d0 \u10e1\u10d9\u10dd\u10da\u10d0\u10e8\u10d8, \u10e0\u10dd\u10db\u10d4\u10da\u10e1\u10d0\u10ea \u10e4\u10d8\u10da\u10e2\u10d5\u10d8\u10e1 \u10e1\u10d8\u10db\u10e1\u10d8\u10d5\u10dc\u10d4 \u10d0\u10e6\u10db\u10dd\u10d0\u10e9\u10dc\u10d3\u10d0. \u10d8\u10db \u10db\u10d8\u10d6\u10dc\u10d8\u10d7 \u10e0\u10dd\u10db \u10e1\u10d8\u10d9\u10d5\u10d3\u10d8\u10da\u10d8\u10e1 \u10e8\u10d4\u10db\u10d3\u10d4\u10d2 \u10dd\u10ef\u10d0\u10ee\u10e1 \u10d9\u10d0\u10e0\u10d2\u10d8 \u10e4\u10d8\u10dc\u10d0\u10dc\u10e1\u10e3\u10e0 \u10db\u10d3\u10d2\u10dd\u10db\u10d0\u10e0\u10d4\u10dd\u10d1\u10d0 \u10d3\u10d0\u10e3\u10e2\u10dd\u10d5\u10dd\u10e1, \u10d8\u10d2\u10d8 \u10ea\u10d5\u10da\u10d8\u10e1 \u10e1\u10d0\u10d9\u10e3\u10d7\u10d0\u10e0 \u10ea\u10ee\u10dd\u10d5\u10e0\u10d4\u10d1\u10d0\u10e1 - \u10d8\u10ec\u10e7\u10d4\u10d1\u10e1 \u10db\u10d4\u10e2\u10d0\u10db\u10e4\u10d4\u10e2\u10d0\u10db\u10d8\u10dc\u10d8\u10e1 \u10ec\u10d0\u10e0\u10db\u10dd\u10d4\u10d1\u10d0\u10e1 \u10d3\u10d0 \u10d2\u10d0\u10e7\u10d8\u10d3\u10d5\u10d0\u10e1, \u10e0\u10d0\u10e8\u10d8\u10ea \u10db\u10d8\u10e1\u10d8 \u10e7\u10dd\u10e4\u10d8\u10da\u10d8 \u10db\u10dd\u10ec\u10d0\u10e4\u10d4 \u10ef\u10d4\u10e1\u10d8 \u10de\u10d8\u10dc\u10d9\u10db\u10d4\u10dc\u10d8 \u10d4\u10ee\u10db\u10d0\u10e0\u10d4\u10d1\u10d0.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "SI",
+            "iso_639_1": "sl",
+            "name": "Sloven\u0161\u010dina",
+            "english_name": "Slovenian",
+            "data": {
+                "name": "Kriva pota",
+                "overview": "Serija nam prika\u017ee kako lahko usodna diagnoza vpliva na povsem obi\u010dajnega, pridnega \u010dloveka in na njegovo moralo ter ga spremeni v glavnega akterja trgovine z mamili. U\u010ditelj kemije Walter White \u017eivi s sinom najstnikom, ki ima cerebralno paralizo in \u017eeno povsem obi\u010dajno \u017eivljenje v Novi Mehiki. Ko mu postavijo diagnozo 3. stopnje raka in napovejo le \u0161e dve leti \u017eivljenja spozna, da nima ve\u010d kaj za izgubiti. Odlo\u010di se, da bo pred smrtjo svoji dru\u017eini zagotovil varno prihodnost, zato se Walt poda na pot drog in kriminala. Za\u010dne proizvajati in prodajati metamfetamin z enim od svojih nekdanjih \u0161tudentov in kmalu se izka\u017ee, da je v tem zanj novem svetu izjemno ve\u0161\u010d...",
+                "homepage": "",
+                "tagline": "Spremenite ena\u010dbo."
+            }
+        },
+        {
+            "iso_3166_1": "HK",
+            "iso_639_1": "zh",
+            "name": "\u666e\u901a\u8bdd",
+            "english_name": "Mandarin",
+            "data": {
+                "name": "\u7d55\u547d\u6bd2\u5e2b",
+                "overview": "\u8a72\u5287\u8b1b\u8ff0\u4e86\u4e00\u6bd4\u7279\u666e\u901a\u7684\u9ad8\u4e2d\u5316\u5b78\u8001\u5e2b\u5728\u5f97\u77e5\u81ea\u5df1\u8eab\u60a3\u7d55\u75c7\u4e4b\u5f8c\uff0c\u70ba\u4e86\u7d66\u5bb6\u4eba\u7559\u4e0b\u8ca1\u7522\uff0c\u800c\u5229\u7528\u81ea\u5df1\u8d85\u51e1\u7684\u5316\u5b78\u77e5\u8b58\u88fd\u9020\u6bd2\u54c1\uff0c\u4e26\u6210\u70ba\u4e16\u754c\u9802\u7d1a\u6bd2\u738b\u7684\u50b3\u5947\u72af\u7f6a\u6545\u4e8b\u3002",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "MY",
+            "iso_639_1": "my",
+            "name": "",
+            "english_name": "Burmese",
+            "data": {
+                "name": "",
+                "overview": "",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "UZ",
+            "iso_639_1": "uz",
+            "name": "ozbek",
+            "english_name": "Uzbek",
+            "data": {
+                "name": "",
+                "overview": "",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "AE",
+            "iso_639_1": "ar",
+            "name": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629",
+            "english_name": "Arabic",
+            "data": {
+                "name": "",
+                "overview": "\u0645\u062f\u0631\u0633 \u0643\u064a\u0645\u064a\u0627\u0621 \u0641\u064a \u0645\u062f\u0631\u0633\u0629 \u062b\u0627\u0646\u0648\u064a\u0629 \u0639\u0644\u0649 \u0648\u0634\u0643 \u0627\u0644\u0648\u0641\u0627\u0629 \u0628\u0633\u0628\u0628 \u0627\u0644\u0633\u0631\u0637\u0627\u0646\u060c \u064a\u0634\u062a\u0631\u0643 \u0645\u0639 \u0637\u0627\u0644\u0628 \u0633\u0627\u0628\u0642 \u0641\u064a \u0635\u0646\u0627\u0639\u0629 \u0648\u0628\u064a\u0639 \u0639\u0642\u0627\u0631 \"\u0627\u0644\u0645\u064a\u062b\" \u0644\u062a\u0623\u0645\u064a\u0646 \u0645\u0633\u062a\u0642\u0628\u0644 \u0623\u0633\u0631\u062a\u0647.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "SG",
+            "iso_639_1": "zh",
+            "name": "\u666e\u901a\u8bdd",
+            "english_name": "Mandarin",
+            "data": {
+                "name": "\u7edd\u547d\u6bd2\u5e08",
+                "overview": "\u4e00\u4f4d\u60a3\u6709\u665a\u671f\u80ba\u764c\u7684\u9ad8\u4e2d\u5316\u5b66\u8001\u5e08\u4e3a\u4e86\u4fdd\u8bc1\u5bb6\u4eba\u672a\u6765\u7684\u751f\u8ba1\uff0c\u51b3\u5b9a\u548c\u4ee5\u524d\u7684\u5b66\u751f\u8054\u624b\u5236\u4f5c\u5e76\u8d29\u5356\u51b0\u6bd2\u3002",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "IN",
+            "iso_639_1": "hi",
+            "name": "\u0939\u093f\u0928\u094d\u0926\u0940",
+            "english_name": "Hindi",
+            "data": {
+                "name": "",
+                "overview": "\u092e\u094c\u0924 \u0915\u0940 \u0915\u0917\u093e\u0930 \u092a\u0930 \u0916\u0921\u093c\u0947 \u0939\u093e\u0908\u0938\u094d\u0915\u0942\u0932 \u0915\u0947 \u0915\u0948\u0902\u0938\u0930\u0917\u094d\u0930\u0938\u094d\u0924 \u0915\u0947\u092e\u093f\u0938\u094d\u091f\u094d\u0930\u0940 \u0936\u093f\u0915\u094d\u0937\u0915 \u0915\u094b \u0905\u092a\u0928\u0947 \u092a\u0930\u093f\u0935\u093e\u0930 \u0915\u093e \u092d\u0935\u093f\u0937\u094d\u092f \u0938\u0941\u0930\u0915\u094d\u0937\u093f\u0924 \u0915\u0930\u0928\u093e \u0939\u0948. \u0935\u0939 \u0928\u0936\u0940\u0932\u0940 \u0926\u0935\u093e \u092c\u0928\u093e\u0928\u0947 \u0914\u0930 \u092c\u0947\u091a\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u090f\u0915 \u092a\u0942\u0930\u094d\u0935 \u091b\u093e\u0924\u094d\u0930 \u0915\u094b \u0938\u093e\u0925 \u0932\u0947\u0924\u093e \u0939\u0948.",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "MY",
+            "iso_639_1": "ms",
+            "name": "Bahasa melayu",
+            "english_name": "Malay",
+            "data": {
+                "name": "",
+                "overview": "",
+                "homepage": "",
+                "tagline": ""
+            }
+        },
+        {
+            "iso_3166_1": "PH",
+            "iso_639_1": "tl",
+            "name": "",
+            "english_name": "Tagalog",
+            "data": {
+                "name": "",
+                "overview": "",
+                "homepage": "",
+                "tagline": ""
+            }
+        }
+    ]
+}

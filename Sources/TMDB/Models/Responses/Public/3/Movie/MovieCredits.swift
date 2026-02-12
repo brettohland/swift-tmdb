@@ -1,7 +1,7 @@
 import Foundation
 
 public extension TMDB {
-    struct MovieCredits: Codable, Identifiable, Sendable {
+    struct MediaCredits: Codable, Identifiable, Sendable {
         public let id: Int
         public let cast: [CastMember]
         public let crew: [CrewMember]

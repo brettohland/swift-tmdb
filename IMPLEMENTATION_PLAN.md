@@ -354,47 +354,178 @@ Tests/TMDBTests/Endpoint Tests/
 
 ---
 
-## Phase 4: TV Shows - Complete Coverage (NEXT)
+## Phase 4: TV Shows - Complete Coverage
 
 **Priority:** HIGH
 **Complexity:** MEDIUM-HIGH
-**Estimated Effort:** 4-5 weeks
 **Target Release:** v0.5.0
+**Endpoints:** 39 total across 4 endpoint enums
 
-### Endpoints to Implement (41 total)
+### Architecture
 
-#### TV Series (18 endpoints)
-- TV series details, credits, aggregate credits
-- Images, videos, reviews, keywords
-- Similar shows, recommendations
-- Alternative titles, content ratings, episode groups
-- External IDs, translations, watch providers
-- Screened theatrically, changes, latest
+TV has a 3-level hierarchy (series > season > episode) that movies don't have, plus TV-unique concepts like aggregate credits, content ratings, and episode groups.
 
-#### TV Series Lists (4 endpoints)
-- Airing today, on the air, popular, top rated
+**4 endpoint enums**: `TVSeries` (22), `TVSeasons` (9), `TVEpisodes` (7), `TVEpisodeGroups` (1)
 
-#### TV Seasons (9 endpoints)
-- Season details, credits, external IDs, images
-- Translations, videos, watch providers, changes
+**3 sub-phases**: 4a (TV Series), 4b (TV Seasons), 4c (TV Episodes + Groups)
 
-#### TV Episodes (9 endpoints)
-- Episode details, credits, external IDs, images
-- Translations, videos, changes
+### Pre-Phase: Shared Type Refactoring
 
-#### TV Episode Groups (1 endpoint)
-- Episode group details
+Before TV work, refactor these types for shared movie/TV use:
 
-### Key Models
+1. **`MovieCredits` → `MediaCredits`** — Rename struct and update all references
+2. **`MovieWatchProviderResult` → `MediaWatchProviderResult`** — Rename struct and update all references
+3. **`ExternalIDs`** — Add `tvdbID` and `tvrageID` optional fields
+4. **`ImageCollection`** — Add `stills` field, make all arrays resilient with `decodeIfPresent ?? []`
+5. **`TranslationData`** — Add `name` field (TV translations return `name` instead of `title`)
+
+### Sub-Phase 4a: TV Series (22 endpoints)
+
+#### New Models
 ```swift
-TMDB.TVSeries
-TMDB.TVSeason
-TMDB.TVEpisode
-TMDB.ContentRating
-TMDB.EpisodeGroup
+TMDB.TVSeries                      // Full detail model with custom Codable
+TMDB.TVSeries.Creator              // Created-by person
+TMDB.TVSeries.Network              // Network info
+TMDB.TVSeries.SeasonOverview       // Lightweight season in series response
+TMDB.TVSeries.EpisodeOverview      // Last/next episode to air
+TMDB.ContentRating                 // TV content rating per region
+TMDB.AggregateCredits              // TV-unique aggregate credits
+TMDB.AggregateCastMember           // Cast with roles across episodes
+TMDB.AggregateCrewMember           // Crew with jobs across episodes
+TMDB.EpisodeGroup                  // Episode group summary
+TMDB.ScreenedTheatricallyResult    // Theatrically screened episodes
 ```
 
-**Note:** Reuse ImageCollection, VideoCollection, Credits from Phase 2
+#### Endpoints (V3Endpoints.TVSeries)
+```
+⏳ GET /3/tv/{id}                      → TVSeries                              tvSeriesDetails(id:)
+⏳ GET /3/tv/{id}/credits               → MediaCredits                          tvSeriesCredits(id:)
+⏳ GET /3/tv/{id}/aggregate_credits     → AggregateCredits                      tvSeriesAggregateCredits(id:)
+⏳ GET /3/tv/{id}/images                → ImageCollection                       tvSeriesImages(id:)
+⏳ GET /3/tv/{id}/videos                → VideoCollection                       tvSeriesVideos(id:)
+⏳ GET /3/tv/{id}/reviews               → PaginatedResponse<Review>             tvSeriesReviews(id:)
+⏳ GET /3/tv/{id}/keywords              → [Keyword]                             tvSeriesKeywords(id:)
+⏳ GET /3/tv/{id}/similar               → PaginatedResponse<DiscoverTV>         similarTVSeries(id:)
+⏳ GET /3/tv/{id}/recommendations       → PaginatedResponse<DiscoverTV>         tvSeriesRecommendations(id:)
+⏳ GET /3/tv/{id}/alternative_titles    → [AlternativeTitle]                    alternativeTVSeriesTitles(id:)
+⏳ GET /3/tv/{id}/content_ratings       → [ContentRating]                       tvSeriesContentRatings(id:)
+⏳ GET /3/tv/{id}/episode_groups        → [EpisodeGroup]                        tvSeriesEpisodeGroups(id:)
+⏳ GET /3/tv/{id}/external_ids          → ExternalIDs                           tvSeriesExternalIDs(id:)
+⏳ GET /3/tv/{id}/translations          → [Translation]                         tvSeriesTranslations(id:)
+⏳ GET /3/tv/{id}/watch/providers       → MediaWatchProviderResult              tvSeriesWatchProviders(id:)
+⏳ GET /3/tv/{id}/screened_theatrically → [ScreenedTheatricallyResult]          tvSeriesScreenedTheatrically(id:)
+⏳ GET /3/tv/{id}/changes               → ChangeCollection                      tvSeriesChanges(id:)
+⏳ GET /3/tv/latest                     → TVSeries                              latestTVSeries()
+⏳ GET /3/tv/airing_today               → PaginatedResponse<DiscoverTV>         tvSeriesAiringToday()
+⏳ GET /3/tv/on_the_air                 → PaginatedResponse<DiscoverTV>         tvSeriesOnTheAir()
+⏳ GET /3/tv/popular                    → PaginatedResponse<DiscoverTV>         popularTVSeries()
+⏳ GET /3/tv/top_rated                  → PaginatedResponse<DiscoverTV>         topRatedTVSeries()
+```
+
+#### Files
+```
+Sources/TMDB/Models/Responses/Public/3/TV/
+├── TVSeries.swift
+├── AggregateCredits.swift
+├── ContentRating.swift
+├── EpisodeGroup.swift
+└── ScreenedTheatricallyResult.swift
+
+Sources/TMDB/Models/Endpoints/TV/TVSeriesEndpoints.swift
+Sources/TMDB/Models/Responses/Internal/TVSeriesKeywordsResponse.swift (+ others)
+Sources/TMDB/Services/MockingService/Extensions/TVSeries+MockableResponse.swift
+Sources/TMDBMocking/JSON/TV/ (22 JSON files)
+Sources/TMDBDependencies/Clients/TVSeriesClient.swift
+Tests/TMDBTests/Endpoint Tests/TV/TVSeriesEndpointTests.swift
+```
+
+### Sub-Phase 4b: TV Seasons (9 endpoints)
+
+#### New Models
+```swift
+TMDB.TVSeason              // Full season detail with episodes array
+TMDB.TVEpisode             // Full episode detail (reused in 4c)
+```
+
+#### Endpoints (V3Endpoints.TVSeasons)
+```
+⏳ GET /3/tv/{id}/season/{num}                      → TVSeason              tvSeasonDetails(seriesID:seasonNumber:)
+⏳ GET /3/tv/{id}/season/{num}/credits               → MediaCredits          tvSeasonCredits(seriesID:seasonNumber:)
+⏳ GET /3/tv/{id}/season/{num}/aggregate_credits     → AggregateCredits      tvSeasonAggregateCredits(seriesID:seasonNumber:)
+⏳ GET /3/tv/{id}/season/{num}/external_ids          → ExternalIDs           tvSeasonExternalIDs(seriesID:seasonNumber:)
+⏳ GET /3/tv/{id}/season/{num}/images                → ImageCollection       tvSeasonImages(seriesID:seasonNumber:)
+⏳ GET /3/tv/{id}/season/{num}/translations          → [Translation]         tvSeasonTranslations(seriesID:seasonNumber:)
+⏳ GET /3/tv/{id}/season/{num}/videos                → VideoCollection       tvSeasonVideos(seriesID:seasonNumber:)
+⏳ GET /3/tv/{id}/season/{num}/watch/providers       → MediaWatchProviderResult tvSeasonWatchProviders(seriesID:seasonNumber:)
+⏳ GET /3/tv/{id}/season/{num}/changes               → ChangeCollection      tvSeasonChanges(seriesID:seasonNumber:)
+```
+
+#### Files
+```
+Sources/TMDB/Models/Responses/Public/3/TV/
+├── TVSeason.swift
+└── TVEpisode.swift
+
+Sources/TMDB/Models/Endpoints/TV/TVSeasonEndpoints.swift
+Sources/TMDB/Services/MockingService/Extensions/TVSeason+MockableResponse.swift
+Sources/TMDBMocking/JSON/TV/Season/ (9 JSON files)
+Sources/TMDBDependencies/Clients/TVSeasonsClient.swift
+Tests/TMDBTests/Endpoint Tests/TV/TVSeasonEndpointTests.swift
+```
+
+### Sub-Phase 4c: TV Episodes + Episode Groups (8 endpoints)
+
+#### New Models
+```swift
+TMDB.EpisodeGroupDetails           // Full episode group with nested groups/episodes
+```
+
+#### Endpoints (V3Endpoints.TVEpisodes)
+```
+⏳ GET /3/tv/{id}/season/{num}/episode/{ep}                  → TVEpisode     tvEpisodeDetails(seriesID:seasonNumber:episodeNumber:)
+⏳ GET /3/tv/{id}/season/{num}/episode/{ep}/credits           → MediaCredits  tvEpisodeCredits(seriesID:seasonNumber:episodeNumber:)
+⏳ GET /3/tv/{id}/season/{num}/episode/{ep}/external_ids      → ExternalIDs   tvEpisodeExternalIDs(seriesID:seasonNumber:episodeNumber:)
+⏳ GET /3/tv/{id}/season/{num}/episode/{ep}/images            → ImageCollection tvEpisodeImages(seriesID:seasonNumber:episodeNumber:)
+⏳ GET /3/tv/{id}/season/{num}/episode/{ep}/translations      → [Translation] tvEpisodeTranslations(seriesID:seasonNumber:episodeNumber:)
+⏳ GET /3/tv/{id}/season/{num}/episode/{ep}/videos            → VideoCollection tvEpisodeVideos(seriesID:seasonNumber:episodeNumber:)
+⏳ GET /3/tv/{id}/season/{num}/episode/{ep}/changes           → ChangeCollection tvEpisodeChanges(seriesID:seasonNumber:episodeNumber:)
+```
+
+#### Endpoints (V3Endpoints.TVEpisodeGroups)
+```
+⏳ GET /3/tv/episode_group/{id}    → EpisodeGroupDetails    episodeGroupDetails(id: String)  ← String ID!
+```
+
+#### Mock Route Ordering (Critical)
+TV routes must be ordered most-specific first:
+1. `/3/tv/\d+/season/\d+/episode/\d+/sub_endpoint$` (episode sub-endpoints)
+2. `/3/tv/\d+/season/\d+/episode/\d+$` (episode details)
+3. `/3/tv/\d+/season/\d+/sub_endpoint$` (season sub-endpoints)
+4. `/3/tv/\d+/season/\d+$` (season details)
+5. `/3/tv/\d+/sub_endpoint$` (series sub-endpoints)
+6. `/3/tv/\d+$` (series details)
+7. `/3/tv/episode_group/[^/]+$` (episode group — string ID)
+8. `/3/tv/latest$`, `/3/tv/airing_today$`, etc. (list endpoints)
+
+#### Files
+```
+Sources/TMDB/Models/Responses/Public/3/TV/EpisodeGroupDetails.swift
+Sources/TMDB/Models/Endpoints/TV/TVEpisodeEndpoints.swift
+Sources/TMDB/Models/Endpoints/TV/TVEpisodeGroupEndpoints.swift
+Sources/TMDB/Services/MockingService/Extensions/TVEpisode+MockableResponse.swift
+Sources/TMDBMocking/JSON/TV/Episode/ (7 JSON files)
+Sources/TMDBMocking/JSON/TV/EpisodeGroup/ (1 JSON file)
+Sources/TMDBDependencies/Clients/TVEpisodesClient.swift
+Tests/TMDBTests/Endpoint Tests/TV/TVEpisodeEndpointTests.swift
+Tests/TMDBTests/Endpoint Tests/TV/TVEpisodeGroupEndpointTests.swift
+```
+
+### Verification
+
+After each sub-phase:
+1. `swift build` — no errors or warnings
+2. `swift test` — all tests pass (existing + new)
+3. `swiftformat --exclude docs Sources Tests` — code formatting
 
 ---
 

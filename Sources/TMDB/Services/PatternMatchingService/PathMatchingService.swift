@@ -22,6 +22,10 @@ enum PathMatchingService {
             + TMDB.V3Endpoints.Find.mockRoutes
             + TMDB.V3Endpoints.Keywords.mockRoutes
             + TMDB.V3Endpoints.Collections.mockRoutes
+            + TMDB.V3Endpoints.TVEpisodes.mockRoutes
+            + TMDB.V3Endpoints.TVEpisodeGroups.mockRoutes
+            + TMDB.V3Endpoints.TVSeasons.mockRoutes
+            + TMDB.V3Endpoints.TVSeries.mockRoutes
 
     static func dataFromURLRequest(_ request: URLRequest) throws -> Data {
         guard let url = request.url else {

@@ -30,5 +30,6 @@ public extension TMDB {
         public let runtime: Int?
         public let tagline: String?
         public let title: String?
+        public let name: String?
     }
 }

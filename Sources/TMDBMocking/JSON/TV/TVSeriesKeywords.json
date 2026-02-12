@@ -1,0 +1,129 @@
+{
+    "id": 1396,
+    "results": [
+        {
+            "name": "new mexico",
+            "id": 1508
+        },
+        {
+            "name": "drug dealer",
+            "id": 2231
+        },
+        {
+            "name": "narcissism",
+            "id": 5857
+        },
+        {
+            "name": "psychopath",
+            "id": 6259
+        },
+        {
+            "name": "terminal illness",
+            "id": 6564
+        },
+        {
+            "name": "outlaw",
+            "id": 9503
+        },
+        {
+            "name": "dark comedy",
+            "id": 10123
+        },
+        {
+            "name": "cancer",
+            "id": 10163
+        },
+        {
+            "name": "tragedy",
+            "id": 10614
+        },
+        {
+            "name": "drugs",
+            "id": 14964
+        },
+        {
+            "name": "criminal",
+            "id": 15009
+        },
+        {
+            "name": "meth lab",
+            "id": 15484
+        },
+        {
+            "name": "drug lord",
+            "id": 18026
+        },
+        {
+            "name": "high school teacher",
+            "id": 41525
+        },
+        {
+            "name": "dea agent",
+            "id": 156805
+        },
+        {
+            "name": "neo-western",
+            "id": 168713
+        },
+        {
+            "name": "narcissist",
+            "id": 185959
+        },
+        {
+            "name": "albuquerque, new mexico",
+            "id": 191005
+        },
+        {
+            "name": "criminal lawyer",
+            "id": 191199
+        },
+        {
+            "name": "fall from grace",
+            "id": 199660
+        },
+        {
+            "name": "cartel",
+            "id": 206594
+        },
+        {
+            "name": "mexican cartel",
+            "id": 217064
+        },
+        {
+            "name": "male egos",
+            "id": 217104
+        },
+        {
+            "name": "crystal meth",
+            "id": 239108
+        },
+        {
+            "name": "dark",
+            "id": 259094
+        },
+        {
+            "name": "methamphetamine",
+            "id": 281692
+        },
+        {
+            "name": "gritty",
+            "id": 286125
+        },
+        {
+            "name": "thriller",
+            "id": 316362
+        },
+        {
+            "name": "awestruck",
+            "id": 325775
+        },
+        {
+            "name": "violent",
+            "id": 342828
+        },
+        {
+            "name": "tortured genius",
+            "id": 360934
+        }
+    ]
+}

@@ -25,7 +25,7 @@ public struct MoviesClient: Sendable {
     /// - Throws: ``TMDBRequestError
     public var alternativeMovieTitles: @Sendable (_ movie: TMDB.Movie) async throws -> [TMDB.AlternativeTitle]
     /// Make a request to the TMDB API's `/3/movie/{id}/credits` endpoint
-    public var movieCredits: @Sendable (_ id: Int) async throws -> TMDB.MovieCredits
+    public var movieCredits: @Sendable (_ id: Int) async throws -> TMDB.MediaCredits
     /// Make a request to the TMDB API's `/3/movie/{id}/images` endpoint
     public var movieImages: @Sendable (_ id: Int) async throws -> TMDB.ImageCollection
     /// Make a request to the TMDB API's `/3/movie/{id}/videos` endpoint
@@ -47,7 +47,7 @@ public struct MoviesClient: Sendable {
     /// Make a request to the TMDB API's `/3/movie/{id}/translations` endpoint
     public var movieTranslations: @Sendable (_ id: Int) async throws -> [TMDB.Translation]
     /// Make a request to the TMDB API's `/3/movie/{id}/watch/providers` endpoint
-    public var movieWatchProviders: @Sendable (_ id: Int) async throws -> TMDB.MovieWatchProviderResult
+    public var movieWatchProviders: @Sendable (_ id: Int) async throws -> TMDB.MediaWatchProviderResult
     /// Make a request to the TMDB API's `/3/movie/{id}/changes` endpoint
     public var movieChanges: @Sendable (_ id: Int) async throws -> TMDB.ChangeCollection
     /// Make a request to the TMDB API's `/3/movie/latest` endpoint

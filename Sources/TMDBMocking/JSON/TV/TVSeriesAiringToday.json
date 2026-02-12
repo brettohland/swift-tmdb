@@ -1,0 +1,419 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "/butPVWgcbtAjL9Z7jU7Xj1KA8KD.jpg",
+            "genre_ids": [
+                10767,
+                35
+            ],
+            "id": 22980,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "Watch What Happens Live with Andy Cohen",
+            "overview": "Bravo network executive Andy Cohen discusses pop culture topics with celebrities and reality show personalities.",
+            "popularity": 143.1138,
+            "poster_path": "/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+            "first_air_date": "2009-07-16",
+            "name": "Watch What Happens Live with Andy Cohen",
+            "vote_average": 5.0,
+            "vote_count": 81
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/qLMfcvdCcCGD2BNLH8b6ZCBuO7D.jpg",
+            "genre_ids": [
+                10763,
+                35
+            ],
+            "id": 2224,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The Daily Show",
+            "overview": "The World's Fakest News Team tackle the biggest stories in news, politics and pop culture.",
+            "popularity": 125.0515,
+            "poster_path": "/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
+            "first_air_date": "1996-07-22",
+            "name": "The Daily Show",
+            "vote_average": 6.398,
+            "vote_count": 615
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/opxjwbFSadDgVmZtrLTlWJsUxrB.jpg",
+            "genre_ids": [
+                18
+            ],
+            "id": 283123,
+            "origin_country": [
+                "TR"
+            ],
+            "original_language": "tr",
+            "original_name": "E\u015fref R\u00fcya",
+            "overview": "As a child, E\u015fref fell in love from afar with a girl he called \u201cR\u00fcya\u201d and spent years searching for her, only to become a powerful mafia figure along the way. Meanwhile, Nisan, an idealistic musician, finds herself in grave danger after performing at a wedding held at E\u015fref\u2019s hotel. E\u015fref falls for Nisan, unaware that she is both the long-lost R\u00fcya he has been chasing for years and a police informant. Trapped in a whirlwind of love, betrayal, and power struggles, E\u015fref is forced into a brutal reckoning\u2014both with his criminal empire and his own emotions.",
+            "popularity": 73.8151,
+            "poster_path": "/jwrN5QA07dm8sKuUFInP2MRLPfb.jpg",
+            "first_air_date": "2025-03-19",
+            "name": "Esref's Dream",
+            "vote_average": 7.292,
+            "vote_count": 24
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/euEHCRdfV1ZTDgfhZm1XKHVkZ2K.jpg",
+            "genre_ids": [
+                99
+            ],
+            "id": 3562,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "NOVA",
+            "overview": "PBS' premier science series helps viewers of all ages explore the science behind the headlines. Along the way, NOVA demystifies science and technology, and highlights the people involved in scientific pursuits.",
+            "popularity": 62.2722,
+            "poster_path": "/giUBXYnDAaJgNqA6iE3BMVE2EHp.jpg",
+            "first_air_date": "1974-03-03",
+            "name": "NOVA",
+            "vote_average": 6.993,
+            "vote_count": 134
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/b4D9I3nz4Iya8Pd566PpOvz9q6O.jpg",
+            "genre_ids": [
+                18,
+                10759,
+                9648
+            ],
+            "id": 302463,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "es",
+            "original_name": "Dinast\u00eda Casillas",
+            "overview": "",
+            "popularity": 58.5065,
+            "poster_path": "/5xFzmTTC4ITaFkiwzohTK1UUNX3.jpg",
+            "first_air_date": "2025-10-07",
+            "name": "Dinast\u00eda Casillas",
+            "vote_average": 8.261,
+            "vote_count": 287
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/qJnjJXBLgG4tummCm792nvNz7u1.jpg",
+            "genre_ids": [
+                10767
+            ],
+            "id": 23915,
+            "origin_country": [
+                "DE"
+            ],
+            "original_language": "de",
+            "original_name": "Markus Lanz",
+            "overview": "TV presenter Markus Lanz invites prominent guests and experts from all areas of public life to his colourful talk show. As a rule, there are four guests, introduced individually to contribute their personal experiences to the topics.",
+            "popularity": 57.1042,
+            "poster_path": "/tr4cLn4ecRASV0SPM9FRv0AJOQF.jpg",
+            "first_air_date": "2008-06-03",
+            "name": "Markus Lanz",
+            "vote_average": 5.5,
+            "vote_count": 14
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/yLRGIigN6BWvEQaJCtRti4mnQkI.jpg",
+            "genre_ids": [
+                80,
+                9648,
+                10764
+            ],
+            "id": 74561,
+            "origin_country": [
+                "CN"
+            ],
+            "original_language": "zh",
+            "original_name": "\u660e\u661f\u5927\u4fa6\u63a2",
+            "overview": "The cast is introduced to the settings and suspects of a murder case for the new episode. The cast then chooses their role in the episode, as a particular suspect or the detective.",
+            "popularity": 54.8172,
+            "poster_path": "/bBtd3p4DZmVEuv8L9SelQ0MVE2B.jpg",
+            "first_air_date": "2016-03-27",
+            "name": "Who's the Murderer",
+            "vote_average": 8.4,
+            "vote_count": 14
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/4og4Eme2gHcTRaHVpZTSCDd7ZNY.jpg",
+            "genre_ids": [
+                10766,
+                18,
+                80
+            ],
+            "id": 1871,
+            "origin_country": [
+                "GB"
+            ],
+            "original_language": "en",
+            "original_name": "EastEnders",
+            "overview": "The everyday lives of working-class residents of Albert Square, a traditional Victorian square of terrace houses surrounding a park in the East End of London's Walford borough.",
+            "popularity": 51.1593,
+            "poster_path": "/z4jgyI5TpoRZiJTNchkVkMrGQyz.jpg",
+            "first_air_date": "1985-02-19",
+            "name": "EastEnders",
+            "vote_average": 4.146,
+            "vote_count": 219
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/cX6dzeKsBTTXHoG3uQUuhQbqyvq.jpg",
+            "genre_ids": [
+                18,
+                10765
+            ],
+            "id": 273160,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The Beauty",
+            "overview": "The world of high fashion turns dark when international supermodels begin dying in gruesome and mysterious ways. FBI Agents Cooper Madsen and Jordan Bennett are sent to Paris to uncover the truth. As they delve deeper into the case, they uncover a sexually transmitted virus that transforms ordinary people into visions of physical perfection, but with terrifying consequences.",
+            "popularity": 50.9936,
+            "poster_path": "/tZTG2PPAukzksPkiQV9c4suIQXk.jpg",
+            "first_air_date": "2026-01-21",
+            "name": "The Beauty",
+            "vote_average": 6.2,
+            "vote_count": 55
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/55tcKzl0gZ0lR1q7TrVJm0h9lkT.jpg",
+            "genre_ids": [
+                10764,
+                10751
+            ],
+            "id": 2912,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "Jeopardy!",
+            "overview": "America's favorite quiz show where contestants are presented with general knowledge clues in the form of answers, and must phrase their responses in question form.",
+            "popularity": 49.4745,
+            "poster_path": "/hfz0IgebqGENG6ZnuqKQKMFk2vy.jpg",
+            "first_air_date": "1984-09-10",
+            "name": "Jeopardy!",
+            "vote_average": 6.838,
+            "vote_count": 151
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/ottT2Yt0OfHiHp3PHJTLNVV8JPE.jpg",
+            "genre_ids": [
+                18,
+                10766
+            ],
+            "id": 13945,
+            "origin_country": [
+                "DE"
+            ],
+            "original_language": "de",
+            "original_name": "Gute Zeiten, schlechte Zeiten",
+            "overview": "Gute Zeiten, schlechte Zeiten is a long-running German television soap opera, first broadcast on RTL in 1992. The programme concerns the lives of a fictional neighborhood in Germany's capital city Berlin. Over the years the soap opera tends to have an overhaul of young people in their late teens and early twenties; targeting a young viewership.",
+            "popularity": 49.1631,
+            "poster_path": "/qujVFLAlBnPU9mZElV4NZgL8iXT.jpg",
+            "first_air_date": "1992-05-11",
+            "name": "Gute Zeiten, schlechte Zeiten",
+            "vote_average": 5.605,
+            "vote_count": 43
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/kCd0rmnNwCd3sgupO9DqSi9aHa0.jpg",
+            "genre_ids": [
+                10767
+            ],
+            "id": 65270,
+            "origin_country": [
+                "KR"
+            ],
+            "original_language": "ko",
+            "original_name": "\ub77c\ub514\uc624\uc2a4\ud0c0",
+            "overview": "\u201cRadio Star\u201d is a South Korean music talk show where the guests and hosts talk openly and intimately about their lives, their pasts and their work. It is part of Munhwa Broadcasting Corporation's \"Golden Fishery\" programming block.",
+            "popularity": 47.8007,
+            "poster_path": "/uRUZDsvUfIP3JUEgOC8ReBlQQUU.jpg",
+            "first_air_date": "2007-05-30",
+            "name": "Radio Star",
+            "vote_average": 5.8,
+            "vote_count": 4
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/pmB8uYJF1WKQCZnJjhnAx2IJjhk.jpg",
+            "genre_ids": [
+                10766
+            ],
+            "id": 14750,
+            "origin_country": [
+                "PL"
+            ],
+            "original_language": "pl",
+            "original_name": "Na Wsp\u00f3lnej",
+            "overview": "Na Wsp\u00f3lnej is a Polish soap opera. It has been running since 2003 on the TVN channel as its flagship primetime weekday soap opera. It is loosely based on the German production Unter Uns and it follows the lives of the inhabitants of an apartment block in Wsp\u00f3lna Street, Warsaw. Episodes tend to last around 20 minutes. It is a Polish version of the Hungarian \"Bar\u00e1tok k\u00f6zt\".\n\nThe series is shot almost entirely in Warsaw and produced by the Polish branch of Freemantle Media. On 9 September 2008 it celebrated its 1000th episode; \"Na Wsp\u00f3lnej\" was the fourth Polish television series ever to achieve such status. A special episode was broadcast in which characters from some other of TVN's most popular shows visited Wsp\u00f3lna Street.",
+            "popularity": 46.3489,
+            "poster_path": "/uksRhdaOn64bO5d33d7rcTbrhJI.jpg",
+            "first_air_date": "2003-01-27",
+            "name": "Na Wsp\u00f3lnej",
+            "vote_average": 4.1,
+            "vote_count": 10
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/5APjn4LnV5wWk5DXq7ZewT6zzP1.jpg",
+            "genre_ids": [
+                10766
+            ],
+            "id": 291,
+            "origin_country": [
+                "GB"
+            ],
+            "original_language": "en",
+            "original_name": "Coronation Street",
+            "overview": "The residents of Coronation Street are ordinary, working-class people, and the show follows them through regular social and family interactions at home, in the workplace, and in their local pub, the Rovers Return Inn. Britain's longest-running soap.",
+            "popularity": 44.1429,
+            "poster_path": "/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
+            "first_air_date": "1960-12-09",
+            "name": "Coronation Street",
+            "vote_average": 5.3,
+            "vote_count": 115
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/m9vxP7F52vTyFTlMqppxKFOcCPN.jpg",
+            "genre_ids": [
+                18
+            ],
+            "id": 307423,
+            "origin_country": [
+                "MX"
+            ],
+            "original_language": "es",
+            "original_name": "Dom\u00e9nica Montero",
+            "overview": "A respected and renowned businesswoman and philanthropist, considered one of the most sought-after brides in the country, who is left at the altar on her wedding day. Humiliated, betrayed, and turned into a target of public scrutiny, Dom\u00e9nica decides to flee and take refuge in one of her parents\u2019 old estates. There, marked by pain, she faces new challenges and meets Luis Fernando, the owner of the neighboring estate, who also carries a painful past. Between them, an explosive relationship develops, marked by pride, misunderstandings, and growing attraction, where land disputes intertwine with their shared desire to rebuild, heal, and give new meaning to their lives.",
+            "popularity": 43.7721,
+            "poster_path": "/A02M5F5DcQ3glHrvBUSGnzTlvW1.jpg",
+            "first_air_date": "2025-12-08",
+            "name": "Dom\u00e9nica Montero",
+            "vote_average": 8.207,
+            "vote_count": 140
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/cWOf1pRRX5gvtSo1calWSB8NQho.jpg",
+            "genre_ids": [
+                10751,
+                35
+            ],
+            "id": 49036,
+            "origin_country": [
+                "CN"
+            ],
+            "original_language": "zh",
+            "original_name": "\u4e61\u6751\u7231\u60c5",
+            "overview": "",
+            "popularity": 42.7216,
+            "poster_path": "/2XlU2bzsESbc6x9lBKe0gyk90oO.jpg",
+            "first_air_date": "2006-09-30",
+            "name": "Love Stories in the Countryside",
+            "vote_average": 6.1,
+            "vote_count": 8
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/eJd5TfoiFG5JOhuMZgdvpTgp8eK.jpg",
+            "genre_ids": [
+                80
+            ],
+            "id": 41018,
+            "origin_country": [
+                "DE"
+            ],
+            "original_language": "de",
+            "original_name": "SOKO Wismar",
+            "overview": "",
+            "popularity": 41.9507,
+            "poster_path": "/jvc2fWkPfr5CdiK18k9VOM6xYZ5.jpg",
+            "first_air_date": "2004-10-06",
+            "name": "SOKO Wismar",
+            "vote_average": 6.1,
+            "vote_count": 10
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/eNjzPQsNNPd8zluKTpv7Axhk8p4.jpg",
+            "genre_ids": [
+                10767
+            ],
+            "id": 1900,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "LIVE with Kelly and Mark",
+            "overview": "A morning talk show with A-list celebrity guests, top-notch performances and one-of-a-kind segments that are unrivaled on daytime television, plus spontaneous, hilarious and unpredictable talk.",
+            "popularity": 41.2068,
+            "poster_path": "/hBkyypWN3EcOzkozatiCm5VeaG.jpg",
+            "first_air_date": "1988-09-05",
+            "name": "LIVE with Kelly and Mark",
+            "vote_average": 5.448,
+            "vote_count": 48
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/7g5ntSj6rQANCZnkDKeRax1hhhD.jpg",
+            "genre_ids": [
+                10767
+            ],
+            "id": 210081,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "Sherri",
+            "overview": "Sherri Shepherd, actress, comic, and Emmy Award-winning longtime co-host of \"The View\", appears before a live audience with a daily dose of pop culture, comedy, conversations, and daytime talk staples, including celebrity and human interest interviews.",
+            "popularity": 40.9988,
+            "poster_path": "/w6K4LsGYTBbuYpDG9qR20g6p1NT.jpg",
+            "first_air_date": "2022-09-12",
+            "name": "Sherri",
+            "vote_average": 2.9,
+            "vote_count": 12
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/s1dTt4M31q2HwD5Fkl1tf5tQzJg.jpg",
+            "genre_ids": [
+                10766
+            ],
+            "id": 206559,
+            "origin_country": [
+                "ZA"
+            ],
+            "original_language": "af",
+            "original_name": "Binnelanders",
+            "overview": "A South African Afrikaans soap opera. It is set in and around the fictional private hospital, Binneland Kliniek, in Pretoria, and the storyline follows the trials, trauma and tribulations of the staff and patients of the hospital.",
+            "popularity": 40.9636,
+            "poster_path": "/3bzECfllho8PphdYujLUIuhncJD.jpg",
+            "first_air_date": "2005-10-13",
+            "name": "Binnelanders",
+            "vote_average": 5.5,
+            "vote_count": 106
+        }
+    ],
+    "total_pages": 17,
+    "total_results": 334
+}

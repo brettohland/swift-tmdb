@@ -154,10 +154,10 @@ public extension TMDB {
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-credits)
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
-    /// - Returns: ``TMDB/MovieCredits``
+    /// - Returns: ``TMDB/MediaCredits``
     /// - Throws: ``TMDBRequestError``
-    static func movieCredits(id: Int) async throws(TMDBRequestError) -> MovieCredits {
-        let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.MovieCredits>(
+    static func movieCredits(id: Int) async throws(TMDBRequestError) -> MediaCredits {
+        let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.MediaCredits>(
             endpoint: V3Endpoints.Movies.credits(id: id),
             httpMethod: .get,
         )
@@ -379,10 +379,10 @@ public extension TMDB {
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-watch-providers)
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
-    /// - Returns: ``TMDB/MovieWatchProviderResult``
+    /// - Returns: ``TMDB/MediaWatchProviderResult``
     /// - Throws: ``TMDBRequestError``
-    static func movieWatchProviders(id: Int) async throws(TMDBRequestError) -> MovieWatchProviderResult {
-        let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.MovieWatchProviderResult>(
+    static func movieWatchProviders(id: Int) async throws(TMDBRequestError) -> MediaWatchProviderResult {
+        let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.MediaWatchProviderResult>(
             endpoint: V3Endpoints.Movies.watchProviders(id: id),
             httpMethod: .get,
         )

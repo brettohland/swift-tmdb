@@ -13,6 +13,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Use `let` for all properties in decoded structs** - The only exception is properties using property wrappers (`@NilBoolean`, `@ISO8601YMD`, `@LanguageCode`, `@RegionCode`, `@Minutes`, etc.) which require `var` per Swift's rules.
 - **Never use `Bool?` in decoded structs** - Always use the `@NilBoolean` property wrapper instead, which decodes missing or null values as `false`. In custom Codable implementations, decode via `_propertyName = try container.decodeIfPresent(NilBoolean.self, forKey: .key) ?? NilBoolean(wrappedValue: false)` and encode via `try container.encode(_propertyName, forKey: .key)`.
 - **Define each enum case on its own line** - Never use comma-separated case lists (e.g., `case a, b, c`). Each case must be on a separate line.
+- **Use `URL` or `URL?` for image path properties** - Properties like `posterPath`, `backdropPath`, `profilePath`, `logoPath`, `filePath`, and `stillPath` are typed as `URL`/`URL?`, not `String`/`String?`.
+- **Use typed throws on all public API methods** - All public static methods on `TMDB` use `async throws(TMDBRequestError)` with a `do/catch` wrapper that converts errors via `throw .systemError(error)`.
 
 ## Swift API Design Guidelines
 
@@ -57,14 +59,19 @@ swift package --disable-sandbox preview-documentation --target TMDB
 
 ## Architecture
 
-### Two-Module Structure
+### Three-Target Structure
 
 1. **TMDB** (Core Module)
    - Contains all API request logic, models, and response types
    - Uses static methods on the `TMDB` enum for making API calls
-   - Automatically provides mock data in test and preview contexts
 
-2. **TMDBDependencies** (Optional Wrapper Module)
+2. **TMDBMocking** (Mock Data Module)
+   - Contains all mock JSON response files for testing and previews
+   - Automatically discovered at runtime via bundle lookup
+   - The `TMDB` library product bundles both `TMDB` + `TMDBMocking` targets
+   - The `TMDBCore` library product provides `TMDB` without mocking (for apps that don't need it)
+
+3. **TMDBDependencies** (Optional Wrapper Module)
    - Provides `@Dependency`-based clients for use with PointFree's Dependencies
    - Re-exports the Dependencies module
    - Example: `MoviesClient` wraps `TMDB.movieDetails(id:)` for dependency injection
@@ -92,7 +99,7 @@ The codebase uses a service-oriented architecture with several internal services
 #### MockingService
 - **PathMatchingService**: Routes incoming test requests to appropriate mock data
 - Uses regex pattern matching to identify endpoints in test contexts
-- Mock JSON responses stored in `Sources/TMDB/Services/MockingService/JSON/`
+- Mock JSON responses stored in `Sources/TMDBMocking/JSON/`
 - **MockableResponse**: Protocol for types that can provide mock data
 
 #### LoggingService
@@ -129,9 +136,13 @@ extension TMDB.V3Endpoints.Movies: EndpointFactory {
 
 // Public API
 public extension TMDB {
-    static func movieDetails(id: Int) async throws -> Movie {
+    static func movieDetails(id: Int) async throws(TMDBRequestError) -> Movie {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, Movie>(...)
-        return try await endpoint.decodedResponse()
+        do {
+            return try await endpoint.decodedResponse()
+        } catch {
+            throw .systemError(error)
+        }
     }
 }
 ```
@@ -159,11 +170,14 @@ Sources/
 │   │   └── Codable Property Wrappers/ # Custom property wrappers for encoding/decoding
 │   ├── Services/
 │   │   ├── RequestService/            # Core networking
-│   │   ├── MockingService/            # Test/preview mocking
+│   │   ├── MockingService/            # Test/preview mocking (routing logic + MockableResponse)
 │   │   ├── LoggingService/            # Logging abstractions
 │   │   └── PatternMatchingService/    # URL pattern matching for mocks
 │   ├── Format Styles/                 # Swift FormatStyle implementations
 │   └── Documentation.docc/            # DocC documentation
+├── TMDBMocking/
+│   ├── TMDBMocking.swift              # Bundle registration for mock data
+│   └── JSON/                          # Mock JSON response files
 └── TMDBDependencies/
     └── Clients/                       # Dependency-based client wrappers
 ```
@@ -194,7 +208,7 @@ To add a new TMDB API endpoint:
 2. Implement `makeURL(baseURL:)` in `EndpointFactory` conformance
 3. Define response model types in `Sources/TMDB/Models/Responses/`
 4. Create public static method on `TMDB` to execute the request
-5. Add mock JSON response in `Sources/TMDB/Services/MockingService/JSON/`
+5. Add mock JSON response in `Sources/TMDBMocking/JSON/`
 6. Update `PathMatchingService.handleV3Path()` to route to mock data
 7. Create conformance to `MockableResponse` protocol for the response type
 8. Write tests in `Tests/TMDBTests/`

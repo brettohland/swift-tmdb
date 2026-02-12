@@ -1,0 +1,454 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "/hPea3Qy5Gd6z4kJLUruBbwAH8Rm.jpg",
+            "id": 60059,
+            "name": "Better Call Saul",
+            "original_name": "Better Call Saul",
+            "overview": "Six years before Saul Goodman meets Walter White. We meet him when the man who will become Saul Goodman is known as Jimmy McGill, a small-time lawyer searching for his destiny, and, more immediately, hustling to make ends meet. Working alongside, and, often, against Jimmy, is \u201cfixer\u201d Mike Ehrmantraut. The series tracks Jimmy\u2019s transformation into Saul Goodman, the man who puts \u201ccriminal\u201d in \u201ccriminal lawyer\".",
+            "poster_path": "/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                80,
+                18
+            ],
+            "popularity": 84.9185,
+            "first_air_date": "2015-02-08",
+            "vote_average": 8.702,
+            "vote_count": 6184,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/aSGSxGMTP893DPMCvMl9AdnEICE.jpg",
+            "id": 1405,
+            "name": "Dexter",
+            "original_name": "Dexter",
+            "overview": "Dexter Morgan, a blood spatter pattern analyst for the Miami Metro Police also leads a secret life as a serial killer, hunting down criminals who have slipped through the cracks of justice.",
+            "poster_path": "/q8dWfc4JwQuv3HayIZeO84jAXED.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                80,
+                18,
+                9648
+            ],
+            "popularity": 159.55,
+            "first_air_date": "2006-10-01",
+            "vote_average": 8.2,
+            "vote_count": 5237,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/dg3OindVAGZBjlT3xYKqIAdukPL.jpg",
+            "id": 42009,
+            "name": "Black Mirror",
+            "original_name": "Black Mirror",
+            "overview": "Twisted tales run wild in this mind-bending anthology series that reveals humanity's worst traits, greatest innovations and more.",
+            "poster_path": "/seN6rRfN0I6n8iDXjlSMk1QjNcq.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                10765,
+                18,
+                9648
+            ],
+            "popularity": 97.9768,
+            "first_air_date": "2011-12-04",
+            "vote_average": 8.282,
+            "vote_count": 5965,
+            "origin_country": [
+                "GB"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/3URK0z9PzpVNJrGE7XOuyy6KFzk.jpg",
+            "id": 87108,
+            "name": "Chernobyl",
+            "original_name": "Chernobyl",
+            "overview": "The true story of one of the worst man-made catastrophes in history: the catastrophic nuclear accident at Chernobyl. A tale of the brave men and women who sacrificed to save Europe from unimaginable disaster.",
+            "poster_path": "/hlLXt2tOPT6RRnjiUmoxyG1LTFi.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                18
+            ],
+            "popularity": 44.6443,
+            "first_air_date": "2019-05-06",
+            "vote_average": 8.701,
+            "vote_count": 7520,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/zZqpAXxVSBtxV9qPBcscfXBcL2w.jpg",
+            "id": 1399,
+            "name": "Game of Thrones",
+            "original_name": "Game of Thrones",
+            "overview": "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
+            "poster_path": "/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                10765,
+                18,
+                10759
+            ],
+            "popularity": 201.9097,
+            "first_air_date": "2011-04-17",
+            "vote_average": 8.46,
+            "vote_count": 26227,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/rAOjnEFTuNysY7bot8zonhImGMh.jpg",
+            "id": 1402,
+            "name": "The Walking Dead",
+            "original_name": "The Walking Dead",
+            "overview": "Sheriff's deputy Rick Grimes awakens from a coma to find a post-apocalyptic world dominated by flesh-eating zombies. He sets out to find his family and encounters many other survivors along the way.",
+            "poster_path": "/ng3cMtxYKt1OSQYqFlnKWnVsqNO.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                10759,
+                18,
+                10765
+            ],
+            "popularity": 128.0494,
+            "first_air_date": "2010-10-31",
+            "vote_average": 8.086,
+            "vote_count": 17491,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/8rvLEmdI4gLrMO1rLqbNdnNcPFE.jpg",
+            "id": 19885,
+            "name": "Sherlock",
+            "original_name": "Sherlock",
+            "overview": "A modern update finds the famous sleuth and his doctor partner solving crime in 21st century London.",
+            "poster_path": "/7WTsnHkbA0FaG6R9twfFde0I9hl.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                80,
+                18,
+                9648
+            ],
+            "popularity": 51.0629,
+            "first_air_date": "2010-07-25",
+            "vote_average": 8.514,
+            "vote_count": 6193,
+            "origin_country": [
+                "GB"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/lNpkvX2s8LGB0mjGODMT4o6Up7j.jpg",
+            "id": 1398,
+            "name": "The Sopranos",
+            "original_name": "The Sopranos",
+            "overview": "The story of New Jersey-based Italian-American mobster Tony Soprano and the difficulties he faces as he tries to balance the conflicting requirements of his home life and the criminal organization he heads. Those difficulties are often highlighted through his ongoing professional relationship with psychiatrist Jennifer Melfi. The show features Tony's family members and Mafia associates in prominent roles and story arcs, most notably his wife Carmela and his cousin and prot\u00e9g\u00e9 Christopher Moltisanti.",
+            "poster_path": "/rTc7ZXdroqjkKivFPvCPX0Ru7uw.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                80,
+                18
+            ],
+            "popularity": 107.4765,
+            "first_air_date": "1999-01-10",
+            "vote_average": 8.651,
+            "vote_count": 3282,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/q8eejQcg1bAqImEV8jh8RtBD4uH.jpg",
+            "id": 94605,
+            "name": "Arcane",
+            "original_name": "Arcane",
+            "overview": "Amid the stark discord of twin cities Piltover and Zaun, two sisters fight on rival sides of a war between magic technologies and clashing convictions.",
+            "poster_path": "/fqldf2t8ztc9aiwn3k6mlX3tvRT.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                16,
+                10759
+            ],
+            "popularity": 46.8023,
+            "first_air_date": "2021-11-06",
+            "vote_average": 8.753,
+            "vote_count": 5659,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/n3Brk7roueE9HOwVmYlJx5j462g.jpg",
+            "id": 2288,
+            "name": "Prison Break",
+            "original_name": "Prison Break",
+            "overview": "Due to a political conspiracy, an innocent man is sent to death row and his only hope is his brother, who makes it his mission to deliberately get himself sent to the same prison in order to break the both of them out, from the inside out.",
+            "poster_path": "/wnmNPaLvhnMeOqnWlhNkYCZxtda.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                10759,
+                80,
+                18
+            ],
+            "popularity": 103.7498,
+            "first_air_date": "2005-08-29",
+            "vote_average": 8.074,
+            "vote_count": 5769,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/13kblIK8DnxMurcRDkeyy2sGR7v.jpg",
+            "id": 44217,
+            "name": "Vikings",
+            "original_name": "Vikings",
+            "overview": "The adventures of Ragnar Lothbrok, the greatest hero of his age. The series tells the sagas of Ragnar's band of Viking brothers and his family, as he rises to become King of the Viking tribes. As well as being a fearless warrior, Ragnar embodies the Norse traditions of devotion to the gods. Legend has it that he was a direct descendant of Odin, the god of war and warriors.",
+            "poster_path": "/bQLrHIRNEkE3PdIWQrZHynQZazu.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                10759,
+                18,
+                10768
+            ],
+            "popularity": 116.3944,
+            "first_air_date": "2013-03-03",
+            "vote_average": 8.1,
+            "vote_count": 7463,
+            "origin_country": [
+                "CA"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/l0qVZIpXtIo7km9u5Yqh0nKPOr5.jpg",
+            "id": 1668,
+            "name": "Friends",
+            "original_name": "Friends",
+            "overview": "Six young people from New York City, on their own and struggling to survive in the real world, find the companionship, comfort and support they get from each other to be the perfect antidote to the pressures of life.",
+            "poster_path": "/2koX1xLkpTQM4IZebYvKysFW1Nh.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                35
+            ],
+            "popularity": 149.6995,
+            "first_air_date": "1994-09-22",
+            "vote_average": 8.417,
+            "vote_count": 8846,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/hZOuVkhAWX9viLJuaIsMh8cM3Jz.jpg",
+            "id": 62560,
+            "name": "Mr. Robot",
+            "original_name": "Mr. Robot",
+            "overview": "A young programmer, Elliot, suffers from a debilitating anti-social disorder and decides that he can only connect to people by hacking them. He wields his skills as a weapon to protect the people that he cares about. Elliot finds himself in the intersection between a cybersecurity firm he works for and the underworld organizations that are recruiting him to bring down corporate America.",
+            "poster_path": "/kv1nRqgebSsREnd7vdC2pSGjpLo.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                80,
+                18
+            ],
+            "popularity": 44.8173,
+            "first_air_date": "2015-06-24",
+            "vote_average": 8.3,
+            "vote_count": 5165,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/gMqQY6SwuhKg1LvmiTxKX6YrINr.jpg",
+            "id": 1418,
+            "name": "The Big Bang Theory",
+            "original_name": "The Big Bang Theory",
+            "overview": "Physicists Leonard and Sheldon find their nerd-centric social circle with pals Howard and Raj expanding when aspiring actress Penny moves in next door.",
+            "poster_path": "/euKFiO5M125rpngFRBbSW83beeI.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                35
+            ],
+            "popularity": 65.2468,
+            "first_air_date": "2007-09-24",
+            "vote_average": 7.914,
+            "vote_count": 12214,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/4jrSbRpLqpvYJtLKncaxZVC47EW.jpg",
+            "id": 60622,
+            "name": "Fargo",
+            "original_name": "Fargo",
+            "overview": "A close-knit anthology series dealing with stories involving malice, violence and murder based in and around Minnesota.",
+            "poster_path": "/6U9CPeD8obHzweikFhiLhpc7YBT.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                80,
+                18
+            ],
+            "popularity": 127.7528,
+            "first_air_date": "2014-04-15",
+            "vote_average": 8.293,
+            "vote_count": 3122,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/Ao5pBFuWY32cVuh6iYjEjZMEscN.jpg",
+            "id": 60625,
+            "name": "Rick and Morty",
+            "original_name": "Rick and Morty",
+            "overview": "Follows a sociopathic genius scientist who drags his inherently timid grandson on adventures across the universe.",
+            "poster_path": "/WGRQ8FpjkDTzivQJ43t94bOuY0.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                16,
+                35,
+                10765,
+                10759
+            ],
+            "popularity": 122.9618,
+            "first_air_date": "2013-12-02",
+            "vote_average": 8.681,
+            "vote_count": 10654,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/bPLRjO2pcBx0WL73WUPzuNzQ3YN.jpg",
+            "id": 46648,
+            "name": "True Detective",
+            "original_name": "True Detective",
+            "overview": "An American anthology police detective series utilizing multiple timelines in which investigations seem to unearth personal and professional secrets of those involved, both within or outside the law.",
+            "poster_path": "/cuV2O5ZyDLHSOWzg3nLVljp1ubw.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                18,
+                9648
+            ],
+            "popularity": 67.829,
+            "first_air_date": "2014-01-12",
+            "vote_average": 8.283,
+            "vote_count": 3936,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/A3bigAAa4u6EbDvmMpDc0GNIEtG.jpg",
+            "id": 1425,
+            "name": "House of Cards",
+            "original_name": "House of Cards",
+            "overview": "Set in present day Washington, D.C., House of Cards is the story of Frank Underwood, a ruthless and cunning politician, and his wife Claire who will stop at nothing to conquer everything. This wicked political drama penetrates the shadowy world of greed, sex and corruption in modern D.C.",
+            "poster_path": "/hKWxWjFwnMvkWQawbhvC0Y7ygQ8.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                18
+            ],
+            "popularity": 55.7405,
+            "first_air_date": "2013-02-01",
+            "vote_average": 8.004,
+            "vote_count": 3055,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/kU98MbVVgi72wzceyrEbClZmMFe.jpg",
+            "id": 246,
+            "name": "Avatar: The Last Airbender",
+            "original_name": "Avatar: The Last Airbender",
+            "overview": "In a war-torn world of elemental magic, a young boy reawakens to undertake a dangerous mystic quest to fulfill his destiny as the Avatar, and bring peace to the world.",
+            "poster_path": "/v2vn1coUMPKw0GI1KGC5J4IXtqp.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                16,
+                10759,
+                10765
+            ],
+            "popularity": 26.9586,
+            "first_air_date": "2005-02-21",
+            "vote_average": 8.753,
+            "vote_count": 4662,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/8zbAoryWbtH0DKdev8abFAjdufy.jpg",
+            "id": 66732,
+            "name": "Stranger Things",
+            "original_name": "Stranger Things",
+            "overview": "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
+            "poster_path": "/uOOtwVbSr4QDjAGIifLDwpb2Pdl.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+                10765,
+                9648,
+                10759
+            ],
+            "popularity": 295.6189,
+            "first_air_date": "2016-07-15",
+            "vote_average": 8.58,
+            "vote_count": 20584,
+            "origin_country": [
+                "US"
+            ]
+        }
+    ],
+    "total_pages": 2,
+    "total_results": 40
+}

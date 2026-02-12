@@ -8,6 +8,8 @@ public extension TMDB {
         public let facebookID: String?
         public let instagramID: String?
         public let twitterID: String?
+        public let tvdbID: Int?
+        public let tvrageID: Int?
 
         enum CodingKeys: String, CodingKey {
             case id
@@ -16,6 +18,8 @@ public extension TMDB {
             case facebookID = "facebookId"
             case instagramID = "instagramId"
             case twitterID = "twitterId"
+            case tvdbID = "tvdbId"
+            case tvrageID = "tvrageId"
         }
     }
 }

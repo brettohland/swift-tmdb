@@ -1,0 +1,61 @@
+{
+    "adult": false,
+    "backdrop_path": null,
+    "created_by": [],
+    "episode_run_time": [],
+    "first_air_date": "2024-05-25",
+    "genres": [],
+    "homepage": "",
+    "id": 313758,
+    "in_production": true,
+    "languages": [],
+    "last_air_date": "2024-05-25",
+    "last_episode_to_air": {
+        "id": 6937428,
+        "name": "Episode 1",
+        "overview": "",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "air_date": "2024-05-25",
+        "episode_number": 1,
+        "episode_type": "standard",
+        "production_code": "",
+        "runtime": null,
+        "season_number": 1,
+        "show_id": 313758,
+        "still_path": null
+    },
+    "name": "\u5b9d\u85cf\u6316\u5440\u6316",
+    "next_episode_to_air": null,
+    "networks": [],
+    "number_of_episodes": 1,
+    "number_of_seasons": 1,
+    "origin_country": [
+        "CN"
+    ],
+    "original_language": "zh",
+    "original_name": "\u5b9d\u85cf\u6316\u5440\u6316",
+    "overview": "",
+    "popularity": 0.0,
+    "poster_path": null,
+    "production_companies": [],
+    "production_countries": [],
+    "seasons": [
+        {
+            "air_date": "2024-05-25",
+            "episode_count": 1,
+            "id": 499898,
+            "name": "Season 1",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 1,
+            "vote_average": 0.0
+        }
+    ],
+    "spoken_languages": [],
+    "status": "Returning Series",
+    "tagline": "",
+    "type": "Reality",
+    "vote_average": 0.0,
+    "vote_count": 0
+}

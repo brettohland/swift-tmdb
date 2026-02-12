@@ -12,7 +12,7 @@ extension TMDB.Movie: MockableResponse {
     }
 }
 
-extension TMDB.MovieCredits: MockableResponse {
+extension TMDB.MediaCredits: MockableResponse {
     static var mockFilename: String {
         "MovieCredits"
     }
@@ -36,7 +36,7 @@ extension TMDB.ExternalIDs: MockableResponse {
     }
 }
 
-extension TMDB.MovieWatchProviderResult: MockableResponse {
+extension TMDB.MediaWatchProviderResult: MockableResponse {
     static var mockFilename: String {
         "MovieWatchProviders"
     }

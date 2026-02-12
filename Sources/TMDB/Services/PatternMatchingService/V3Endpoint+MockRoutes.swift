@@ -115,7 +115,7 @@ extension TMDB.V3Endpoints.Movies: MockRouteProvider {
                 try TMDB.ChangeCollection.mockData()
             },
             MockRoute(pattern: "^/3/movie/\\d+/credits$") {
-                try TMDB.MovieCredits.mockData()
+                try TMDB.MediaCredits.mockData()
             },
             MockRoute(pattern: "^/3/movie/\\d+/external_ids$") {
                 try TMDB.ExternalIDs.mockData()
@@ -145,7 +145,7 @@ extension TMDB.V3Endpoints.Movies: MockRouteProvider {
                 try TMDB.VideoCollection.mockData()
             },
             MockRoute(pattern: "^/3/movie/\\d+/watch/providers$") {
-                try TMDB.MovieWatchProviderResult.mockData()
+                try TMDB.MediaWatchProviderResult.mockData()
             },
             // Details (must come after sub-endpoints)
             MockRoute(pattern: "^/3/movie/\\d+$") {
@@ -166,6 +166,168 @@ extension TMDB.V3Endpoints.Movies: MockRouteProvider {
             },
             MockRoute(pattern: "^/3/movie/upcoming$") {
                 try MockUtilities.jsonDataFromFile("UpcomingMovies")
+            },
+        ]
+    }
+}
+
+// MARK: - TV Episodes
+
+extension TMDB.V3Endpoints.TVEpisodes: MockRouteProvider {
+    static var mockRoutes: [MockRoute] {
+        [
+            // Sub-endpoints (must come before details match)
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/episode/\\d+/credits$") {
+                try MockUtilities.jsonDataFromFile("TVEpisodeCredits")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/episode/\\d+/external_ids$") {
+                try MockUtilities.jsonDataFromFile("TVEpisodeExternalIDs")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/episode/\\d+/images$") {
+                try MockUtilities.jsonDataFromFile("TVEpisodeImages")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/episode/\\d+/translations$") {
+                try MockUtilities.jsonDataFromFile("TVEpisodeTranslations")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/episode/\\d+/videos$") {
+                try MockUtilities.jsonDataFromFile("TVEpisodeVideos")
+            },
+            // Details (must come after sub-endpoints)
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/episode/\\d+$") {
+                try TMDB.TVEpisode.mockData()
+            },
+            // Changes (uses episode ID directly)
+            MockRoute(pattern: "^/3/tv/episode/\\d+/changes$") {
+                try MockUtilities.jsonDataFromFile("TVEpisodeChanges")
+            },
+        ]
+    }
+}
+
+// MARK: - TV Episode Groups
+
+extension TMDB.V3Endpoints.TVEpisodeGroups: MockRouteProvider {
+    static var mockRoutes: [MockRoute] {
+        [
+            MockRoute(pattern: "^/3/tv/episode_group/[^/]+$") {
+                try TMDB.EpisodeGroupDetails.mockData()
+            },
+        ]
+    }
+}
+
+// MARK: - TV Seasons
+
+extension TMDB.V3Endpoints.TVSeasons: MockRouteProvider {
+    static var mockRoutes: [MockRoute] {
+        [
+            // Sub-endpoints (must come before details match)
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/aggregate_credits$") {
+                try MockUtilities.jsonDataFromFile("TVSeasonAggregateCredits")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/credits$") {
+                try MockUtilities.jsonDataFromFile("TVSeasonCredits")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/external_ids$") {
+                try MockUtilities.jsonDataFromFile("TVSeasonExternalIDs")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/images$") {
+                try MockUtilities.jsonDataFromFile("TVSeasonImages")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/translations$") {
+                try MockUtilities.jsonDataFromFile("TVSeasonTranslations")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/videos$") {
+                try MockUtilities.jsonDataFromFile("TVSeasonVideos")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+/watch/providers$") {
+                try MockUtilities.jsonDataFromFile("TVSeasonWatchProviders")
+            },
+            // Details (must come after sub-endpoints)
+            MockRoute(pattern: "^/3/tv/\\d+/season/\\d+$") {
+                try TMDB.TVSeason.mockData()
+            },
+            // Changes (uses season ID directly)
+            MockRoute(pattern: "^/3/tv/season/\\d+/changes$") {
+                try MockUtilities.jsonDataFromFile("TVSeasonChanges")
+            },
+        ]
+    }
+}
+
+// MARK: - TV Series
+
+extension TMDB.V3Endpoints.TVSeries: MockRouteProvider {
+    static var mockRoutes: [MockRoute] {
+        [
+            // Sub-endpoints (must come before details match)
+            MockRoute(pattern: "^/3/tv/\\d+/aggregate_credits$") {
+                try TMDB.AggregateCredits.mockData()
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/alternative_titles$") {
+                try MockUtilities.jsonDataFromFile("AlternativeTVSeriesTitles")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/changes$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesChanges")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/content_ratings$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesContentRatings")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/credits$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesCredits")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/episode_groups$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesEpisodeGroups")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/external_ids$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesExternalIDs")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/images$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesImages")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/keywords$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesKeywords")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/recommendations$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesRecommendations")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/reviews$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesReviews")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/screened_theatrically$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesScreenedTheatrically")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/similar$") {
+                try MockUtilities.jsonDataFromFile("SimilarTVSeries")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/translations$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesTranslations")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/videos$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesVideos")
+            },
+            MockRoute(pattern: "^/3/tv/\\d+/watch/providers$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesWatchProviders")
+            },
+            // Details (must come after sub-endpoints)
+            MockRoute(pattern: "^/3/tv/\\d+$") {
+                try TMDB.TVSeries.mockData()
+            },
+            // List endpoints
+            MockRoute(pattern: "^/3/tv/latest$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesLatest")
+            },
+            MockRoute(pattern: "^/3/tv/airing_today$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesAiringToday")
+            },
+            MockRoute(pattern: "^/3/tv/on_the_air$") {
+                try MockUtilities.jsonDataFromFile("TVSeriesOnTheAir")
+            },
+            MockRoute(pattern: "^/3/tv/popular$") {
+                try MockUtilities.jsonDataFromFile("PopularTVSeries")
+            },
+            MockRoute(pattern: "^/3/tv/top_rated$") {
+                try MockUtilities.jsonDataFromFile("TopRatedTVSeries")
             },
         ]
     }

@@ -1,7 +1,7 @@
 import Foundation
 
 public extension TMDB {
-    struct MovieWatchProviderResult: Codable, Identifiable, Sendable {
+    struct MediaWatchProviderResult: Codable, Identifiable, Sendable {
         public let id: Int
         public let results: [String: WatchProviderAvailability]
     }

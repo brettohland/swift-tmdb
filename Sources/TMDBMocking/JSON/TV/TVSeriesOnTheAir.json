@@ -1,0 +1,438 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "/jIArNHIekrCSVgdMbKPAXpPY03Y.jpg",
+            "genre_ids": [
+                10751,
+                16,
+                35
+            ],
+            "id": 456,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The Simpsons",
+            "overview": "Set in Springfield, the average American town, the show focuses on the antics and everyday adventures of the Simpson family; Homer, Marge, Bart, Lisa and Maggie, as well as a virtual cast of thousands. Since the beginning, the series has been a pop culture icon, attracting hundreds of celebrities to guest star. The show has also made name for itself in its fearless satirical take on politics, media and American life in general.",
+            "popularity": 286.8016,
+            "poster_path": "/uWpG7GqfKGQqX4YMAo3nv5OrglV.jpg",
+            "first_air_date": "1989-12-17",
+            "name": "The Simpsons",
+            "vote_average": 8.012,
+            "vote_count": 10572
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/6iNWfGVCEfASDdlNb05TP5nG0ll.jpg",
+            "genre_ids": [
+                80,
+                18,
+                35
+            ],
+            "id": 79744,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The Rookie",
+            "overview": "Starting over isn't easy, especially for small-town guy John Nolan who, after a life-altering incident, is pursuing his dream of being an LAPD officer. As the force's oldest rookie, he\u2019s met with skepticism from some higher-ups who see him as just a walking midlife crisis.",
+            "popularity": 284.8976,
+            "poster_path": "/70kTz0OmjjZe7zHvIDrq2iKW7PJ.jpg",
+            "first_air_date": "2018-10-16",
+            "name": "The Rookie",
+            "vote_average": 8.53,
+            "vote_count": 2942
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/jbTqU6BJMufoMnPSlO4ThrcXs3Y.jpg",
+            "genre_ids": [
+                16,
+                35
+            ],
+            "id": 1434,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "Family Guy",
+            "overview": "Sick, twisted, politically incorrect and Freakin' Sweet animated series featuring the adventures of the dysfunctional Griffin family. Bumbling Peter and long-suffering Lois have three kids. Stewie (a brilliant but sadistic baby bent on killing his mother and taking over the world), Meg (the oldest, and is the most unpopular girl in town) and Chris (the middle kid, he's not very bright but has a passion for movies). The final member of the family is Brian - a talking dog and much more than a pet, he keeps Stewie in check whilst sipping Martinis and sorting through his own life issues.",
+            "popularity": 262.2057,
+            "poster_path": "/3PFsEuAiyLkWsP4GG6dIV37Q6gu.jpg",
+            "first_air_date": "1999-01-31",
+            "name": "Family Guy",
+            "vote_average": 7.389,
+            "vote_count": 4789
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/7mkUu1F2hVUNgz24xO8HPx0D6mK.jpg",
+            "genre_ids": [
+                18,
+                10765,
+                10759
+            ],
+            "id": 224372,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "A Knight of the Seven Kingdoms",
+            "overview": "A century before the events of Game of Thrones, two unlikely heroes wandered Westeros: a young, naive but courageous knight, Ser Duncan the Tall, and his diminutive squire, Egg. Set in an age when the Targaryen line still holds the Iron Throne and the last dragon has not yet passed from living memory, great destinies, powerful foes, and dangerous exploits await these improbable and incomparable friends.",
+            "popularity": 253.874,
+            "poster_path": "/abrZg2iodq4XeBngpNESOgfPvBM.jpg",
+            "first_air_date": "2026-01-18",
+            "name": "A Knight of the Seven Kingdoms",
+            "vote_average": 8.2,
+            "vote_count": 235
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/gmECX1DvFgdUPjtio2zaL8BPYPu.jpg",
+            "genre_ids": [
+                16,
+                10759,
+                10765
+            ],
+            "id": 95479,
+            "origin_country": [
+                "JP"
+            ],
+            "original_language": "ja",
+            "original_name": "\u546a\u8853\u5efb\u6226",
+            "overview": "Yuji Itadori is a boy with tremendous physical strength, though he lives a completely ordinary high school life. One day, to save a classmate who has been attacked by curses, he eats the finger of Ryomen Sukuna, taking the curse into his own soul. From then on, he shares one body with Ryomen Sukuna. Guided by the most powerful of sorcerers, Satoru Gojo, Itadori is admitted to Tokyo Jujutsu High School, an organization that fights the curses... and thus begins the heroic tale of a boy who became a curse to exorcise a curse, a life from which he could never turn back.",
+            "popularity": 191.3074,
+            "poster_path": "/fHpKWq9ayzSk8nSwqRuaAUemRKh.jpg",
+            "first_air_date": "2020-10-03",
+            "name": "JUJUTSU KAISEN",
+            "vote_average": 8.6,
+            "vote_count": 4182
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/n69QxkZ0RRc6PMNnxD9U0MZnLzl.jpg",
+            "genre_ids": [
+                10764
+            ],
+            "id": 4656,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "Raw",
+            "overview": "A regularly scheduled, live, year-round program featuring some of the biggest WWE Superstars.",
+            "popularity": 151.448,
+            "poster_path": "/pv5WNnLUo7mpT8k901Lo8UovrqI.jpg",
+            "first_air_date": "1993-01-11",
+            "name": "Raw",
+            "vote_average": 6.803,
+            "vote_count": 350
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/butPVWgcbtAjL9Z7jU7Xj1KA8KD.jpg",
+            "genre_ids": [
+                10767,
+                35
+            ],
+            "id": 22980,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "Watch What Happens Live with Andy Cohen",
+            "overview": "Bravo network executive Andy Cohen discusses pop culture topics with celebrities and reality show personalities.",
+            "popularity": 143.1138,
+            "poster_path": "/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+            "first_air_date": "2009-07-16",
+            "name": "Watch What Happens Live with Andy Cohen",
+            "vote_average": 5.0,
+            "vote_count": 81
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/qLMfcvdCcCGD2BNLH8b6ZCBuO7D.jpg",
+            "genre_ids": [
+                10763,
+                35
+            ],
+            "id": 2224,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The Daily Show",
+            "overview": "The World's Fakest News Team tackle the biggest stories in news, politics and pop culture.",
+            "popularity": 125.0515,
+            "poster_path": "/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
+            "first_air_date": "1996-07-22",
+            "name": "The Daily Show",
+            "vote_average": 6.398,
+            "vote_count": 615
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/5UNcEz7Lc3OGilpPn1Tb9cd1xsc.jpg",
+            "genre_ids": [
+                35,
+                10767
+            ],
+            "id": 1220,
+            "origin_country": [
+                "GB"
+            ],
+            "original_language": "en",
+            "original_name": "The Graham Norton Show",
+            "overview": "Each week celebrity guests join Irish comedian\u00a0Graham Norton to discuss what's being going on around the world that week. The guests poke fun and share their opinions on the main news stories. Graham is often joined by a band or artist to play the show out.",
+            "popularity": 117.7303,
+            "poster_path": "/vrbqaBXB8AALynQzpWz6JdCPEJS.jpg",
+            "first_air_date": "2007-02-22",
+            "name": "The Graham Norton Show",
+            "vote_average": 7.188,
+            "vote_count": 276
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/usLRh1bcbL0Q9X8zf6rL4OV1qrA.jpg",
+            "genre_ids": [
+                10759,
+                10765,
+                18
+            ],
+            "id": 2661,
+            "origin_country": [
+                "JP"
+            ],
+            "original_language": "ja",
+            "original_name": "\u4eee\u9762\u30e9\u30a4\u30c0\u30fc",
+            "overview": "Takeshi Hongo is a promising young man with a passion for motorcycle racing. However, his dreams are suddenly ruined when he gets kidnapped by Shocker, the evil secret organization planning to dominate the world. After being remodeled into a cyborg, Takeshi escapes and swears to protect the world from the inhuman monsters.",
+            "popularity": 114.7671,
+            "poster_path": "/lv3OlrXyTNg4Dz0JrtopOmMziNs.jpg",
+            "first_air_date": "1971-04-03",
+            "name": "Kamen Rider",
+            "vote_average": 6.5,
+            "vote_count": 94
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/gMMnf8VRg3Z98WaFmOLr9Jk8pIs.jpg",
+            "genre_ids": [
+                35,
+                10767
+            ],
+            "id": 63770,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The Late Show with Stephen Colbert",
+            "overview": "Stephen Colbert brings his signature satire and comedy to The Late Show with Stephen Colbert, the #1 show in late night, where he talks with an eclectic mix of guests about what is new and relevant in the worlds of politics, entertainment, business, music, technology, and more. Featuring bandleader Jon Batiste with his band Stay Human, the Emmy Award-nominated show is broadcast from the historic Ed Sullivan Theater.",
+            "popularity": 110.7688,
+            "poster_path": "/9jkThAGYj2yp8jsS6Nriy5mzKFT.jpg",
+            "first_air_date": "2015-09-08",
+            "name": "The Late Show with Stephen Colbert",
+            "vote_average": 6.2,
+            "vote_count": 334
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/lDmFwAaHL1kXnAfZeUTieAdUTko.jpg",
+            "genre_ids": [
+                10765,
+                10759,
+                10751,
+                18
+            ],
+            "id": 235685,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The Pendragon Cycle: Rise of the Merlin",
+            "overview": "Merlin, the immortal son of the bard Taliesin and Atlantean Princess Charis, is followed through his tragic upbringing, descent into madness, and shocking disappearance, leading to the legend that surrounds him. Set before King Arthur's birth, Merlin, assumed dead or a myth, reemerges in sub-Roman Britain to unite the fractured kingdoms under threat from Saxon invaders.",
+            "popularity": 104.7928,
+            "poster_path": "/jJfk8NXauN4UgFQ1qn9lFzEk7ib.jpg",
+            "first_air_date": "2026-01-22",
+            "name": "The Pendragon Cycle: Rise of the Merlin",
+            "vote_average": 8.4,
+            "vote_count": 24
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/wsHj4oHQJoe7DMYaqNFwVoyLiAh.jpg",
+            "genre_ids": [
+                35,
+                10764
+            ],
+            "id": 33238,
+            "origin_country": [
+                "KR"
+            ],
+            "original_language": "ko",
+            "original_name": "\ub7f0\ub2dd\ub9e8",
+            "overview": "These days, as variety shows are gradually disappearing, this is one of Korea\u2019s representative variety shows that has been responsible for Sunday evenings for over 10 years. This program features numerous stars and members going around various places, playing games, and completing missions. In particular, among the many fun elements of variety shows, this one focuses solely on laughter.\n\nOpen your eyes! Big fun is coming in!\n\nOpen your mouth! Big laughter is coming in!\n\nOpen your heart! Useful lessons are coming in!",
+            "popularity": 99.1545,
+            "poster_path": "/2Wmmu1MkqxJ48J7aySET9EKEjXz.jpg",
+            "first_air_date": "2010-07-11",
+            "name": "Running Man",
+            "vote_average": 8.3,
+            "vote_count": 203
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/rBOnrVlck7BIlGeWVlzYiZeg4l2.jpg",
+            "genre_ids": [
+                16,
+                10759,
+                18,
+                10765
+            ],
+            "id": 209867,
+            "origin_country": [
+                "JP"
+            ],
+            "original_language": "ja",
+            "original_name": "\u846c\u9001\u306e\u30d5\u30ea\u30fc\u30ec\u30f3",
+            "overview": "Decades after her party defeated the Demon King, an old friend's funeral launches the elf wizard Frieren on a journey of self-discovery.",
+            "popularity": 94.9909,
+            "poster_path": "/dqZENchTd7lp5zht7BdlqM7RBhD.jpg",
+            "first_air_date": "2023-09-29",
+            "name": "Frieren: Beyond Journey's End",
+            "vote_average": 8.773,
+            "vote_count": 675
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/zocVz88wzfCd2y3RPKxI8qjhRKc.jpg",
+            "genre_ids": [
+                99,
+                18,
+                80
+            ],
+            "id": 90,
+            "origin_country": [
+                "CA"
+            ],
+            "original_language": "en",
+            "original_name": "Mayday",
+            "overview": "Major real-life air disasters are depicted in this series. Each episode features a detailed dramatized reconstruction of the incident based on cockpit voice recorders and air traffic control transcripts, as well as eyewitnesses recounts and interviews with aviation experts.",
+            "popularity": 93.6704,
+            "poster_path": "/sUfJxQarDfBMgmJgsgJqmVP16UU.jpg",
+            "first_air_date": "2003-09-03",
+            "name": "Mayday",
+            "vote_average": 8.192,
+            "vote_count": 274
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/8dbKQrdVR5HD7PVWjTPawnTYCPT.jpg",
+            "genre_ids": [
+                35,
+                80,
+                18,
+                9648
+            ],
+            "id": 41956,
+            "origin_country": [
+                "GB"
+            ],
+            "original_language": "en",
+            "original_name": "Death in Paradise",
+            "overview": "A brilliant but idiosyncratic British detective and his resourceful local team solve baffling murder mysteries on the fictional Caribbean island of Saint Marie.",
+            "popularity": 87.5507,
+            "poster_path": "/u7t6vCyqAdD5hE4eEfTrZmVljDi.jpg",
+            "first_air_date": "2011-10-25",
+            "name": "Death in Paradise",
+            "vote_average": 7.5,
+            "vote_count": 306
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/hEtBwhqAzHKihQ1H9QD2kj8bJ5.jpg",
+            "genre_ids": [
+                10764
+            ],
+            "id": 8514,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "RuPaul's Drag Race",
+            "overview": "Join RuPaul, the world's most famous drag queen, as the host, mentor and judge for the ultimate in drag queen competitions. The top drag queens in the U.S. will vie for drag stardom as RuPaul, in full glamazon drag, will reign supreme in all judging and eliminations while helping guide the contestants as they prepare for each challenge.",
+            "popularity": 84.959,
+            "poster_path": "/ySs9xkTfPgQCUNB2ctOzcMWP14n.jpg",
+            "first_air_date": "2009-02-02",
+            "name": "RuPaul's Drag Race",
+            "vote_average": 7.5,
+            "vote_count": 267
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/6uPBHw488MUW6x51zZ2OCJo6Dgp.jpg",
+            "genre_ids": [
+                18
+            ],
+            "id": 250307,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The Pitt",
+            "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+            "popularity": 79.5864,
+            "poster_path": "/kvFSpESyBZMjaeOJDx7RS3P1jey.jpg",
+            "first_air_date": "2025-01-09",
+            "name": "The Pitt",
+            "vote_average": 8.702,
+            "vote_count": 461
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/bIHCUqaapZdRjd2kzSDiwzYyrpC.jpg",
+            "genre_ids": [
+                16,
+                10759,
+                35,
+                10751,
+                10765
+            ],
+            "id": 45140,
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "Teen Titans Go!",
+            "overview": "Robin, Starfire, Raven, Beast Boy and Cyborg return in all-new, comedic adventures. They may be super heroes who save the world every day ... but somebody still has to do the laundry!",
+            "popularity": 77.8888,
+            "poster_path": "/kPKAigYUlWRpnfo4Ptiwlz4FWXU.jpg",
+            "first_air_date": "2013-04-23",
+            "name": "Teen Titans Go!",
+            "vote_average": 6.5,
+            "vote_count": 684
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/opxjwbFSadDgVmZtrLTlWJsUxrB.jpg",
+            "genre_ids": [
+                18
+            ],
+            "id": 283123,
+            "origin_country": [
+                "TR"
+            ],
+            "original_language": "tr",
+            "original_name": "E\u015fref R\u00fcya",
+            "overview": "As a child, E\u015fref fell in love from afar with a girl he called \u201cR\u00fcya\u201d and spent years searching for her, only to become a powerful mafia figure along the way. Meanwhile, Nisan, an idealistic musician, finds herself in grave danger after performing at a wedding held at E\u015fref\u2019s hotel. E\u015fref falls for Nisan, unaware that she is both the long-lost R\u00fcya he has been chasing for years and a police informant. Trapped in a whirlwind of love, betrayal, and power struggles, E\u015fref is forced into a brutal reckoning\u2014both with his criminal empire and his own emotions.",
+            "popularity": 73.8151,
+            "poster_path": "/jwrN5QA07dm8sKuUFInP2MRLPfb.jpg",
+            "first_air_date": "2025-03-19",
+            "name": "Esref's Dream",
+            "vote_average": 7.292,
+            "vote_count": 24
+        }
+    ],
+    "total_pages": 64,
+    "total_results": 1275
+}
