@@ -1,8 +1,10 @@
 import Foundation
 import Testing
 @testable import TMDB
+import TMDBMocking
 
 struct CreditEndpointTests {
+    init() { TMDBMockData.register() }
     @Test func details() async throws {
         let details = try await TMDB.credits(forID: 0)
         #expect(!details.id.isEmpty)

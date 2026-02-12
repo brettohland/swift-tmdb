@@ -2,8 +2,10 @@ import Dependencies
 import Foundation
 import Testing
 @testable import TMDB
+import TMDBMocking
 
 struct SearchEndpointTests {
+    init() { TMDBMockData.register() }
     @Test func searchMovies() async throws {
         let results = try await TMDB.searchMovies(query: "Fight Club")
         #expect(!results.results.isEmpty)

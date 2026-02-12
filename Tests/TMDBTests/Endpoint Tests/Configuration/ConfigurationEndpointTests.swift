@@ -2,8 +2,10 @@ import Dependencies
 import Foundation
 import Testing
 @testable import TMDB
+import TMDBMocking
 
 struct ConfigurationEndpointTests {
+    init() { TMDBMockData.register() }
     @Test func details() async throws {
         let config = try await TMDB.configurationDetails()
         #expect(!config.changeKeys.isEmpty)

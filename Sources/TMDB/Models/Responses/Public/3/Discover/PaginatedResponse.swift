@@ -9,5 +9,12 @@ public extension TMDB.Discover {
         @NilInteger
         public var totalPages: Int
         public let results: [Wrapped]
+
+        public init(page: Int, totalResults: Int, totalPages: Int, results: [Wrapped]) {
+            _page = NilInteger(wrappedValue: page)
+            _totalResults = NilInteger(wrappedValue: totalResults)
+            _totalPages = NilInteger(wrappedValue: totalPages)
+            self.results = results
+        }
     }
 }

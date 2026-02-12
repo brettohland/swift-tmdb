@@ -48,6 +48,11 @@ let package = Package(
             resources: [
                 .process("JSON"),
             ],
+            swiftSettings: [
+                .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+                .enableUpcomingFeature("InferIsolatedConformances"),
+                .enableUpcomingFeature("FullTypedThrows"),
+            ]
         ),
         .target(
             name: "TMDBDependencies",
@@ -62,6 +67,14 @@ let package = Package(
                 .enableUpcomingFeature("FullTypedThrows"),
             ],
         ),
-        .testTarget(name: "TMDBTests", dependencies: ["TMDB", "TMDBMocking"]),
+        .testTarget(
+            name: "TMDBTests",
+            dependencies: ["TMDB", "TMDBMocking"],
+            swiftSettings: [
+                .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+                .enableUpcomingFeature("InferIsolatedConformances"),
+                .enableUpcomingFeature("FullTypedThrows"),
+            ]
+        ),
     ],
 )

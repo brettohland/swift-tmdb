@@ -5,14 +5,14 @@ protocol MockableResponse: Decodable {
 }
 
 extension MockableResponse {
-    static func mock() throws -> Self {
-        let data = try mockData()
+    static func _loadMock() throws -> Self {
+        let data = try _loadMockData()
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return try decoder.decode(Self.self, from: data)
     }
 
-    static func mockData() throws -> Data {
+    static func _loadMockData() throws -> Data {
         try MockUtilities.jsonDataFromFile(mockFilename)
     }
 }

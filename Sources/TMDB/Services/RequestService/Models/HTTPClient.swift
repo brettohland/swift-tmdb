@@ -49,16 +49,33 @@ extension DependencyValues {
 // MARK: - Test/Preview Mocks
 
 extension TMDB.HTTPClient: TestDependencyKey {
+
+    static var logger: TMDB.LoggingService {
+        Dependency(\.logger).wrappedValue
+    }
+
     static var testValue: TMDB.HTTPClient {
         TMDB.HTTPClient { request, _ throws in
-            try PathMatchingService.dataFromURLRequest(request)
+            guard let handler = TMDB.mockDataHandler else {
+                logger.notice(
+                    "TMDB mock data handler not registered. Call TMDBMockData.register() before running tests.",
+                )
+                return Data()
+            }
+            return try handler(request)
         }
     }
 
     static var previewValue: TMDB.HTTPClient {
         TMDB.HTTPClient { request, _ throws in
+            guard let handler = TMDB.mockDataHandler else {
+                logger.notice(
+                    "TMDB mock data handler not registered. Call TMDBMockData.register() before using previews.",
+                )
+                return Data()
+            }
             try await Task.sleep(for: .seconds(2))
-            return try PathMatchingService.dataFromURLRequest(request)
+            return try handler(request)
         }
     }
 }

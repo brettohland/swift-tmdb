@@ -2,8 +2,10 @@ import Dependencies
 import Foundation
 import Testing
 @testable import TMDB
+import TMDBMocking
 
 struct TrendingEndpointTests {
+    init() { TMDBMockData.register() }
     @Test func trendingAllDay() async throws {
         let trending = try await TMDB.trendingAll(timeWindow: .day)
         #expect(!trending.results.isEmpty)

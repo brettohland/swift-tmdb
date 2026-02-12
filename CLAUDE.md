@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## General Guidelines
+
+When asked to do X, do exactly X. Do not expand scope beyond what was requested. If the user asks for a plan, deliver the plan. If they ask for implementation, implement. Ask before doing additional work.
+
+## Workflow Conventions
+
+When asked to create a plan, always write it to a file on disk (e.g., `PLAN.md` or `.claude/plans/<name>.md`) unless explicitly told otherwise.
+
 ## Project Overview
 
 `swift-tmdb` is a modern Swift package providing a type-safe wrapper around the TMDB API (The Movie Database). It targets iOS/iPadOS 26+ and uses Swift 6.2 with strict concurrency enabled. The package is designed to automatically provide mocked responses during unit testing and SwiftUI previews using PointFree's Dependencies framework.
@@ -66,8 +74,8 @@ swift package --disable-sandbox preview-documentation --target TMDB
    - Uses static methods on the `TMDB` enum for making API calls
 
 2. **TMDBMocking** (Mock Data Module)
-   - Contains all mock JSON response files for testing and previews
-   - Automatically discovered at runtime via bundle lookup
+   - Contains all mock JSON response files, mock routing logic, `MockableResponse` protocol, and route definitions
+   - Requires explicit registration via `TMDBMockData.register()` in test `init()` or before SwiftUI previews
    - The `TMDB` library product bundles both `TMDB` + `TMDBMocking` targets
    - The `TMDBCore` library product provides `TMDB` without mocking (for apps that don't need it)
 
@@ -97,10 +105,9 @@ The codebase uses a service-oriented architecture with several internal services
 - **URLFactory**: Utility for constructing endpoint URLs
 
 #### MockingService
-- **PathMatchingService**: Routes incoming test requests to appropriate mock data
-- Uses regex pattern matching to identify endpoints in test contexts
+- **MockDataHandler**: Thin closure bridge (`TMDB.mockDataHandler`) that TMDBMocking registers to connect mock data to the core framework
+- Mock routing, `PathMatchingService`, `MockableResponse` protocol, and route definitions all live in TMDBMocking
 - Mock JSON responses stored in `Sources/TMDBMocking/JSON/`
-- **MockableResponse**: Protocol for types that can provide mock data
 
 #### LoggingService
 - **LoggingDependencyClient**: Abstraction for logging
@@ -152,10 +159,10 @@ public extension TMDB {
 The framework uses PointFree's Dependencies for:
 - **Testability**: Automatic mock data in `XCTest` and SwiftUI previews
 - **Dependency Injection**: `HTTPClient`, logging, and configuration are all injected dependencies
-- **Context Awareness**: The `HTTPClient` automatically switches to mock mode in test/preview contexts:
+- **Context Awareness**: The `HTTPClient` automatically switches to mock mode in test/preview contexts via `TMDB.mockDataHandler`:
   - `liveValue`: Uses real URLSession
-  - `testValue`: Uses PathMatchingService with instant responses
-  - `previewValue`: Uses PathMatchingService with 2-second delay for realistic previews
+  - `testValue`: Calls `mockDataHandler` with instant responses
+  - `previewValue`: Calls `mockDataHandler` with 2-second delay for realistic previews
 
 ### Directory Structure
 
@@ -170,13 +177,17 @@ Sources/
 │   │   └── Codable Property Wrappers/ # Custom property wrappers for encoding/decoding
 │   ├── Services/
 │   │   ├── RequestService/            # Core networking
-│   │   ├── MockingService/            # Test/preview mocking (routing logic + MockableResponse)
-│   │   ├── LoggingService/            # Logging abstractions
-│   │   └── PatternMatchingService/    # URL pattern matching for mocks
+│   │   ├── MockingService/            # MockDataHandler closure bridge
+│   │   └── LoggingService/            # Logging abstractions
 │   ├── Format Styles/                 # Swift FormatStyle implementations
 │   └── Documentation.docc/            # DocC documentation
 ├── TMDBMocking/
-│   ├── TMDBMocking.swift              # Bundle registration for mock data
+│   ├── TMDBMocking.swift              # TMDBMockData.register() entry point
+│   ├── PathMatchingService.swift      # URL pattern matching and mock routing
+│   ├── MockableResponse.swift         # Protocol for types providing mock data
+│   ├── MockUtilities.swift            # JSON file loading helpers
+│   ├── Extensions/                    # MockableResponse conformances per endpoint group
+│   ├── Routes/                        # MockRoute definitions per endpoint group
 │   └── JSON/                          # Mock JSON response files
 └── TMDBDependencies/
     └── Clients/                       # Dependency-based client wrappers
@@ -209,14 +220,22 @@ To add a new TMDB API endpoint:
 3. Define response model types in `Sources/TMDB/Models/Responses/`
 4. Create public static method on `TMDB` to execute the request
 5. Add mock JSON response in `Sources/TMDBMocking/JSON/`
-6. Update `PathMatchingService.handleV3Path()` to route to mock data
-7. Create conformance to `MockableResponse` protocol for the response type
+6. Add a route file in `Sources/TMDBMocking/Routes/` and register it in `PathMatchingService.v3Routes`
+7. Create `MockableResponse` conformance in `Sources/TMDBMocking/Extensions/`
 8. Write tests in `Tests/TMDBTests/`
 9. (Optional) Add client wrapper in `TMDBDependencies/Clients/`
 
+## Code Review Guidelines
+
+When reviewing code, do not flag optional URL properties (e.g., `URL? backdropPath`) as bugs — these are intentionally optional in the TMDB API models.
+
 ## Testing
 
-Tests use Swift Testing framework (not XCTest). The `@testable import TMDB` gives access to internal types. Tests automatically receive mock data without additional setup due to the Dependencies framework integration.
+This is a Swift Package Manager project. Tests use mock JSON fixtures and the PointFree Dependencies framework — they do NOT make live API requests. When debugging test failures, check mock data and dependency overrides before assuming network issues.
+
+After completing implementation tasks, always run `swift build` and `swift test` to verify before committing. If tests fail, debug and fix before presenting results as complete.
+
+Tests use Swift Testing framework (not XCTest). The `@testable import TMDB` gives access to internal types. Tests must call `TMDBMockData.register()` in their struct `init()` to connect mock data before any TMDB API calls.
 
 Test files are organized by feature:
 - `DiscoverFilterTests.swift`: Tests for Discover filter types

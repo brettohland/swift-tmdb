@@ -2,8 +2,10 @@ import Dependencies
 import Foundation
 import Testing
 @testable import TMDB
+import TMDBMocking
 
 struct TVSeasonEndpointTests {
+    init() { TMDBMockData.register() }
     @Test func tvSeasonDetails() async throws {
         let season = try await TMDB.tvSeasonDetails(seriesID: 1_396, seasonNumber: 1)
         #expect(!season.name.isEmpty)
