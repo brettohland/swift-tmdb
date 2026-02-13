@@ -7,5 +7,10 @@ public extension TMDB.Configuration {
     struct JobDepartment: Codable, Sendable {
         public let department: String
         public let jobs: [String]
+
+        public init(department: String, jobs: [String]) {
+            self.department = department
+            self.jobs = jobs
+        }
     }
 }

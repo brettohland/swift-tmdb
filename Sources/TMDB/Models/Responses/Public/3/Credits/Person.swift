@@ -12,6 +12,28 @@ public extension TMDB.Credits {
         public let knownForDepartment: String
         public let profilePath: URL
 
+        public init(
+            isAdult: Bool,
+            id: Int,
+            name: String,
+            originalName: String,
+            mediaType: String,
+            popularity: Double,
+            gender: Int,
+            knownForDepartment: String,
+            profilePath: URL,
+        ) {
+            _isAdult = NilBoolean(wrappedValue: isAdult)
+            self.id = id
+            self.name = name
+            self.originalName = originalName
+            self.mediaType = mediaType
+            self.popularity = popularity
+            self.gender = gender
+            self.knownForDepartment = knownForDepartment
+            self.profilePath = profilePath
+        }
+
         enum CodingKeys: String, CodingKey {
             case isAdult = "adult"
             case id

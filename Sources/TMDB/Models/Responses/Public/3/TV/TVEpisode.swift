@@ -16,6 +16,38 @@ public extension TMDB {
         public let showID: Int?
         public let crew: [CrewMember]?
         public let guestStars: [CastMember]?
+
+        public init(
+            id: Int,
+            name: String,
+            overview: String,
+            episodeNumber: Int,
+            seasonNumber: Int,
+            airDate: Date?,
+            stillPath: URL?,
+            voteAverage: Double,
+            voteCount: Int,
+            productionCode: String,
+            runtime: Int?,
+            showID: Int?,
+            crew: [CrewMember]?,
+            guestStars: [CastMember]?,
+        ) {
+            self.id = id
+            self.name = name
+            self.overview = overview
+            self.episodeNumber = episodeNumber
+            self.seasonNumber = seasonNumber
+            self.airDate = airDate
+            self.stillPath = stillPath
+            self.voteAverage = voteAverage
+            self.voteCount = voteCount
+            self.productionCode = productionCode
+            self.runtime = runtime
+            self.showID = showID
+            self.crew = crew
+            self.guestStars = guestStars
+        }
     }
 }
 

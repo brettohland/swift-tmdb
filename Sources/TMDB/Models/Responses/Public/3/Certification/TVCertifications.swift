@@ -6,5 +6,9 @@ public extension TMDB {
     /// [Details on TMDB's site](https://developer.themoviedb.org/reference/certifications-tv-list)
     struct TVCertifications: Codable, Sendable {
         public let certifications: [String: [Certification]]
+
+        public init(certifications: [String: [Certification]]) {
+            self.certifications = certifications
+        }
     }
 }

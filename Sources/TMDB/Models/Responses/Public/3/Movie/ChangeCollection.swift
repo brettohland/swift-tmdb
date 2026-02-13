@@ -3,11 +3,20 @@ import Foundation
 public extension TMDB {
     struct ChangeCollection: Codable, Sendable {
         public let changes: [Change]
+
+        public init(changes: [Change]) {
+            self.changes = changes
+        }
     }
 
     struct Change: Codable, Sendable {
         public let key: String
         public let items: [ChangeItem]
+
+        public init(key: String, items: [ChangeItem]) {
+            self.key = key
+            self.items = items
+        }
     }
 
     struct ChangeItem: Codable, Sendable {
@@ -17,6 +26,22 @@ public extension TMDB {
         public let languageCode: String?
         public let regionCode: String?
         public let value: AnyCodableValue?
+
+        public init(
+            id: String,
+            action: String,
+            time: String,
+            languageCode: String?,
+            regionCode: String?,
+            value: AnyCodableValue?,
+        ) {
+            self.id = id
+            self.action = action
+            self.time = time
+            self.languageCode = languageCode
+            self.regionCode = regionCode
+            self.value = value
+        }
 
         enum CodingKeys: String, CodingKey {
             case id

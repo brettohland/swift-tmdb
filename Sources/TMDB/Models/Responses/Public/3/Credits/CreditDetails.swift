@@ -10,6 +10,24 @@ public extension TMDB.Credits {
         public let id: String
         public let person: Person
 
+        public init(
+            type: String,
+            department: String,
+            job: String,
+            media: Media,
+            mediaType: String,
+            id: String,
+            person: Person,
+        ) {
+            self.type = type
+            self.department = department
+            self.job = job
+            self.media = media
+            self.mediaType = mediaType
+            self.id = id
+            self.person = person
+        }
+
         enum CodingKeys: String, CodingKey {
             case type = "creditType"
             case department

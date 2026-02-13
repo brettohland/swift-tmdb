@@ -8,6 +8,13 @@ public extension TMDB {
         public let logoPath: URL
         public let displayPriority: Int
 
+        public init(id: Int, name: String, logoPath: URL, displayPriority: Int) {
+            self.id = id
+            self.name = name
+            self.logoPath = logoPath
+            self.displayPriority = displayPriority
+        }
+
         enum CodingKeys: String, CodingKey {
             case id = "providerId"
             case name = "providerName"
@@ -19,5 +26,9 @@ public extension TMDB {
     /// Response for watch provider lists
     struct WatchProviderList: Codable, Sendable {
         public let results: [WatchProvider]
+
+        public init(results: [WatchProvider]) {
+            self.results = results
+        }
     }
 }

@@ -10,6 +10,22 @@ public extension TMDB {
         public let knownForDepartment: String?
         @NilBoolean public var isAdult: Bool
 
+        public init(
+            id: Int,
+            name: String,
+            profilePath: URL?,
+            popularity: Double,
+            knownForDepartment: String?,
+            isAdult: Bool,
+        ) {
+            self.id = id
+            self.name = name
+            self.profilePath = profilePath
+            self.popularity = popularity
+            self.knownForDepartment = knownForDepartment
+            _isAdult = NilBoolean(wrappedValue: isAdult)
+        }
+
         enum CodingKeys: String, CodingKey {
             case id
             case name

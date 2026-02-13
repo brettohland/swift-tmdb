@@ -8,6 +8,11 @@ public extension TMDB.Configuration {
         @RegionCode public var regionCode: Locale.Region
         public let zones: [String]
 
+        public init(regionCode: Locale.Region, zones: [String]) {
+            _regionCode = RegionCode(wrappedValue: regionCode)
+            self.zones = zones
+        }
+
         enum CodingKeys: String, CodingKey {
             case regionCode = "iso31661"
             case zones

@@ -7,6 +7,20 @@ public extension TMDB {
         public let logos: [ImageDetail]
         public let posters: [ImageDetail]
         public let stills: [ImageDetail]
+
+        public init(
+            id: Int,
+            backdrops: [ImageDetail],
+            logos: [ImageDetail],
+            posters: [ImageDetail],
+            stills: [ImageDetail],
+        ) {
+            self.id = id
+            self.backdrops = backdrops
+            self.logos = logos
+            self.posters = posters
+            self.stills = stills
+        }
     }
 
     struct ImageDetail: Codable, Sendable {
@@ -17,6 +31,24 @@ public extension TMDB {
         public let voteAverage: Double
         public let voteCount: Int
         public let languageCode: String?
+
+        public init(
+            aspectRatio: Double,
+            height: Int,
+            width: Int,
+            filePath: URL,
+            voteAverage: Double,
+            voteCount: Int,
+            languageCode: String?,
+        ) {
+            self.aspectRatio = aspectRatio
+            self.height = height
+            self.width = width
+            self.filePath = filePath
+            self.voteAverage = voteAverage
+            self.voteCount = voteCount
+            self.languageCode = languageCode
+        }
 
         enum CodingKeys: String, CodingKey {
             case aspectRatio

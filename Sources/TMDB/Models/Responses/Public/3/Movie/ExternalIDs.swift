@@ -11,6 +11,26 @@ public extension TMDB {
         public let tvdbID: Int?
         public let tvrageID: Int?
 
+        public init(
+            id: Int,
+            imdbID: String?,
+            wikidataID: String?,
+            facebookID: String?,
+            instagramID: String?,
+            twitterID: String?,
+            tvdbID: Int?,
+            tvrageID: Int?,
+        ) {
+            self.id = id
+            self.imdbID = imdbID
+            self.wikidataID = wikidataID
+            self.facebookID = facebookID
+            self.instagramID = instagramID
+            self.twitterID = twitterID
+            self.tvdbID = tvdbID
+            self.tvrageID = tvrageID
+        }
+
         enum CodingKeys: String, CodingKey {
             case id
             case imdbID = "imdbId"

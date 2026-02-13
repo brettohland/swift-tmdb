@@ -21,6 +21,42 @@ public extension TMDB.Credits {
         public let originCountry: [Locale.Region]
         public let seasons: [Season]
 
+        public init(
+            isAdult: Bool,
+            backdropPath: URL,
+            id: Int,
+            name: String,
+            originalLanguage: Locale.Language,
+            originalName: String,
+            overview: String,
+            posterPath: URL,
+            mediaType: String,
+            genreIDs: [Int],
+            popularity: Double,
+            firstAirDate: Date?,
+            voteAverage: Double,
+            voteCount: Int,
+            originCountry: [Locale.Region],
+            seasons: [Season],
+        ) {
+            _isAdult = NilBoolean(wrappedValue: isAdult)
+            self.backdropPath = backdropPath
+            self.id = id
+            self.name = name
+            _originalLanguage = LanguageCode(wrappedValue: originalLanguage)
+            self.originalName = originalName
+            self.overview = overview
+            self.posterPath = posterPath
+            self.mediaType = mediaType
+            self.genreIDs = genreIDs
+            self.popularity = popularity
+            _firstAirDate = ISO8601YMD(wrappedValue: firstAirDate)
+            self.voteAverage = voteAverage
+            self.voteCount = voteCount
+            self.originCountry = originCountry
+            self.seasons = seasons
+        }
+
         enum CodingKeys: String, CodingKey {
             case isAdult = "adult"
             case backdropPath

@@ -7,5 +7,10 @@ public extension TMDB {
     struct ConfigurationResponse: Codable, Sendable {
         public let images: ImageConfiguration?
         public let changeKeys: [TMDB.Configuration.ChangeKey]
+
+        public init(images: ImageConfiguration?, changeKeys: [TMDB.Configuration.ChangeKey]) {
+            self.images = images
+            self.changeKeys = changeKeys
+        }
     }
 }

@@ -12,6 +12,26 @@ public extension TMDB {
         public let profilePath: URL?
         public let knownFor: [MultiSearchResult]
 
+        public init(
+            id: Int,
+            name: String,
+            isAdult: Bool,
+            gender: Int?,
+            knownForDepartment: String?,
+            popularity: Double?,
+            profilePath: URL?,
+            knownFor: [MultiSearchResult],
+        ) {
+            self.id = id
+            self.name = name
+            _isAdult = NilBoolean(wrappedValue: isAdult)
+            self.gender = gender
+            self.knownForDepartment = knownForDepartment
+            self.popularity = popularity
+            self.profilePath = profilePath
+            self.knownFor = knownFor
+        }
+
         enum CodingKeys: String, CodingKey {
             case id
             case name

@@ -23,6 +23,7 @@ When asked to create a plan, always write it to a file on disk (e.g., `PLAN.md` 
 - **Define each enum case on its own line** - Never use comma-separated case lists (e.g., `case a, b, c`). Each case must be on a separate line.
 - **Use `URL` or `URL?` for image path properties** - Properties like `posterPath`, `backdropPath`, `profilePath`, `logoPath`, `filePath`, and `stillPath` are typed as `URL`/`URL?`, not `String`/`String?`.
 - **Use typed throws on all public API methods** - All public static methods on `TMDB` use `async throws(TMDBRequestError)` with a `do/catch` wrapper that converts errors via `throw .systemError(error)`.
+- **Always add a public memberwise initializer to public response structs** - Swift only auto-generates internal memberwise initializers, so every public struct in `Sources/TMDB/Models/Responses/Public/` must have an explicit `public init(...)`. For `let` properties use `self.prop = prop`. For property wrappers use the underscore form: `_prop = Wrapper(wrappedValue: val)` (e.g., `_isAdult = NilBoolean(wrappedValue: isAdult)`, `_releaseDate = ISO8601YMD(wrappedValue: releaseDate)`). Place the initializer after the last property declaration, before any `CodingKeys` enum or Codable conformance.
 
 ## Swift API Design Guidelines
 

@@ -32,6 +32,60 @@ public extension TMDB {
         public let isVideo: Bool
         public let voteAverage: Double
         public let voteCount: Int
+
+        public init(
+            isAdult: Bool,
+            backdropPath: URL,
+            belongsToCollection: TitleCollection?,
+            budget: Int,
+            genres: [Genre],
+            homepage: URL?,
+            id: Int,
+            imdbID: String,
+            originalLanguage: Locale.Region,
+            originalTitle: String,
+            overview: String,
+            popularity: Double,
+            posterPath: URL,
+            productionCompanies: [ProductionCompany],
+            productionCountries: [Locale.Region],
+            releaseDate: Date?,
+            revenue: Int,
+            runtime: Measurement<UnitDuration>,
+            spokenLanguages: [Locale.Language],
+            status: String,
+            tagline: String,
+            title: String,
+            isVideo: Bool,
+            voteAverage: Double,
+            voteCount: Int,
+        ) {
+            self.isAdult = isAdult
+            self.backdropPath = backdropPath
+            self.belongsToCollection = belongsToCollection
+            self.budget = budget
+            self.genres = genres
+            _homepage = EmptyStringNullable(wrappedValue: homepage)
+            self.id = id
+            self.imdbID = imdbID
+            self.originalLanguage = originalLanguage
+            self.originalTitle = originalTitle
+            self.overview = overview
+            self.popularity = popularity
+            self.posterPath = posterPath
+            self.productionCompanies = productionCompanies
+            _productionCountries = RegionArray(wrappedValue: productionCountries)
+            _releaseDate = ISO8601YMD(wrappedValue: releaseDate)
+            self.revenue = revenue
+            _runtime = Minutes(wrappedValue: runtime)
+            _spokenLanguages = LanguageArray(wrappedValue: spokenLanguages)
+            self.status = status
+            self.tagline = tagline
+            self.title = title
+            self.isVideo = isVideo
+            self.voteAverage = voteAverage
+            self.voteCount = voteCount
+        }
     }
 }
 

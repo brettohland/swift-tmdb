@@ -9,6 +9,24 @@ public extension TMDB {
         public let groupCount: Int
         public let type: Int
         public let network: TVSeries.Network?
+
+        public init(
+            id: String,
+            name: String,
+            description: String,
+            episodeCount: Int,
+            groupCount: Int,
+            type: Int,
+            network: TVSeries.Network?,
+        ) {
+            self.id = id
+            self.name = name
+            self.description = description
+            self.episodeCount = episodeCount
+            self.groupCount = groupCount
+            self.type = type
+            self.network = network
+        }
     }
 }
 

@@ -26,6 +26,38 @@ public extension TMDB.Discover {
         @ISO8601YMD
         public var releaseDate: Date?
 
+        public init(
+            isAdult: Bool,
+            backdropPath: URL?,
+            genreIDs: [Int],
+            id: Int,
+            originalLanguage: Locale.Language,
+            overview: String?,
+            popularity: Double?,
+            posterPath: URL?,
+            isVideo: Bool,
+            voteAverage: Double?,
+            voteCount: Int?,
+            originalTitle: String?,
+            title: String?,
+            releaseDate: Date?,
+        ) {
+            _isAdult = NilBoolean(wrappedValue: isAdult)
+            self.backdropPath = backdropPath
+            self.genreIDs = genreIDs
+            self.id = id
+            _originalLanguage = LanguageCode(wrappedValue: originalLanguage)
+            self.overview = overview
+            self.popularity = popularity
+            self.posterPath = posterPath
+            _isVideo = NilBoolean(wrappedValue: isVideo)
+            self.voteAverage = voteAverage
+            self.voteCount = voteCount
+            self.originalTitle = originalTitle
+            self.title = title
+            _releaseDate = ISO8601YMD(wrappedValue: releaseDate)
+        }
+
         enum CodingKeys: String, CodingKey {
             case isAdult = "adult"
             case backdropPath

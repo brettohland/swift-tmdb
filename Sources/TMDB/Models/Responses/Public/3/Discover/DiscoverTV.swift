@@ -23,6 +23,36 @@ public extension TMDB.Discover {
         @ISO8601YMD
         public var firstAirDate: Date?
 
+        public init(
+            backdropPath: URL?,
+            genreIDs: [Int],
+            id: Int,
+            originalLanguage: Locale.Language,
+            overview: String?,
+            popularity: Double?,
+            posterPath: URL?,
+            voteAverage: Double?,
+            voteCount: Int?,
+            name: String?,
+            originalName: String?,
+            originCountry: [Locale.Region],
+            firstAirDate: Date?,
+        ) {
+            self.backdropPath = backdropPath
+            self.genreIDs = genreIDs
+            self.id = id
+            _originalLanguage = LanguageCode(wrappedValue: originalLanguage)
+            self.overview = overview
+            self.popularity = popularity
+            self.posterPath = posterPath
+            self.voteAverage = voteAverage
+            self.voteCount = voteCount
+            self.name = name
+            self.originalName = originalName
+            self.originCountry = originCountry
+            _firstAirDate = ISO8601YMD(wrappedValue: firstAirDate)
+        }
+
         enum CodingKeys: String, CodingKey {
             case backdropPath
             case genreIDs = "genreIds"

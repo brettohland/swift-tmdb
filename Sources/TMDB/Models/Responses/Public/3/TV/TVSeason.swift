@@ -12,6 +12,26 @@ public extension TMDB {
         public let voteAverage: Double
         public let episodes: [TVEpisode]
 
+        public init(
+            id: Int,
+            name: String,
+            overview: String,
+            posterPath: URL?,
+            airDate: Date?,
+            seasonNumber: Int,
+            voteAverage: Double,
+            episodes: [TVEpisode],
+        ) {
+            self.id = id
+            self.name = name
+            self.overview = overview
+            self.posterPath = posterPath
+            _airDate = ISO8601YMD(wrappedValue: airDate)
+            self.seasonNumber = seasonNumber
+            self.voteAverage = voteAverage
+            self.episodes = episodes
+        }
+
         enum CodingKeys: String, CodingKey {
             case id
             case name

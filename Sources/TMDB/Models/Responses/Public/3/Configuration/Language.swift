@@ -9,6 +9,12 @@ public extension TMDB.Configuration {
         public let englishName: String
         public let name: String
 
+        public init(languageCode: Locale.Language, englishName: String, name: String) {
+            _languageCode = LanguageCode(wrappedValue: languageCode)
+            self.englishName = englishName
+            self.name = name
+        }
+
         enum CodingKeys: String, CodingKey {
             case languageCode = "iso6391"
             case englishName

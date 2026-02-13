@@ -7,6 +7,12 @@ public extension TMDB {
         public let meaning: String
         public let order: Int
 
+        public init(rating: String, meaning: String, order: Int) {
+            self.rating = rating
+            self.meaning = meaning
+            self.order = order
+        }
+
         enum CodingKeys: String, CodingKey {
             case rating = "certification"
             case meaning

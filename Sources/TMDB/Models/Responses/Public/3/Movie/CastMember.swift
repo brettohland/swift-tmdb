@@ -16,6 +16,34 @@ public extension TMDB {
         public let creditID: String
         public let order: Int
 
+        public init(
+            isAdult: Bool,
+            gender: Int?,
+            id: Int,
+            knownForDepartment: String?,
+            name: String,
+            originalName: String,
+            popularity: Double,
+            profilePath: URL?,
+            castID: Int?,
+            character: String,
+            creditID: String,
+            order: Int,
+        ) {
+            _isAdult = NilBoolean(wrappedValue: isAdult)
+            self.gender = gender
+            self.id = id
+            self.knownForDepartment = knownForDepartment
+            self.name = name
+            self.originalName = originalName
+            self.popularity = popularity
+            self.profilePath = profilePath
+            self.castID = castID
+            self.character = character
+            self.creditID = creditID
+            self.order = order
+        }
+
         enum CodingKeys: String, CodingKey {
             case isAdult = "adult"
             case gender

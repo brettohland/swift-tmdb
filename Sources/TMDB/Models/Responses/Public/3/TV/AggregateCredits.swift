@@ -5,6 +5,12 @@ public extension TMDB {
         public let id: Int
         public let cast: [AggregateCastMember]
         public let crew: [AggregateCrewMember]
+
+        public init(id: Int, cast: [AggregateCastMember], crew: [AggregateCrewMember]) {
+            self.id = id
+            self.cast = cast
+            self.crew = crew
+        }
     }
 
     struct AggregateCastMember: Codable, Identifiable, Sendable {
@@ -20,6 +26,32 @@ public extension TMDB {
         public let roles: [Role]
         public let totalEpisodeCount: Int
         public let order: Int
+
+        public init(
+            isAdult: Bool,
+            gender: Int?,
+            id: Int,
+            knownForDepartment: String?,
+            name: String,
+            originalName: String,
+            popularity: Double,
+            profilePath: URL?,
+            roles: [Role],
+            totalEpisodeCount: Int,
+            order: Int,
+        ) {
+            _isAdult = NilBoolean(wrappedValue: isAdult)
+            self.gender = gender
+            self.id = id
+            self.knownForDepartment = knownForDepartment
+            self.name = name
+            self.originalName = originalName
+            self.popularity = popularity
+            self.profilePath = profilePath
+            self.roles = roles
+            self.totalEpisodeCount = totalEpisodeCount
+            self.order = order
+        }
 
         enum CodingKeys: String, CodingKey {
             case isAdult = "adult"
@@ -39,6 +71,12 @@ public extension TMDB {
             public let creditID: String
             public let character: String
             public let episodeCount: Int
+
+            public init(creditID: String, character: String, episodeCount: Int) {
+                self.creditID = creditID
+                self.character = character
+                self.episodeCount = episodeCount
+            }
 
             enum CodingKeys: String, CodingKey {
                 case creditID = "creditId"
@@ -62,6 +100,32 @@ public extension TMDB {
         public let jobs: [Job]
         public let totalEpisodeCount: Int
 
+        public init(
+            isAdult: Bool,
+            gender: Int?,
+            id: Int,
+            knownForDepartment: String?,
+            name: String,
+            originalName: String,
+            popularity: Double,
+            profilePath: URL?,
+            department: String,
+            jobs: [Job],
+            totalEpisodeCount: Int,
+        ) {
+            _isAdult = NilBoolean(wrappedValue: isAdult)
+            self.gender = gender
+            self.id = id
+            self.knownForDepartment = knownForDepartment
+            self.name = name
+            self.originalName = originalName
+            self.popularity = popularity
+            self.profilePath = profilePath
+            self.department = department
+            self.jobs = jobs
+            self.totalEpisodeCount = totalEpisodeCount
+        }
+
         enum CodingKeys: String, CodingKey {
             case isAdult = "adult"
             case gender
@@ -80,6 +144,12 @@ public extension TMDB {
             public let creditID: String
             public let job: String
             public let episodeCount: Int
+
+            public init(creditID: String, job: String, episodeCount: Int) {
+                self.creditID = creditID
+                self.job = job
+                self.episodeCount = episodeCount
+            }
 
             enum CodingKeys: String, CodingKey {
                 case creditID = "creditId"

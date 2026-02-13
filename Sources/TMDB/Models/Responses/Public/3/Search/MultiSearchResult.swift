@@ -25,6 +25,52 @@ public extension TMDB {
         public let gender: Int?
         public let knownFor: [MultiSearchResult]?
         public let originCountry: [String]?
+
+        public init(
+            id: Int,
+            mediaType: String,
+            title: String?,
+            name: String?,
+            originalTitle: String?,
+            originalName: String?,
+            overview: String?,
+            posterPath: URL?,
+            backdropPath: URL?,
+            profilePath: URL?,
+            popularity: Double?,
+            voteAverage: Double?,
+            voteCount: Int?,
+            releaseDate: Date?,
+            firstAirDate: Date?,
+            isAdult: Bool,
+            genreIDs: [Int]?,
+            knownForDepartment: String?,
+            gender: Int?,
+            knownFor: [MultiSearchResult]?,
+            originCountry: [String]?,
+        ) {
+            self.id = id
+            self.mediaType = mediaType
+            self.title = title
+            self.name = name
+            self.originalTitle = originalTitle
+            self.originalName = originalName
+            self.overview = overview
+            self.posterPath = posterPath
+            self.backdropPath = backdropPath
+            self.profilePath = profilePath
+            self.popularity = popularity
+            self.voteAverage = voteAverage
+            self.voteCount = voteCount
+            self.releaseDate = releaseDate
+            self.firstAirDate = firstAirDate
+            _isAdult = NilBoolean(wrappedValue: isAdult)
+            self.genreIDs = genreIDs
+            self.knownForDepartment = knownForDepartment
+            self.gender = gender
+            self.knownFor = knownFor
+            self.originCountry = originCountry
+        }
     }
 }
 

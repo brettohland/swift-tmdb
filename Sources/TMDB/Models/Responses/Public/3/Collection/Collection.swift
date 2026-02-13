@@ -8,5 +8,21 @@ public extension TMDB {
         public let posterPath: URL?
         public let backdropPath: URL?
         public let parts: [Discover.DiscoverMovie]
+
+        public init(
+            id: Int,
+            name: String,
+            overview: String,
+            posterPath: URL?,
+            backdropPath: URL?,
+            parts: [Discover.DiscoverMovie],
+        ) {
+            self.id = id
+            self.name = name
+            self.overview = overview
+            self.posterPath = posterPath
+            self.backdropPath = backdropPath
+            self.parts = parts
+        }
     }
 }

@@ -12,6 +12,26 @@ public extension TMDB.Credits {
         public let seasonNumber: Int
         public let showID: Int
 
+        public init(
+            airDate: Date?,
+            episodeCount: Int,
+            id: Int,
+            name: String,
+            overview: String,
+            posterPath: URL,
+            seasonNumber: Int,
+            showID: Int,
+        ) {
+            _airDate = ISO8601YMD(wrappedValue: airDate)
+            self.episodeCount = episodeCount
+            self.id = id
+            self.name = name
+            self.overview = overview
+            self.posterPath = posterPath
+            self.seasonNumber = seasonNumber
+            self.showID = showID
+        }
+
         enum CodingKeys: String, CodingKey {
             case airDate
             case episodeCount

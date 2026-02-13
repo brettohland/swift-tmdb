@@ -5,6 +5,12 @@ public extension TMDB {
         public let id: Int
         public let seasonNumber: Int
         public let episodeNumber: Int
+
+        public init(id: Int, seasonNumber: Int, episodeNumber: Int) {
+            self.id = id
+            self.seasonNumber = seasonNumber
+            self.episodeNumber = episodeNumber
+        }
     }
 }
 

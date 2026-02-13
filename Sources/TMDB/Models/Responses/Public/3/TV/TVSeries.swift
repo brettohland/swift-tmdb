@@ -41,6 +41,74 @@ public extension TMDB {
         public let type: String
         public let voteAverage: Double
         public let voteCount: Int
+
+        public init(
+            isAdult: Bool,
+            backdropPath: URL?,
+            createdBy: [Creator],
+            episodeRunTime: [Int],
+            firstAirDate: Date?,
+            genres: [Genre],
+            homepage: URL?,
+            id: Int,
+            isInProduction: Bool,
+            languages: [String],
+            lastAirDate: Date?,
+            lastEpisodeToAir: EpisodeOverview?,
+            name: String,
+            nextEpisodeToAir: EpisodeOverview?,
+            networks: [Network],
+            numberOfEpisodes: Int,
+            numberOfSeasons: Int,
+            originCountry: [String],
+            originalLanguage: String,
+            originalName: String,
+            overview: String,
+            popularity: Double,
+            posterPath: URL?,
+            productionCompanies: [ProductionCompany],
+            productionCountries: [Locale.Region],
+            seasons: [SeasonOverview],
+            spokenLanguages: [Locale.Language],
+            status: String,
+            tagline: String,
+            type: String,
+            voteAverage: Double,
+            voteCount: Int,
+        ) {
+            _isAdult = NilBoolean(wrappedValue: isAdult)
+            self.backdropPath = backdropPath
+            self.createdBy = createdBy
+            self.episodeRunTime = episodeRunTime
+            _firstAirDate = ISO8601YMD(wrappedValue: firstAirDate)
+            self.genres = genres
+            _homepage = EmptyStringNullable(wrappedValue: homepage)
+            self.id = id
+            _isInProduction = NilBoolean(wrappedValue: isInProduction)
+            self.languages = languages
+            _lastAirDate = ISO8601YMD(wrappedValue: lastAirDate)
+            self.lastEpisodeToAir = lastEpisodeToAir
+            self.name = name
+            self.nextEpisodeToAir = nextEpisodeToAir
+            self.networks = networks
+            self.numberOfEpisodes = numberOfEpisodes
+            self.numberOfSeasons = numberOfSeasons
+            self.originCountry = originCountry
+            self.originalLanguage = originalLanguage
+            self.originalName = originalName
+            self.overview = overview
+            self.popularity = popularity
+            self.posterPath = posterPath
+            self.productionCompanies = productionCompanies
+            _productionCountries = RegionArray(wrappedValue: productionCountries)
+            self.seasons = seasons
+            _spokenLanguages = LanguageArray(wrappedValue: spokenLanguages)
+            self.status = status
+            self.tagline = tagline
+            self.type = type
+            self.voteAverage = voteAverage
+            self.voteCount = voteCount
+        }
     }
 }
 
@@ -54,6 +122,15 @@ public extension TMDB.TVSeries {
         public let originalName: String
         public let gender: Int
         public let profilePath: URL?
+
+        public init(id: Int, creditID: String, name: String, originalName: String, gender: Int, profilePath: URL?) {
+            self.id = id
+            self.creditID = creditID
+            self.name = name
+            self.originalName = originalName
+            self.gender = gender
+            self.profilePath = profilePath
+        }
 
         enum CodingKeys: String, CodingKey {
             case id
@@ -70,6 +147,13 @@ public extension TMDB.TVSeries {
         public let name: String
         public let logoPath: URL?
         public let originCountry: String
+
+        public init(id: Int, name: String, logoPath: URL?, originCountry: String) {
+            self.id = id
+            self.name = name
+            self.logoPath = logoPath
+            self.originCountry = originCountry
+        }
 
         enum CodingKeys: String, CodingKey {
             case id
@@ -89,6 +173,26 @@ public extension TMDB.TVSeries {
         public let episodeCount: Int
         public let seasonNumber: Int
         public let voteAverage: Double
+
+        public init(
+            id: Int,
+            name: String,
+            overview: String,
+            posterPath: URL?,
+            airDate: Date?,
+            episodeCount: Int,
+            seasonNumber: Int,
+            voteAverage: Double,
+        ) {
+            self.id = id
+            self.name = name
+            self.overview = overview
+            self.posterPath = posterPath
+            _airDate = ISO8601YMD(wrappedValue: airDate)
+            self.episodeCount = episodeCount
+            self.seasonNumber = seasonNumber
+            self.voteAverage = voteAverage
+        }
 
         enum CodingKeys: String, CodingKey {
             case id
@@ -116,6 +220,34 @@ public extension TMDB.TVSeries {
         public let runtime: Int?
         public let productionCode: String
         public let showID: Int
+
+        public init(
+            id: Int,
+            name: String,
+            overview: String,
+            episodeNumber: Int,
+            seasonNumber: Int,
+            airDate: Date?,
+            stillPath: URL?,
+            voteAverage: Double,
+            voteCount: Int,
+            runtime: Int?,
+            productionCode: String,
+            showID: Int,
+        ) {
+            self.id = id
+            self.name = name
+            self.overview = overview
+            self.episodeNumber = episodeNumber
+            self.seasonNumber = seasonNumber
+            _airDate = ISO8601YMD(wrappedValue: airDate)
+            self.stillPath = stillPath
+            self.voteAverage = voteAverage
+            self.voteCount = voteCount
+            self.runtime = runtime
+            self.productionCode = productionCode
+            self.showID = showID
+        }
 
         enum CodingKeys: String, CodingKey {
             case id
