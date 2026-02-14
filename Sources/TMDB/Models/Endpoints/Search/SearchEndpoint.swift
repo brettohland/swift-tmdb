@@ -2,13 +2,13 @@ import Foundation
 
 extension TMDB.V3Endpoints {
     enum Search {
-        case movie(query: String)
-        case tv(query: String)
-        case person(query: String)
-        case multi(query: String)
-        case collection(query: String)
-        case company(query: String)
-        case keyword(query: String)
+        case movie(query: String, page: Int)
+        case tv(query: String, page: Int)
+        case person(query: String, page: Int)
+        case multi(query: String, page: Int)
+        case collection(query: String, page: Int)
+        case company(query: String, page: Int)
+        case keyword(query: String, page: Int)
     }
 }
 
@@ -17,27 +17,34 @@ extension TMDB.V3Endpoints.Search: EndpointFactory {
         var paths: [any StringProtocol] = ["3", "search"]
         var queryItems: [URLQueryItem] = []
         switch self {
-        case .movie(let query):
+        case .movie(let query, let page):
             paths.append("movie")
             queryItems.append(URLQueryItem(name: "query", value: query))
-        case .tv(let query):
+            queryItems.append(URLQueryItem(name: "page", value: String(page)))
+        case .tv(let query, let page):
             paths.append("tv")
             queryItems.append(URLQueryItem(name: "query", value: query))
-        case .person(let query):
+            queryItems.append(URLQueryItem(name: "page", value: String(page)))
+        case .person(let query, let page):
             paths.append("person")
             queryItems.append(URLQueryItem(name: "query", value: query))
-        case .multi(let query):
+            queryItems.append(URLQueryItem(name: "page", value: String(page)))
+        case .multi(let query, let page):
             paths.append("multi")
             queryItems.append(URLQueryItem(name: "query", value: query))
-        case .collection(let query):
+            queryItems.append(URLQueryItem(name: "page", value: String(page)))
+        case .collection(let query, let page):
             paths.append("collection")
             queryItems.append(URLQueryItem(name: "query", value: query))
-        case .company(let query):
+            queryItems.append(URLQueryItem(name: "page", value: String(page)))
+        case .company(let query, let page):
             paths.append("company")
             queryItems.append(URLQueryItem(name: "query", value: query))
-        case .keyword(let query):
+            queryItems.append(URLQueryItem(name: "page", value: String(page)))
+        case .keyword(let query, let page):
             paths.append("keyword")
             queryItems.append(URLQueryItem(name: "query", value: query))
+            queryItems.append(URLQueryItem(name: "page", value: String(page)))
         }
         return URLFactory.makeURL(baseURL: baseURL, appending: paths, queryItems: queryItems)
     }
@@ -57,7 +64,7 @@ public extension TMDB {
     static func searchMovies(query: String, page: Int = 1) async throws(TMDBRequestError) -> Discover
     .PaginatedResponse<Discover.DiscoverMovie> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverMovie>>(
-            endpoint: V3Endpoints.Search.movie(query: query),
+            endpoint: V3Endpoints.Search.movie(query: query, page: page),
             httpMethod: .get,
         )
         do {
@@ -82,7 +89,7 @@ public extension TMDB {
     static func searchTV(query: String, page: Int = 1) async throws(TMDBRequestError) -> Discover
     .PaginatedResponse<Discover.DiscoverTV> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverTV>>(
-            endpoint: V3Endpoints.Search.tv(query: query),
+            endpoint: V3Endpoints.Search.tv(query: query, page: page),
             httpMethod: .get,
         )
         do {
@@ -107,7 +114,7 @@ public extension TMDB {
     static func searchPeople(query: String, page: Int = 1) async throws(TMDBRequestError) -> Discover
     .PaginatedResponse<SearchPerson> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.SearchPerson>>(
-            endpoint: V3Endpoints.Search.person(query: query),
+            endpoint: V3Endpoints.Search.person(query: query, page: page),
             httpMethod: .get,
         )
         do {
@@ -132,7 +139,7 @@ public extension TMDB {
     static func searchMulti(query: String, page: Int = 1) async throws(TMDBRequestError) -> Discover
     .PaginatedResponse<MultiSearchResult> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.MultiSearchResult>>(
-            endpoint: V3Endpoints.Search.multi(query: query),
+            endpoint: V3Endpoints.Search.multi(query: query, page: page),
             httpMethod: .get,
         )
         do {
@@ -157,7 +164,7 @@ public extension TMDB {
     static func searchCollections(query: String, page: Int = 1) async throws(TMDBRequestError) -> Discover
     .PaginatedResponse<SearchCollection> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.SearchCollection>>(
-            endpoint: V3Endpoints.Search.collection(query: query),
+            endpoint: V3Endpoints.Search.collection(query: query, page: page),
             httpMethod: .get,
         )
         do {
@@ -182,7 +189,7 @@ public extension TMDB {
     static func searchCompanies(query: String, page: Int = 1) async throws(TMDBRequestError) -> Discover
     .PaginatedResponse<SearchCompany> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.SearchCompany>>(
-            endpoint: V3Endpoints.Search.company(query: query),
+            endpoint: V3Endpoints.Search.company(query: query, page: page),
             httpMethod: .get,
         )
         do {
@@ -207,7 +214,7 @@ public extension TMDB {
     static func searchKeywords(query: String, page: Int = 1) async throws(TMDBRequestError) -> Discover
     .PaginatedResponse<Keyword> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Keyword>>(
-            endpoint: V3Endpoints.Search.keyword(query: query),
+            endpoint: V3Endpoints.Search.keyword(query: query, page: page),
             httpMethod: .get,
         )
         do {

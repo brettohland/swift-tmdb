@@ -16,5 +16,12 @@ public extension TMDB.Discover {
             _totalPages = NilInteger(wrappedValue: totalPages)
             self.results = results
         }
+
+        enum CodingKeys: String, CodingKey {
+            case page
+            case totalResults
+            case totalPages
+            case results
+        }
     }
 }

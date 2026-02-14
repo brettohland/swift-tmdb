@@ -3,22 +3,24 @@ import Foundation
 extension TMDB.V3Endpoints {
     enum Keywords {
         case details(id: Int)
-        case movies(id: Int)
+        case movies(id: Int, page: Int)
     }
 }
 
 extension TMDB.V3Endpoints.Keywords: EndpointFactory {
     func makeURL(baseURL: URL) -> URL {
         var paths: [any StringProtocol] = ["3", "keyword"]
+        var queryItems: [URLQueryItem] = []
         switch self {
         case .details(let id):
             // /3/keyword/{id}
             paths.append(String(id))
-        case .movies(let id):
+        case .movies(let id, let page):
             // /3/keyword/{id}/movies
             paths += [String(id), "movies"]
+            queryItems.append(URLQueryItem(name: "page", value: String(page)))
         }
-        return URLFactory.makeURL(baseURL: baseURL, appending: paths)
+        return URLFactory.makeURL(baseURL: baseURL, appending: paths, queryItems: queryItems)
     }
 }
 
@@ -58,7 +60,7 @@ public extension TMDB {
     static func keywordMovies(id: Int, page: Int = 1) async throws(TMDBRequestError) -> Discover
     .PaginatedResponse<Discover.DiscoverMovie> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverMovie>>(
-            endpoint: V3Endpoints.Keywords.movies(id: id),
+            endpoint: V3Endpoints.Keywords.movies(id: id, page: page),
             httpMethod: .get,
         )
         do {

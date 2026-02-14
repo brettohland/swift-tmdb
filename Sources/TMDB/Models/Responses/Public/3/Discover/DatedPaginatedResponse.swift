@@ -18,6 +18,14 @@ public extension TMDB.Discover {
             _totalPages = NilInteger(wrappedValue: totalPages)
             self.results = results
         }
+
+        enum CodingKeys: String, CodingKey {
+            case dates
+            case page
+            case totalResults
+            case totalPages
+            case results
+        }
     }
 
     struct DateRange: Codable, Sendable {
@@ -29,6 +37,11 @@ public extension TMDB.Discover {
         public init(maximum: Date?, minimum: Date?) {
             _maximum = ISO8601YMD(wrappedValue: maximum)
             _minimum = ISO8601YMD(wrappedValue: minimum)
+        }
+
+        enum CodingKeys: String, CodingKey {
+            case maximum
+            case minimum
         }
     }
 }

@@ -23,6 +23,7 @@ When asked to create a plan, always write it to a file on disk (e.g., `PLAN.md` 
 - **Define each enum case on its own line** - Never use comma-separated case lists (e.g., `case a, b, c`). Each case must be on a separate line.
 - **Use `URL` or `URL?` for image path properties** - Properties like `posterPath`, `backdropPath`, `profilePath`, `logoPath`, `filePath`, and `stillPath` are typed as `URL`/`URL?`, not `String`/`String?`.
 - **Use typed throws on all public API methods** - All public static methods on `TMDB` use `async throws(TMDBRequestError)` with a `do/catch` wrapper that converts errors via `throw .systemError(error)`.
+- **Forward all public method parameters to the endpoint enum** - Every parameter on a public `TMDB` static method (e.g., `page`, `query`) must be captured in the corresponding `V3Endpoints` enum case and used in `makeURL(baseURL:)`. Do not accept parameters in the public API signature that are silently ignored.
 - **Always add a public memberwise initializer to public response structs** - Swift only auto-generates internal memberwise initializers, so every public struct in `Sources/TMDB/Models/Responses/Public/` must have an explicit `public init(...)`. For `let` properties use `self.prop = prop`. For property wrappers use the underscore form: `_prop = Wrapper(wrappedValue: val)` (e.g., `_isAdult = NilBoolean(wrappedValue: isAdult)`, `_releaseDate = ISO8601YMD(wrappedValue: releaseDate)`). Place the initializer after the last property declaration, before any `CodingKeys` enum or Codable conformance.
 
 ## Swift API Design Guidelines
@@ -33,7 +34,7 @@ This project follows the [Swift API Design Guidelines](https://www.swift.org/doc
 - **ISO code properties** use descriptive role names: `regionCode`, `languageCode` (not `iso31661`, `iso6391`)
 - **Redundant type prefixes** are removed: `WatchProvider.id` (not `providerId`), `Credits.Details.type` (not `creditType`)
 - **Protocols** describing capability use `-able` suffix: `Discoverable` (not `DiscoverType`)
-- When renaming a decoded property, add a `CodingKeys` enum mapping the new name to the original JSON key. If any property wrapper is present on the struct, ALL properties must appear in `CodingKeys`.
+- When renaming a decoded property, add a `CodingKeys` enum mapping the new name to the original JSON key. If any property wrapper is present on the struct, ALL properties must appear in `CodingKeys` — even if the project uses `.convertFromSnakeCase` key decoding and the names happen to match.
 
 ## Build and Test Commands
 
@@ -229,6 +230,8 @@ To add a new TMDB API endpoint:
 ## Code Review Guidelines
 
 When reviewing code, do not flag optional URL properties (e.g., `URL? backdropPath`) as bugs — these are intentionally optional in the TMDB API models.
+
+- **Doc comments must match the actual URL path** - The `/// /3/...` doc comment on each public method must reflect the URL that `makeURL(baseURL:)` actually produces, not the TMDB docs page name.
 
 ## Testing
 
