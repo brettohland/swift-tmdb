@@ -30,7 +30,8 @@ extension TMDB.V3Endpoints.Find: EndpointFactory {
         case .byID(let externalID, let source):
             // /3/find/{external_id}?external_source=...
             let paths: [any StringProtocol] = ["3", "find", externalID]
-            let queryItems = [URLQueryItem(name: "external_source", value: source.rawValue)]
+            var queryItems: [URLQueryItem] = []
+            queryItems.append("external_source", value: source.rawValue)
             return URLFactory.makeURL(baseURL: baseURL, appending: paths, queryItems: queryItems)
         }
     }

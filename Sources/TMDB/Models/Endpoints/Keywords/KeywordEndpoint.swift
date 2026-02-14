@@ -18,7 +18,7 @@ extension TMDB.V3Endpoints.Keywords: EndpointFactory {
         case .movies(let id, let page):
             // /3/keyword/{id}/movies
             paths += [String(id), "movies"]
-            queryItems.append(URLQueryItem(name: "page", value: String(page)))
+            queryItems.append("page", value: page)
         }
         return URLFactory.makeURL(baseURL: baseURL, appending: paths, queryItems: queryItems)
     }

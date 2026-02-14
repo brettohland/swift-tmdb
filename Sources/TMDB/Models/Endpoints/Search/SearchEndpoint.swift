@@ -19,53 +19,39 @@ extension TMDB.V3Endpoints.Search: EndpointFactory {
         switch self {
         case .movie(let query, let page, let includeAdult, let year, let primaryReleaseYear):
             paths.append("movie")
-            queryItems.append(URLQueryItem(name: "query", value: query))
-            queryItems.append(URLQueryItem(name: "page", value: String(page)))
-            if includeAdult {
-                queryItems.append(URLQueryItem(name: "include_adult", value: "true"))
-            }
-            if let year {
-                queryItems.append(URLQueryItem(name: "year", value: String(year)))
-            }
-            if let primaryReleaseYear {
-                queryItems.append(URLQueryItem(name: "primary_release_year", value: String(primaryReleaseYear)))
-            }
+            queryItems.append(.query, value: query)
+            queryItems.append(.page, value: page)
+            queryItems.appendIfTrue(.includeAdult, value: includeAdult)
+            queryItems.appendIfPresent(.year, value: year)
+            queryItems.appendIfPresent(.primaryReleaseYear, value: primaryReleaseYear)
         case .tv(let query, let page, let includeAdult, let firstAirDateYear):
             paths.append("tv")
-            queryItems.append(URLQueryItem(name: "query", value: query))
-            queryItems.append(URLQueryItem(name: "page", value: String(page)))
-            if includeAdult {
-                queryItems.append(URLQueryItem(name: "include_adult", value: "true"))
-            }
-            if let firstAirDateYear {
-                queryItems.append(URLQueryItem(name: "first_air_date_year", value: String(firstAirDateYear)))
-            }
+            queryItems.append(.query, value: query)
+            queryItems.append(.page, value: page)
+            queryItems.appendIfTrue(.includeAdult, value: includeAdult)
+            queryItems.appendIfPresent(.firstAirDateYear, value: firstAirDateYear)
         case .person(let query, let page, let includeAdult):
             paths.append("person")
-            queryItems.append(URLQueryItem(name: "query", value: query))
-            queryItems.append(URLQueryItem(name: "page", value: String(page)))
-            if includeAdult {
-                queryItems.append(URLQueryItem(name: "include_adult", value: "true"))
-            }
+            queryItems.append(.query, value: query)
+            queryItems.append(.page, value: page)
+            queryItems.appendIfTrue(.includeAdult, value: includeAdult)
         case .multi(let query, let page, let includeAdult):
             paths.append("multi")
-            queryItems.append(URLQueryItem(name: "query", value: query))
-            queryItems.append(URLQueryItem(name: "page", value: String(page)))
-            if includeAdult {
-                queryItems.append(URLQueryItem(name: "include_adult", value: "true"))
-            }
+            queryItems.append(.query, value: query)
+            queryItems.append(.page, value: page)
+            queryItems.appendIfTrue(.includeAdult, value: includeAdult)
         case .collection(let query, let page):
             paths.append("collection")
-            queryItems.append(URLQueryItem(name: "query", value: query))
-            queryItems.append(URLQueryItem(name: "page", value: String(page)))
+            queryItems.append(.query, value: query)
+            queryItems.append(.page, value: page)
         case .company(let query, let page):
             paths.append("company")
-            queryItems.append(URLQueryItem(name: "query", value: query))
-            queryItems.append(URLQueryItem(name: "page", value: String(page)))
+            queryItems.append(.query, value: query)
+            queryItems.append(.page, value: page)
         case .keyword(let query, let page):
             paths.append("keyword")
-            queryItems.append(URLQueryItem(name: "query", value: query))
-            queryItems.append(URLQueryItem(name: "page", value: String(page)))
+            queryItems.append(.query, value: query)
+            queryItems.append(.page, value: page)
         }
         return URLFactory.makeURL(baseURL: baseURL, appending: paths, queryItems: queryItems)
     }
@@ -129,8 +115,7 @@ public extension TMDB {
         page: Int = 1,
         includeAdult: Bool = false,
         firstAirDateYear: Int? = nil,
-    ) async throws(TMDBRequestError) -> Discover
-    .PaginatedResponse<Discover.DiscoverTV> {
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverTV> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverTV>>(
             endpoint: V3Endpoints.Search.tv(
                 query: query,
@@ -164,8 +149,7 @@ public extension TMDB {
         query: String,
         page: Int = 1,
         includeAdult: Bool = false,
-    ) async throws(TMDBRequestError) -> Discover
-    .PaginatedResponse<SearchPerson> {
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<SearchPerson> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.SearchPerson>>(
             endpoint: V3Endpoints.Search.person(query: query, page: page, includeAdult: includeAdult),
             httpMethod: .get,
@@ -194,8 +178,7 @@ public extension TMDB {
         query: String,
         page: Int = 1,
         includeAdult: Bool = false,
-    ) async throws(TMDBRequestError) -> Discover
-    .PaginatedResponse<MultiSearchResult> {
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<MultiSearchResult> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.MultiSearchResult>>(
             endpoint: V3Endpoints.Search.multi(query: query, page: page, includeAdult: includeAdult),
             httpMethod: .get,
@@ -219,8 +202,10 @@ public extension TMDB {
     ///   - page: The page of results to return (default: 1)
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/SearchCollection``
     /// - Throws: ``TMDBRequestError``
-    static func searchCollections(query: String, page: Int = 1) async throws(TMDBRequestError) -> Discover
-    .PaginatedResponse<SearchCollection> {
+    static func searchCollections(
+        query: String,
+        page: Int = 1
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<SearchCollection> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.SearchCollection>>(
             endpoint: V3Endpoints.Search.collection(query: query, page: page),
             httpMethod: .get,
@@ -244,8 +229,10 @@ public extension TMDB {
     ///   - page: The page of results to return (default: 1)
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/SearchCompany``
     /// - Throws: ``TMDBRequestError``
-    static func searchCompanies(query: String, page: Int = 1) async throws(TMDBRequestError) -> Discover
-    .PaginatedResponse<SearchCompany> {
+    static func searchCompanies(
+        query: String,
+        page: Int = 1
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<SearchCompany> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.SearchCompany>>(
             endpoint: V3Endpoints.Search.company(query: query, page: page),
             httpMethod: .get,
@@ -269,8 +256,10 @@ public extension TMDB {
     ///   - page: The page of results to return (default: 1)
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Keyword``
     /// - Throws: ``TMDBRequestError``
-    static func searchKeywords(query: String, page: Int = 1) async throws(TMDBRequestError) -> Discover
-    .PaginatedResponse<Keyword> {
+    static func searchKeywords(
+        query: String,
+        page: Int = 1
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Keyword> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Keyword>>(
             endpoint: V3Endpoints.Search.keyword(query: query, page: page),
             httpMethod: .get,
