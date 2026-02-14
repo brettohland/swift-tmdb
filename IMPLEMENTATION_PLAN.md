@@ -1,7 +1,7 @@
 # TMDB API v3 Read-Only Endpoints - Implementation Plan
 
-**Status:** Phase 3 Complete ✅ | Phase 4 Next
-**Last Updated:** 2026-02-09
+**Status:** Phase 3 Complete ✅ | Phase 3.5 Next
+**Last Updated:** 2026-02-14
 **Target:** 110 total endpoints (9 existing + 101 new)
 
 ---
@@ -10,11 +10,12 @@
 1. [Progress Overview](#progress-overview)
 2. [Phase 1: Foundation & Configuration](#phase-1-foundation--configuration-complete-)
 3. [Phase 2: Movies - Complete Coverage](#phase-2-movies---complete-coverage-complete-)
-4. [Phase 3: Search & Discovery](#phase-3-search--discovery-next)
-5. [Phase 4: TV Shows - Complete Coverage](#phase-4-tv-shows---complete-coverage)
-6. [Phase 5: People & Supporting Features](#phase-5-people--supporting-features)
-7. [Implementation Patterns](#implementation-patterns)
-8. [Lessons Learned](#lessons-learned)
+4. [Phase 3: Search & Discovery](#phase-3-search--discovery-complete-)
+5. [Phase 3.5: Language, Region & Missing Query Parameters](#phase-35-language-region--missing-query-parameters)
+6. [Phase 4: TV Shows - Complete Coverage](#phase-4-tv-shows---complete-coverage)
+7. [Phase 5: People & Supporting Features](#phase-5-people--supporting-features)
+8. [Implementation Patterns](#implementation-patterns)
+9. [Lessons Learned](#lessons-learned)
 
 ---
 
@@ -26,7 +27,8 @@
 | **Phase 1** | 15 | ✅ Complete | v0.2.0 (ready) |
 | **Phase 2** | 20 | ✅ Complete | v0.3.0 (ready) |
 | **Phase 3** | 12 | ✅ Complete | v0.4.0 (ready) |
-| **Phase 4** | 41 | 📋 Next | v0.5.0 |
+| **Phase 3.5** | — | 📋 Next | v0.4.1 |
+| **Phase 4** | 41 | ⏳ Planned | v0.5.0 |
 | **Phase 5** | 13 | ⏳ Planned | v0.6.0 |
 | **Total** | **110** | **56/110 (51%)** | |
 
@@ -351,6 +353,66 @@ Tests/TMDBTests/Endpoint Tests/
 - ✅ Added `Discoverable` conformance to `Keyword` for use in `PaginatedResponse<Keyword>`
 - ✅ All 61 tests passing (12 new + 49 existing)
 - ✅ Build successful with no warnings
+
+---
+
+## Phase 3.5: Language, Region & Missing Query Parameters
+
+**Priority:** HIGH (must complete before Phase 4)
+**Complexity:** MEDIUM
+**Target Release:** v0.4.1
+
+### Background
+
+A query parameter audit (see `QUERY_PARAM_AUDIT.md`) revealed that most existing endpoints are missing optional query parameters documented in the official TMDB API. The `language` and `region` parameters are the most pervasive — they appear on ~30 and ~6 endpoints respectively. Rather than adding them as individual parameters on every method, they should be handled as SDK-level infrastructure so that all current and future endpoints benefit automatically.
+
+### Part 1: Language & Region Infrastructure
+
+`language` and `region` are cross-cutting concerns. This phase should design and implement an SDK-level mechanism for these parameters so they are:
+
+- Configurable as defaults (e.g., at SDK initialization or via a global setting)
+- Overridable on a per-request basis
+- Automatically injected into endpoint URL construction
+- Applied retroactively to all 56 existing endpoints and all future endpoints
+
+The exact design (e.g., stored in a dependency, threaded through `EndpointFactory`, set on `Endpoint`, etc.) should be determined during implementation planning.
+
+### Part 2: Remaining Missing Query Parameters
+
+After language/region infrastructure is in place, the remaining non-language/region missing parameters need to be added to individual endpoints. These are endpoint-specific and follow the existing pattern of adding parameters to enum cases and `makeURL(baseURL:)`.
+
+**Movie Detail Endpoints:**
+- `movieReviews(id:)` — add `page`
+- `similarMovies(id:)` — add `page`
+- `movieRecommendations(id:)` — add `page`
+- `movieChanges(id:)` — add `start_date`, `end_date`, `page`
+
+**Movie List Endpoints:**
+- `moviesNowPlaying()` — add `page`
+- `popularMovies()` — add `page`
+- `topRatedMovies()` — add `page`
+- `upcomingMovies()` — add `page`
+
+**Trending Endpoints:**
+- `trendingAll(timeWindow:)` — add `page`
+- `trendingMovies(timeWindow:)` — add `page`
+- `trendingTV(timeWindow:)` — add `page`
+- `trendingPeople(timeWindow:)` — add `page`
+
+**Search Endpoints:**
+- `searchCollections(query:page:)` — add `includeAdult`, `region`
+
+**Keyword Endpoints:**
+- `keywordMovies(id:page:)` — add `includeAdult`
+
+**Discover TV Endpoint:**
+- `discoverTV(filters:)` — add `includeAdult`, `voteAverageLessThan`, `voteCountLessThan`
+
+### Verification
+
+1. `swift build` — no errors or warnings
+2. `swift test` — all existing tests still pass
+3. `swiftformat --exclude docs Sources Tests` — code formatting
 
 ---
 
@@ -818,35 +880,20 @@ swift test --filter MovieEndpointTests/movieCredits
 
 ## Next Steps
 
-### Immediate (Phase 4 - TV Shows)
+### Immediate (Phase 3.5 - Language, Region & Missing Query Parameters)
 
-1. **Implement TV Series Endpoints** (18 endpoints)
-   - TV series details, credits, aggregate credits, images, videos
-   - Reviews, keywords, similar, recommendations
-   - Alternative titles, content ratings, episode groups
-   - External IDs, translations, watch providers, changes, latest
+1. **Design language/region infrastructure** — determine how defaults are stored and how they're injected into URL construction
+2. **Implement infrastructure** — update `EndpointFactory`/`Endpoint`/dependency layer as needed
+3. **Retrofit all 56 existing endpoints** — ensure language/region are automatically applied
+4. **Add remaining missing query parameters** — `page`, `start_date`/`end_date`, `includeAdult`, etc. per the audit
+5. **Release v0.4.1**
 
-2. **Implement TV Series Lists** (4 endpoints)
-   - Airing today, on the air, popular, top rated
+### Then (Phase 4 - TV Shows)
 
-3. **Implement TV Seasons** (9 endpoints)
-   - Season details, credits, external IDs, images, translations, videos, watch providers, changes
-
-4. **Implement TV Episodes** (9 endpoints + 1 episode groups)
-   - Episode details, credits, external IDs, images, translations, videos, changes
-
-5. **Key Models to Create:**
-   - `TMDB.TVSeries`, `TMDB.TVSeason`, `TMDB.TVEpisode`
-   - `TMDB.ContentRating`, `TMDB.EpisodeGroup`
-   - Reuse `ImageCollection`, `VideoCollection`, `Credits`, etc. from Phase 2
-
-6. **Test & Release v0.5.0**
-
-### Timeline Estimate
-
-- **Phase 4:** 4-5 weeks (41 endpoints)
-- **Phase 5:** 2-3 weeks (13 endpoints)
-- **Total:** 6-8 weeks for remaining 54 endpoints
+1. **Implement TV Series Endpoints** (22 endpoints)
+2. **Implement TV Seasons** (9 endpoints)
+3. **Implement TV Episodes + Groups** (8 endpoints)
+4. **Release v0.5.0**
 
 ---
 
@@ -858,7 +905,8 @@ swift test --filter MovieEndpointTests/movieCredits
 | v0.2.0 | Phase 1 - Foundation (15) | ✅ Ready |
 | v0.3.0 | Phase 2 - Movies (20) | ✅ Ready |
 | v0.4.0 | Phase 3 - Search (12) | ✅ Ready |
-| v0.5.0 | Phase 4 - TV (41) | 📋 Next |
+| v0.4.1 | Phase 3.5 - Language/Region & Query Params | 📋 Next |
+| v0.5.0 | Phase 4 - TV (41) | ⏳ Planned |
 | v0.6.0 | Phase 5 - People (13) | ⏳ Planned |
 | v1.0.0 | Auth + Account (future) | 💡 Deferred |
 
@@ -883,6 +931,6 @@ Requires:
 
 ---
 
-**Document Version:** 1.2
-**Last Updated:** 2026-02-09
-**Next Review:** Start of Phase 4
+**Document Version:** 1.3
+**Last Updated:** 2026-02-14
+**Next Review:** Start of Phase 3.5

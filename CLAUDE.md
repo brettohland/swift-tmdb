@@ -10,6 +10,10 @@ When asked to do X, do exactly X. Do not expand scope beyond what was requested.
 
 When asked to create a plan, always write it to a file on disk (e.g., `PLAN.md` or `.claude/plans/<name>.md`) unless explicitly told otherwise.
 
+## TMDB API Reference
+
+The official TMDB API documentation at https://developer.themoviedb.org/reference is the **sole source of truth** for all questions about the TMDB API — including available endpoints, query parameters, response schemas, and expected behavior. Do not rely on third-party API wrappers, community wikis, or other unofficial sources when determining what the API supports.
+
 ## Project Overview
 
 `swift-tmdb` is a modern Swift package providing a type-safe wrapper around the TMDB API (The Movie Database). It targets iOS/iPadOS 26+ and uses Swift 6.2 with strict concurrency enabled. The package is designed to automatically provide mocked responses during unit testing and SwiftUI previews using PointFree's Dependencies framework.

@@ -204,7 +204,7 @@ public extension TMDB {
     /// - Throws: ``TMDBRequestError``
     static func searchCollections(
         query: String,
-        page: Int = 1
+        page: Int = 1,
     ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<SearchCollection> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.SearchCollection>>(
             endpoint: V3Endpoints.Search.collection(query: query, page: page),
@@ -231,7 +231,7 @@ public extension TMDB {
     /// - Throws: ``TMDBRequestError``
     static func searchCompanies(
         query: String,
-        page: Int = 1
+        page: Int = 1,
     ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<SearchCompany> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.SearchCompany>>(
             endpoint: V3Endpoints.Search.company(query: query, page: page),
@@ -258,7 +258,7 @@ public extension TMDB {
     /// - Throws: ``TMDBRequestError``
     static func searchKeywords(
         query: String,
-        page: Int = 1
+        page: Int = 1,
     ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Keyword> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Keyword>>(
             endpoint: V3Endpoints.Search.keyword(query: query, page: page),

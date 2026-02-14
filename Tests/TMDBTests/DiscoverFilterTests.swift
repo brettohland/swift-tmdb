@@ -13,52 +13,52 @@ struct DiscoverFilterTests {
             MovieFilter.language(Locale(identifier: "en_US")).queryItem.description == "language=en_US",
         )
         #expect(
-            MovieFilter.sortBy(.popularity, .ascending).queryItem.description == "sort_option=popularity.asc",
+            MovieFilter.sortBy(.popularity, .ascending).queryItem.description == "sort_by=popularity.asc",
         )
         #expect(
-            MovieFilter.sortBy(.popularity, .descending).queryItem.description == "sort_option=popularity.desc",
+            MovieFilter.sortBy(.popularity, .descending).queryItem.description == "sort_by=popularity.desc",
         )
         #expect(
-            MovieFilter.sortBy(.averageVote, .ascending).queryItem.description == "sort_option=average_vote.asc",
+            MovieFilter.sortBy(.averageVote, .ascending).queryItem.description == "sort_by=average_vote.asc",
         )
         #expect(
             MovieFilter.sortBy(.averageVote, .descending).queryItem
-                .description == "sort_option=average_vote.desc",
+                .description == "sort_by=average_vote.desc",
         )
         #expect(
             MovieFilter.sortBy(.originalTitle, .ascending).queryItem
-                .description == "sort_option=original_title.asc",
+                .description == "sort_by=original_title.asc",
         )
         #expect(
             MovieFilter.sortBy(.originalTitle, .descending).queryItem
-                .description == "sort_option=original_title.desc",
+                .description == "sort_by=original_title.desc",
         )
         #expect(
             MovieFilter.sortBy(.primaryReleaseDate, .ascending).queryItem
-                .description == "sort_option=primary_release_date.asc",
+                .description == "sort_by=primary_release_date.asc",
         )
         #expect(
             MovieFilter.sortBy(.primaryReleaseDate, .descending).queryItem
-                .description == "sort_option=primary_release_date.desc",
+                .description == "sort_by=primary_release_date.desc",
         )
         #expect(
-            MovieFilter.sortBy(.releaseDate, .ascending).queryItem.description == "sort_option=release_date.asc",
+            MovieFilter.sortBy(.releaseDate, .ascending).queryItem.description == "sort_by=release_date.asc",
         )
         #expect(
             MovieFilter.sortBy(.releaseDate, .descending).queryItem
-                .description == "sort_option=release_date.desc",
+                .description == "sort_by=release_date.desc",
         )
         #expect(
-            MovieFilter.sortBy(.revenue, .ascending).queryItem.description == "sort_option=revenue.asc",
+            MovieFilter.sortBy(.revenue, .ascending).queryItem.description == "sort_by=revenue.asc",
         )
         #expect(
-            MovieFilter.sortBy(.revenue, .descending).queryItem.description == "sort_option=revenue.desc",
+            MovieFilter.sortBy(.revenue, .descending).queryItem.description == "sort_by=revenue.desc",
         )
         #expect(
-            MovieFilter.sortBy(.voteCount, .ascending).queryItem.description == "sort_option=vote_count.asc",
+            MovieFilter.sortBy(.voteCount, .ascending).queryItem.description == "sort_by=vote_count.asc",
         )
         #expect(
-            MovieFilter.sortBy(.voteCount, .descending).queryItem.description == "sort_option=vote_count.desc",
+            MovieFilter.sortBy(.voteCount, .descending).queryItem.description == "sort_by=vote_count.desc",
         )
         #expect(
             MovieFilter.page(1).queryItem.description == "page=1",
@@ -233,50 +233,50 @@ struct DiscoverFilterTests {
             TVFilter.language(Locale(identifier: "en_US")).queryItem.description == "language=en_US",
         )
         #expect(
-            TVFilter.sortBy(.popularity, .ascending).queryItem.description == "sort_option=popularity.asc",
+            TVFilter.sortBy(.popularity, .ascending).queryItem.description == "sort_by=popularity.asc",
         )
         #expect(
-            TVFilter.sortBy(.popularity, .descending).queryItem.description == "sort_option=popularity.desc",
+            TVFilter.sortBy(.popularity, .descending).queryItem.description == "sort_by=popularity.desc",
         )
         #expect(
-            TVFilter.sortBy(.averageVote, .ascending).queryItem.description == "sort_option=average_vote.asc",
+            TVFilter.sortBy(.averageVote, .ascending).queryItem.description == "sort_by=average_vote.asc",
         )
         #expect(
-            TVFilter.sortBy(.averageVote, .descending).queryItem.description == "sort_option=average_vote.desc",
+            TVFilter.sortBy(.averageVote, .descending).queryItem.description == "sort_by=average_vote.desc",
         )
         #expect(
             TVFilter.sortBy(.originalTitle, .ascending).queryItem
-                .description == "sort_option=original_title.asc",
+                .description == "sort_by=original_title.asc",
         )
         #expect(
             TVFilter.sortBy(.originalTitle, .descending).queryItem
-                .description == "sort_option=original_title.desc",
+                .description == "sort_by=original_title.desc",
         )
         #expect(
             TVFilter.sortBy(.primaryReleaseDate, .ascending).queryItem
-                .description == "sort_option=primary_release_date.asc",
+                .description == "sort_by=primary_release_date.asc",
         )
         #expect(
             TVFilter.sortBy(.primaryReleaseDate, .descending).queryItem
-                .description == "sort_option=primary_release_date.desc",
+                .description == "sort_by=primary_release_date.desc",
         )
         #expect(
-            TVFilter.sortBy(.releaseDate, .ascending).queryItem.description == "sort_option=release_date.asc",
+            TVFilter.sortBy(.releaseDate, .ascending).queryItem.description == "sort_by=release_date.asc",
         )
         #expect(
-            TVFilter.sortBy(.releaseDate, .descending).queryItem.description == "sort_option=release_date.desc",
+            TVFilter.sortBy(.releaseDate, .descending).queryItem.description == "sort_by=release_date.desc",
         )
         #expect(
-            TVFilter.sortBy(.revenue, .ascending).queryItem.description == "sort_option=revenue.asc",
+            TVFilter.sortBy(.revenue, .ascending).queryItem.description == "sort_by=revenue.asc",
         )
         #expect(
-            TVFilter.sortBy(.revenue, .descending).queryItem.description == "sort_option=revenue.desc",
+            TVFilter.sortBy(.revenue, .descending).queryItem.description == "sort_by=revenue.desc",
         )
         #expect(
-            TVFilter.sortBy(.voteCount, .ascending).queryItem.description == "sort_option=vote_count.asc",
+            TVFilter.sortBy(.voteCount, .ascending).queryItem.description == "sort_by=vote_count.asc",
         )
         #expect(
-            TVFilter.sortBy(.voteCount, .descending).queryItem.description == "sort_option=vote_count.desc",
+            TVFilter.sortBy(.voteCount, .descending).queryItem.description == "sort_by=vote_count.desc",
         )
         #expect(
             TVFilter.page(1).queryItem.description == "page=1",

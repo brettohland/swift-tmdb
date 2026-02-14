@@ -64,7 +64,7 @@ extension TMDB.Discover.TVFilter: QueryItemEncodable {
         case .language:
             "language"
         case .sortBy:
-            "sort_option"
+            "sort_by"
         case .page:
             "page"
         case .voteCountGreaterThan:
