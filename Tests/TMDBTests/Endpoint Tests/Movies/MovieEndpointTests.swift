@@ -5,7 +5,6 @@ import Testing
 import TMDBMocking
 
 struct MovieEndpointTests {
-    init() { TMDBMockData.register() }
     @Test func movieDetails() async throws {
         _ = try await TMDB.movieDetails(id: 0)
     }

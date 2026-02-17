@@ -2,10 +2,8 @@ import Dependencies
 import Foundation
 import Testing
 @testable import TMDB
-import TMDBMocking
 
 struct WatchProviderEndpointTests {
-    init() { TMDBMockData.register() }
     @Test func regions() async throws {
         let regions = try await TMDB.watchProviderRegions()
         #expect(!regions.results.isEmpty)

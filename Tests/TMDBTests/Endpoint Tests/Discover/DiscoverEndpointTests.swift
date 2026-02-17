@@ -2,10 +2,8 @@ import Dependencies
 import Foundation
 import Testing
 @testable import TMDB
-import TMDBMocking
 
 struct DiscoverEndpointTests {
-    init() { TMDBMockData.register() }
     @Test func discoverMovies() async throws {
         let results = try await TMDB.discoverMovie()
         #expect(!results.results.isEmpty)

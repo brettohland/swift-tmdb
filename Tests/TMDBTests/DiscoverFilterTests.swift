@@ -1,10 +1,8 @@
 import Foundation
 import Testing
 @testable import TMDB
-import TMDBMocking
 
 struct DiscoverFilterTests {
-    init() { TMDBMockData.register() }
     @Test func verifyMovieFilters() throws {
         typealias MovieFilter = TMDB.Discover.MovieFilter
         let testDate = Date(timeIntervalSince1970: 0)

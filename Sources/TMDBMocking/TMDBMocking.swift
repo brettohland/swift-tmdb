@@ -3,16 +3,16 @@ import TMDB
 
 /// Provides access to TMDB mock JSON data bundled in the `TMDBMocking` target.
 ///
-/// Call ``register()`` before running tests or using SwiftUI previews
-/// to connect mock data to the TMDB framework.
+/// Mock data is now automatically discovered at runtime — no registration is needed.
 public enum TMDBMockData {
-    /// Registers the mock data handler with the TMDB framework.
+    /// Previously required to connect mock data to the TMDB framework.
     ///
-    /// This must be called before any TMDB API calls are made in test
-    /// or preview contexts. Typically called in test struct `init()`.
+    /// This method is now a no-op. Mock data is automatically discovered
+    /// via the TMDBMocking resource bundle. You can safely remove calls
+    /// to `TMDBMockData.register()` and `import TMDBMocking` from your tests.
+    @available(*, deprecated, message: "No longer needed. Mock data is discovered automatically.")
     public static func register() {
-        TMDB.mockDataHandler = { request in
-            try PathMatchingService.dataFromURLRequest(request)
-        }
+        // No-op: mock data is now resolved automatically by MockRouteResolver
+        // via runtime bundle discovery.
     }
 }

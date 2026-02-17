@@ -1,10 +1,8 @@
 import Foundation
 import Testing
 @testable import TMDB
-import TMDBMocking
 
 struct EndpointFactoryTests {
-    init() { TMDBMockData.register() }
     @Test func verifyConfigurationURLFactories() throws {
         try checkURLFactory(
             TMDB.V3Endpoints.Configuration.details,
