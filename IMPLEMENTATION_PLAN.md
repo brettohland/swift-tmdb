@@ -1,7 +1,7 @@
 # TMDB API v3 Read-Only Endpoints - Implementation Plan
 
-**Status:** Phase 3 Complete ✅ | Phase 3.5 Next
-**Last Updated:** 2026-02-14
+**Status:** Phase 3.5 Complete ✅ | Phase 4 Next
+**Last Updated:** 2026-02-18
 **Target:** 110 total endpoints (9 existing + 101 new)
 
 ---
@@ -27,8 +27,8 @@
 | **Phase 1** | 15 | ✅ Complete | v0.2.0 (ready) |
 | **Phase 2** | 20 | ✅ Complete | v0.3.0 (ready) |
 | **Phase 3** | 12 | ✅ Complete | v0.4.0 (ready) |
-| **Phase 3.5** | — | 📋 Next | v0.4.1 |
-| **Phase 4** | 41 | ⏳ Planned | v0.5.0 |
+| **Phase 3.5** | — | ✅ Complete | v0.4.1 (ready) |
+| **Phase 4** | 41 | 📋 Next | v0.5.0 |
 | **Phase 5** | 13 | ⏳ Planned | v0.6.0 |
 | **Total** | **110** | **56/110 (51%)** | |
 
@@ -356,63 +356,100 @@ Tests/TMDBTests/Endpoint Tests/
 
 ---
 
-## Phase 3.5: Language, Region & Missing Query Parameters
+## Phase 3.5: Language, Region & Missing Query Parameters (COMPLETE ✅)
 
-**Priority:** HIGH (must complete before Phase 4)
-**Complexity:** MEDIUM
-**Target Release:** v0.4.1
+**Completed:** 2026-02-18
+**Target Release:** v0.4.1 (ready)
 
-### Background
+### Infrastructure Changes
 
-A query parameter audit (see `QUERY_PARAM_AUDIT.md`) revealed that most existing endpoints are missing optional query parameters documented in the official TMDB API. The `language` and `region` parameters are the most pervasive — they appear on ~30 and ~6 endpoints respectively. Rather than adding them as individual parameters on every method, they should be handled as SDK-level infrastructure so that all current and future endpoints benefit automatically.
+#### TMDBConfiguration Defaults
+- Added `defaultLanguage: Locale?` and `defaultRegion: Locale.Region?` to `TMDBConfiguration`
+- Both default to `nil` — TMDB's server-side default (`en-US`) applies when not set
+- Users can configure globally at SDK init, then override per-request
 
-### Part 1: Language & Region Infrastructure
+#### EndpointFactory Protocol
+- Added `supportsLanguage: Bool` (default: `true`) and `supportsRegion: Bool` (default: `false`)
+- Endpoints opt out by overriding to `false`; region endpoints opt in by overriding to `true`
 
-`language` and `region` are cross-cutting concerns. This phase should design and implement an SDK-level mechanism for these parameters so they are:
+#### Auto-Injection in Endpoint.decodedResponse()
+- After `makeURL()`, inspects the URL and appends `language`/`region` from `TMDBConfiguration` defaults
+- Only injects if: (a) the endpoint supports the parameter, and (b) it isn't already present in the URL
+- Per-request overrides passed through enum cases into `makeURL()` take precedence
 
-- Configurable as defaults (e.g., at SDK initialization or via a global setting)
-- Overridable on a per-request basis
-- Automatically injected into endpoint URL construction
-- Applied retroactively to all 56 existing endpoints and all future endpoints
+#### Locale.queryValue Fix
+- Fixed `Locale.queryValue` to replace underscores with hyphens (`en-US` not `en_US`)
+- TMDB API expects hyphenated locale identifiers
 
-The exact design (e.g., stored in a dependency, threaded through `EndpointFactory`, set on `Endpoint`, etc.) should be determined during implementation planning.
+### Endpoint Opt-Outs
 
-### Part 2: Remaining Missing Query Parameters
+| Endpoint | supportsLanguage | supportsRegion |
+|----------|-----------------|----------------|
+| Certifications (all) | `false` | `false` |
+| Configuration (all) | `false` | `false` |
+| Credits (all) | `false` | `false` |
+| Reviews (all) | `false` | `false` |
+| Discover (all) | `false` (uses own filter system) | `false` |
+| Movies: keywords, releaseDates, externalIDs, watchProviders | `false` | `false` |
+| Movies: nowPlaying, popular, topRated, upcoming | `true` | `true` |
+| Keywords: details | `false` | `false` |
+| Keywords: movies | `true` | `true` |
+| Search: movie, collection | `true` | `true` |
+| Search: tv, person, multi, company, keyword | `true` | `false` |
 
-After language/region infrastructure is in place, the remaining non-language/region missing parameters need to be added to individual endpoints. These are endpoint-specific and follow the existing pattern of adding parameters to enum cases and `makeURL(baseURL:)`.
+### Missing Query Parameters Added
 
-**Movie Detail Endpoints:**
-- `movieReviews(id:)` — add `page`
-- `similarMovies(id:)` — add `page`
-- `movieRecommendations(id:)` — add `page`
-- `movieChanges(id:)` — add `start_date`, `end_date`, `page`
+**Movie Endpoints (13 updated):**
+- `movieDetails(id:)` — added `language`
+- `movieCredits(id:)` — added `language`
+- `movieImages(id:)` — added `language`
+- `movieVideos(id:)` — added `language`
+- `movieReviews(id:)` — added `page`, `language`
+- `similarMovies(id:)` — added `page`, `language`
+- `movieRecommendations(id:)` — added `page`, `language`
+- `movieChanges(id:)` — added `startDate`, `endDate`, `page`
+- `latestMovie()` — added `language`
+- `moviesNowPlaying()` — added `page`, `language`, `region`
+- `popularMovies()` — added `page`, `language`, `region`
+- `topRatedMovies()` — added `page`, `language`, `region`
+- `upcomingMovies()` — added `page`, `language`, `region`
 
-**Movie List Endpoints:**
-- `moviesNowPlaying()` — add `page`
-- `popularMovies()` — add `page`
-- `topRatedMovies()` — add `page`
-- `upcomingMovies()` — add `page`
+**Trending Endpoints (4 updated):**
+- All 4 cases — added `page`, `language`
 
-**Trending Endpoints:**
-- `trendingAll(timeWindow:)` — add `page`
-- `trendingMovies(timeWindow:)` — add `page`
-- `trendingTV(timeWindow:)` — add `page`
-- `trendingPeople(timeWindow:)` — add `page`
+**Search Endpoints (5 updated):**
+- `searchMovies` — added `language`, `region`
+- `searchTV` — added `language`
+- `searchPeople` — added `language`
+- `searchMulti` — added `language`
+- `searchCollections` — added `includeAdult`, `language`, `region`
 
-**Search Endpoints:**
-- `searchCollections(query:page:)` — add `includeAdult`, `region`
+**Other Endpoints (8 updated):**
+- `keywordMovies(id:page:)` — added `includeAdult`, `language`, `region`
+- `collectionDetails(id:)` — added `language`
+- `collectionImages(id:)` — added `language`
+- `find(externalID:source:)` — added `language`
+- `movieGenres()` — added `language`
+- `tvGenres()` — added `language`
+- `watchProviderRegions()` — added `language`
+- `movieWatchProviders()` / `tvWatchProviders()` — added `language`
 
-**Keyword Endpoints:**
-- `keywordMovies(id:page:)` — add `includeAdult`
+**Discover TV Filter (3 new cases):**
+- `.includeAdult(Bool)`, `.voteAverageLessThan(Double)`, `.voteCountLessThan(Int)`
 
-**Discover TV Endpoint:**
-- `discoverTV(filters:)` — add `includeAdult`, `voteAverageLessThan`, `voteCountLessThan`
+**QueryItemKey (2 new keys):**
+- `startDate = "start_date"`, `endDate = "end_date"`
+
+### Key Design Decisions
+- All new parameters have default values → fully source-compatible
+- TMDB defaults to `en-US` server-side, so no SDK-side default is needed
+- Discover endpoints handle language/region through their own filter system, not auto-injection
+- Mock system is path-only (ignores query params), so no mock changes were needed
 
 ### Verification
-
-1. `swift build` — no errors or warnings
-2. `swift test` — all existing tests still pass
-3. `swiftformat --exclude docs Sources Tests` — code formatting
+- ✅ `swift build` — no errors
+- ✅ `swift test` — all 108 tests pass
+- ✅ `swiftformat` — clean
 
 ---
 
@@ -860,6 +897,24 @@ public init(from decoder: Decoder) throws {
    - `FindPerson`, `FindTVEpisode`, `FindTVSeason` are lightweight types specific to the find response
    - Differ from full person/episode/season models that will be created in later phases
 
+### Phase 3.5 Insights
+
+1. **Auto-Injection via Protocol Properties**
+   - `EndpointFactory.supportsLanguage`/`supportsRegion` with default implementations is a clean opt-in/opt-out pattern
+   - `Endpoint.decodedResponse()` inspects the URL after `makeURL()` to avoid duplicating parameters already set per-request
+
+2. **Locale.queryValue Must Use Hyphens**
+   - TMDB expects `en-US` (hyphen), but Swift's `Locale.identifier` returns `en_US` (underscore)
+   - Fixed by replacing `_` with `-` in `Locale.queryValue`
+
+3. **Discover Endpoints Are Special**
+   - Discover handles language/region through its own filter system (`.language()`, `.watchRegion()`)
+   - Must opt out of auto-injection with `supportsLanguage: false`
+
+4. **No Mock Changes Needed for Query Params**
+   - `MockRouteResolver` matches on URL path only, ignoring query parameters
+   - Adding query parameters to endpoints requires no mock data changes
+
 ### Build & Test Commands
 
 ```bash
@@ -880,20 +935,20 @@ swift test --filter MovieEndpointTests/movieCredits
 
 ## Next Steps
 
-### Immediate (Phase 3.5 - Language, Region & Missing Query Parameters)
+### Immediate (Phase 4 - TV Shows)
 
-1. **Design language/region infrastructure** — determine how defaults are stored and how they're injected into URL construction
-2. **Implement infrastructure** — update `EndpointFactory`/`Endpoint`/dependency layer as needed
-3. **Retrofit all 56 existing endpoints** — ensure language/region are automatically applied
-4. **Add remaining missing query parameters** — `page`, `start_date`/`end_date`, `includeAdult`, etc. per the audit
-5. **Release v0.4.1**
+1. **Pre-phase shared type refactoring** — MediaCredits, MediaWatchProviderResult, ExternalIDs, ImageCollection, TranslationData
+2. **Sub-Phase 4a: TV Series Endpoints** (22 endpoints)
+3. **Sub-Phase 4b: TV Seasons** (9 endpoints)
+4. **Sub-Phase 4c: TV Episodes + Groups** (8 endpoints)
+5. **Release v0.5.0**
 
-### Then (Phase 4 - TV Shows)
+### Then (Phase 5 - People & Supporting Features)
 
-1. **Implement TV Series Endpoints** (22 endpoints)
-2. **Implement TV Seasons** (9 endpoints)
-3. **Implement TV Episodes + Groups** (8 endpoints)
-4. **Release v0.5.0**
+1. **People endpoints** (9 endpoints)
+2. **Company endpoints** (2 endpoints)
+3. **Network endpoints** (2 endpoints)
+4. **Release v0.6.0**
 
 ---
 
@@ -905,8 +960,8 @@ swift test --filter MovieEndpointTests/movieCredits
 | v0.2.0 | Phase 1 - Foundation (15) | ✅ Ready |
 | v0.3.0 | Phase 2 - Movies (20) | ✅ Ready |
 | v0.4.0 | Phase 3 - Search (12) | ✅ Ready |
-| v0.4.1 | Phase 3.5 - Language/Region & Query Params | 📋 Next |
-| v0.5.0 | Phase 4 - TV (41) | ⏳ Planned |
+| v0.4.1 | Phase 3.5 - Language/Region & Query Params | ✅ Ready |
+| v0.5.0 | Phase 4 - TV (41) | 📋 Next |
 | v0.6.0 | Phase 5 - People (13) | ⏳ Planned |
 | v1.0.0 | Auth + Account (future) | 💡 Deferred |
 
@@ -931,6 +986,6 @@ Requires:
 
 ---
 
-**Document Version:** 1.3
-**Last Updated:** 2026-02-14
-**Next Review:** Start of Phase 3.5
+**Document Version:** 1.4
+**Last Updated:** 2026-02-18
+**Next Review:** Start of Phase 4

@@ -34,6 +34,7 @@ The official TMDB API documentation at https://developer.themoviedb.org/referenc
   - `queryItems.appendIfTrue(.includeAdult, value: includeAdult)` — appends only if `true`
   - `queryItems.append("external_source", value: source.rawValue)` — `String` fallback for keys not in `QueryItemKey`
 - **Add shared query keys to `V3Endpoints.QueryItemKey`** - The `QueryItemKey` enum in `V3Endpoints+QueryItemKey.swift` maps Swift case names to their JSON query parameter names (e.g., `case includeAdult = "include_adult"`). When adding a new endpoint that uses a query parameter already in the enum, use the enum case. When a parameter is used by multiple endpoints but not yet in the enum, add it there rather than using raw strings.
+- **New endpoints must set `supportsLanguage`/`supportsRegion` correctly** - The `EndpointFactory` protocol has `supportsLanguage: Bool` (default `true`) and `supportsRegion: Bool` (default `false`). Override to `false` for endpoints that don't accept a `language` query parameter (e.g., certifications, configuration, credits, reviews). Override `supportsRegion` to `true` for endpoints that accept a `region` parameter. For per-case control, use a `switch self` computed property. Discover endpoints must set `supportsLanguage: false` because they handle language/region through their own filter system.
 - **Always add a public memberwise initializer to public response structs** - Swift only auto-generates internal memberwise initializers, so every public struct in `Sources/TMDB/Models/Responses/Public/` must have an explicit `public init(...)`. For `let` properties use `self.prop = prop`. For property wrappers use the underscore form: `_prop = Wrapper(wrappedValue: val)` (e.g., `_isAdult = NilBoolean(wrappedValue: isAdult)`, `_releaseDate = ISO8601YMD(wrappedValue: releaseDate)`). Place the initializer after the last property declaration, before any `CodingKeys` enum or Codable conformance.
 
 ## Swift API Design Guidelines
@@ -112,8 +113,8 @@ The codebase uses a service-oriented architecture with several internal services
 
 #### RequestService
 - **HTTPClient**: Core networking client that wraps URLSession
-- **Endpoint**: Generic struct that handles request/response lifecycle
-- **EndpointFactory**: Protocol for endpoint URL generation
+- **Endpoint**: Generic struct that handles request/response lifecycle; auto-injects `language`/`region` defaults from `TMDBConfiguration` after `makeURL()` if the endpoint supports them
+- **EndpointFactory**: Protocol for endpoint URL generation with `supportsLanguage`/`supportsRegion` opt-in/opt-out properties
 - **URLFactory**: Utility for constructing endpoint URLs
 
 #### MockingService
@@ -227,13 +228,14 @@ To add a new TMDB API endpoint:
 
 1. Create endpoint case in appropriate `TMDB.V3Endpoints` enum (or create new enum)
 2. Implement `makeURL(baseURL:)` in `EndpointFactory` conformance
-3. Define response model types in `Sources/TMDB/Models/Responses/`
-4. Create public static method on `TMDB` to execute the request
-5. Add mock JSON response in `Sources/TMDBMocking/JSON/`
-6. Add a route entry in `Sources/TMDBMocking/JSON/MockRoutes.json` mapping the URL pattern to the JSON filename
-7. Create `MockableResponse` conformance in `Sources/TMDBMocking/Extensions/`
-8. Write tests in `Tests/TMDBTests/`
-9. (Optional) Add client wrapper in `TMDBDependencies/Clients/`
+3. Set `supportsLanguage`/`supportsRegion` overrides if the defaults (`true`/`false`) don't match the TMDB API docs for this endpoint
+4. Define response model types in `Sources/TMDB/Models/Responses/`
+5. Create public static method on `TMDB` to execute the request (include `language: Locale? = nil` and/or `region: Locale.Region? = nil` parameters where the TMDB API supports them, forwarding to the enum case and into `makeURL`)
+6. Add mock JSON response in `Sources/TMDBMocking/JSON/`
+7. Add a route entry in `Sources/TMDBMocking/JSON/MockRoutes.json` mapping the URL pattern to the JSON filename
+8. Create `MockableResponse` conformance in `Sources/TMDBMocking/Extensions/`
+9. Write tests in `Tests/TMDBTests/`
+10. (Optional) Add client wrapper in `TMDBDependencies/Clients/`
 
 ## Code Review Guidelines
 
