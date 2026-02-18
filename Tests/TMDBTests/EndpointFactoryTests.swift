@@ -51,12 +51,12 @@ struct EndpointFactoryTests {
 
     @Test func verifyMovieFactories() throws {
         try checkURLFactory(
-            TMDB.V3Endpoints.Movies.details(id: 0),
+            TMDB.V3Endpoints.Movies.details(id: 0, language: Locale?.none),
             againstPattern: "^/3/movie/\\d+$",
         )
         #expect(throws: URLError.self) {
             try checkURLFactory(
-                TMDB.V3Endpoints.Movies.details(id: 0),
+                TMDB.V3Endpoints.Movies.details(id: 0, language: Locale?.none),
                 againstPattern: "^/3/movie/\\d+/alternative_titles$",
             )
         }

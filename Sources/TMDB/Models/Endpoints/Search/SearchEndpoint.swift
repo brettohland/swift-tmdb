@@ -2,48 +2,74 @@ import Foundation
 
 extension TMDB.V3Endpoints {
     enum Search {
-        case movie(query: String, page: Int, includeAdult: Bool, year: Int?, primaryReleaseYear: Int?)
-        case tv(query: String, page: Int, includeAdult: Bool, firstAirDateYear: Int?)
-        case person(query: String, page: Int, includeAdult: Bool)
-        case multi(query: String, page: Int, includeAdult: Bool)
-        case collection(query: String, page: Int)
+        case movie(
+            query: String,
+            page: Int,
+            includeAdult: Bool,
+            year: Int?,
+            primaryReleaseYear: Int?,
+            language: Locale?,
+            region: Locale.Region?,
+        )
+        case tv(query: String, page: Int, includeAdult: Bool, firstAirDateYear: Int?, language: Locale?)
+        case person(query: String, page: Int, includeAdult: Bool, language: Locale?)
+        case multi(query: String, page: Int, includeAdult: Bool, language: Locale?)
+        case collection(query: String, page: Int, includeAdult: Bool, language: Locale?, region: Locale.Region?)
         case company(query: String, page: Int)
         case keyword(query: String, page: Int)
     }
 }
 
 extension TMDB.V3Endpoints.Search: EndpointFactory {
+    var supportsRegion: Bool {
+        switch self {
+        case .collection,
+             .movie:
+            true
+        default:
+            false
+        }
+    }
+
     func makeURL(baseURL: URL) -> URL {
         var paths: [any StringProtocol] = ["3", "search"]
         var queryItems: [URLQueryItem] = []
         switch self {
-        case .movie(let query, let page, let includeAdult, let year, let primaryReleaseYear):
+        case .movie(let query, let page, let includeAdult, let year, let primaryReleaseYear, let language, let region):
             paths.append("movie")
             queryItems.append(.query, value: query)
             queryItems.append(.page, value: page)
             queryItems.appendIfTrue(.includeAdult, value: includeAdult)
             queryItems.appendIfPresent(.year, value: year)
             queryItems.appendIfPresent(.primaryReleaseYear, value: primaryReleaseYear)
-        case .tv(let query, let page, let includeAdult, let firstAirDateYear):
+            queryItems.appendIfPresent(.language, value: language)
+            queryItems.appendIfPresent(.region, value: region)
+        case .tv(let query, let page, let includeAdult, let firstAirDateYear, let language):
             paths.append("tv")
             queryItems.append(.query, value: query)
             queryItems.append(.page, value: page)
             queryItems.appendIfTrue(.includeAdult, value: includeAdult)
             queryItems.appendIfPresent(.firstAirDateYear, value: firstAirDateYear)
-        case .person(let query, let page, let includeAdult):
+            queryItems.appendIfPresent(.language, value: language)
+        case .person(let query, let page, let includeAdult, let language):
             paths.append("person")
             queryItems.append(.query, value: query)
             queryItems.append(.page, value: page)
             queryItems.appendIfTrue(.includeAdult, value: includeAdult)
-        case .multi(let query, let page, let includeAdult):
+            queryItems.appendIfPresent(.language, value: language)
+        case .multi(let query, let page, let includeAdult, let language):
             paths.append("multi")
             queryItems.append(.query, value: query)
             queryItems.append(.page, value: page)
             queryItems.appendIfTrue(.includeAdult, value: includeAdult)
-        case .collection(let query, let page):
+            queryItems.appendIfPresent(.language, value: language)
+        case .collection(let query, let page, let includeAdult, let language, let region):
             paths.append("collection")
             queryItems.append(.query, value: query)
             queryItems.append(.page, value: page)
+            queryItems.appendIfTrue(.includeAdult, value: includeAdult)
+            queryItems.appendIfPresent(.language, value: language)
+            queryItems.appendIfPresent(.region, value: region)
         case .company(let query, let page):
             paths.append("company")
             queryItems.append(.query, value: query)
@@ -77,6 +103,8 @@ public extension TMDB {
         includeAdult: Bool = false,
         year: Int? = nil,
         primaryReleaseYear: Int? = nil,
+        language: Locale? = nil,
+        region: Locale.Region? = nil,
     ) async throws(TMDBRequestError) -> Discover
     .PaginatedResponse<Discover.DiscoverMovie> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverMovie>>(
@@ -86,6 +114,8 @@ public extension TMDB {
                 includeAdult: includeAdult,
                 year: year,
                 primaryReleaseYear: primaryReleaseYear,
+                language: language,
+                region: region,
             ),
             httpMethod: .get,
         )
@@ -115,6 +145,7 @@ public extension TMDB {
         page: Int = 1,
         includeAdult: Bool = false,
         firstAirDateYear: Int? = nil,
+        language: Locale? = nil,
     ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverTV> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverTV>>(
             endpoint: V3Endpoints.Search.tv(
@@ -122,6 +153,7 @@ public extension TMDB {
                 page: page,
                 includeAdult: includeAdult,
                 firstAirDateYear: firstAirDateYear,
+                language: language,
             ),
             httpMethod: .get,
         )
@@ -149,9 +181,15 @@ public extension TMDB {
         query: String,
         page: Int = 1,
         includeAdult: Bool = false,
+        language: Locale? = nil,
     ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<SearchPerson> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.SearchPerson>>(
-            endpoint: V3Endpoints.Search.person(query: query, page: page, includeAdult: includeAdult),
+            endpoint: V3Endpoints.Search.person(
+                query: query,
+                page: page,
+                includeAdult: includeAdult,
+                language: language,
+            ),
             httpMethod: .get,
         )
         do {
@@ -178,9 +216,15 @@ public extension TMDB {
         query: String,
         page: Int = 1,
         includeAdult: Bool = false,
+        language: Locale? = nil,
     ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<MultiSearchResult> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.MultiSearchResult>>(
-            endpoint: V3Endpoints.Search.multi(query: query, page: page, includeAdult: includeAdult),
+            endpoint: V3Endpoints.Search.multi(
+                query: query,
+                page: page,
+                includeAdult: includeAdult,
+                language: language,
+            ),
             httpMethod: .get,
         )
         do {
@@ -205,9 +249,18 @@ public extension TMDB {
     static func searchCollections(
         query: String,
         page: Int = 1,
+        includeAdult: Bool = false,
+        language: Locale? = nil,
+        region: Locale.Region? = nil,
     ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<SearchCollection> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.SearchCollection>>(
-            endpoint: V3Endpoints.Search.collection(query: query, page: page),
+            endpoint: V3Endpoints.Search.collection(
+                query: query,
+                page: page,
+                includeAdult: includeAdult,
+                language: language,
+                region: region,
+            ),
             httpMethod: .get,
         )
         do {

@@ -7,6 +7,8 @@ extension TMDB.V3Endpoints {
 }
 
 extension TMDB.V3Endpoints.Reviews: EndpointFactory {
+    var supportsLanguage: Bool { false }
+
     func makeURL(baseURL: URL) -> URL {
         var paths: [any StringProtocol] = ["3", "review"]
         switch self {

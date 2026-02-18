@@ -2,59 +2,94 @@ import Foundation
 
 extension TMDB.V3Endpoints {
     enum Movies {
-        case details(id: Int)
+        case details(id: Int, language: Locale?)
         case alternativeTitles(id: Int)
-        case credits(id: Int)
-        case images(id: Int)
-        case videos(id: Int)
-        case reviews(id: Int)
+        case credits(id: Int, language: Locale?)
+        case images(id: Int, language: Locale?)
+        case videos(id: Int, language: Locale?)
+        case reviews(id: Int, page: Int, language: Locale?)
         case keywords(id: Int)
-        case similar(id: Int)
-        case recommendations(id: Int)
+        case similar(id: Int, page: Int, language: Locale?)
+        case recommendations(id: Int, page: Int, language: Locale?)
         case releaseDates(id: Int)
         case externalIDs(id: Int)
         case translations(id: Int)
         case watchProviders(id: Int)
-        case changes(id: Int)
-        case latest
-        case nowPlaying
-        case popular
-        case topRated
-        case upcoming
+        case changes(id: Int, startDate: Date?, endDate: Date?, page: Int)
+        case latest(language: Locale?)
+        case nowPlaying(page: Int, language: Locale?, region: Locale.Region?)
+        case popular(page: Int, language: Locale?, region: Locale.Region?)
+        case topRated(page: Int, language: Locale?, region: Locale.Region?)
+        case upcoming(page: Int, language: Locale?, region: Locale.Region?)
     }
 }
 
 extension TMDB.V3Endpoints.Movies: EndpointFactory {
+    var supportsLanguage: Bool {
+        switch self {
+        case .externalIDs,
+             .keywords,
+             .releaseDates,
+             .watchProviders:
+            false
+        default:
+            true
+        }
+    }
+
+    var supportsRegion: Bool {
+        switch self {
+        case .nowPlaying,
+             .popular,
+             .topRated,
+             .upcoming:
+            true
+        default:
+            false
+        }
+    }
+
     func makeURL(baseURL: URL) -> URL {
         var paths: [any StringProtocol] = ["3", "movie"]
+        var queryItems: [URLQueryItem] = []
         switch self {
-        case .details(let id):
+        case .details(let id, let language):
             // /3/movie/{ID}
             paths.append(String(id))
+            queryItems.appendIfPresent(.language, value: language)
         case .alternativeTitles(let id):
             // /3/movie/{ID}/alternative_titles
             paths += [String(id), "alternative_titles"]
-        case .credits(let id):
+        case .credits(let id, let language):
             // /3/movie/{ID}/credits
             paths += [String(id), "credits"]
-        case .images(let id):
+            queryItems.appendIfPresent(.language, value: language)
+        case .images(let id, let language):
             // /3/movie/{ID}/images
             paths += [String(id), "images"]
-        case .videos(let id):
+            queryItems.appendIfPresent(.language, value: language)
+        case .videos(let id, let language):
             // /3/movie/{ID}/videos
             paths += [String(id), "videos"]
-        case .reviews(let id):
+            queryItems.appendIfPresent(.language, value: language)
+        case .reviews(let id, let page, let language):
             // /3/movie/{ID}/reviews
             paths += [String(id), "reviews"]
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
         case .keywords(let id):
             // /3/movie/{ID}/keywords
             paths += [String(id), "keywords"]
-        case .similar(let id):
+        case .similar(let id, let page, let language):
             // /3/movie/{ID}/similar
             paths += [String(id), "similar"]
-        case .recommendations(let id):
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
+        case .recommendations(let id, let page, let language):
             // /3/movie/{ID}/recommendations
             paths += [String(id), "recommendations"]
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
         case .releaseDates(let id):
             // /3/movie/{ID}/release_dates
             paths += [String(id), "release_dates"]
@@ -67,26 +102,42 @@ extension TMDB.V3Endpoints.Movies: EndpointFactory {
         case .watchProviders(let id):
             // /3/movie/{ID}/watch/providers
             paths += [String(id), "watch", "providers"]
-        case .changes(let id):
+        case .changes(let id, let startDate, let endDate, let page):
             // /3/movie/{ID}/changes
             paths += [String(id), "changes"]
-        case .latest:
+            queryItems.appendIfPresent(.startDate, value: startDate)
+            queryItems.appendIfPresent(.endDate, value: endDate)
+            queryItems.append(.page, value: page)
+        case .latest(let language):
             // /3/movie/latest
             paths.append("latest")
-        case .nowPlaying:
+            queryItems.appendIfPresent(.language, value: language)
+        case .nowPlaying(let page, let language, let region):
             // /3/movie/now_playing
             paths.append("now_playing")
-        case .popular:
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
+            queryItems.appendIfPresent(.region, value: region)
+        case .popular(let page, let language, let region):
             // /3/movie/popular
             paths.append("popular")
-        case .topRated:
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
+            queryItems.appendIfPresent(.region, value: region)
+        case .topRated(let page, let language, let region):
             // /3/movie/top_rated
             paths.append("top_rated")
-        case .upcoming:
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
+            queryItems.appendIfPresent(.region, value: region)
+        case .upcoming(let page, let language, let region):
             // /3/movie/upcoming
             paths.append("upcoming")
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
+            queryItems.appendIfPresent(.region, value: region)
         }
-        return URLFactory.makeURL(baseURL: baseURL, appending: paths)
+        return URLFactory.makeURL(baseURL: baseURL, appending: paths, queryItems: queryItems)
     }
 }
 
@@ -101,9 +152,9 @@ public extension TMDB {
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
     /// - Returns: ``TMDB/Movie``
     /// - Throws: ``TMDBRequestError``
-    static func movieDetails(id: Int) async throws(TMDBRequestError) -> Movie {
+    static func movieDetails(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> Movie {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Movie>(
-            endpoint: V3Endpoints.Movies.details(id: id),
+            endpoint: V3Endpoints.Movies.details(id: id, language: language),
             httpMethod: .get,
         )
         do {
@@ -156,9 +207,9 @@ public extension TMDB {
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
     /// - Returns: ``TMDB/MediaCredits``
     /// - Throws: ``TMDBRequestError``
-    static func movieCredits(id: Int) async throws(TMDBRequestError) -> MediaCredits {
+    static func movieCredits(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> MediaCredits {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.MediaCredits>(
-            endpoint: V3Endpoints.Movies.credits(id: id),
+            endpoint: V3Endpoints.Movies.credits(id: id, language: language),
             httpMethod: .get,
         )
         do {
@@ -178,9 +229,9 @@ public extension TMDB {
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
     /// - Returns: ``TMDB/ImageCollection``
     /// - Throws: ``TMDBRequestError``
-    static func movieImages(id: Int) async throws(TMDBRequestError) -> ImageCollection {
+    static func movieImages(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> ImageCollection {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.ImageCollection>(
-            endpoint: V3Endpoints.Movies.images(id: id),
+            endpoint: V3Endpoints.Movies.images(id: id, language: language),
             httpMethod: .get,
         )
         do {
@@ -200,9 +251,9 @@ public extension TMDB {
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
     /// - Returns: ``TMDB/VideoCollection``
     /// - Throws: ``TMDBRequestError``
-    static func movieVideos(id: Int) async throws(TMDBRequestError) -> VideoCollection {
+    static func movieVideos(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> VideoCollection {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.VideoCollection>(
-            endpoint: V3Endpoints.Movies.videos(id: id),
+            endpoint: V3Endpoints.Movies.videos(id: id, language: language),
             httpMethod: .get,
         )
         do {
@@ -222,9 +273,13 @@ public extension TMDB {
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Review``
     /// - Throws: ``TMDBRequestError``
-    static func movieReviews(id: Int) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Review> {
+    static func movieReviews(
+        id: Int,
+        page: Int = 1,
+        language: Locale? = nil,
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Review> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Review>>(
-            endpoint: V3Endpoints.Movies.reviews(id: id),
+            endpoint: V3Endpoints.Movies.reviews(id: id, page: page, language: language),
             httpMethod: .get,
         )
         do {
@@ -267,10 +322,14 @@ public extension TMDB {
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverMovie``
     /// - Throws: ``TMDBRequestError``
-    static func similarMovies(id: Int) async throws(TMDBRequestError) -> Discover
+    static func similarMovies(
+        id: Int,
+        page: Int = 1,
+        language: Locale? = nil,
+    ) async throws(TMDBRequestError) -> Discover
     .PaginatedResponse<Discover.DiscoverMovie> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverMovie>>(
-            endpoint: V3Endpoints.Movies.similar(id: id),
+            endpoint: V3Endpoints.Movies.similar(id: id, page: page, language: language),
             httpMethod: .get,
         )
         do {
@@ -290,10 +349,14 @@ public extension TMDB {
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverMovie``
     /// - Throws: ``TMDBRequestError``
-    static func movieRecommendations(id: Int) async throws(TMDBRequestError) -> Discover
+    static func movieRecommendations(
+        id: Int,
+        page: Int = 1,
+        language: Locale? = nil,
+    ) async throws(TMDBRequestError) -> Discover
     .PaginatedResponse<Discover.DiscoverMovie> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverMovie>>(
-            endpoint: V3Endpoints.Movies.recommendations(id: id),
+            endpoint: V3Endpoints.Movies.recommendations(id: id, page: page, language: language),
             httpMethod: .get,
         )
         do {
@@ -403,9 +466,14 @@ public extension TMDB {
     /// - Parameter id: `Int` TMDB's unique identifier for the movie
     /// - Returns: ``TMDB/ChangeCollection``
     /// - Throws: ``TMDBRequestError``
-    static func movieChanges(id: Int) async throws(TMDBRequestError) -> ChangeCollection {
+    static func movieChanges(
+        id: Int,
+        startDate: Date? = nil,
+        endDate: Date? = nil,
+        page: Int = 1,
+    ) async throws(TMDBRequestError) -> ChangeCollection {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.ChangeCollection>(
-            endpoint: V3Endpoints.Movies.changes(id: id),
+            endpoint: V3Endpoints.Movies.changes(id: id, startDate: startDate, endDate: endDate, page: page),
             httpMethod: .get,
         )
         do {
@@ -424,9 +492,9 @@ public extension TMDB {
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-latest-id)
     /// - Returns: ``TMDB/Movie``
     /// - Throws: ``TMDBRequestError``
-    static func latestMovie() async throws(TMDBRequestError) -> Movie {
+    static func latestMovie(language: Locale? = nil) async throws(TMDBRequestError) -> Movie {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Movie>(
-            endpoint: V3Endpoints.Movies.latest,
+            endpoint: V3Endpoints.Movies.latest(language: language),
             httpMethod: .get,
         )
         do {
@@ -445,13 +513,17 @@ public extension TMDB {
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-now-playing-list)
     /// - Returns: ``TMDB/Discover/DatedPaginatedResponse`` of ``TMDB/Discover/DiscoverMovie``
     /// - Throws: ``TMDBRequestError``
-    static func moviesNowPlaying() async throws(TMDBRequestError) -> Discover
+    static func moviesNowPlaying(
+        page: Int = 1,
+        language: Locale? = nil,
+        region: Locale.Region? = nil,
+    ) async throws(TMDBRequestError) -> Discover
     .DatedPaginatedResponse<Discover.DiscoverMovie> {
         let endpoint = Endpoint<
             HTTP.EmptyRequestBody,
             TMDB.Discover.DatedPaginatedResponse<TMDB.Discover.DiscoverMovie>,
         >(
-            endpoint: V3Endpoints.Movies.nowPlaying,
+            endpoint: V3Endpoints.Movies.nowPlaying(page: page, language: language, region: region),
             httpMethod: .get,
         )
         do {
@@ -470,9 +542,13 @@ public extension TMDB {
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-popular-list)
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverMovie``
     /// - Throws: ``TMDBRequestError``
-    static func popularMovies() async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverMovie> {
+    static func popularMovies(
+        page: Int = 1,
+        language: Locale? = nil,
+        region: Locale.Region? = nil,
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverMovie> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverMovie>>(
-            endpoint: V3Endpoints.Movies.popular,
+            endpoint: V3Endpoints.Movies.popular(page: page, language: language, region: region),
             httpMethod: .get,
         )
         do {
@@ -491,9 +567,13 @@ public extension TMDB {
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-top-rated-list)
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverMovie``
     /// - Throws: ``TMDBRequestError``
-    static func topRatedMovies() async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverMovie> {
+    static func topRatedMovies(
+        page: Int = 1,
+        language: Locale? = nil,
+        region: Locale.Region? = nil,
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverMovie> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverMovie>>(
-            endpoint: V3Endpoints.Movies.topRated,
+            endpoint: V3Endpoints.Movies.topRated(page: page, language: language, region: region),
             httpMethod: .get,
         )
         do {
@@ -512,13 +592,17 @@ public extension TMDB {
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-upcoming-list)
     /// - Returns: ``TMDB/Discover/DatedPaginatedResponse`` of ``TMDB/Discover/DiscoverMovie``
     /// - Throws: ``TMDBRequestError``
-    static func upcomingMovies() async throws(TMDBRequestError) -> Discover
+    static func upcomingMovies(
+        page: Int = 1,
+        language: Locale? = nil,
+        region: Locale.Region? = nil,
+    ) async throws(TMDBRequestError) -> Discover
     .DatedPaginatedResponse<Discover.DiscoverMovie> {
         let endpoint = Endpoint<
             HTTP.EmptyRequestBody,
             TMDB.Discover.DatedPaginatedResponse<TMDB.Discover.DiscoverMovie>,
         >(
-            endpoint: V3Endpoints.Movies.upcoming,
+            endpoint: V3Endpoints.Movies.upcoming(page: page, language: language, region: region),
             httpMethod: .get,
         )
         do {

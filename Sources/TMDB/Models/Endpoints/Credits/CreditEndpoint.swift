@@ -7,6 +7,8 @@ extension TMDB.V3Endpoints {
 }
 
 extension TMDB.V3Endpoints.Credits: EndpointFactory {
+    var supportsLanguage: Bool { false }
+
     func makeURL(baseURL: URL) -> URL {
         var paths = ["3"]
         switch self {

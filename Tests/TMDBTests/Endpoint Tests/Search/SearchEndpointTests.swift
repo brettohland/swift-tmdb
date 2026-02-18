@@ -48,16 +48,18 @@ struct SearchEndpointTests {
             includeAdult: true,
             year: 1_999,
             primaryReleaseYear: 1_999,
+            language: nil,
+            region: nil,
         )
         let url = endpoint.makeURL(baseURL: TMDB.Constants.baseURL)
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        let queryItems = components.queryItems!
         #expect(url.relativePath == "/3/search/movie")
-        #expect(components.queryItems?.contains(where: { $0.name == "query" && $0.value == "Fight Club" }) == true)
-        #expect(components.queryItems?.contains(where: { $0.name == "page" && $0.value == "2" }) == true)
-        #expect(components.queryItems?.contains(where: { $0.name == "include_adult" && $0.value == "true" }) == true)
-        #expect(components.queryItems?.contains(where: { $0.name == "year" && $0.value == "1999" }) == true)
-        #expect(components.queryItems?
-            .contains(where: { $0.name == "primary_release_year" && $0.value == "1999" }) == true)
+        #expect(queryItems.contains { $0.name == "query" && $0.value == "Fight Club" })
+        #expect(queryItems.contains { $0.name == "page" && $0.value == "2" })
+        #expect(queryItems.contains { $0.name == "include_adult" && $0.value == "true" })
+        #expect(queryItems.contains { $0.name == "year" && $0.value == "1999" })
+        #expect(queryItems.contains { $0.name == "primary_release_year" && $0.value == "1999" })
     }
 
     @Test func searchMovieURLWithDefaults() {
@@ -67,12 +69,15 @@ struct SearchEndpointTests {
             includeAdult: false,
             year: nil,
             primaryReleaseYear: nil,
+            language: nil,
+            region: nil,
         )
         let url = endpoint.makeURL(baseURL: TMDB.Constants.baseURL)
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-        #expect(components.queryItems?.contains(where: { $0.name == "include_adult" }) != true)
-        #expect(components.queryItems?.contains(where: { $0.name == "year" }) != true)
-        #expect(components.queryItems?.contains(where: { $0.name == "primary_release_year" }) != true)
+        let queryItems = components.queryItems ?? []
+        #expect(!queryItems.contains { $0.name == "include_adult" })
+        #expect(!queryItems.contains { $0.name == "year" })
+        #expect(!queryItems.contains { $0.name == "primary_release_year" })
     }
 
     @Test func searchTVURLWithAllParams() {
@@ -81,13 +86,14 @@ struct SearchEndpointTests {
             page: 1,
             includeAdult: true,
             firstAirDateYear: 2_008,
+            language: nil,
         )
         let url = endpoint.makeURL(baseURL: TMDB.Constants.baseURL)
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        let queryItems = components.queryItems!
         #expect(url.relativePath == "/3/search/tv")
-        #expect(components.queryItems?.contains(where: { $0.name == "include_adult" && $0.value == "true" }) == true)
-        #expect(components.queryItems?
-            .contains(where: { $0.name == "first_air_date_year" && $0.value == "2008" }) == true)
+        #expect(queryItems.contains { $0.name == "include_adult" && $0.value == "true" })
+        #expect(queryItems.contains { $0.name == "first_air_date_year" && $0.value == "2008" })
     }
 
     @Test func searchTVURLWithDefaults() {
@@ -96,11 +102,13 @@ struct SearchEndpointTests {
             page: 1,
             includeAdult: false,
             firstAirDateYear: nil,
+            language: nil,
         )
         let url = endpoint.makeURL(baseURL: TMDB.Constants.baseURL)
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-        #expect(components.queryItems?.contains(where: { $0.name == "include_adult" }) != true)
-        #expect(components.queryItems?.contains(where: { $0.name == "first_air_date_year" }) != true)
+        let queryItems = components.queryItems ?? []
+        #expect(!queryItems.contains { $0.name == "include_adult" })
+        #expect(!queryItems.contains { $0.name == "first_air_date_year" })
     }
 
     @Test func searchPersonURLWithIncludeAdult() {
@@ -108,11 +116,13 @@ struct SearchEndpointTests {
             query: "Brad Pitt",
             page: 1,
             includeAdult: true,
+            language: nil,
         )
         let url = endpoint.makeURL(baseURL: TMDB.Constants.baseURL)
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        let queryItems = components.queryItems!
         #expect(url.relativePath == "/3/search/person")
-        #expect(components.queryItems?.contains(where: { $0.name == "include_adult" && $0.value == "true" }) == true)
+        #expect(queryItems.contains { $0.name == "include_adult" && $0.value == "true" })
     }
 
     @Test func searchMultiURLWithIncludeAdult() {
@@ -120,10 +130,12 @@ struct SearchEndpointTests {
             query: "Fight Club",
             page: 1,
             includeAdult: true,
+            language: nil,
         )
         let url = endpoint.makeURL(baseURL: TMDB.Constants.baseURL)
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        let queryItems = components.queryItems!
         #expect(url.relativePath == "/3/search/multi")
-        #expect(components.queryItems?.contains(where: { $0.name == "include_adult" && $0.value == "true" }) == true)
+        #expect(queryItems.contains { $0.name == "include_adult" && $0.value == "true" })
     }
 }

@@ -8,7 +8,7 @@ struct DiscoverFilterTests {
         let testDate = Date(timeIntervalSince1970: 0)
         let testDateString = "1970-01-01"
         #expect(
-            MovieFilter.language(Locale(identifier: "en_US")).queryItem.description == "language=en_US",
+            MovieFilter.language(Locale(identifier: "en_US")).queryItem.description == "language=en-US",
         )
         #expect(
             MovieFilter.sortBy(.popularity, .ascending).queryItem.description == "sort_by=popularity.asc",
@@ -170,7 +170,7 @@ struct DiscoverFilterTests {
         )
         #expect(
             MovieFilter.region(Locale(languageCode: .english, languageRegion: .canada)).queryItem
-                .description == "region=en_CA",
+                .description == "region=en-CA",
         )
         #expect(
             MovieFilter.releaseDateGreaterThan(testDate).queryItem
@@ -228,7 +228,7 @@ struct DiscoverFilterTests {
         let testDate = Date(timeIntervalSince1970: 0)
         let testDateString = "1970-01-01"
         #expect(
-            TVFilter.language(Locale(identifier: "en_US")).queryItem.description == "language=en_US",
+            TVFilter.language(Locale(identifier: "en_US")).queryItem.description == "language=en-US",
         )
         #expect(
             TVFilter.sortBy(.popularity, .ascending).queryItem.description == "sort_by=popularity.asc",

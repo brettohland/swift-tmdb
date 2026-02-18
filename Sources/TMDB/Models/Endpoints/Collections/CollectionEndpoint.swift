@@ -2,23 +2,26 @@ import Foundation
 
 extension TMDB.V3Endpoints {
     enum Collections {
-        case details(id: Int)
-        case images(id: Int)
+        case details(id: Int, language: Locale?)
+        case images(id: Int, language: Locale?)
     }
 }
 
 extension TMDB.V3Endpoints.Collections: EndpointFactory {
     func makeURL(baseURL: URL) -> URL {
         var paths: [any StringProtocol] = ["3", "collection"]
+        var queryItems: [URLQueryItem] = []
         switch self {
-        case .details(let id):
+        case .details(let id, let language):
             // /3/collection/{id}
             paths.append(String(id))
-        case .images(let id):
+            queryItems.appendIfPresent(.language, value: language)
+        case .images(let id, let language):
             // /3/collection/{id}/images
             paths += [String(id), "images"]
+            queryItems.appendIfPresent(.language, value: language)
         }
-        return URLFactory.makeURL(baseURL: baseURL, appending: paths)
+        return URLFactory.makeURL(baseURL: baseURL, appending: paths, queryItems: queryItems)
     }
 }
 
@@ -31,9 +34,9 @@ public extension TMDB {
     /// - Parameter id: The collection ID
     /// - Returns: ``TMDB/Collection``
     /// - Throws: ``TMDBRequestError``
-    static func collectionDetails(id: Int) async throws(TMDBRequestError) -> Collection {
+    static func collectionDetails(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> Collection {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Collection>(
-            endpoint: V3Endpoints.Collections.details(id: id),
+            endpoint: V3Endpoints.Collections.details(id: id, language: language),
             httpMethod: .get,
         )
         do {
@@ -53,9 +56,9 @@ public extension TMDB {
     /// - Parameter id: The collection ID
     /// - Returns: ``TMDB/ImageCollection``
     /// - Throws: ``TMDBRequestError``
-    static func collectionImages(id: Int) async throws(TMDBRequestError) -> ImageCollection {
+    static func collectionImages(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> ImageCollection {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.ImageCollection>(
-            endpoint: V3Endpoints.Collections.images(id: id),
+            endpoint: V3Endpoints.Collections.images(id: id, language: language),
             httpMethod: .get,
         )
         do {

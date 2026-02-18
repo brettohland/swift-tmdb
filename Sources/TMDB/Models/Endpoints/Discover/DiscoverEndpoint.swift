@@ -8,6 +8,8 @@ extension TMDB.V3Endpoints {
 }
 
 extension TMDB.V3Endpoints.Discover: EndpointFactory {
+    var supportsLanguage: Bool { false }
+
     func makeURL(baseURL: URL) -> URL {
         // /3/discover
         var paths = ["3", "discover"]

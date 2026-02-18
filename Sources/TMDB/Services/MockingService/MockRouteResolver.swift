@@ -41,10 +41,13 @@ enum MockRouteResolver {
 
     private static let resolved: ResolvedRoutes? = {
         guard let bundle = discoverMockBundle() else { return nil }
-        guard let manifestURL = bundle.url(forResource: "MockRoutes", withExtension: "json"),
-              let manifestData = try? Data(contentsOf: manifestURL),
-              let entries = try? JSONDecoder().decode([RouteEntry].self, from: manifestData)
-        else { return nil }
+        guard
+            let manifestURL = bundle.url(forResource: "MockRoutes", withExtension: "json"),
+            let manifestData = try? Data(contentsOf: manifestURL),
+            let entries = try? JSONDecoder().decode([RouteEntry].self, from: manifestData)
+        else {
+            return nil
+        }
 
         let compiled = entries.compactMap { entry -> CompiledRoute? in
             guard let regex = try? Regex(entry.pattern) else { return nil }

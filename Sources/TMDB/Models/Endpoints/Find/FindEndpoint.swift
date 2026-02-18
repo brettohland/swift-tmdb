@@ -20,18 +20,19 @@ public extension TMDB {
 
 extension TMDB.V3Endpoints {
     enum Find {
-        case byID(externalID: String, source: TMDB.ExternalSource)
+        case byID(externalID: String, source: TMDB.ExternalSource, language: Locale?)
     }
 }
 
 extension TMDB.V3Endpoints.Find: EndpointFactory {
     func makeURL(baseURL: URL) -> URL {
         switch self {
-        case .byID(let externalID, let source):
+        case .byID(let externalID, let source, let language):
             // /3/find/{external_id}?external_source=...
             let paths: [any StringProtocol] = ["3", "find", externalID]
             var queryItems: [URLQueryItem] = []
             queryItems.append("external_source", value: source.rawValue)
+            queryItems.appendIfPresent(.language, value: language)
             return URLFactory.makeURL(baseURL: baseURL, appending: paths, queryItems: queryItems)
         }
     }
@@ -48,9 +49,13 @@ public extension TMDB {
     ///   - source: The ``TMDB/ExternalSource`` to search by
     /// - Returns: ``TMDB/FindResult``
     /// - Throws: ``TMDBRequestError``
-    static func find(externalID: String, source: ExternalSource) async throws(TMDBRequestError) -> FindResult {
+    static func find(
+        externalID: String,
+        source: ExternalSource,
+        language: Locale? = nil,
+    ) async throws(TMDBRequestError) -> FindResult {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.FindResult>(
-            endpoint: V3Endpoints.Find.byID(externalID: externalID, source: source),
+            endpoint: V3Endpoints.Find.byID(externalID: externalID, source: source, language: language),
             httpMethod: .get,
         )
         do {

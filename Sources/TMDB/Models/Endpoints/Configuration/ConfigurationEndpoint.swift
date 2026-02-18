@@ -12,6 +12,8 @@ extension TMDB.V3Endpoints {
 }
 
 extension TMDB.V3Endpoints.Configuration: EndpointFactory {
+    var supportsLanguage: Bool { false }
+
     func makeURL(baseURL: URL) -> URL {
         // /3
         var paths = ["3"]

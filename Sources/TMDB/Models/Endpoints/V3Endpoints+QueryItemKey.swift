@@ -2,6 +2,7 @@ import Foundation
 
 extension TMDB.V3Endpoints {
     enum QueryItemKey: String {
+        case endDate = "end_date"
         case firstAirDateYear = "first_air_date_year"
         case includeAdult = "include_adult"
         case language
@@ -9,6 +10,7 @@ extension TMDB.V3Endpoints {
         case primaryReleaseYear = "primary_release_year"
         case query
         case region
+        case startDate = "start_date"
         case year
     }
 }
