@@ -4,11 +4,11 @@ Instructions on initialization and usage of the `swift-tmdb` package.
 
 ## Requirements
 
-`swift-tmdb` requires a TMDB API Key in order to function. 
+`swift-tmdb` requires a TMDB API Key in order to function.
 
 Follow their [Getting Started](https://developer.themoviedb.org/docs/getting-started) guide in order to get your key.
 
-> Warning: 
+> Warning:
 [Follow the best security practices](https://nshipster.com/secrets/) with your TMDB API Key and do not store it inside of your source code repository.
 
 ## Initializing
@@ -44,9 +44,20 @@ struct MyApp: App {
         }
     }
 }
-
 ```
 
+For more control, use ``TMDBConfiguration`` directly:
+
+```swift
+let config = TMDBConfiguration(
+    apiKey: "APIKEYHERE",
+    defaultLanguage: Locale(identifier: "en-US"),
+    defaultRegion: Locale.Region("US")
+)
+try await TMDB.initialize(configuration: config)
+```
+
+The `defaultLanguage` and `defaultRegion` values are injected automatically into endpoints that support them. Per-request overrides always take precedence.
 
 ## Getting Data
 
@@ -54,7 +65,7 @@ After initialization, there are two ways to use the module to request data from 
 
 ### Using Static Methods
 
-As an example, you can request a movie's details by calling the static `movieDetails` method on the `TMDB` enum:
+Call static methods directly on the `TMDB` enum. Here's an example fetching movie details:
 
 ```swift
 import SwiftUI
@@ -88,15 +99,39 @@ struct MovieDetails: View {
     }
 }
 ```
-Calling this method is safe to do from SwiftUI Previews or from unit test cases. `swift-tmdb` uses [PointFree's Dependencies](https://github.com/pointfreeco/swift-dependencies) 
-module to provide your previews or tests with mock data.
 
-#### (Optional) Using Dependency Clients
+The same pattern works across all endpoint categories — movies, TV series, seasons, episodes, search, discover, trending, and more:
 
-By including the `TMDBDependencies` module, a `DependencyClient` via PointFree's [https://github.com/pointfreeco/swift-dependencies] 
-package will be exposed.
+```swift
+// TV series
+let series = try await TMDB.tvSeriesDetails(id: 1396)
 
-The `swift-dependencies` module is included when importing `TMDBDependencies`.
+// Search
+let results = try await TMDB.searchMovies(query: "Inception")
+
+// Trending
+let trending = try await TMDB.trendingAll(timeWindow: .week)
+
+// Discover with filters
+let action = try await TMDB.discoverMovie(filters: [.withGenres([.and("28")]), .sortBy(.popularity, .descending)])
+```
+
+Calling these methods is safe from SwiftUI Previews and unit tests. `swift-tmdb` uses [PointFree's Dependencies](https://github.com/pointfreeco/swift-dependencies) to provide mock data automatically.
+
+### (Optional) Using Dependency Clients
+
+The `TMDBDependencies` module provides `@Dependency`-based clients for use with PointFree's [swift-dependencies](https://github.com/pointfreeco/swift-dependencies) package.
+
+Available clients:
+
+| Client | Dependency Key | Endpoints |
+|--------|---------------|-----------|
+| `MoviesClient` | `\.tmdbMovies` | All movie endpoints |
+| `TVSeriesClient` | `\.tmdbTVSeries` | All TV series endpoints |
+| `TVSeasonsClient` | `\.tmdbTVSeasons` | All TV season endpoints |
+| `TVEpisodesClient` | `\.tmdbTVEpisodes` | All TV episode endpoints |
+
+The `swift-dependencies` module is re-exported when importing `TMDBDependencies`.
 
 ```swift
 import SwiftUI
@@ -132,8 +167,6 @@ struct MovieDetails: View {
         }
     }
 }
-
 ```
 
-Calling this method is safe to do from SwiftUI Previews or from unit test cases. `swift-tmdb` uses [PointFree's Dependencies](https://github.com/pointfreeco/swift-dependencies) 
-module to provide your previews or tests with mock data.
+Calling these methods is safe from SwiftUI Previews and unit tests. `swift-tmdb` uses [PointFree's Dependencies](https://github.com/pointfreeco/swift-dependencies) to provide mock data automatically.

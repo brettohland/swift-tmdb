@@ -49,7 +49,6 @@ extension DependencyValues {
 // MARK: - Test/Preview Mocks
 
 extension TMDB.HTTPClient: TestDependencyKey {
-
     static var testValue: TMDB.HTTPClient {
         TMDB.HTTPClient { request, _ throws in
             try MockRouteResolver.data(for: request)
