@@ -34,7 +34,7 @@ The official TMDB API documentation at https://developer.themoviedb.org/referenc
   - `queryItems.appendIfTrue(.includeAdult, value: includeAdult)` — appends only if `true`
   - `queryItems.append("external_source", value: source.rawValue)` — `String` fallback for keys not in `QueryItemKey`
 - **Add shared query keys to `V3Endpoints.QueryItemKey`** - The `QueryItemKey` enum in `V3Endpoints+QueryItemKey.swift` maps Swift case names to their JSON query parameter names (e.g., `case includeAdult = "include_adult"`). When adding a new endpoint that uses a query parameter already in the enum, use the enum case. When a parameter is used by multiple endpoints but not yet in the enum, add it there rather than using raw strings.
-- **New endpoints must set `supportsLanguage`/`supportsRegion` correctly** - The `EndpointFactory` protocol has `supportsLanguage: Bool` (default `true`) and `supportsRegion: Bool` (default `false`). Override to `false` for endpoints that don't accept a `language` query parameter (e.g., certifications, configuration, credits, reviews). Override `supportsRegion` to `true` for endpoints that accept a `region` parameter. For per-case control, use a `switch self` computed property. Discover endpoints must set `supportsLanguage: false` because they handle language/region through their own filter system.
+- **New endpoints must set `supportsLanguage`/`supportsRegion` correctly** - The `EndpointFactory` protocol has `supportsLanguage: Bool` (default `true`) and `supportsRegion: Bool` (default `false`). Override to `false` for endpoints that don't accept a `language` query parameter (e.g., certifications, configuration, credits, reviews). Override `supportsRegion` to `true` for endpoints that accept a `region` parameter. For per-case control, use a `switch self` computed property. Discover endpoints must set `supportsLanguage: false` because they handle language/region through their own filter system. **Do not assume all endpoints in a category share the same parameter support** — always verify each endpoint individually in the TMDB API docs. For example, among TV list endpoints only `GET /3/tv/popular` accepts `region`; `airing_today`, `on_the_air`, and `top_rated` do not.
 - **Always add a public memberwise initializer to public response structs** - Swift only auto-generates internal memberwise initializers, so every public struct in `Sources/TMDB/Models/Responses/Public/` must have an explicit `public init(...)`. For `let` properties use `self.prop = prop`. For property wrappers use the underscore form: `_prop = Wrapper(wrappedValue: val)` (e.g., `_isAdult = NilBoolean(wrappedValue: isAdult)`, `_releaseDate = ISO8601YMD(wrappedValue: releaseDate)`). Place the initializer after the last property declaration, before any `CodingKeys` enum or Codable conformance.
 
 ## Swift API Design Guidelines
@@ -255,6 +255,12 @@ Test files are organized by feature:
 - `DiscoverFilterTests.swift`: Tests for Discover filter types
 - `EndpointFactoryTests.swift`: Tests for URL generation
 - `Endpoint Tests/`: Directory with tests organized by API section
+
+## TMDB API Quirks
+
+Known deviations from the TMDB API's general URL patterns:
+
+- **TV season and episode changes use direct IDs, not hierarchical paths** - Unlike other TV sub-resource endpoints (which follow `/3/tv/{series_id}/season/{season_number}/...`), the changes endpoints take a direct resource ID: `GET /3/tv/season/{season_id}/changes` and `GET /3/tv/episode/{episode_id}/changes`. The same pattern applies to `GET /3/tv/{series_id}/changes` (uses series ID, not a sub-path). Model the endpoint enum cases with a direct ID parameter rather than the full hierarchy.
 
 ## Discovery Filters
 

@@ -2,15 +2,15 @@ import Foundation
 
 extension TMDB.V3Endpoints {
     enum TVSeries {
-        case details(id: Int)
-        case credits(id: Int)
-        case aggregateCredits(id: Int)
-        case images(id: Int)
-        case videos(id: Int)
-        case reviews(id: Int)
+        case details(id: Int, language: Locale?)
+        case credits(id: Int, language: Locale?)
+        case aggregateCredits(id: Int, language: Locale?)
+        case images(id: Int, language: Locale?)
+        case videos(id: Int, language: Locale?)
+        case reviews(id: Int, page: Int, language: Locale?)
         case keywords(id: Int)
-        case similar(id: Int)
-        case recommendations(id: Int)
+        case similar(id: Int, page: Int, language: Locale?)
+        case recommendations(id: Int, page: Int, language: Locale?)
         case alternativeTitles(id: Int)
         case contentRatings(id: Int)
         case episodeGroups(id: Int)
@@ -18,46 +18,84 @@ extension TMDB.V3Endpoints {
         case translations(id: Int)
         case watchProviders(id: Int)
         case screenedTheatrically(id: Int)
-        case changes(id: Int)
-        case latest
-        case airingToday
-        case onTheAir
-        case popular
-        case topRated
+        case changes(id: Int, startDate: Date?, endDate: Date?, page: Int)
+        case latest(language: Locale?)
+        case airingToday(page: Int, language: Locale?)
+        case onTheAir(page: Int, language: Locale?)
+        case popular(page: Int, language: Locale?, region: Locale.Region?)
+        case topRated(page: Int, language: Locale?)
     }
 }
 
 extension TMDB.V3Endpoints.TVSeries: EndpointFactory {
+    var supportsLanguage: Bool {
+        switch self {
+        case .alternativeTitles,
+             .changes,
+             .contentRatings,
+             .episodeGroups,
+             .externalIDs,
+             .keywords,
+             .screenedTheatrically,
+             .translations,
+             .watchProviders:
+            false
+        default:
+            true
+        }
+    }
+
+    var supportsRegion: Bool {
+        switch self {
+        case .popular:
+            true
+        default:
+            false
+        }
+    }
+
     func makeURL(baseURL: URL) -> URL {
         var paths: [any StringProtocol] = ["3", "tv"]
+        var queryItems: [URLQueryItem] = []
         switch self {
-        case .details(let id):
+        case .details(let id, let language):
             // /3/tv/{ID}
             paths.append(String(id))
-        case .credits(let id):
+            queryItems.appendIfPresent(.language, value: language)
+        case .credits(let id, let language):
             // /3/tv/{ID}/credits
             paths += [String(id), "credits"]
-        case .aggregateCredits(let id):
+            queryItems.appendIfPresent(.language, value: language)
+        case .aggregateCredits(let id, let language):
             // /3/tv/{ID}/aggregate_credits
             paths += [String(id), "aggregate_credits"]
-        case .images(let id):
+            queryItems.appendIfPresent(.language, value: language)
+        case .images(let id, let language):
             // /3/tv/{ID}/images
             paths += [String(id), "images"]
-        case .videos(let id):
+            queryItems.appendIfPresent(.language, value: language)
+        case .videos(let id, let language):
             // /3/tv/{ID}/videos
             paths += [String(id), "videos"]
-        case .reviews(let id):
+            queryItems.appendIfPresent(.language, value: language)
+        case .reviews(let id, let page, let language):
             // /3/tv/{ID}/reviews
             paths += [String(id), "reviews"]
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
         case .keywords(let id):
             // /3/tv/{ID}/keywords
             paths += [String(id), "keywords"]
-        case .similar(let id):
+        case .similar(let id, let page, let language):
             // /3/tv/{ID}/similar
             paths += [String(id), "similar"]
-        case .recommendations(let id):
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
+        case .recommendations(let id, let page, let language):
             // /3/tv/{ID}/recommendations
             paths += [String(id), "recommendations"]
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
         case .alternativeTitles(let id):
             // /3/tv/{ID}/alternative_titles
             paths += [String(id), "alternative_titles"]
@@ -79,26 +117,39 @@ extension TMDB.V3Endpoints.TVSeries: EndpointFactory {
         case .screenedTheatrically(let id):
             // /3/tv/{ID}/screened_theatrically
             paths += [String(id), "screened_theatrically"]
-        case .changes(let id):
+        case .changes(let id, let startDate, let endDate, let page):
             // /3/tv/{ID}/changes
             paths += [String(id), "changes"]
-        case .latest:
+            queryItems.appendIfPresent(.startDate, value: startDate)
+            queryItems.appendIfPresent(.endDate, value: endDate)
+            queryItems.append(.page, value: page)
+        case .latest(let language):
             // /3/tv/latest
             paths.append("latest")
-        case .airingToday:
+            queryItems.appendIfPresent(.language, value: language)
+        case .airingToday(let page, let language):
             // /3/tv/airing_today
             paths.append("airing_today")
-        case .onTheAir:
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
+        case .onTheAir(let page, let language):
             // /3/tv/on_the_air
             paths.append("on_the_air")
-        case .popular:
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
+        case .popular(let page, let language, let region):
             // /3/tv/popular
             paths.append("popular")
-        case .topRated:
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
+            queryItems.appendIfPresent(.region, value: region)
+        case .topRated(let page, let language):
             // /3/tv/top_rated
             paths.append("top_rated")
+            queryItems.append(.page, value: page)
+            queryItems.appendIfPresent(.language, value: language)
         }
-        return URLFactory.makeURL(baseURL: baseURL, appending: paths)
+        return URLFactory.makeURL(baseURL: baseURL, appending: paths, queryItems: queryItems)
     }
 }
 
@@ -110,12 +161,14 @@ public extension TMDB {
     /// `/3/tv/{id}`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-details)
-    /// - Parameter id: `Int` TMDB's unique identifier for the TV series
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the TV series
+    ///   - language: Override the default language for this request
     /// - Returns: ``TMDB/TVSeries``
     /// - Throws: ``TMDBRequestError``
-    static func tvSeriesDetails(id: Int) async throws(TMDBRequestError) -> TVSeries {
+    static func tvSeriesDetails(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> TVSeries {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.TVSeries>(
-            endpoint: V3Endpoints.TVSeries.details(id: id),
+            endpoint: V3Endpoints.TVSeries.details(id: id, language: language),
             httpMethod: .get,
         )
         do {
@@ -132,12 +185,14 @@ public extension TMDB {
     /// `/3/tv/{id}/credits`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-credits)
-    /// - Parameter id: `Int` TMDB's unique identifier for the TV series
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the TV series
+    ///   - language: Override the default language for this request
     /// - Returns: ``TMDB/MediaCredits``
     /// - Throws: ``TMDBRequestError``
-    static func tvSeriesCredits(id: Int) async throws(TMDBRequestError) -> MediaCredits {
+    static func tvSeriesCredits(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> MediaCredits {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.MediaCredits>(
-            endpoint: V3Endpoints.TVSeries.credits(id: id),
+            endpoint: V3Endpoints.TVSeries.credits(id: id, language: language),
             httpMethod: .get,
         )
         do {
@@ -154,12 +209,16 @@ public extension TMDB {
     /// `/3/tv/{id}/aggregate_credits`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-aggregate-credits)
-    /// - Parameter id: `Int` TMDB's unique identifier for the TV series
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the TV series
+    ///   - language: Override the default language for this request
     /// - Returns: ``TMDB/AggregateCredits``
     /// - Throws: ``TMDBRequestError``
-    static func tvSeriesAggregateCredits(id: Int) async throws(TMDBRequestError) -> AggregateCredits {
+    static func tvSeriesAggregateCredits(id: Int, language: Locale? = nil) async throws(TMDBRequestError)
+        -> AggregateCredits
+    {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.AggregateCredits>(
-            endpoint: V3Endpoints.TVSeries.aggregateCredits(id: id),
+            endpoint: V3Endpoints.TVSeries.aggregateCredits(id: id, language: language),
             httpMethod: .get,
         )
         do {
@@ -176,12 +235,14 @@ public extension TMDB {
     /// `/3/tv/{id}/images`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-images)
-    /// - Parameter id: `Int` TMDB's unique identifier for the TV series
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the TV series
+    ///   - language: Override the default language for this request
     /// - Returns: ``TMDB/ImageCollection``
     /// - Throws: ``TMDBRequestError``
-    static func tvSeriesImages(id: Int) async throws(TMDBRequestError) -> ImageCollection {
+    static func tvSeriesImages(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> ImageCollection {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.ImageCollection>(
-            endpoint: V3Endpoints.TVSeries.images(id: id),
+            endpoint: V3Endpoints.TVSeries.images(id: id, language: language),
             httpMethod: .get,
         )
         do {
@@ -198,12 +259,14 @@ public extension TMDB {
     /// `/3/tv/{id}/videos`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-videos)
-    /// - Parameter id: `Int` TMDB's unique identifier for the TV series
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the TV series
+    ///   - language: Override the default language for this request
     /// - Returns: ``TMDB/VideoCollection``
     /// - Throws: ``TMDBRequestError``
-    static func tvSeriesVideos(id: Int) async throws(TMDBRequestError) -> VideoCollection {
+    static func tvSeriesVideos(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> VideoCollection {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.VideoCollection>(
-            endpoint: V3Endpoints.TVSeries.videos(id: id),
+            endpoint: V3Endpoints.TVSeries.videos(id: id, language: language),
             httpMethod: .get,
         )
         do {
@@ -220,12 +283,19 @@ public extension TMDB {
     /// `/3/tv/{id}/reviews`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-reviews)
-    /// - Parameter id: `Int` TMDB's unique identifier for the TV series
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the TV series
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: Override the default language for this request
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Review``
     /// - Throws: ``TMDBRequestError``
-    static func tvSeriesReviews(id: Int) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Review> {
+    static func tvSeriesReviews(
+        id: Int,
+        page: Int = 1,
+        language: Locale? = nil,
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Review> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Review>>(
-            endpoint: V3Endpoints.TVSeries.reviews(id: id),
+            endpoint: V3Endpoints.TVSeries.reviews(id: id, page: page, language: language),
             httpMethod: .get,
         )
         do {
@@ -265,13 +335,19 @@ public extension TMDB {
     /// `/3/tv/{id}/similar`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-similar)
-    /// - Parameter id: `Int` TMDB's unique identifier for the TV series
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the TV series
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: Override the default language for this request
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverTV``
     /// - Throws: ``TMDBRequestError``
-    static func similarTVSeries(id: Int) async throws(TMDBRequestError) -> Discover
-    .PaginatedResponse<Discover.DiscoverTV> {
+    static func similarTVSeries(
+        id: Int,
+        page: Int = 1,
+        language: Locale? = nil,
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverTV> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverTV>>(
-            endpoint: V3Endpoints.TVSeries.similar(id: id),
+            endpoint: V3Endpoints.TVSeries.similar(id: id, page: page, language: language),
             httpMethod: .get,
         )
         do {
@@ -288,13 +364,19 @@ public extension TMDB {
     /// `/3/tv/{id}/recommendations`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-recommendations)
-    /// - Parameter id: `Int` TMDB's unique identifier for the TV series
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the TV series
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: Override the default language for this request
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverTV``
     /// - Throws: ``TMDBRequestError``
-    static func tvSeriesRecommendations(id: Int) async throws(TMDBRequestError) -> Discover
-    .PaginatedResponse<Discover.DiscoverTV> {
+    static func tvSeriesRecommendations(
+        id: Int,
+        page: Int = 1,
+        language: Locale? = nil,
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverTV> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverTV>>(
-            endpoint: V3Endpoints.TVSeries.recommendations(id: id),
+            endpoint: V3Endpoints.TVSeries.recommendations(id: id, page: page, language: language),
             httpMethod: .get,
         )
         do {
@@ -470,12 +552,21 @@ public extension TMDB {
     /// `/3/tv/{id}/changes`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-changes)
-    /// - Parameter id: `Int` TMDB's unique identifier for the TV series
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the TV series
+    ///   - startDate: Filter changes from this date
+    ///   - endDate: Filter changes to this date
+    ///   - page: The page of results to return (default: 1)
     /// - Returns: ``TMDB/ChangeCollection``
     /// - Throws: ``TMDBRequestError``
-    static func tvSeriesChanges(id: Int) async throws(TMDBRequestError) -> ChangeCollection {
+    static func tvSeriesChanges(
+        id: Int,
+        startDate: Date? = nil,
+        endDate: Date? = nil,
+        page: Int = 1,
+    ) async throws(TMDBRequestError) -> ChangeCollection {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.ChangeCollection>(
-            endpoint: V3Endpoints.TVSeries.changes(id: id),
+            endpoint: V3Endpoints.TVSeries.changes(id: id, startDate: startDate, endDate: endDate, page: page),
             httpMethod: .get,
         )
         do {
@@ -492,11 +583,12 @@ public extension TMDB {
     /// `/3/tv/latest`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-latest-id)
+    /// - Parameter language: Override the default language for this request
     /// - Returns: ``TMDB/TVSeries``
     /// - Throws: ``TMDBRequestError``
-    static func latestTVSeries() async throws(TMDBRequestError) -> TVSeries {
+    static func latestTVSeries(language: Locale? = nil) async throws(TMDBRequestError) -> TVSeries {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.TVSeries>(
-            endpoint: V3Endpoints.TVSeries.latest,
+            endpoint: V3Endpoints.TVSeries.latest(language: language),
             httpMethod: .get,
         )
         do {
@@ -513,12 +605,17 @@ public extension TMDB {
     /// `/3/tv/airing_today`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-airing-today-list)
+    /// - Parameters:
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: Override the default language for this request
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverTV``
     /// - Throws: ``TMDBRequestError``
-    static func tvSeriesAiringToday() async throws(TMDBRequestError) -> Discover
-    .PaginatedResponse<Discover.DiscoverTV> {
+    static func tvSeriesAiringToday(
+        page: Int = 1,
+        language: Locale? = nil,
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverTV> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverTV>>(
-            endpoint: V3Endpoints.TVSeries.airingToday,
+            endpoint: V3Endpoints.TVSeries.airingToday(page: page, language: language),
             httpMethod: .get,
         )
         do {
@@ -535,11 +632,17 @@ public extension TMDB {
     /// `/3/tv/on_the_air`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-on-the-air-list)
+    /// - Parameters:
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: Override the default language for this request
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverTV``
     /// - Throws: ``TMDBRequestError``
-    static func tvSeriesOnTheAir() async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverTV> {
+    static func tvSeriesOnTheAir(
+        page: Int = 1,
+        language: Locale? = nil,
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverTV> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverTV>>(
-            endpoint: V3Endpoints.TVSeries.onTheAir,
+            endpoint: V3Endpoints.TVSeries.onTheAir(page: page, language: language),
             httpMethod: .get,
         )
         do {
@@ -556,11 +659,19 @@ public extension TMDB {
     /// `/3/tv/popular`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-popular-list)
+    /// - Parameters:
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: Override the default language for this request
+    ///   - region: Override the default region for this request
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverTV``
     /// - Throws: ``TMDBRequestError``
-    static func popularTVSeries() async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverTV> {
+    static func popularTVSeries(
+        page: Int = 1,
+        language: Locale? = nil,
+        region: Locale.Region? = nil,
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverTV> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverTV>>(
-            endpoint: V3Endpoints.TVSeries.popular,
+            endpoint: V3Endpoints.TVSeries.popular(page: page, language: language, region: region),
             httpMethod: .get,
         )
         do {
@@ -577,11 +688,17 @@ public extension TMDB {
     /// `/3/tv/top_rated`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/tv-series-top-rated-list)
+    /// - Parameters:
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: Override the default language for this request
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverTV``
     /// - Throws: ``TMDBRequestError``
-    static func topRatedTVSeries() async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverTV> {
+    static func topRatedTVSeries(
+        page: Int = 1,
+        language: Locale? = nil,
+    ) async throws(TMDBRequestError) -> Discover.PaginatedResponse<Discover.DiscoverTV> {
         let endpoint = Endpoint<HTTP.EmptyRequestBody, TMDB.Discover.PaginatedResponse<TMDB.Discover.DiscoverTV>>(
-            endpoint: V3Endpoints.TVSeries.topRated,
+            endpoint: V3Endpoints.TVSeries.topRated(page: page, language: language),
             httpMethod: .get,
         )
         do {
