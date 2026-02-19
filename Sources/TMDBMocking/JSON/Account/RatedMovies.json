@@ -1,0 +1,27 @@
+{
+  "page": 1,
+  "total_results": 1,
+  "total_pages": 1,
+  "results": [
+    {
+      "poster_path": null,
+      "adult": false,
+      "overview": "A rated movie.",
+      "release_date": "2010-07-16",
+      "genre_ids": [28, 878],
+      "id": 27205,
+      "original_title": "Inception",
+      "original_language": "en",
+      "title": "Inception",
+      "backdrop_path": null,
+      "popularity": 75.0,
+      "vote_count": 30000,
+      "video": false,
+      "vote_average": 8.4,
+      "account_rating": {
+        "created_at": "2024-03-15T12:00:00.000Z",
+        "value": 9.0
+      }
+    }
+  ]
+}

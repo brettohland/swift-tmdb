@@ -10,6 +10,8 @@ extension TMDB.V3Endpoints {
         case primaryReleaseYear = "primary_release_year"
         case query
         case region
+        case sessionID = "session_id"
+        case sortBy = "sort_by"
         case startDate = "start_date"
         case year
     }

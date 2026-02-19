@@ -17,6 +17,7 @@
   { "pattern": "^/3/genre/movie/list$", "file": "MovieGenres" },
   { "pattern": "^/3/genre/tv/list$", "file": "TVGenres" },
 
+  { "pattern": "^/3/movie/\\d+/rating$", "file": "AccountWriteResult" },
   { "pattern": "^/3/movie/\\d+/alternative_titles$", "file": "AlternativeTitles" },
   { "pattern": "^/3/movie/\\d+/changes$", "file": "MovieChanges" },
   { "pattern": "^/3/movie/\\d+/credits$", "file": "MovieCredits" },
@@ -64,6 +65,7 @@
   { "pattern": "^/3/collection/\\d+/images$", "file": "CollectionImages" },
   { "pattern": "^/3/collection/\\d+$", "file": "CollectionDetails" },
 
+  { "pattern": "^/3/tv/\\d+/season/\\d+/episode/\\d+/rating$", "file": "AccountWriteResult" },
   { "pattern": "^/3/tv/\\d+/season/\\d+/episode/\\d+/credits$", "file": "TVEpisodeCredits" },
   { "pattern": "^/3/tv/\\d+/season/\\d+/episode/\\d+/external_ids$", "file": "TVEpisodeExternalIDs" },
   { "pattern": "^/3/tv/\\d+/season/\\d+/episode/\\d+/images$", "file": "TVEpisodeImages" },
@@ -85,6 +87,7 @@
 
   { "pattern": "^/3/tv/season/\\d+/changes$", "file": "TVSeasonChanges" },
 
+  { "pattern": "^/3/tv/\\d+/rating$", "file": "AccountWriteResult" },
   { "pattern": "^/3/tv/\\d+/aggregate_credits$", "file": "TVSeriesAggregateCredits" },
   { "pattern": "^/3/tv/\\d+/alternative_titles$", "file": "AlternativeTVSeriesTitles" },
   { "pattern": "^/3/tv/\\d+/changes$", "file": "TVSeriesChanges" },
@@ -126,5 +129,18 @@
   { "pattern": "^/4/auth/request_token$", "file": "AuthRequestToken" },
   { "pattern": "^/4/auth/access_token$", "file": "AuthAccessToken" },
   { "pattern": "^/3/authentication/session/convert/4$", "file": "AuthV3Session" },
-  { "pattern": "^/3/authentication/session$", "file": "AuthDeleteResult" }
+  { "pattern": "^/3/authentication/session$", "file": "AuthDeleteResult" },
+
+  { "pattern": "^/3/account/[^/]+/favorite$", "file": "AccountWriteResult" },
+  { "pattern": "^/3/account/[^/]+/watchlist$", "file": "AccountWriteResult" },
+
+  { "pattern": "^/4/account/[^/]+/lists$", "file": "AccountLists" },
+  { "pattern": "^/4/account/[^/]+/movie/favorites$", "file": "FavoriteMovies" },
+  { "pattern": "^/4/account/[^/]+/tv/favorites$", "file": "FavoriteTVSeries" },
+  { "pattern": "^/4/account/[^/]+/movie/rated$", "file": "RatedMovies" },
+  { "pattern": "^/4/account/[^/]+/tv/rated$", "file": "RatedTVSeries" },
+  { "pattern": "^/4/account/[^/]+/movie/recommendations$", "file": "AccountMovieRecommendations" },
+  { "pattern": "^/4/account/[^/]+/tv/recommendations$", "file": "AccountTVRecommendations" },
+  { "pattern": "^/4/account/[^/]+/movie/watchlist$", "file": "WatchlistMovies" },
+  { "pattern": "^/4/account/[^/]+/tv/watchlist$", "file": "WatchlistTVSeries" }
 ]

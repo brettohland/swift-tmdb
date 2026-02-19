@@ -81,7 +81,11 @@ let package = Package(
         ),
         .testTarget(
             name: "TMDBTests",
-            dependencies: ["TMDB", "TMDBMocking"],
+            dependencies: [
+                "TMDB",
+                "TMDBMocking",
+                .product(name: "Dependencies", package: "swift-dependencies"),
+            ],
             swiftSettings: swiftSettings
         ),
     ],

@@ -10,6 +10,8 @@ public enum TMDBRequestError: Error {
     case authenticationCancelled
     /// An authentication flow is already in progress
     case authenticationAlreadyInProgress
+    /// No authenticated session is available
+    case notAuthenticated
 }
 
 extension TMDBRequestError: Equatable {
@@ -22,6 +24,8 @@ extension TMDBRequestError: Equatable {
         case (.authenticationCancelled, .authenticationCancelled):
             true
         case (.authenticationAlreadyInProgress, .authenticationAlreadyInProgress):
+            true
+        case (.notAuthenticated, .notAuthenticated):
             true
         default:
             false

@@ -1,0 +1,22 @@
+{
+  "page": 1,
+  "total_results": 1,
+  "total_pages": 1,
+  "results": [
+    {
+      "backdrop_path": null,
+      "genre_ids": [10765, 18],
+      "id": 1402,
+      "original_language": "en",
+      "overview": "A recommended TV series.",
+      "popularity": 80.0,
+      "poster_path": null,
+      "vote_average": 8.3,
+      "vote_count": 12000,
+      "name": "The Walking Dead",
+      "original_name": "The Walking Dead",
+      "origin_country": ["US"],
+      "first_air_date": "2010-10-31"
+    }
+  ]
+}

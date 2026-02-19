@@ -1,0 +1,23 @@
+{
+  "page": 1,
+  "total_results": 1,
+  "total_pages": 1,
+  "results": [
+    {
+      "poster_path": null,
+      "adult": false,
+      "overview": "A classic favorite movie.",
+      "release_date": "1994-09-23",
+      "genre_ids": [18, 80],
+      "id": 278,
+      "original_title": "The Shawshank Redemption",
+      "original_language": "en",
+      "title": "The Shawshank Redemption",
+      "backdrop_path": null,
+      "popularity": 50.0,
+      "vote_count": 20000,
+      "video": false,
+      "vote_average": 8.7
+    }
+  ]
+}
