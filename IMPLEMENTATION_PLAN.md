@@ -1,8 +1,8 @@
 # TMDB API v3 Read-Only Endpoints - Implementation Plan
 
-**Status:** Phase 6 Complete ✅ | Auth & session infrastructure done
-**Last Updated:** 2026-02-18
-**Target:** 114 total endpoints (109 read-only + 5 auth)
+**Status:** Phase 8 Complete ✅ | Lists v4 CRUD done
+**Last Updated:** 2026-02-19
+**Target:** 138 total endpoints (109 read-only + 5 auth + 15 account + 9 lists)
 
 ---
 
@@ -31,7 +31,9 @@
 | **Phase 4** | 41 | ✅ Complete | v0.5.0 (ready) |
 | **Phase 5** | 12 | ✅ Complete | v0.6.0 |
 | **Phase 6** | 5 | ✅ Complete | v1.0.0 |
-| **Total** | **114** | **114/114 (100%)** | |
+| **Phase 7** | 15 | ✅ Complete | v1.0.0 |
+| **Phase 8** | 9 | ✅ Complete | v1.0.0 |
+| **Total** | **138** | **138/138 (100%)** | |
 
 ---
 
@@ -979,7 +981,7 @@ swift test --filter MovieEndpointTests/movieCredits
 
 ### Auth infrastructure complete ✅
 
-114 endpoints implemented (109 read-only + 5 auth). The next phases add account features and list management using the **v4 API** (OAuth-based, modern list features) with targeted v3 write endpoints where v4 has no equivalent.
+138 endpoints implemented (109 read-only + 5 auth + 15 account + 9 lists). All planned phases are complete. Phase 9 (Guest Sessions) is an optional future addition.
 
 ---
 
@@ -1215,60 +1217,109 @@ Tests/TMDBTests/Endpoint Tests/Account/AccountEndpointTests.swift
 
 ---
 
-## Phase 8: Lists (v4 CRUD)
+## Phase 8: Lists v4 CRUD (COMPLETE ✅)
 
-**Priority:** MEDIUM
-**Complexity:** MEDIUM
-**Target Release:** v1.0.0
-**Requires:** Phase 6 complete (valid `access_token`)
-**New Endpoints:** 9
+**Completed:** 2026-02-19
+**Endpoints Implemented:** 9
+**Tests Added:** 16 (180 total, all passing)
 
-### Strategy
+### Implemented Endpoints
 
-Use v4 lists exclusively. v3 lists are a dead end — TMDB no longer adds new features to them and the website itself uses v4 lists. Key v4 advantages: mixed movie+TV lists, unlimited item imports, private lists, per-item comments, better sorting.
+#### v4 List Read (2 endpoints)
+- ✅ `GET /4/list/{list_id}` → `TMDB.listDetails(listID:page:sortBy:)`
+- ✅ `GET /4/list/{list_id}/item_status` → `TMDB.listItemStatus(listID:mediaType:mediaID:)`
 
-### Endpoints
-```
-⏳ GET    /4/list/{list_id}                → ListDetails          TMDB.listDetails(id:page:sortBy:)
-⏳ GET    /4/list/{list_id}/item_status    → ListItemStatus       TMDB.listItemStatus(listID:mediaID:mediaType:)
-⏳ POST   /4/list                          → ListCreateResult     TMDB.createList(name:description:language:public:)
-⏳ PUT    /4/list/{list_id}                → WriteResult          TMDB.updateList(id:name:description:public:sortBy:)
-⏳ DELETE /4/list/{list_id}                → WriteResult          TMDB.deleteList(id:)
-⏳ POST   /4/list/{list_id}/items          → ListWriteResult      TMDB.addListItems(listID:items:)
-⏳ PUT    /4/list/{list_id}/items          → ListWriteResult      TMDB.updateListItems(listID:items:)
-⏳ DELETE /4/list/{list_id}/items          → ListWriteResult      TMDB.removeListItems(listID:items:)
-⏳ GET    /4/list/{list_id}/clear          → WriteResult          TMDB.clearList(id:confirm:)
-```
-
-Note: `GET /4/list/{list_id}/clear` uses GET (not DELETE) — this is a TMDB API quirk. Requires `confirm=true` as a query parameter.
+#### v4 List Write (7 endpoints)
+- ✅ `POST /4/list` → `TMDB.createList(name:description:languageCode:regionCode:isPublic:)`
+- ✅ `PUT /4/list/{list_id}` → `TMDB.updateList(listID:name:description:isPublic:sortBy:)`
+- ✅ `DELETE /4/list/{list_id}` → `TMDB.deleteList(listID:)`
+- ✅ `POST /4/list/{list_id}/items` → `TMDB.addItemsToList(listID:items:)`
+- ✅ `PUT /4/list/{list_id}/items` → `TMDB.updateListItems(listID:items:)`
+- ✅ `DELETE /4/list/{list_id}/items` → `TMDB.removeItemsFromList(listID:items:)`
+- ✅ `GET /4/list/{list_id}/clear` → `TMDB.clearList(listID:)`
 
 ### New Models
 ```swift
-TMDB.List.Details           // Full list with paginated results, sort options, metadata
-TMDB.List.Item              // id: Int, mediaType: MediaType (shared with Phase 7)
-TMDB.List.ItemStatus        // itemPresent: Bool, id: Int, mediaType: MediaType
-TMDB.List.CreateResult      // id: Int (the new list's ID), success: Bool, statusMessage: String
-TMDB.List.WriteResult       // results: [ItemWriteResult] (per-item success/failure)
-TMDB.List.ItemWriteResult   // mediaID: Int, mediaType: MediaType, success: Bool
-TMDB.List.SortBy            // popularity.asc/desc, vote_average.asc/desc, release_date.asc/desc, title.asc/desc
+TMDB.List.Details           // Full list metadata + paginated Item results + Creator
+TMDB.List.Item              // Polymorphic movie/TV item with custom Codable (dates, comment)
+TMDB.List.Creator           // List creator info (id, name, username, gravatarHash)
+TMDB.List.ItemStatus        // Item presence check result
+TMDB.List.CreateResult      // New list ID + status
+TMDB.List.ItemsResult       // Bulk operation result with per-item ItemResult
+TMDB.List.ItemResult        // Per-item success/failure in bulk operations
 ```
 
-### Files to Create
+### Internal Request Bodies
+```swift
+CreateListBody              // name, description, iso_639_1, iso_3166_1, public
+UpdateListBody              // name?, description?, public?, sort_by?
+ListItemsBody               // items: [ListItemEntry]
+ListItemEntry               // media_type, media_id, comment?
 ```
-Sources/TMDB/Models/Endpoints/Lists/V4ListEndpoints.swift
 
+### Files Created
+
+**Namespace:** 1 file
+```
+Sources/TMDB/Models/Responses/Public/4/List/ListNamespace.swift
+```
+
+**Response Models:** 5 files
+```
 Sources/TMDB/Models/Responses/Public/4/List/
 ├── ListDetails.swift
 ├── ListItem.swift
 ├── ListItemStatus.swift
 ├── ListCreateResult.swift
-└── ListWriteResult.swift
+└── ListItemsResult.swift
+```
 
-Sources/TMDBDependencies/Clients/ListsClient.swift
+**Request Bodies:** 3 files
+```
+Sources/TMDB/Models/Responses/Internal/Lists/
+├── CreateListBody.swift
+├── UpdateListBody.swift
+└── ListItemsBody.swift
+```
+
+**Endpoints + Public API:** 1 file
+```
+Sources/TMDB/Models/Endpoints/Lists/V4ListEndpoints.swift
+```
+
+**Mock Data:** 4 JSON files
+```
+Sources/TMDBMocking/JSON/Lists/
+├── ListDetails.json
+├── ListItemStatus.json
+├── ListCreateResult.json
+└── ListItemsResult.json
+```
+
+**Mock Conformances:** 1 file
+```
 Sources/TMDBMocking/Extensions/Lists+MockableResponse.swift
-Sources/TMDBMocking/JSON/Lists/ (9 JSON files)
+```
+
+**Dependency Client:** 1 file
+```
+Sources/TMDBDependencies/Clients/ListsClient.swift
+```
+
+**Tests:** 1 file (9 functional + 7 URL generation)
+```
 Tests/TMDBTests/Endpoint Tests/Lists/ListEndpointTests.swift
 ```
+
+### Key Design Decisions
+- `List.Details` is NOT `Discover.PaginatedResponse<T>` — combines list metadata with pagination
+- `List.Item` follows `TrendingResult` pattern (polymorphic with custom Codable for dates)
+- Reused `Account.WriteResult` for `updateList`, `deleteList`, `clearList` (standard status response)
+- Reused `Account.MediaType` for item media types in public API signatures
+- `sortBy` is `String?` (not enum) — TMDB supports many sort options that may expand
+- All list endpoints set `supportsLanguage: false`
+- Mock system shares paths for GET/PUT/DELETE on same URL (path-only matching)
+- `ListDetails.json` includes `status_code`/`status_message`/`success` so `Account.WriteResult` decodes from same mock
 
 ### v3 Lists Skipped Intentionally
 
@@ -1315,11 +1366,11 @@ Guest sessions expire after 60 minutes of inactivity or 24 hours. The same v3 ra
 | v0.5.0 | Phase 4 - TV (41) | ✅ Ready |
 | v0.6.0 | Phase 5 - People (12) | ✅ Ready |
 | v1.0.0-alpha | Phase 6 - Auth (5) | ✅ Ready |
-| v1.0.0 | Phase 7 - Account (15) + Phase 8 - Lists (9) | 💡 Planned |
+| v1.0.0 | Phase 7 - Account (15) + Phase 8 - Lists (9) | ✅ Ready |
 | v1.1.0 | Phase 9 - Guest Sessions (4) | 💡 Optional |
 
 ---
 
-**Document Version:** 1.6
-**Last Updated:** 2026-02-18
-**Next Review:** Start of Phase 7
+**Document Version:** 1.8
+**Last Updated:** 2026-02-19
+**Next Review:** Phase 9 (Guest Sessions) if needed

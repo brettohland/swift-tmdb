@@ -308,6 +308,7 @@ Test files are organized by feature:
 Known deviations from the TMDB API's general URL patterns:
 
 - **TV season and episode changes use direct IDs, not hierarchical paths** - Unlike other TV sub-resource endpoints (which follow `/3/tv/{series_id}/season/{season_number}/...`), the changes endpoints take a direct resource ID: `GET /3/tv/season/{season_id}/changes` and `GET /3/tv/episode/{episode_id}/changes`. The same pattern applies to `GET /3/tv/{series_id}/changes` (uses series ID, not a sub-path). Model the endpoint enum cases with a direct ID parameter rather than the full hierarchy.
+- **Clear list uses GET, not DELETE** - `GET /4/list/{list_id}/clear` uses the GET method to clear all items from a list, which is unusual for a destructive operation.
 
 ## Discovery Filters
 

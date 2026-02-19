@@ -142,5 +142,11 @@
   { "pattern": "^/4/account/[^/]+/movie/recommendations$", "file": "AccountMovieRecommendations" },
   { "pattern": "^/4/account/[^/]+/tv/recommendations$", "file": "AccountTVRecommendations" },
   { "pattern": "^/4/account/[^/]+/movie/watchlist$", "file": "WatchlistMovies" },
-  { "pattern": "^/4/account/[^/]+/tv/watchlist$", "file": "WatchlistTVSeries" }
+  { "pattern": "^/4/account/[^/]+/tv/watchlist$", "file": "WatchlistTVSeries" },
+
+  { "pattern": "^/4/list/\\d+/item_status$", "file": "ListItemStatus" },
+  { "pattern": "^/4/list/\\d+/items$", "file": "ListItemsResult" },
+  { "pattern": "^/4/list/\\d+/clear$", "file": "AccountWriteResult" },
+  { "pattern": "^/4/list/\\d+$", "file": "ListDetails" },
+  { "pattern": "^/4/list$", "file": "ListCreateResult" }
 ]
