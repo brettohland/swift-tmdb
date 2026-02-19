@@ -70,6 +70,31 @@ easy display of data coming from the TMDB API.
 
 ---
 
+## Roadmap
+
+| Feature | Endpoints | Status |
+|---------|-----------|--------|
+| Configuration, Genres, Trending, Watch Providers | 15 | Done |
+| Movies (details, credits, lists, images, etc.) | 20 | Done |
+| Search, Find, Keywords, Collections | 12 | Done |
+| Language, Region & Query Parameter Support | -- | Done |
+| TV Series, Seasons, Episodes, Episode Groups | 41 | Done |
+| People, Companies, Networks | 12 | Done |
+| Auth & Session Infrastructure (v3 + v4) | 5 | Done |
+| Account Read & Write (favorites, watchlist, ratings) | 15 | Done |
+| **Lists v4 CRUD** | **9** | **Planned** |
+| Guest Sessions | 4 | Planned |
+
+### Lists v4 CRUD
+
+Full CRUD for the modern v4 list system -- mixed movie + TV lists, unlimited imports, private lists, per-item comments, and flexible sorting. Includes create, update, delete, add/remove/update items, item status checks, and clear.
+
+### Guest Sessions
+
+Lightweight unauthenticated rating support. Guest sessions allow users to submit movie, TV, and episode ratings without creating a full TMDB account. Sessions expire after 60 minutes of inactivity or 24 hours.
+
+---
+
 ## Supported Endpoints
 
 ### Account (Authenticated)
