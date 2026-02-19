@@ -4,6 +4,7 @@ import Foundation
 struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable> {
     let endpoint: EndpointFactory
     let httpMethod: HTTP.Method
+    let requestBody: RequestBody?
     let encoder: JSONEncoder
     let decoder: JSONDecoder
 
@@ -14,6 +15,7 @@ struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable> {
     init(
         endpoint: EndpointFactory,
         httpMethod: HTTP.Method,
+        requestBody: RequestBody? = nil,
         encoder: JSONEncoder = .iso8601SnakeCake,
         decoder: JSONDecoder = .iso8601SnakeCake,
     ) {
@@ -21,6 +23,7 @@ struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable> {
         self.encoder = encoder
         self.endpoint = endpoint
         self.httpMethod = httpMethod
+        self.requestBody = requestBody
     }
 
     func data(forRequest request: URLRequest) async throws -> Data {
@@ -51,6 +54,10 @@ struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable> {
         finalURL = applyDefaults(to: finalURL, from: configuration)
         var request = URLRequest(url: finalURL)
         request.httpMethod = httpMethod.rawValue
+        if let requestBody, !(requestBody is HTTP.EmptyRequestBody) {
+            request.httpBody = try encoder.encode(requestBody)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
         return try await decodedResponse(forRequest: request)
     }
 

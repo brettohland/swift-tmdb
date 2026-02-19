@@ -3,6 +3,12 @@
 
 @preconcurrency import PackageDescription
 
+let swiftSettings: [SwiftSetting] = [
+    .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+    .enableUpcomingFeature("InferIsolatedConformances"),
+    .enableUpcomingFeature("FullTypedThrows"),
+]
+
 let package = Package(
     name: "swift-tmdb",
     platforms: [
@@ -24,6 +30,14 @@ let package = Package(
             name: "TMDBDependencies",
             targets: ["TMDBDependencies"],
         ),
+        .library(
+            name: "TMDBSwiftUI",
+            targets: ["TMDBSwiftUI"],
+        ),
+        .library(
+            name: "TMDBUIKit",
+            targets: ["TMDBUIKit"],
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-dependencies.git", exact: "1.10.0"),
@@ -36,11 +50,7 @@ let package = Package(
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 .product(name: "DependenciesMacros", package: "swift-dependencies"),
             ],
-            swiftSettings: [
-                .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-                .enableUpcomingFeature("InferIsolatedConformances"),
-                .enableUpcomingFeature("FullTypedThrows"),
-            ],
+            swiftSettings: swiftSettings,
         ),
         .target(
             name: "TMDBMocking",
@@ -48,11 +58,7 @@ let package = Package(
             resources: [
                 .process("JSON"),
             ],
-            swiftSettings: [
-                .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-                .enableUpcomingFeature("InferIsolatedConformances"),
-                .enableUpcomingFeature("FullTypedThrows"),
-            ]
+            swiftSettings: swiftSettings
         ),
         .target(
             name: "TMDBDependencies",
@@ -61,20 +67,22 @@ let package = Package(
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 .product(name: "DependenciesMacros", package: "swift-dependencies"),
             ],
-            swiftSettings: [
-                .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-                .enableUpcomingFeature("InferIsolatedConformances"),
-                .enableUpcomingFeature("FullTypedThrows"),
-            ],
+            swiftSettings: swiftSettings,
+        ),
+        .target(
+            name: "TMDBSwiftUI",
+            dependencies: ["TMDB"],
+            swiftSettings: swiftSettings,
+        ),
+        .target(
+            name: "TMDBUIKit",
+            dependencies: ["TMDB"],
+            swiftSettings: swiftSettings,
         ),
         .testTarget(
             name: "TMDBTests",
             dependencies: ["TMDB", "TMDBMocking"],
-            swiftSettings: [
-                .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-                .enableUpcomingFeature("InferIsolatedConformances"),
-                .enableUpcomingFeature("FullTypedThrows"),
-            ]
+            swiftSettings: swiftSettings
         ),
     ],
 )

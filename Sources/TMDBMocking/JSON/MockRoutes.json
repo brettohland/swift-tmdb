@@ -121,5 +121,10 @@
   { "pattern": "^/3/company/\\d+$", "file": "CompanyDetails" },
 
   { "pattern": "^/3/network/\\d+/images$", "file": "NetworkImages" },
-  { "pattern": "^/3/network/\\d+$", "file": "NetworkDetails" }
+  { "pattern": "^/3/network/\\d+$", "file": "NetworkDetails" },
+
+  { "pattern": "^/4/auth/request_token$", "file": "AuthRequestToken" },
+  { "pattern": "^/4/auth/access_token$", "file": "AuthAccessToken" },
+  { "pattern": "^/3/authentication/session/convert/4$", "file": "AuthV3Session" },
+  { "pattern": "^/3/authentication/session$", "file": "AuthDeleteResult" }
 ]

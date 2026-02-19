@@ -6,6 +6,10 @@ public enum TMDBRequestError: Error {
     case networkError(TMDBAPIError)
     /// A "catch-all" for other errors thrown by the system (including decoding issues)
     case systemError(any Error)
+    /// The user cancelled the authentication flow
+    case authenticationCancelled
+    /// An authentication flow is already in progress
+    case authenticationAlreadyInProgress
 }
 
 extension TMDBRequestError: Equatable {
@@ -15,6 +19,10 @@ extension TMDBRequestError: Equatable {
             lhsError == rhsError
         case (.systemError(let lhsError), .systemError(let rhsError)):
             "\(lhsError)" == "\(rhsError)"
+        case (.authenticationCancelled, .authenticationCancelled):
+            true
+        case (.authenticationAlreadyInProgress, .authenticationAlreadyInProgress):
+            true
         default:
             false
         }

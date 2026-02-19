@@ -27,7 +27,8 @@ The official TMDB API documentation at https://developer.themoviedb.org/referenc
 - **Define each enum case on its own line** - Never use comma-separated case lists (e.g., `case a, b, c`). Each case must be on a separate line.
 - **Use `URL` or `URL?` for image path properties** - Properties like `posterPath`, `backdropPath`, `profilePath`, `logoPath`, `filePath`, and `stillPath` are typed as `URL`/`URL?`, not `String`/`String?`.
 - **Use typed throws on all public API methods** - All public static methods on `TMDB` use `async throws(TMDBRequestError)` with a `do/catch` wrapper that converts errors via `throw .systemError(error)`.
-- **Forward all public method parameters to the endpoint enum** - Every parameter on a public `TMDB` static method (e.g., `page`, `query`) must be captured in the corresponding `V3Endpoints` enum case and used in `makeURL(baseURL:)`. Do not accept parameters in the public API signature that are silently ignored.
+- **Forward all public method parameters to the endpoint enum** - Every parameter on a public `TMDB` static method (e.g., `page`, `query`) must be captured in the corresponding `V3Endpoints` or `V4Endpoints` enum case and used in `makeURL(baseURL:)`. Do not accept parameters in the public API signature that are silently ignored.
+- **POST/DELETE endpoints use `requestBody:` parameter** - When an endpoint requires a JSON request body, pass a specific `Encodable` type as `RequestBody` (not `HTTP.EmptyRequestBody`) and supply it via `Endpoint(endpoint:httpMethod:requestBody:)`. The `Endpoint` struct automatically encodes the body and sets `Content-Type: application/json`. Internal request body types live in `Sources/TMDB/Models/Responses/Internal/Auth/`.
 - **Use `[URLQueryItem]` helpers for query parameters** - When building query items in `makeURL(baseURL:)`, use the helpers from `URLQueryItem+Helpers.swift` instead of constructing `URLQueryItem` directly. These leverage the `QueryValueRepresentable` protocol (which `String`, `Int`, `Bool`, `Double`, `Date`, `Locale`, etc. already conform to) to handle value conversion automatically. Prefer the `QueryItemKey` enum overloads for common/shared keys; use the `String` overloads for endpoint-specific keys not yet in the enum:
   - `queryItems.append(.page, value: page)` — appends a required parameter using `QueryItemKey`
   - `queryItems.appendIfPresent(.year, value: year)` — appends only if non-nil
@@ -83,7 +84,7 @@ swift package --disable-sandbox preview-documentation --target TMDB
 
 ## Architecture
 
-### Three-Target Structure
+### Five-Target Structure
 
 1. **TMDB** (Core Module)
    - Contains all API request logic, models, and response types
@@ -99,6 +100,16 @@ swift package --disable-sandbox preview-documentation --target TMDB
    - Provides `@Dependency`-based clients for use with PointFree's Dependencies
    - Re-exports the Dependencies module
    - Example: `MoviesClient` wraps `TMDB.movieDetails(id:)` for dependency injection
+
+4. **TMDBSwiftUI** (Browser Auth for SwiftUI)
+   - Provides `.tmdbAuthentication(isPresented:onComplete:)` view modifier
+   - Uses `@Environment(\.webAuthenticationSession)` for browser-based OAuth
+   - Re-exports `TMDB` via `@_exported import TMDB`
+
+5. **TMDBUIKit** (Browser Auth for UIKit)
+   - Provides `TMDB.authenticate(presentationAnchor:)` for UIKit apps
+   - Uses `ASWebAuthenticationSession` with explicit presentation anchor
+   - Re-exports `TMDB` via `@_exported import TMDB`
 
 ### Initialization
 
@@ -125,6 +136,11 @@ The codebase uses a service-oriented architecture with several internal services
 - `MockableResponse` protocol and `mock()` convenience methods live in TMDBMocking
 - Mock JSON responses stored in `Sources/TMDBMocking/JSON/`
 
+#### AuthService
+- **AuthSession**: Public model storing `accessToken`, `accountID`, `sessionID`
+- **AuthSessionStore**: Keychain-backed dependency (`liveValue` uses Security framework, `testValue` is in-memory, `previewValue` returns mock session)
+- **AuthenticationCoordinator**: Public actor orchestrating the full OAuth flow (token request → browser approval → token exchange → session conversion → keychain storage)
+
 #### LoggingService
 - **LoggingDependencyClient**: Abstraction for logging
 - **OSLoggingService**: Production implementation using OSLog
@@ -134,14 +150,14 @@ The codebase uses a service-oriented architecture with several internal services
 
 All TMDB API endpoints follow this structure:
 
-1. Define endpoint enum in `TMDB.V3Endpoints` namespace (e.g., `TMDB.V3Endpoints.Movies`)
-2. Implement `EndpointFactory.makeURL(baseURL:)` to construct the URL path
+1. Define endpoint enum in `TMDB.V3Endpoints` or `TMDB.V4Endpoints` namespace (e.g., `TMDB.V3Endpoints.Movies`, `TMDB.V4Endpoints.Auth`)
+2. Implement `EndpointFactory.makeURL(baseURL:)` to construct the URL path (v3 paths start with `"3"`, v4 paths start with `"4"`)
 3. Create public static methods on `TMDB` that:
    - Create an `Endpoint<RequestBody, ResponseBody>` instance
    - Call `endpoint.decodedResponse()` to execute the request
    - Return the decoded response
 
-Example structure:
+Example structure (GET):
 ```swift
 // Endpoint definition
 extension TMDB.V3Endpoints {
@@ -170,6 +186,24 @@ public extension TMDB {
 }
 ```
 
+Example structure (POST with request body):
+```swift
+public extension TMDB {
+    static func createAccessToken(requestToken: String) async throws(TMDBRequestError) -> Auth.AccessToken {
+        let endpoint = Endpoint<AccessTokenBody, Auth.AccessToken>(
+            endpoint: V4Endpoints.Auth.createAccessToken(requestToken: requestToken),
+            httpMethod: .post,
+            requestBody: AccessTokenBody(requestToken: requestToken),
+        )
+        do {
+            return try await endpoint.decodedResponse()
+        } catch {
+            throw .systemError(error)
+        }
+    }
+}
+```
+
 ### Dependencies Integration
 
 The framework uses PointFree's Dependencies for:
@@ -188,11 +222,17 @@ Sources/
 │   ├── TMDB.swift                     # Top-level namespace and initialization
 │   ├── Models/
 │   │   ├── Endpoints/                 # Endpoint definitions grouped by API section
-│   │   ├── Responses/                 # Response model types
+│   │   │   ├── Auth/                  # V3 + V4 auth endpoints
+│   │   │   └── ...                    # Movies, TV, Search, etc.
+│   │   ├── Responses/
+│   │   │   ├── Public/3/              # v3 response models
+│   │   │   ├── Public/4/Auth/         # v4 auth response models
+│   │   │   └── Internal/Auth/         # Request body types (not public)
 │   │   ├── Errors/                    # Error types
 │   │   └── Codable Property Wrappers/ # Custom property wrappers for encoding/decoding
 │   ├── Services/
 │   │   ├── RequestService/            # Core networking
+│   │   ├── AuthService/               # Auth session, keychain store, coordinator
 │   │   ├── MockingService/            # MockRouteResolver for runtime bundle discovery
 │   │   └── LoggingService/            # Logging abstractions
 │   ├── Format Styles/                 # Swift FormatStyle implementations
@@ -203,6 +243,8 @@ Sources/
 │   ├── MockUtilities.swift            # JSON file loading helpers
 │   ├── Extensions/                    # MockableResponse conformances per endpoint group
 │   └── JSON/                          # Mock JSON response files + MockRoutes.json manifest
+├── TMDBSwiftUI/                       # SwiftUI auth modifier (.tmdbAuthentication)
+├── TMDBUIKit/                         # UIKit auth extension (TMDB.authenticate)
 └── TMDBDependencies/
     └── Clients/                       # Dependency-based client wrappers
 ```
@@ -229,7 +271,7 @@ The codebase includes custom property wrappers for handling TMDB API quirks:
 
 To add a new TMDB API endpoint:
 
-1. Create endpoint case in appropriate `TMDB.V3Endpoints` enum (or create new enum)
+1. Create endpoint case in appropriate `TMDB.V3Endpoints` or `TMDB.V4Endpoints` enum (or create new enum)
 2. Implement `makeURL(baseURL:)` in `EndpointFactory` conformance
 3. Set `supportsLanguage`/`supportsRegion` overrides if the defaults (`true`/`false`) don't match the TMDB API docs for this endpoint
 4. Define response model types in `Sources/TMDB/Models/Responses/`

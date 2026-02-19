@@ -1,0 +1,7 @@
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.mock_access_token",
+  "account_id": "5eb9ab1ec3a368001f7c42da",
+  "status_code": 1,
+  "status_message": "Success.",
+  "success": true
+}
