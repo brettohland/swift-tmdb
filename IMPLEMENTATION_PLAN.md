@@ -967,13 +967,15 @@ v4 uses a modern OAuth-style flow distinct from v3's session system. The v4 acce
 ### Auth Flow
 
 ```
-1. App calls POST /4/auth/request_token  →  gets { request_token, status_message }
-2. App opens https://www.themoviedb.org/auth/access?request_token={token} in browser/webview
-3. User approves → browser redirects back to app via deep link
-4. App calls POST /4/auth/access_token   →  gets { access_token, account_id }
-5. App calls POST /3/authentication/session/convert/4  →  gets { session_id }  (v3 compat)
-6. Store access_token (keychain), account_id, and session_id for subsequent requests
+1. SDK calls POST /4/auth/request_token  →  gets { request_token }
+2. SDK builds approval URL and starts ASWebAuthenticationSession (presents Safari sheet)
+3. User approves → ASWebAuthenticationSession intercepts the tmdb-sdk://auth redirect
+4. SDK calls POST /4/auth/access_token   →  gets { access_token, account_id }
+5. SDK calls POST /3/authentication/session/convert/4  →  gets { session_id }  (v3 compat)
+6. SDK stores access_token, account_id, and session_id in keychain via AuthSessionStore
 ```
+
+The entire flow is owned by the SDK via a single `TMDB.authenticate()` call. The app does not need to register a URL scheme or handle any deep links — `ASWebAuthenticationSession` intercepts the redirect internally.
 
 ### Endpoints
 
@@ -1013,11 +1015,31 @@ struct AuthSession: Codable, Sendable {
 }
 
 struct AuthSessionStore {
-    var load: () -> AuthSession?
-    var save: (AuthSession) -> Void
-    var clear: () -> Void
+    var load: @Sendable () -> AuthSession?
+    var save: @Sendable (AuthSession) -> Void
+    var clear: @Sendable () -> Void
 }
 ```
+
+**Keychain implementation (`liveValue`):**
+- Uses the `Security` framework directly (no third-party keychain wrapper)
+- Stores the entire `AuthSession` as a single JSON-encoded `kSecClassGenericPassword` item
+- `kSecAttrService`: `"swift-tmdb"` — namespaces SDK items to avoid collisions with the host app's keychain entries
+- `kSecAttrAccount`: `"auth-session"` — the item identifier within the namespace
+- `kSecAttrAccessibleAfterFirstUnlock` — available after first device unlock, survives background refreshes and reboots, not extractable from a powered-off device
+- No `kSecAttrAccessGroup` — iOS sandboxing automatically scopes items to the host app
+- No biometric gating — this is an API token, not a financial credential
+- If the stored JSON fails to decode, treat as "not logged in" and clear the corrupted entry
+
+**Dependency contexts:**
+
+| Context | Behavior |
+|---------|----------|
+| `liveValue` | Reads/writes the real keychain via `Security` framework |
+| `testValue` | In-memory storage, isolated per test, no keychain access |
+| `previewValue` | Returns a pre-populated mock `AuthSession` so previews render as "logged in" |
+
+Apps can override storage entirely via Dependencies (e.g., to use their own keychain wrapper or CloudKit sync).
 
 #### Request Body Support
 All auth endpoints require POST/DELETE with JSON request bodies. Currently all endpoints are GET with no body. This requires:
@@ -1028,13 +1050,93 @@ All auth endpoints require POST/DELETE with JSON request bodies. Currently all e
 #### Authenticated Request Injection
 After login, the `access_token` must be injected as `Authorization: Bearer {token}` on all v4 requests and as `session_id` query parameter on v3 write requests. The `HTTPClient` or `Endpoint` layer needs to be aware of auth state.
 
-#### Deep Link Handling
-Step 2 of the auth flow requires the app to register a URL scheme or universal link for the redirect after user approval. This is app-level configuration (not SDK), but the SDK should expose the approval URL:
+#### Browser Authentication (new targets: TMDBSwiftUI + TMDBUIKit)
+
+The OAuth browser step requires presenting a Safari sheet to the user. Since the core `TMDB` target has no UI framework dependency, browser presentation is handled by two new optional targets — one for SwiftUI (primary) and one for UIKit.
+
+Both targets re-export `TMDB` via `@_exported import TMDB`, so the consuming app only needs a single import:
+
 ```swift
-public extension TMDB {
-    static func userApprovalURL(requestToken: String) -> URL
+// SwiftUI app — gets full access to TMDB + SwiftUI auth
+import TMDBSwiftUI
+
+// UIKit app — gets full access to TMDB + UIKit auth
+import TMDBUIKit
+```
+
+**TMDBSwiftUI (primary)** — Uses `@Environment(\.webAuthenticationSession)` (available iOS 16.4+):
+```swift
+// View modifier
+.tmdbAuthentication(isPresented: $showLogin) { result in
+    switch result {
+    case .success: // authenticated
+    case .failure(let error): // handle error
+    }
+}
+
+// The modifier internally calls:
+let callbackURL = try await webAuthenticationSession.authenticate(
+    using: approvalURL,
+    callback: .customScheme("tmdb-sdk"),
+    preferredBrowserSession: nil,
+    additionalHeaderFields: [:]
+)
+```
+
+No `UIWindow` or presentation anchor needed — SwiftUI handles presentation from the view hierarchy automatically.
+
+**TMDBUIKit (optional)** — Uses `ASWebAuthenticationSession` with an explicit presentation anchor:
+```swift
+try await TMDB.authenticate(presentationAnchor: windowScene.keyWindow!)
+```
+
+User cancellation of the Safari sheet maps to `TMDBRequestError.authenticationCancelled`.
+
+#### AuthenticationCoordinator (actor, in core TMDB target)
+
+The core `TMDB` target owns the auth logic (token requests, session conversion, keychain storage) but does **not** present any browser UI. The UI targets inject the browser session result into the coordinator.
+
+Concurrent calls to `authenticate()` are serialised — only one browser session should run at a time:
+
+```swift
+actor AuthenticationCoordinator {
+    private var inProgress = false
+
+    func authenticate(browserRedirectURL: URL) async throws -> AuthSession {
+        guard !inProgress else {
+            throw TMDBRequestError.authenticationAlreadyInProgress
+        }
+        inProgress = true
+        defer { inProgress = false }
+        // 1. Extract approved request token from redirect URL
+        // 2. POST /4/auth/access_token
+        // 3. POST /3/authentication/session/convert/4
+        // 4. Store in keychain via AuthSessionStore
+        // 5. Return AuthSession
+    }
+
+    func createRequestToken() async throws -> (requestToken: String, approvalURL: URL) {
+        // POST /4/auth/request_token
+        // Build https://www.themoviedb.org/auth/access?request_token={token}&redirect_to=tmdb-sdk://auth
+    }
 }
 ```
+
+The UI targets call `createRequestToken()` to get the approval URL, present the browser, then pass the redirect URL back to `authenticate(browserRedirectURL:)`. This keeps the core target free of any UI framework dependency.
+
+### New Targets
+
+The following library products are added to `Package.swift`:
+
+| Product | Targets | Dependencies | Import Pattern |
+|---------|---------|--------------|----------------|
+| `TMDBSwiftUI` | `TMDBSwiftUI` | `TMDB`, `SwiftUI`, `AuthenticationServices` | `@_exported import TMDB` |
+| `TMDBUIKit` | `TMDBUIKit` | `TMDB`, `UIKit`, `AuthenticationServices` | `@_exported import TMDB` |
+
+Existing products unchanged:
+- `TMDB` — bundles `TMDB` + `TMDBMocking` (no UI dependency)
+- `TMDBCore` — `TMDB` only
+- `TMDBDependencies` — `@_exported import Dependencies`
 
 ### Files to Create
 ```
@@ -1046,6 +1148,18 @@ Sources/TMDB/Models/Responses/Public/4/Auth/
 ├── AuthRequestToken.swift
 ├── AuthAccessToken.swift
 └── V3Session.swift
+
+Sources/TMDB/Services/AuthService/
+├── AuthenticationCoordinator.swift
+└── AuthSessionStore.swift
+
+Sources/TMDBSwiftUI/
+├── TMDBSwiftUI.swift                  // @_exported import TMDB
+└── TMDBAuthenticationModifier.swift   // .tmdbAuthentication(isPresented:onComplete:)
+
+Sources/TMDBUIKit/
+├── TMDBUIKit.swift                    // @_exported import TMDB
+└── TMDB+UIKitAuth.swift               // TMDB.authenticate(presentationAnchor:)
 
 Sources/TMDBDependencies/Clients/
 └── AuthClient.swift
@@ -1062,6 +1176,14 @@ Auth endpoints cannot use static mock JSON the same way as read-only endpoints, 
 - The user approval step is browser-based and cannot be automated
 
 **Approach**: Mock the network layer at the `HTTPClient` level for unit tests. Test the token exchange logic and session storage independently. Integration tests (against the live API) are deferred — document how to run them manually with a real API key and test account.
+
+### Documentation
+
+Update `Documentation.docc` with an authentication guide covering:
+- How to present authentication in SwiftUI (`.tmdbAuthentication` view modifier via `TMDBSwiftUI`)
+- How to present authentication in UIKit (`TMDB.authenticate(presentationAnchor:)` via `TMDBUIKit`)
+- Checking auth state and logging out
+- Keychain storage defaults and how to override via Dependencies
 
 ---
 
