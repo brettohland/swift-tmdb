@@ -1,0 +1,14 @@
+{
+  "id": 1,
+  "name": "Lucasfilm Ltd.",
+  "description": "Lucasfilm Ltd. LLC is an American film and television production company.",
+  "headquarters": "San Francisco, California",
+  "homepage": "https://www.lucasfilm.com",
+  "logo_path": "/o86DbpburjxrqAzEDhXZcyE8pDb.png",
+  "origin_country": "US",
+  "parent_company": {
+    "id": 2,
+    "name": "The Walt Disney Company",
+    "logo_path": "/wdrCwmRnLFJhEoH8GSfymY85KHT.png"
+  }
+}

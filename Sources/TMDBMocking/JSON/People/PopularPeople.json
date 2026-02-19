@@ -1,0 +1,63 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "id": 287,
+      "name": "Brad Pitt",
+      "gender": 2,
+      "known_for_department": "Acting",
+      "profile_path": "/kU3B75TyRiCgE270EyZnHjfivoq.jpg",
+      "popularity": 35.82,
+      "adult": false,
+      "known_for": [
+        {
+          "id": 550,
+          "media_type": "movie",
+          "title": "Fight Club",
+          "original_title": "Fight Club",
+          "overview": "A ticking-time-bomb insomniac and a slippery soap salesman.",
+          "poster_path": "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+          "backdrop_path": "/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg",
+          "release_date": "1999-10-15",
+          "popularity": 61.416,
+          "vote_average": 8.433,
+          "vote_count": 29095,
+          "genre_ids": [18, 53],
+          "original_language": "en",
+          "adult": false,
+          "video": false
+        }
+      ]
+    },
+    {
+      "id": 1245,
+      "name": "Scarlett Johansson",
+      "gender": 1,
+      "known_for_department": "Acting",
+      "profile_path": "/6NsMbJXRlDZuDzatN2akFdGuTvx.jpg",
+      "popularity": 32.45,
+      "adult": false,
+      "known_for": [
+        {
+          "id": 24428,
+          "media_type": "movie",
+          "title": "The Avengers",
+          "original_title": "The Avengers",
+          "overview": "Nick Fury of S.H.I.E.L.D. brings together a team of super humans.",
+          "poster_path": "/RYMX2wcKCBAr24UyPD7KE3C1TW.jpg",
+          "backdrop_path": "/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg",
+          "release_date": "2012-04-25",
+          "popularity": 71.212,
+          "vote_average": 7.711,
+          "vote_count": 29427,
+          "genre_ids": [878, 28, 12],
+          "original_language": "en",
+          "adult": false,
+          "video": false
+        }
+      ]
+    }
+  ],
+  "total_pages": 500,
+  "total_results": 10000
+}

@@ -1,8 +1,8 @@
 # TMDB API v3 Read-Only Endpoints - Implementation Plan
 
-**Status:** Phase 4 Complete ✅ | Phase 5 Next
+**Status:** Phase 5 Complete ✅ | All planned endpoints done
 **Last Updated:** 2026-02-18
-**Target:** 110 total endpoints (9 existing + 101 new)
+**Target:** 109 total endpoints (9 existing + 100 new; `tagged_images` skipped — deprecated)
 
 ---
 
@@ -29,8 +29,8 @@
 | **Phase 3** | 12 | ✅ Complete | v0.4.0 (ready) |
 | **Phase 3.5** | — | ✅ Complete | v0.4.1 (ready) |
 | **Phase 4** | 41 | ✅ Complete | v0.5.0 (ready) |
-| **Phase 5** | 13 | ⏳ Planned | v0.6.0 |
-| **Total** | **110** | **97/110 (88%)** | |
+| **Phase 5** | 12 | ✅ Complete | v0.6.0 |
+| **Total** | **109** | **109/109 (100%)** | |
 
 ---
 
@@ -628,42 +628,54 @@ After each sub-phase:
 
 ---
 
-## Phase 5: People & Supporting Features
+## Phase 5: People & Supporting Features (COMPLETE ✅)
 
-**Priority:** MEDIUM
-**Complexity:** MEDIUM
-**Estimated Effort:** 2-3 weeks
-**Target Release:** v0.6.0
+**Completed:** 2026-02-18
+**Endpoints Implemented:** 12 (`tagged_images` skipped — deprecated in TMDB API)
+**Tests Added:** 12 (123 total, all passing)
 
-### Endpoints to Implement (13 total)
+### Implemented Endpoints
 
-#### People (9 endpoints)
-- ⏳ `GET /3/person/{id}` - Person details
-- ⏳ `GET /3/person/{id}/movie_credits` - Movie credits
-- ⏳ `GET /3/person/{id}/tv_credits` - TV credits
-- ⏳ `GET /3/person/{id}/combined_credits` - All credits
-- ⏳ `GET /3/person/{id}/external_ids` - External IDs
-- ⏳ `GET /3/person/{id}/images` - Person images
-- ⏳ `GET /3/person/{id}/tagged_images` - Tagged in images
-- ⏳ `GET /3/person/{id}/translations` - Translations
-- ⏳ `GET /3/person/popular` - Popular people
+#### People (8 endpoints)
+- ✅ `GET /3/person/{id}` → `TMDB.personDetails(id:language:)`
+- ✅ `GET /3/person/{id}/movie_credits` → `TMDB.personMovieCredits(id:language:)`
+- ✅ `GET /3/person/{id}/tv_credits` → `TMDB.personTVCredits(id:language:)`
+- ✅ `GET /3/person/{id}/combined_credits` → `TMDB.personCombinedCredits(id:language:)`
+- ✅ `GET /3/person/{id}/external_ids` → `TMDB.personExternalIDs(id:)`
+- ✅ `GET /3/person/{id}/images` → `TMDB.personImages(id:)`
+- ✅ `GET /3/person/{id}/translations` → `TMDB.personTranslations(id:)`
+- ✅ `GET /3/person/popular` → `TMDB.popularPeople(page:language:)`
 
 #### Companies (2 endpoints)
-- ⏳ `GET /3/company/{id}` - Company details
-- ⏳ `GET /3/company/{id}/images` - Company logos
+- ✅ `GET /3/company/{id}` → `TMDB.companyDetails(id:)`
+- ✅ `GET /3/company/{id}/images` → `TMDB.companyImages(id:)`
 
 #### Networks (2 endpoints)
-- ⏳ `GET /3/network/{id}` - Network details
-- ⏳ `GET /3/network/{id}/images` - Network logos
+- ✅ `GET /3/network/{id}` → `TMDB.networkDetails(id:)`
+- ✅ `GET /3/network/{id}/images` → `TMDB.networkImages(id:)`
 
 ### Key Models
 ```swift
-TMDB.Person
-TMDB.PersonMovieCredits
-TMDB.PersonTVCredits
-TMDB.Company
-TMDB.Network
+TMDB.Person              // with Gender enum (unspecified/female/male/nonBinary)
+TMDB.PersonMovieCredits  // PersonMovieCastCredit + PersonMovieCrewCredit
+TMDB.PersonTVCredits     // PersonTVCastCredit + PersonTVCrewCredit
+TMDB.PersonCombinedCredits // flat struct PersonCombinedCredit with optional fields
+TMDB.PersonImages        // profiles: [ImageDetail] (reuses existing ImageDetail)
+TMDB.PopularPerson       // with knownFor: [MultiSearchResult] (reuses existing type)
+TMDB.Company             // with ParentCompany nested type
+TMDB.Network             // separate from TMDB.TVSeries.Network
+TMDB.LogoCollection      // shared by company/network image endpoints (with LogoDetail)
 ```
+
+### Design Decisions
+- `tagged_images` skipped: deprecated in TMDB API
+- `TMDB.Network` is separate from `TMDB.TVSeries.Network` (lightweight inline type)
+- `TMDB.Company` is separate from `TMDB.ProductionCompany` (keeps existing code unchanged)
+- `TMDB.Person.Gender` is a typed enum with graceful fallback to `.unspecified`
+- `PersonCombinedCredit` uses flat-struct-with-optionals pattern (like `MultiSearchResult`)
+- `personExternalIDs` reuses `TMDB.ExternalIDs` (tvdb/tvrage fields are just nil for persons)
+- `personTranslations` reuses `TranslationCollection`; added `biography: String?` to `TranslationData`
+- `popularPeople` returns `Discover.PaginatedResponse<PopularPerson>`; `PopularPerson` conforms to `Discoverable`
 
 ---
 
@@ -935,20 +947,308 @@ swift test --filter MovieEndpointTests/movieCredits
 
 ## Next Steps
 
-### Immediate (Phase 4 - TV Shows)
+### All planned read-only v3 endpoints complete ✅
 
-1. **Pre-phase shared type refactoring** — MediaCredits, MediaWatchProviderResult, ExternalIDs, ImageCollection, TranslationData
-2. **Sub-Phase 4a: TV Series Endpoints** (22 endpoints)
-3. **Sub-Phase 4b: TV Seasons** (9 endpoints)
-4. **Sub-Phase 4c: TV Episodes + Groups** (8 endpoints)
-5. **Release v0.5.0**
+109/109 read-only v3 endpoints implemented. The next phases add user authentication and account features using the **v4 API** (OAuth-based, modern list features) with targeted v3 write endpoints where v4 has no equivalent.
 
-### Then (Phase 5 - People & Supporting Features)
+---
 
-1. **People endpoints** (9 endpoints)
-2. **Company endpoints** (2 endpoints)
-3. **Network endpoints** (2 endpoints)
-4. **Release v0.6.0**
+## Phase 6: Auth & Session Infrastructure
+
+**Priority:** HIGH (prerequisite for Phases 7–9)
+**Complexity:** HIGH
+**Target Release:** v1.0.0
+**New Endpoints:** 5
+
+### Strategy
+
+v4 uses a modern OAuth-style flow distinct from v3's session system. The v4 access token can then be converted into a v3 session ID, giving access to the v3 write endpoints (favorites, watchlist, ratings) that have no v4 equivalent.
+
+### Auth Flow
+
+```
+1. App calls POST /4/auth/request_token  →  gets { request_token, status_message }
+2. App opens https://www.themoviedb.org/auth/access?request_token={token} in browser/webview
+3. User approves → browser redirects back to app via deep link
+4. App calls POST /4/auth/access_token   →  gets { access_token, account_id }
+5. App calls POST /3/authentication/session/convert/4  →  gets { session_id }  (v3 compat)
+6. Store access_token (keychain), account_id, and session_id for subsequent requests
+```
+
+### Endpoints
+
+#### v4 Auth (3 endpoints)
+```
+⏳ POST   /4/auth/request_token           → AuthRequestToken      TMDB.createRequestToken()
+⏳ POST   /4/auth/access_token            → AuthAccessToken       TMDB.createAccessToken(requestToken:)
+⏳ DELETE /4/auth/access_token            → (success/failure)     TMDB.logout()
+```
+
+#### v3 Session Conversion (1 endpoint)
+```
+⏳ POST   /3/authentication/session/convert/4  → V3Session        TMDB.convertToV3Session(accessToken:)
+```
+
+#### v3 Session Deletion (1 endpoint)
+```
+⏳ DELETE /3/authentication/session       → (success/failure)     TMDB.deleteV3Session(sessionID:)
+```
+
+### New Models
+```swift
+TMDB.Auth.RequestToken      // request_token: String, status_message: String, success: Bool
+TMDB.Auth.AccessToken       // access_token: String, account_id: String, status_message: String, success: Bool
+TMDB.Auth.V3Session         // session_id: String, success: Bool
+```
+
+### Infrastructure Required
+
+#### AuthSessionStore (new Dependency)
+A new keychain-backed dependency for persisting auth state across app launches:
+```swift
+struct AuthSession: Codable, Sendable {
+    let accessToken: String       // v4 Bearer token for account/list endpoints
+    let accountID: String         // v4 account_object_id for account endpoints
+    let sessionID: String?        // v3 session_id for write endpoints (favorites, watchlist, ratings)
+}
+
+struct AuthSessionStore {
+    var load: () -> AuthSession?
+    var save: (AuthSession) -> Void
+    var clear: () -> Void
+}
+```
+
+#### Request Body Support
+All auth endpoints require POST/DELETE with JSON request bodies. Currently all endpoints are GET with no body. This requires:
+- Populating `HTTP.RequestBody` (currently always `EmptyRequestBody`)
+- Setting `Content-Type: application/json` on write requests
+- Adding an `httpBody` path through `Endpoint.decodedResponse()`
+
+#### Authenticated Request Injection
+After login, the `access_token` must be injected as `Authorization: Bearer {token}` on all v4 requests and as `session_id` query parameter on v3 write requests. The `HTTPClient` or `Endpoint` layer needs to be aware of auth state.
+
+#### Deep Link Handling
+Step 2 of the auth flow requires the app to register a URL scheme or universal link for the redirect after user approval. This is app-level configuration (not SDK), but the SDK should expose the approval URL:
+```swift
+public extension TMDB {
+    static func userApprovalURL(requestToken: String) -> URL
+}
+```
+
+### Files to Create
+```
+Sources/TMDB/Models/Endpoints/Auth/
+├── V4AuthEndpoints.swift
+└── V3AuthEndpoints.swift
+
+Sources/TMDB/Models/Responses/Public/4/Auth/
+├── AuthRequestToken.swift
+├── AuthAccessToken.swift
+└── V3Session.swift
+
+Sources/TMDBDependencies/Clients/
+└── AuthClient.swift
+
+Sources/TMDBMocking/Extensions/Auth+MockableResponse.swift
+Sources/TMDBMocking/JSON/Auth/ (5 JSON files)
+Tests/TMDBTests/Endpoint Tests/Auth/AuthEndpointTests.swift
+```
+
+### Testing Strategy
+
+Auth endpoints cannot use static mock JSON the same way as read-only endpoints, because:
+- Tokens are single-use and user-specific
+- The user approval step is browser-based and cannot be automated
+
+**Approach**: Mock the network layer at the `HTTPClient` level for unit tests. Test the token exchange logic and session storage independently. Integration tests (against the live API) are deferred — document how to run them manually with a real API key and test account.
+
+---
+
+## Phase 7: Account Read & Write
+
+**Priority:** HIGH
+**Complexity:** MEDIUM
+**Target Release:** v1.0.0
+**Requires:** Phase 6 complete (valid `access_token`, `account_id`, `session_id`)
+**New Endpoints:** 15
+
+### Strategy
+
+- **Read**: Use v4 account endpoints exclusively. Skip the v3 GET equivalents — v4 returns the same data with improved sorting options and is the modern interface.
+- **Write**: Use v3 POST/DELETE endpoints for favorites, watchlist, and ratings — there are no v4 equivalents for these write operations.
+- All v4 account endpoints are GET and use `account_object_id` (the `account_id` from Phase 6).
+- All v3 write endpoints use `session_id` as a query parameter.
+
+### Endpoints
+
+#### v4 Account Read (9 GET endpoints)
+```
+⏳ GET /4/account/{id}/lists               → PaginatedResponse<UserList>          TMDB.accountLists()
+⏳ GET /4/account/{id}/movie/favorites     → PaginatedResponse<DiscoverMovie>     TMDB.favoriteMovies(sortBy:page:)
+⏳ GET /4/account/{id}/tv/favorites        → PaginatedResponse<DiscoverTV>        TMDB.favoriteTVSeries(sortBy:page:)
+⏳ GET /4/account/{id}/movie/rated         → PaginatedResponse<RatedMovie>        TMDB.ratedMovies(sortBy:page:)
+⏳ GET /4/account/{id}/tv/rated            → PaginatedResponse<RatedTV>           TMDB.ratedTVSeries(sortBy:page:)
+⏳ GET /4/account/{id}/movie/recommendations → PaginatedResponse<DiscoverMovie>   TMDB.movieRecommendations(page:)
+⏳ GET /4/account/{id}/tv/recommendations  → PaginatedResponse<DiscoverTV>        TMDB.tvRecommendations(page:)
+⏳ GET /4/account/{id}/movie/watchlist     → PaginatedResponse<DiscoverMovie>     TMDB.watchlistMovies(sortBy:page:)
+⏳ GET /4/account/{id}/tv/watchlist        → PaginatedResponse<DiscoverTV>        TMDB.watchlistTVSeries(sortBy:page:)
+```
+
+Query parameters for favorites/rated/watchlist endpoints:
+- `page: Int = 1`
+- `language: Locale? = nil`
+- `sortBy: AccountSortOrder = .createdAtAscending`
+
+#### v3 Write — Favorites & Watchlist (2 POST endpoints)
+```
+⏳ POST /3/account/{id}/favorite           → (success/error)    TMDB.setFavorite(mediaType:mediaID:favorite:)
+⏳ POST /3/account/{id}/watchlist          → (success/error)    TMDB.setWatchlist(mediaType:mediaID:watchlist:)
+```
+
+Both use a toggle pattern: pass `favorite: true` to add, `false` to remove.
+
+#### v3 Write — Ratings (6 POST/DELETE endpoints)
+```
+⏳ POST   /3/movie/{id}/rating             → (success/error)    TMDB.rateMovie(id:rating:)
+⏳ DELETE /3/movie/{id}/rating             → (success/error)    TMDB.deleteMovieRating(id:)
+⏳ POST   /3/tv/{id}/rating                → (success/error)    TMDB.rateTVSeries(id:rating:)
+⏳ DELETE /3/tv/{id}/rating                → (success/error)    TMDB.deleteTVSeriesRating(id:)
+⏳ POST   /3/tv/episode/{id}/rating        → (success/error)    TMDB.rateTVEpisode(id:rating:)
+⏳ DELETE /3/tv/episode/{id}/rating        → (success/error)    TMDB.deleteTVEpisodeRating(id:)
+```
+
+Ratings use a value `0.5...10.0` in increments of `0.5`.
+
+### New Models
+```swift
+TMDB.Account.SortOrder      // "created_at.asc" | "created_at.desc"
+TMDB.Account.UserList       // lightweight list summary (id, name, description, itemCount, public)
+TMDB.Account.RatedMovie     // DiscoverMovie + rating: Double
+TMDB.Account.RatedTV        // DiscoverTV + rating: Double
+TMDB.Account.MediaType      // .movie | .tv  (for favorite/watchlist toggle)
+TMDB.Account.WriteResult    // success: Bool, statusMessage: String, statusCode: Int
+```
+
+### v3 Endpoints Skipped Intentionally
+
+The following v3 account GET endpoints exist but are **not implemented** — v4 equivalents cover the same data with a better interface:
+- `GET /3/account/{id}/favorite/movies`
+- `GET /3/account/{id}/favorite/tv`
+- `GET /3/account/{id}/rated/movies`
+- `GET /3/account/{id}/rated/tv`
+- `GET /3/account/{id}/rated/tv/episodes`
+- `GET /3/account/{id}/watchlist/movies`
+- `GET /3/account/{id}/watchlist/tv`
+- `GET /3/account/{id}/lists`
+
+### Files to Create
+```
+Sources/TMDB/Models/Endpoints/Account/
+├── V4AccountEndpoints.swift
+└── V3AccountWriteEndpoints.swift
+
+Sources/TMDB/Models/Responses/Public/4/Account/
+├── UserList.swift
+├── RatedMovie.swift
+├── RatedTV.swift
+├── SortOrder.swift
+├── MediaType.swift
+└── WriteResult.swift
+
+Sources/TMDBDependencies/Clients/AccountClient.swift
+Sources/TMDBMocking/Extensions/Account+MockableResponse.swift
+Sources/TMDBMocking/JSON/Account/ (15 JSON files)
+Tests/TMDBTests/Endpoint Tests/Account/AccountEndpointTests.swift
+```
+
+---
+
+## Phase 8: Lists (v4 CRUD)
+
+**Priority:** MEDIUM
+**Complexity:** MEDIUM
+**Target Release:** v1.0.0
+**Requires:** Phase 6 complete (valid `access_token`)
+**New Endpoints:** 9
+
+### Strategy
+
+Use v4 lists exclusively. v3 lists are a dead end — TMDB no longer adds new features to them and the website itself uses v4 lists. Key v4 advantages: mixed movie+TV lists, unlimited item imports, private lists, per-item comments, better sorting.
+
+### Endpoints
+```
+⏳ GET    /4/list/{list_id}                → ListDetails          TMDB.listDetails(id:page:sortBy:)
+⏳ GET    /4/list/{list_id}/item_status    → ListItemStatus       TMDB.listItemStatus(listID:mediaID:mediaType:)
+⏳ POST   /4/list                          → ListCreateResult     TMDB.createList(name:description:language:public:)
+⏳ PUT    /4/list/{list_id}                → WriteResult          TMDB.updateList(id:name:description:public:sortBy:)
+⏳ DELETE /4/list/{list_id}                → WriteResult          TMDB.deleteList(id:)
+⏳ POST   /4/list/{list_id}/items          → ListWriteResult      TMDB.addListItems(listID:items:)
+⏳ PUT    /4/list/{list_id}/items          → ListWriteResult      TMDB.updateListItems(listID:items:)
+⏳ DELETE /4/list/{list_id}/items          → ListWriteResult      TMDB.removeListItems(listID:items:)
+⏳ GET    /4/list/{list_id}/clear          → WriteResult          TMDB.clearList(id:confirm:)
+```
+
+Note: `GET /4/list/{list_id}/clear` uses GET (not DELETE) — this is a TMDB API quirk. Requires `confirm=true` as a query parameter.
+
+### New Models
+```swift
+TMDB.List.Details           // Full list with paginated results, sort options, metadata
+TMDB.List.Item              // id: Int, mediaType: MediaType (shared with Phase 7)
+TMDB.List.ItemStatus        // itemPresent: Bool, id: Int, mediaType: MediaType
+TMDB.List.CreateResult      // id: Int (the new list's ID), success: Bool, statusMessage: String
+TMDB.List.WriteResult       // results: [ItemWriteResult] (per-item success/failure)
+TMDB.List.ItemWriteResult   // mediaID: Int, mediaType: MediaType, success: Bool
+TMDB.List.SortBy            // popularity.asc/desc, vote_average.asc/desc, release_date.asc/desc, title.asc/desc
+```
+
+### Files to Create
+```
+Sources/TMDB/Models/Endpoints/Lists/V4ListEndpoints.swift
+
+Sources/TMDB/Models/Responses/Public/4/List/
+├── ListDetails.swift
+├── ListItem.swift
+├── ListItemStatus.swift
+├── ListCreateResult.swift
+└── ListWriteResult.swift
+
+Sources/TMDBDependencies/Clients/ListsClient.swift
+Sources/TMDBMocking/Extensions/Lists+MockableResponse.swift
+Sources/TMDBMocking/JSON/Lists/ (9 JSON files)
+Tests/TMDBTests/Endpoint Tests/Lists/ListEndpointTests.swift
+```
+
+### v3 Lists Skipped Intentionally
+
+The following v3 list endpoints exist but are **not implemented** — v4 is the modern replacement with a richer feature set:
+- `GET /3/list/{list_id}`
+- `GET /3/list/{list_id}/item_status`
+- `POST /3/list`
+- `POST /3/list/{list_id}/add_item`
+- `POST /3/list/{list_id}/remove_item`
+- `POST /3/list/{list_id}/clear`
+- `DELETE /3/list/{list_id}`
+
+---
+
+## Phase 9: Guest Sessions (Optional)
+
+**Priority:** LOW
+**Complexity:** LOW
+**Target Release:** v1.1.0
+**New Endpoints:** 4
+
+Guest sessions allow unauthenticated users to submit ratings without a full account. Useful for apps that want to offer ratings without requiring login.
+
+```
+⏳ POST /3/authentication/guest_session/new     → GuestSession          TMDB.createGuestSession()
+⏳ GET  /3/guest_session/{id}/rated/movies      → PaginatedResponse<RatedMovie>  TMDB.guestRatedMovies(sessionID:)
+⏳ GET  /3/guest_session/{id}/rated/tv          → PaginatedResponse<RatedTV>     TMDB.guestRatedTV(sessionID:)
+⏳ GET  /3/guest_session/{id}/rated/tv/episodes → PaginatedResponse<RatedEpisode> TMDB.guestRatedEpisodes(sessionID:)
+```
+
+Guest sessions expire after 60 minutes of inactivity or 24 hours. The same v3 rating write endpoints from Phase 7 are reused — they accept either a `session_id` or `guest_session_id` query parameter.
 
 ---
 
@@ -961,31 +1261,13 @@ swift test --filter MovieEndpointTests/movieCredits
 | v0.3.0 | Phase 2 - Movies (20) | ✅ Ready |
 | v0.4.0 | Phase 3 - Search (12) | ✅ Ready |
 | v0.4.1 | Phase 3.5 - Language/Region & Query Params | ✅ Ready |
-| v0.5.0 | Phase 4 - TV (41) | 📋 Next |
-| v0.6.0 | Phase 5 - People (13) | ⏳ Planned |
-| v1.0.0 | Auth + Account (future) | 💡 Deferred |
+| v0.5.0 | Phase 4 - TV (41) | ✅ Ready |
+| v0.6.0 | Phase 5 - People (12) | ✅ Ready |
+| v1.0.0 | Phase 6 - Auth (5) + Phase 7 - Account (15) + Phase 8 - Lists (9) | 💡 Planned |
+| v1.1.0 | Phase 9 - Guest Sessions (4) | 💡 Optional |
 
 ---
 
-## Deferred Features (v1.0+)
-
-Not included in current plan:
-
-- Authentication endpoints (7)
-- Account endpoints (11)
-- Guest sessions (3)
-- Lists CRUD (7)
-- Rating POST/DELETE operations
-- Total: ~30 endpoints requiring auth
-
-Requires:
-- Session management infrastructure
-- Secure token storage
-- Request body handling for POST/DELETE
-- Different testing strategy
-
----
-
-**Document Version:** 1.4
+**Document Version:** 1.5
 **Last Updated:** 2026-02-18
-**Next Review:** Start of Phase 4
+**Next Review:** Start of Phase 6

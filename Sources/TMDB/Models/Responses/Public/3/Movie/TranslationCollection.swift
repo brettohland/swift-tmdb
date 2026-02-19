@@ -44,6 +44,7 @@ public extension TMDB {
     }
 
     struct TranslationData: Codable, Sendable {
+        public let biography: String?
         public let homepage: String?
         public let overview: String?
         public let runtime: Int?
@@ -52,6 +53,7 @@ public extension TMDB {
         public let name: String?
 
         public init(
+            biography: String?,
             homepage: String?,
             overview: String?,
             runtime: Int?,
@@ -59,6 +61,7 @@ public extension TMDB {
             title: String?,
             name: String?,
         ) {
+            self.biography = biography
             self.homepage = homepage
             self.overview = overview
             self.runtime = runtime

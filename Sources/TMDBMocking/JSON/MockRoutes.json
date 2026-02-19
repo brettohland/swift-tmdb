@@ -106,5 +106,20 @@
   { "pattern": "^/3/tv/airing_today$", "file": "TVSeriesAiringToday" },
   { "pattern": "^/3/tv/on_the_air$", "file": "TVSeriesOnTheAir" },
   { "pattern": "^/3/tv/popular$", "file": "PopularTVSeries" },
-  { "pattern": "^/3/tv/top_rated$", "file": "TopRatedTVSeries" }
+  { "pattern": "^/3/tv/top_rated$", "file": "TopRatedTVSeries" },
+
+  { "pattern": "^/3/person/\\d+/combined_credits$", "file": "PersonCombinedCredits" },
+  { "pattern": "^/3/person/\\d+/external_ids$", "file": "PersonExternalIDs" },
+  { "pattern": "^/3/person/\\d+/images$", "file": "PersonImages" },
+  { "pattern": "^/3/person/\\d+/movie_credits$", "file": "PersonMovieCredits" },
+  { "pattern": "^/3/person/\\d+/translations$", "file": "PersonTranslations" },
+  { "pattern": "^/3/person/\\d+/tv_credits$", "file": "PersonTVCredits" },
+  { "pattern": "^/3/person/\\d+$", "file": "PersonDetails" },
+  { "pattern": "^/3/person/popular$", "file": "PopularPeople" },
+
+  { "pattern": "^/3/company/\\d+/images$", "file": "CompanyImages" },
+  { "pattern": "^/3/company/\\d+$", "file": "CompanyDetails" },
+
+  { "pattern": "^/3/network/\\d+/images$", "file": "NetworkImages" },
+  { "pattern": "^/3/network/\\d+$", "file": "NetworkDetails" }
 ]
