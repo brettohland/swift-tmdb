@@ -1,3 +1,11 @@
+```
+ ▗▄▄▖▄   ▄ ▄ ▗▞▀▀▘■      ▗▄▄▄▖▗▖  ▗▖▗▄▄▄  ▗▄▄▖ 
+▐▌   █ ▄ █ ▄ ▐▌▗▄▟▙▄▖      █  ▐▛▚▞▜▌▐▌  █ ▐▌ ▐▌
+ ▝▀▚▖█▄█▄█ █ ▐▛▀▘▐▌        █  ▐▌  ▐▌▐▌  █ ▐▛▀▚▖
+▗▄▄▞▘      █ ▐▌  ▐▌        █  ▐▌  ▐▌▐▙▄▄▀ ▐▙▄▞▘
+                 ▐▌                            
+
+```
 # `swift-tmdb`: A Modern TMDB Swift Package
 
 A TMDB SDK that targets iOS/iPadOS 26 and uses Swift 6.2 and provides automatic mocked responses during unit testing

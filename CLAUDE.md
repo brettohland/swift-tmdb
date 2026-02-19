@@ -10,6 +10,8 @@ When asked to do X, do exactly X. Do not expand scope beyond what was requested.
 
 When asked to create a plan, always write it to a file on disk (e.g., `PLAN.md` or `.claude/plans/<name>.md`) unless explicitly told otherwise.
 
+After completing each implementation phase, update both `CLAUDE.md` (with any new patterns, conventions, or findings from the phase) and `IMPLEMENTATION_PLAN.md` (to reflect the completed work, mark endpoints as done, and record lessons learned).
+
 ## TMDB API Reference
 
 The official TMDB API documentation at https://developer.themoviedb.org/reference is the **sole source of truth** for all questions about the TMDB API — including available endpoints, query parameters, response schemas, and expected behavior. Do not rely on third-party API wrappers, community wikis, or other unofficial sources when determining what the API supports.
