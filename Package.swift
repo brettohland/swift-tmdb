@@ -88,5 +88,13 @@ let package = Package(
             ],
             swiftSettings: swiftSettings
         ),
+        .testTarget(
+            name: "TMDBIntegrationTests",
+            dependencies: [
+                "TMDB",
+                .product(name: "Dependencies", package: "swift-dependencies"),
+            ],
+            swiftSettings: swiftSettings
+        ),
     ],
 )

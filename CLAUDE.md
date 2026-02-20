@@ -249,6 +249,19 @@ Sources/
 ├── TMDBUIKit/                         # UIKit auth extension (TMDB.authenticate)
 └── TMDBDependencies/
     └── Clients/                       # Dependency-based client wrappers
+Tests/
+├── TMDBTests/                         # Unit tests (mock data, no network)
+│   ├── Endpoint Tests/                # Tests organized by API section
+│   ├── DiscoverFilterTests.swift
+│   └── EndpointFactoryTests.swift
+├── TMDBIntegrationTests/              # Integration tests (live TMDB API)
+│   ├── Helpers/
+│   │   ├── TMDBCredential.swift       # Reads TMDB_API_KEY from environment
+│   │   └── IntegrationTestBase.swift  # withLiveTMDB() dependency override
+│   └── Endpoint Tests/                # Tests organized by API section
+.github/
+└── workflows/
+    └── integration.yml                # Weekly + manual integration test CI
 ```
 
 ## Swift 6 Features
@@ -292,16 +305,36 @@ When reviewing code, do not flag optional URL properties (e.g., `URL? backdropPa
 
 ## Testing
 
-This is a Swift Package Manager project. Tests use mock JSON fixtures and the PointFree Dependencies framework — they do NOT make live API requests. When debugging test failures, check mock data and dependency overrides before assuming network issues.
+This is a Swift Package Manager project. Tests use Swift Testing framework (not XCTest). The `@testable import TMDB` gives access to internal types.
 
 After completing implementation tasks, always run `swift build` and `swift test` to verify before committing. If tests fail, debug and fix before presenting results as complete.
 
-Tests use Swift Testing framework (not XCTest). The `@testable import TMDB` gives access to internal types. Mock data is discovered automatically at runtime — no `TMDBMockData.register()` call or `import TMDBMocking` is needed (unless the test uses `.mock()` convenience methods from TMDBMocking).
+### Unit Tests (`TMDBTests`)
+
+Unit tests use mock JSON fixtures and the PointFree Dependencies framework — they do NOT make live API requests. When debugging test failures, check mock data and dependency overrides before assuming network issues.
+
+Mock data is discovered automatically at runtime — no `TMDBMockData.register()` call or `import TMDBMocking` is needed (unless the test uses `.mock()` convenience methods from TMDBMocking).
 
 Test files are organized by feature:
 - `DiscoverFilterTests.swift`: Tests for Discover filter types
 - `EndpointFactoryTests.swift`: Tests for URL generation
 - `Endpoint Tests/`: Directory with tests organized by API section
+
+### Integration Tests (`TMDBIntegrationTests`)
+
+Integration tests hit the **live TMDB API** to verify response models decode correctly against real data. They catch schema drift and contract changes that mock-based unit tests cannot detect.
+
+- **Requires** `TMDB_API_KEY` environment variable — tests skip gracefully when not set
+- **Run locally**: `TMDB_API_KEY=<key> swift test --filter TMDBIntegrationTests`
+- **Run without key** (verify skip): `swift test --filter TMDBIntegrationTests`
+- **CI**: GitHub Actions workflow (`.github/workflows/integration.yml`) — manual dispatch + weekly Sunday schedule
+- **Pattern**: Each test suite uses `@Suite(.serialized, .enabled(if: TMDBCredential.isAvailable))` and wraps calls in `withLiveTMDB { ... }` to override dependencies with live URLSession + real API key
+- **Scope**: All read-only GET endpoints. Auth, account, list, and guest session endpoints are excluded (require authentication or have side effects)
+- **Excluded endpoints**: `latestMovie()`/`latestTVSeries()` (unpredictable content with null non-optional fields), `credits(forID:)` (parameter type mismatch — takes `Int` but TMDB expects string credit IDs)
+
+#### Known Integration Test Failures
+
+The `@ISO8601YMD` property wrapper cannot parse empty string `""` date values returned by the TMDB API for some entries. This causes decode failures in `searchMovies()`, `searchTV()`, and `similarTVSeries()`. These are real schema bugs that should be fixed by making `@ISO8601YMD` handle empty strings gracefully.
 
 ## TMDB API Quirks
 

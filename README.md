@@ -70,6 +70,32 @@ easy display of data coming from the TMDB API.
 
 ---
 
+## Testing
+
+### Unit Tests
+
+All 148 endpoints have unit tests that verify decoding against mock JSON fixtures. No network access required.
+
+```bash
+swift test --filter TMDBTests
+```
+
+### Integration Tests
+
+A separate `TMDBIntegrationTests` target hits the live TMDB API to verify response models decode correctly. Tests skip gracefully when no API key is set.
+
+```bash
+# Run with API key
+TMDB_API_KEY=<your-key> swift test --filter TMDBIntegrationTests
+
+# Without key (tests skip, not fail)
+swift test --filter TMDBIntegrationTests
+```
+
+Integration tests run weekly via GitHub Actions and can be triggered manually.
+
+---
+
 ## Roadmap
 
 | Feature | Endpoints | Status |
@@ -82,16 +108,9 @@ easy display of data coming from the TMDB API.
 | People, Companies, Networks | 12 | Done |
 | Auth & Session Infrastructure (v3 + v4) | 5 | Done |
 | Account Read & Write (favorites, watchlist, ratings) | 15 | Done |
-| **Lists v4 CRUD** | **9** | **Planned** |
-| Guest Sessions | 4 | Planned |
-
-### Lists v4 CRUD
-
-Full CRUD for the modern v4 list system -- mixed movie + TV lists, unlimited imports, private lists, per-item comments, and flexible sorting. Includes create, update, delete, add/remove/update items, item status checks, and clear.
-
-### Guest Sessions
-
-Lightweight unauthenticated rating support. Guest sessions allow users to submit movie, TV, and episode ratings without creating a full TMDB account. Sessions expire after 60 minutes of inactivity or 24 hours.
+| Lists v4 CRUD | 9 | Done |
+| Guest Sessions | 10 | Done |
+| Integration Test Suite | 102 tests | Done |
 
 ---
 
