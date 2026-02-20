@@ -3,19 +3,19 @@ import Foundation
 public extension TMDB {
     struct Movie: Sendable {
         public let isAdult: Bool
-        public let backdropPath: String
+        public let backdropPath: URL?
         public let belongsToCollection: TitleCollection?
         public let budget: Int
         public let genres: [Genre]
         @EmptyStringNullable
         public var homepage: URL?
         public let id: Int
-        public let imdbID: String
+        public let imdbID: String?
         public let originalLanguage: Locale.Region
         public let originalTitle: String
         public let overview: String
         public let popularity: Double
-        public let posterPath: String
+        public let posterPath: URL?
         public let productionCompanies: [ProductionCompany]
         @RegionArray
         public var productionCountries: [Locale.Region]
@@ -27,11 +27,65 @@ public extension TMDB {
         @LanguageArray
         public var spokenLanguages: [Locale.Language]
         public let status: String
-        public let tagline: String
+        public let tagline: String?
         public let title: String
-        public let video: Bool
+        public let isVideo: Bool
         public let voteAverage: Double
         public let voteCount: Int
+
+        public init(
+            isAdult: Bool,
+            backdropPath: URL?,
+            belongsToCollection: TitleCollection?,
+            budget: Int,
+            genres: [Genre],
+            homepage: URL?,
+            id: Int,
+            imdbID: String?,
+            originalLanguage: Locale.Region,
+            originalTitle: String,
+            overview: String,
+            popularity: Double,
+            posterPath: URL?,
+            productionCompanies: [ProductionCompany],
+            productionCountries: [Locale.Region],
+            releaseDate: Date?,
+            revenue: Int,
+            runtime: Measurement<UnitDuration>,
+            spokenLanguages: [Locale.Language],
+            status: String,
+            tagline: String?,
+            title: String,
+            isVideo: Bool,
+            voteAverage: Double,
+            voteCount: Int,
+        ) {
+            self.isAdult = isAdult
+            self.backdropPath = backdropPath
+            self.belongsToCollection = belongsToCollection
+            self.budget = budget
+            self.genres = genres
+            _homepage = EmptyStringNullable(wrappedValue: homepage)
+            self.id = id
+            self.imdbID = imdbID
+            self.originalLanguage = originalLanguage
+            self.originalTitle = originalTitle
+            self.overview = overview
+            self.popularity = popularity
+            self.posterPath = posterPath
+            self.productionCompanies = productionCompanies
+            _productionCountries = RegionArray(wrappedValue: productionCountries)
+            _releaseDate = ISO8601YMD(wrappedValue: releaseDate)
+            self.revenue = revenue
+            _runtime = Minutes(wrappedValue: runtime)
+            _spokenLanguages = LanguageArray(wrappedValue: spokenLanguages)
+            self.status = status
+            self.tagline = tagline
+            self.title = title
+            self.isVideo = isVideo
+            self.voteAverage = voteAverage
+            self.voteCount = voteCount
+        }
     }
 }
 
@@ -59,7 +113,7 @@ extension TMDB.Movie: Codable {
         case status
         case tagline
         case title
-        case video
+        case isVideo = "video"
         case voteAverage
         case voteCount
     }

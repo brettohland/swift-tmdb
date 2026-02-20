@@ -2,16 +2,19 @@ import Dependencies
 import Foundation
 import Testing
 @testable import TMDB
+import TMDBMocking
 
 struct DiscoverEndpointTests {
     @Test func discoverMovies() async throws {
-        _ = try await TMDB.discoverMovie()
+        let results = try await TMDB.discoverMovie()
+        #expect(!results.results.isEmpty)
 
         _ = try await TMDB.discoverMovie(filters: .voteCountGreaterThan(1), .certification("test"))
     }
 
     @Test func discoverTV() async throws {
-        _ = try await TMDB.discoverTV()
+        let results = try await TMDB.discoverTV()
+        #expect(!results.results.isEmpty)
     }
 
 }

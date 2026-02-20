@@ -1,0 +1,30 @@
+name: Integration Tests
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 0' # Sundays at 06:00 UTC
+
+concurrency:
+  group: integration-tests
+  cancel-in-progress: true
+
+jobs:
+  integration-tests:
+    name: TMDB API Integration Tests
+    runs-on: macos-15
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Run Integration Tests
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        run: swift test --filter TMDBIntegrationTests

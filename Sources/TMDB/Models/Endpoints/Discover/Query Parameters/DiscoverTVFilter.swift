@@ -33,9 +33,9 @@ public extension TMDB.Discover {
         case withOriginalLanguage(Locale.Language)
         case withWatchMonetizationTypes([LogicalOperator<MonetizationType>])
         case withWatchProviders([LogicalOperator<String>])
+        case withoutCompanies([String])
         case withoutGenres([LogicalOperator<String>])
         case withoutKeywords([String])
-        case withoutCompanies([String])
 
         // TV Filters
         case airDateGreaterThan(Date)
@@ -43,12 +43,15 @@ public extension TMDB.Discover {
         case firstAirDateGreaterThan(Date)
         case firstAirDateLessThan(Date)
         case firstAirDateYear(Int)
+        case includeAdult(Bool)
+        case includeNullFirstAirDates(Bool)
+        case screenedTheatrically(Bool)
         case timezone(TimeZone)
+        case voteAverageLessThan(Double)
+        case voteCountLessThan(Int)
         case withNetworks([String])
         case withRuntimeGreaterThan(Int)
         case withRuntimeLessThan(Int)
-        case includeNullFirstAirDates(Bool)
-        case screenedTheatrically(Bool)
         case withStatus([LogicalOperator<TVReleaseStatus>])
         case withType([LogicalOperator<MediaReleaseType>])
     }
@@ -64,7 +67,7 @@ extension TMDB.Discover.TVFilter: QueryItemEncodable {
         case .language:
             "language"
         case .sortBy:
-            "sort_option"
+            "sort_by"
         case .page:
             "page"
         case .voteCountGreaterThan:
@@ -119,6 +122,12 @@ extension TMDB.Discover.TVFilter: QueryItemEncodable {
             "with_status"
         case .withType:
             "with_type"
+        case .includeAdult:
+            "include_adult"
+        case .voteAverageLessThan:
+            "vote_average.lte"
+        case .voteCountLessThan:
+            "vote_count.lte"
         }
     }
 
@@ -181,6 +190,12 @@ extension TMDB.Discover.TVFilter: QueryItemEncodable {
         case .withStatus(let value):
             value.queryValue
         case .withType(let value):
+            value.queryValue
+        case .includeAdult(let value):
+            value.queryValue
+        case .voteAverageLessThan(let value):
+            value.queryValue
+        case .voteCountLessThan(let value):
             value.queryValue
         }
     }

@@ -1,0 +1,25 @@
+{
+  "id": 2150,
+  "name": "Shrek Collection",
+  "overview": "The Shrek franchise from DreamWorks Animation, based on William Steig's picture book.",
+  "poster_path": "/xRPaJMnQhHPceTGswlhUPsNPGxa.jpg",
+  "backdrop_path": "/gmqgxJsPMrQBBUWGSnOEIDvDlBq.jpg",
+  "parts": [
+    {
+      "adult": false,
+      "backdrop_path": "/uFsVz7VwhSOPpCNOOQAm7K0dLB4.jpg",
+      "genre_ids": [16, 35, 14, 12, 10751],
+      "id": 808,
+      "original_language": "en",
+      "original_title": "Shrek",
+      "overview": "It ain't easy bein' green -- especially if you're a likable ogre named Shrek.",
+      "popularity": 117.811,
+      "poster_path": "/iB64vpL3dIObOtMZgX3RqdVdQDc.jpg",
+      "release_date": "2001-05-18",
+      "title": "Shrek",
+      "video": false,
+      "vote_average": 7.713,
+      "vote_count": 16174
+    }
+  ]
+}

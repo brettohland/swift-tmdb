@@ -1,37 +1,104 @@
 import Foundation
 
-/// A format style purpose-built to display the runtime of a film or television show.
+/// A format style for displaying movie or television show runtimes in a human-readable form.
 ///
-/// Use the `.runtime` computed property, or `.runtime(style:displayUnit:)` static method on FormatStyle for easier
-/// access.
+/// `Runtime` converts a `Measurement<UnitDuration>` into a localized string using
+/// `Date.ComponentsFormatStyle`. It is most commonly used with the `@Minutes` property wrapper,
+/// which decodes integer minutes from the TMDB API into `Measurement<UnitDuration>` values.
+///
+/// ### Quick Start
+///
+/// Use the `.runtime` shorthand on any `Measurement<UnitDuration>` value:
+///
+/// ```swift
+/// let movie = try await TMDB.movieDetails(id: 550)
+/// movie.runtime.formatted(.runtime)
+/// // "139 min"
+/// ```
+///
+/// ### Display Units
+///
+/// Choose between minutes-only and hour/minute display using ``DisplayUnit``:
+///
+/// ```swift
+/// movie.runtime.formatted(.runtime(style: .abbreviated, displayUnit: .minutesOnly))
+/// // "139 min"
+///
+/// movie.runtime.formatted(.runtime(style: .abbreviated, displayUnit: .hourMinute))
+/// // "2 hr, 19 min"
+/// ```
+///
+/// ### Styles
+///
+/// The `style` parameter accepts any `Date.ComponentsFormatStyle.Style` value:
+///
+/// ```swift
+/// // Abbreviated (default)
+/// movie.runtime.formatted(.runtime(style: .abbreviated, displayUnit: .hourMinute))
+/// // "2 hr, 19 min"
+///
+/// // Wide
+/// movie.runtime.formatted(.runtime(style: .wide, displayUnit: .hourMinute))
+/// // "2 hours, 19 minutes"
+///
+/// // Narrow
+/// movie.runtime.formatted(.runtime(style: .narrow, displayUnit: .hourMinute))
+/// // "2h 19m"
+///
+/// // Condensed Abbreviated
+/// movie.runtime.formatted(.runtime(style: .condensedAbbreviated, displayUnit: .hourMinute))
+/// // "2hr 19min"
+///
+/// // Spell Out
+/// movie.runtime.formatted(.runtime(style: .spellOut, displayUnit: .hourMinute))
+/// // "two hours, nineteen minutes"
+/// ```
+///
+/// ### Locale
+///
+/// Pass a specific `Locale` to control localization:
+///
+/// ```swift
+/// movie.runtime.formatted(.runtime(style: .wide, displayUnit: .hourMinute, locale: Locale(identifier: "fr_FR")))
+/// // "2 heures et 19 minutes"
+/// ```
+///
 public struct Runtime: FormatStyle {
     public typealias FormatInput = Measurement<UnitDuration>
     public typealias FormatOutput = String
 
-    /// Controls which units to include when converting the runtime for display to the user
+    /// Controls which duration units are included in the formatted output.
     public enum DisplayUnit: Codable {
-        /// Attempts to display the runtime using a combination of hours and minutes.
+        /// Displays the runtime as hours and minutes.
         ///
-        /// > Important: The hours unit will be omitted for runtimes less than an hour.
+        /// For runtimes under one hour, the hours unit is omitted automatically.
+        ///
+        /// ```swift
+        /// // 139 minutes → "2 hr, 19 min"
+        /// // 45 minutes  → "45 min"
+        /// ```
         case hourMinute
-        /// Displays the runtime in minutes.
+        /// Displays the runtime in minutes only, regardless of duration.
         ///
-        /// > Important: Runtimes over an hour will still only be displayed in minutes
+        /// ```swift
+        /// // 139 minutes → "139 min"
+        /// // 45 minutes  → "45 min"
+        /// ```
         case minutesOnly
     }
 
-    /// Controls how the duration unit is displayed to the user
+    /// The formatting style applied to each duration component (e.g., `.abbreviated`, `.wide`, `.narrow`).
     let style: Date.ComponentsFormatStyle.Style
-    /// Controls which units are included in the display
+    /// The units to include in the formatted output.
     let displayUnit: DisplayUnit
-    /// The `Locale` to use when formatting for display
+    /// The locale used for localization. Defaults to `.autoupdatingCurrent`.
     let locale: Locale
 
-    //// Initialize a new Runtime format style used for displaying movie or television show runtimes to the user.
+    /// Creates a new runtime format style.
     /// - Parameters:
-    ///   - style: Controls the styling of the unit and its proximity to the numerical value
-    ///   - displayUnit: Controls which units to display to the user
-    ///   - locale: The Locale used during the conversion (defaults to `.autoupdatingCurrent`
+    ///   - style: The component formatting style (e.g., `.abbreviated` for "hr, min", `.wide` for "hours, minutes").
+    ///   - displayUnit: Whether to show hours and minutes or minutes only.
+    ///   - locale: The locale for localization. Defaults to `.autoupdatingCurrent`.
     public init(
         style: Date.ComponentsFormatStyle.Style,
         displayUnit: DisplayUnit,
@@ -57,21 +124,30 @@ public struct Runtime: FormatStyle {
 }
 
 public extension FormatStyle where Self == Measurement<UnitDuration>.FormatStyle {
-    /// Display a movie or television show's runtime in minutes.
+    /// A convenience format style that displays runtimes in abbreviated minutes.
     ///
-    /// This format style will use your device's current locale for localization.
+    /// Equivalent to `.runtime(style: .abbreviated, displayUnit: .minutesOnly)`.
     ///
-    /// > Note: For more options use the `.runtime(style:displayUnit:)` method on
+    /// ```swift
+    /// movie.runtime.formatted(.runtime)
+    /// // "139 min"
+    /// ```
     static var runtime: Runtime {
         runtime(style: .abbreviated, displayUnit: .minutesOnly)
     }
 
-    /// Display a movie or television show's runtime using additional customization values
+    /// Creates a runtime format style with the specified options.
+    ///
+    /// ```swift
+    /// movie.runtime.formatted(.runtime(style: .wide, displayUnit: .hourMinute))
+    /// // "2 hours, 19 minutes"
+    /// ```
+    ///
     /// - Parameters:
-    ///   - style: Controls the styling of the unit and its proximity to the numerical value
-    ///   - displayUnit: Controls which units to display to the user
-    ///   - locale: The Locale used during the conversion (defaults to `.autoupdatingCurrent`)
-    /// - Returns: A string representation of the runtime
+    ///   - style: The component formatting style (e.g., `.abbreviated`, `.wide`, `.narrow`).
+    ///   - displayUnit: Whether to show hours and minutes or minutes only.
+    ///   - locale: The locale for localization. Defaults to `.autoupdatingCurrent`.
+    /// - Returns: A configured ``Runtime`` format style.
     static func runtime(
         style: Date.ComponentsFormatStyle.Style,
         displayUnit: Runtime.DisplayUnit,

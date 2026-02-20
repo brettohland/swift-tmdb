@@ -4,6 +4,7 @@ import Foundation
 struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable> {
     let endpoint: EndpointFactory
     let httpMethod: HTTP.Method
+    let requestBody: RequestBody?
     let encoder: JSONEncoder
     let decoder: JSONDecoder
 
@@ -14,6 +15,7 @@ struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable> {
     init(
         endpoint: EndpointFactory,
         httpMethod: HTTP.Method,
+        requestBody: RequestBody? = nil,
         encoder: JSONEncoder = .iso8601SnakeCake,
         decoder: JSONDecoder = .iso8601SnakeCake,
     ) {
@@ -21,6 +23,7 @@ struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable> {
         self.encoder = encoder
         self.endpoint = endpoint
         self.httpMethod = httpMethod
+        self.requestBody = requestBody
     }
 
     func data(forRequest request: URLRequest) async throws -> Data {
@@ -46,9 +49,38 @@ struct Endpoint<RequestBody: Encodable, ResponseBody: Decodable> {
 
     func decodedResponse() async throws -> ResponseBody {
         let baseURL = TMDB.Constants.baseURL
-        let finalURL = endpoint.makeURL(baseURL: baseURL)
+        var finalURL = endpoint.makeURL(baseURL: baseURL)
+        let configuration = try await sdkConfiguration()
+        finalURL = applyDefaults(to: finalURL, from: configuration)
         var request = URLRequest(url: finalURL)
         request.httpMethod = httpMethod.rawValue
+        if let requestBody, !(requestBody is HTTP.EmptyRequestBody) {
+            request.httpBody = try encoder.encode(requestBody)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
         return try await decodedResponse(forRequest: request)
+    }
+
+    private func applyDefaults(to url: URL, from configuration: TMDBConfiguration) -> URL {
+        guard endpoint.supportsLanguage || endpoint.supportsRegion else { return url }
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return url }
+        var queryItems = components.queryItems ?? []
+        let existingKeys = Set(queryItems.map(\.name))
+        if endpoint.supportsLanguage,
+           !existingKeys.contains("language"),
+           let defaultLanguage = configuration.defaultLanguage
+        {
+            queryItems.append(.language, value: defaultLanguage)
+        }
+        if endpoint.supportsRegion,
+           !existingKeys.contains("region"),
+           let defaultRegion = configuration.defaultRegion
+        {
+            queryItems.append(.region, value: defaultRegion)
+        }
+        if !queryItems.isEmpty {
+            components.queryItems = queryItems
+        }
+        return components.url ?? url
     }
 }

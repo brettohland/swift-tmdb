@@ -1,0 +1,515 @@
+{
+    "id": 62085,
+    "translations": [
+        {
+            "iso_3166_1": "US",
+            "iso_639_1": "en",
+            "name": "English",
+            "english_name": "English",
+            "data": {
+                "name": "Pilot",
+                "overview": "When an unassuming high school chemistry teacher discovers he has a rare form of lung cancer, he decides to team up with a former student and create a top of the line crystal meth in a used RV, to provide for his family once he is gone."
+            }
+        },
+        {
+            "iso_3166_1": "DE",
+            "iso_639_1": "de",
+            "name": "Deutsch",
+            "english_name": "German",
+            "data": {
+                "name": "Der Einstieg",
+                "overview": "Ein Chemielehrer mit Lungenkrebs im Endstadium entschlie\u00dft sich, Methamphetamin herzustellen und zu verkaufen, um seine Familie \u00fcber die Runden zu bringen."
+            }
+        },
+        {
+            "iso_3166_1": "FR",
+            "iso_639_1": "fr",
+            "name": "Fran\u00e7ais",
+            "english_name": "French",
+            "data": {
+                "name": "Chute libre",
+                "overview": "Atteint d'un cancer en phase terminale, un prof de chimie se lance dans la fabrication et la vente de m\u00e9thamph\u00e9tamines pour assurer l'avenir financier de sa famille."
+            }
+        },
+        {
+            "iso_3166_1": "NL",
+            "iso_639_1": "nl",
+            "name": "Nederlands",
+            "english_name": "Dutch",
+            "data": {
+                "name": "Pilot",
+                "overview": "Een terminale longkankerlijder en scheikundedocent waagt zich aan het maken en verkopen van methamphetamine om voor zijn gezin te kunnen zorgen."
+            }
+        },
+        {
+            "iso_3166_1": "TR",
+            "iso_639_1": "tr",
+            "name": "T\u00fcrk\u00e7e",
+            "english_name": "Turkish",
+            "data": {
+                "name": "Pilot B\u00f6l\u00fcm",
+                "overview": "\u00d6l\u00fcmc\u00fcl akci\u011fer kanseri te\u015fhisi konan bir lise kimya \u00f6\u011fretmeni, ailesini ge\u00e7indirmek i\u00e7in metamfetamin yap\u0131p satmaya ba\u015flar."
+            }
+        },
+        {
+            "iso_3166_1": "SK",
+            "iso_639_1": "sk",
+            "name": "Sloven\u010dina",
+            "english_name": "Slovak",
+            "data": {
+                "name": "",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "RU",
+            "iso_639_1": "ru",
+            "name": "P\u0443\u0441\u0441\u043a\u0438\u0439",
+            "english_name": "Russian",
+            "data": {
+                "name": "\u041f\u0438\u043b\u043e\u0442",
+                "overview": "\u041d\u0430 \u043e\u0447\u0435\u0440\u0435\u0434\u043d\u043e\u0439 \u0434\u0435\u043d\u044c \u0440\u043e\u0436\u0434\u0435\u043d\u0438\u044f \u0441\u0443\u0434\u044c\u0431\u0430 \u043f\u0440\u0435\u043f\u043e\u0434\u043d\u043e\u0441\u0438\u0442 \u043f\u043e\u0436\u0438\u043b\u043e\u043c\u0443 \u0448\u043a\u043e\u043b\u044c\u043d\u043e\u043c\u0443 \u0443\u0447\u0438\u0442\u0435\u043b\u044e \u0423\u043e\u043b\u0442\u0435\u0440\u0443 \u0423\u0430\u0439\u0442\u0443 \u0441\u0442\u0440\u0430\u0448\u043d\u044b\u0439 \u0441\u044e\u0440\u043f\u0440\u0438\u0437 \u2014 \u0440\u0430\u043a \u043b\u0451\u0433\u043a\u0438\u0445 \u0432 \u043f\u043e\u0441\u043b\u0435\u0434\u043d\u0435\u0439 \u0441\u0442\u0430\u0434\u0438\u0438, \u0434\u0430\u044e\u0449\u0438\u0439 \u0435\u043c\u0443 \u0435\u0449\u0451 \u043b\u0438\u0448\u044c \u043f\u0430\u0440\u0443 \u043b\u0435\u0442 \u0436\u0438\u0437\u043d\u0438. \u0420\u0435\u0448\u0438\u0432 \u043f\u0435\u0440\u0435\u0441\u0442\u0430\u0442\u044c \u0432\u043b\u0430\u0447\u0438\u0442\u044c \u0436\u0430\u043b\u043a\u043e\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043e\u0432\u0430\u043d\u0438\u0435 \u043d\u0430 \u0434\u0432\u0443\u0445 \u043d\u0435\u043b\u044e\u0431\u0438\u043c\u044b\u0445 \u0440\u0430\u0431\u043e\u0442\u0430\u0445, \u0423\u043e\u043b\u0442\u0435\u0440 \u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f \u043f\u043e\u0434\u0432\u0435\u0440\u043d\u0443\u0432\u0448\u0438\u043c\u0441\u044f \u0441\u043b\u0443\u0447\u0430\u0435\u043c, \u0430 \u0442\u0430\u043a\u0436\u0435 \u0441\u0432\u043e\u0438\u043c\u0438 \u043f\u043e\u0437\u043d\u0430\u043d\u0438\u044f\u043c\u0438 \u0432 \u0445\u0438\u043c\u0438\u0438 \u0434\u043b\u044f \u043d\u0430\u0447\u0430\u043b\u0430 \u043d\u043e\u0432\u043e\u0439 \u0436\u0438\u0437\u043d\u0438, \u043f\u043e\u043b\u043d\u043e\u0439 \u043a\u0440\u0438\u043c\u0438\u043d\u0430\u043b\u0430, \u0434\u0435\u043d\u0435\u0433 \u0438 \u043d\u0430\u0440\u043a\u043e\u0442\u0438\u043a\u043e\u0432. \u041e\u0434\u043d\u0430\u043a\u043e \u0432\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f \u0432 \u044d\u0442\u0443 \u0436\u0438\u0437\u043d\u044c \u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u043d\u0435 \u0442\u0430\u043a-\u0442\u043e \u043f\u0440\u043e\u0441\u0442\u043e."
+            }
+        },
+        {
+            "iso_3166_1": "HU",
+            "iso_639_1": "hu",
+            "name": "Magyar",
+            "english_name": "Hungarian",
+            "data": {
+                "name": "A l\u00fazer",
+                "overview": "Miut\u00e1n v\u00e9gzetes t\u00fcd\u0151r\u00e1kkal diagnosztiz\u00e1lj\u00e1k, a k\u00f6z\u00e9piskolai k\u00e9miatan\u00e1r metamfetamint kezd el k\u00e9sz\u00edteni \u00e9s \u00e1rulni, hogy biztos\u00edtsa csal\u00e1dja meg\u00e9lhet\u00e9s\u00e9t."
+            }
+        },
+        {
+            "iso_3166_1": "CN",
+            "iso_639_1": "zh",
+            "name": "\u666e\u901a\u8bdd",
+            "english_name": "Mandarin",
+            "data": {
+                "name": "\u8bd5\u64ad\u96c6",
+                "overview": "\u4e00\u4f4d\u9ad8\u4e2d\u5316\u5b66\u8001\u5e08\u88ab\u8bca\u65ad\u51fa\u60a3\u4e86\u665a\u671f\u80ba\u764c\uff0c\u4e3a\u4e86\u517b\u5bb6\uff0c\u4ed6\u5f00\u59cb\u5236\u9020\u548c\u9500\u552e\u6bd2\u54c1\u3002"
+            }
+        },
+        {
+            "iso_3166_1": "ES",
+            "iso_639_1": "es",
+            "name": "Espa\u00f1ol",
+            "english_name": "Spanish",
+            "data": {
+                "name": "Piloto",
+                "overview": "Walter White, profesor de qu\u00edmica en un instituto, descubre que tiene c\u00e1ncer de pulm\u00f3n y decide trabajar junto con un ex-alumno elaborando metanfetamina de alta calidad para poder ganar dinero para que su familia se mantenga."
+            }
+        },
+        {
+            "iso_3166_1": "GR",
+            "iso_639_1": "el",
+            "name": "\u03b5\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac",
+            "english_name": "Greek",
+            "data": {
+                "name": "\u0395\u03c0\u03b5\u03b9\u03c3\u03cc\u03b4\u03b9\u03bf-\u03c0\u03b9\u03bb\u03cc\u03c4\u03bf\u03c2",
+                "overview": "\u0388\u03bd\u03b1\u03c2 \u03ba\u03b1\u03b8\u03b7\u03b3\u03b7\u03c4\u03ae\u03c2 \u03c7\u03b7\u03bc\u03b5\u03af\u03b1\u03c2 \u03bc\u03b5 \u03ba\u03b1\u03c1\u03ba\u03af\u03bd\u03bf \u03c3\u03c4\u03bf\u03c5\u03c2 \u03c0\u03bd\u03b5\u03cd\u03bc\u03bf\u03bd\u03b5\u03c2 \u03c3\u03b5 \u03c4\u03b5\u03bb\u03b9\u03ba\u03cc \u03c3\u03c4\u03ac\u03b4\u03b9\u03bf \u03ba\u03b1\u03c4\u03b1\u03c6\u03b5\u03cd\u03b3\u03b5\u03b9 \u03c3\u03c4\u03b7\u03bd \u03c0\u03b1\u03c1\u03b1\u03b3\u03c9\u03b3\u03ae \u03ba\u03b1\u03b9 \u03c3\u03c4\u03b7\u03bd \u03c0\u03ce\u03bb\u03b7\u03c3\u03b7 \u03bc\u03b5\u03b8\u03b1\u03bc\u03c6\u03b5\u03c4\u03b1\u03bc\u03af\u03bd\u03b7\u03c2, \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03c3\u03c5\u03bd\u03c4\u03b7\u03c1\u03ae\u03c3\u03b5\u03b9 \u03c4\u03b7\u03bd \u03bf\u03b9\u03ba\u03bf\u03b3\u03ad\u03bd\u03b5\u03b9\u03ac \u03c4\u03bf\u03c5."
+            }
+        },
+        {
+            "iso_3166_1": "PT",
+            "iso_639_1": "pt",
+            "name": "Portugu\u00eas",
+            "english_name": "Portuguese",
+            "data": {
+                "name": "Piloto",
+                "overview": "Diagnosticado com cancro de pulm\u00e3o terminal, um professor de secund\u00e1rio decide \"cozinhar\" e vender metanfetaminas para sustentar a sua fam\u00edlia."
+            }
+        },
+        {
+            "iso_3166_1": "IT",
+            "iso_639_1": "it",
+            "name": "Italiano",
+            "english_name": "Italian",
+            "data": {
+                "name": "Questione di chimica",
+                "overview": "Dopo la diagnosi di cancro terminale ai polmoni, un insegnante di chimica del liceo si d\u00e0 alla produzione di metanfetamine per garantire la sopravvivenza della famiglia."
+            }
+        },
+        {
+            "iso_3166_1": "BG",
+            "iso_639_1": "bg",
+            "name": "\u0431\u044a\u043b\u0433\u0430\u0440\u0441\u043a\u0438 \u0435\u0437\u0438\u043a",
+            "english_name": "Bulgarian",
+            "data": {
+                "name": "",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "RO",
+            "iso_639_1": "ro",
+            "name": "Rom\u00e2n\u0103",
+            "english_name": "Romanian",
+            "data": {
+                "name": "Pilot",
+                "overview": "Diagnosticat cu cancer la pl\u0103m\u00e2ni \u00een faz\u0103 terminal\u0103, un profesor de chimie de la liceu recurge la prepararea \u0219i comercializarea metamfetaminei ca s\u0103-\u0219i \u00eentre\u021bin\u0103 familia."
+            }
+        },
+        {
+            "iso_3166_1": "KR",
+            "iso_639_1": "ko",
+            "name": "\ud55c\uad6d\uc5b4/\uc870\uc120\ub9d0",
+            "english_name": "Korean",
+            "data": {
+                "name": "\ud654\ud559 \uc120\uc0dd\uacfc \ud558\uc774\uc820\ubc84\uadf8",
+                "overview": "\ud3d0\uc554 \ub9d0\uae30 \uc9c4\ub2e8\uc744 \ubc1b\uc740 \ud55c \uace0\ub4f1\ud559\uad50 \ud654\ud559 \uad50\uc0ac\ub294 \uc790\uc2e0\uc758 \uac00\uc871\uc744 \ubd80\uc591\ud558\uae30 \uc704\ud574 \ud544\ub85c\ud3f0\uc744 \ucd94\ucd9c\ud574\uc11c \ud310\ub9e4\ud55c\ub2e4."
+            }
+        },
+        {
+            "iso_3166_1": "IL",
+            "iso_639_1": "he",
+            "name": "\u05e2\u05b4\u05d1\u05b0\u05e8\u05b4\u05d9\u05ea",
+            "english_name": "Hebrew",
+            "data": {
+                "name": "\u05e4\u05d9\u05d9\u05dc\u05d5\u05d8",
+                "overview": "\u05de\u05d5\u05e8\u05d4 \u05dc\u05db\u05d9\u05de\u05d9\u05d4 \u05d1\u05ea\u05d9\u05db\u05d5\u05df \u05de\u05d0\u05d5\u05d1\u05d7\u05df \u05db\u05d7\u05d5\u05dc\u05d4 \u05d1\u05e1\u05e8\u05d8\u05df \u05e8\u05d9\u05d0\u05d5\u05ea \u05e1\u05d5\u05e4\u05e0\u05d9, \u05d5\u05e4\u05d5\u05e0\u05d4 \u05dc\u05d9\u05d9\u05e6\u05d5\u05e8 \u05d5\u05dc\u05de\u05db\u05d9\u05e8\u05d4 \u05e9\u05dc \u05de\u05ea\u05d0\u05de\u05e4\u05d8\u05de\u05d9\u05e0\u05d9\u05dd \u05db\u05d3\u05d9 \u05dc\u05e4\u05e8\u05e0\u05e1 \u05d0\u05ea \u05de\u05e9\u05e4\u05d7\u05ea\u05d5."
+            }
+        },
+        {
+            "iso_3166_1": "PL",
+            "iso_639_1": "pl",
+            "name": "Polski",
+            "english_name": "Polish",
+            "data": {
+                "name": "Pilot",
+                "overview": "Nauczyciel chemii w szkole \u015bredniej dowiaduje si\u0119, \u017ce ma nieuleczalnego raka p\u0142uc. Aby zapewni\u0107 byt rodzinie, bierze si\u0119 za produkcj\u0119 i rozprowadzanie metamfetaminy."
+            }
+        },
+        {
+            "iso_3166_1": "DK",
+            "iso_639_1": "da",
+            "name": "Dansk",
+            "english_name": "Danish",
+            "data": {
+                "name": "Pilot",
+                "overview": "Kemil\u00e6reren Walter White har rundet 50 og har sine bedste \u00e5r bag sig, s\u00e5 da han f\u00e5r at vide, at han har kr\u00e6ft og kun kort tid tilbage at leve i, tager han en drastisk beslutning."
+            }
+        },
+        {
+            "iso_3166_1": "CZ",
+            "iso_639_1": "cs",
+            "name": "\u010cesk\u00fd",
+            "english_name": "Czech",
+            "data": {
+                "name": "Pilotn\u00ed d\u00edl",
+                "overview": "St\u0159edo\u0161kolsk\u00fd u\u010ditel chemie, kter\u00e9mu byla diagnostikov\u00e1na rakovina plic v kone\u010dn\u00e9m st\u00e1diu, se rozhodne va\u0159it a prod\u00e1vat amfetaminy, aby zaopat\u0159il rodinu."
+            }
+        },
+        {
+            "iso_3166_1": "JP",
+            "iso_639_1": "ja",
+            "name": "\u65e5\u672c\u8a9e",
+            "english_name": "Japanese",
+            "data": {
+                "name": "\u5316\u5b66\u6559\u5e2b \u30a6\u30a9\u30eb\u30bf\u30fc\u30fb\u30db\u30ef\u30a4\u30c8",
+                "overview": "\u5730\u5473\u3067\u51b4\u3048\u306a\u3044\u9ad8\u6821\u306e\u5316\u5b66\u6559\u5e2b\u304c\u672b\u671f\u306e\u80ba\u30ac\u30f3\u3068\u5ba3\u544a\u3055\u308c\u308b\u3002\u5bb6\u65cf\u306e\u305f\u3081\u306b\u304a\u91d1\u3092\u6b8b\u3057\u305f\u3044\u3068\u601d\u3044\u3064\u3044\u305f\u306e\u306f\u3001\u9ebb\u85ac\u3092\u7cbe\u88fd\u3057\u58f2\u308a\u3055\u3070\u304f\u3053\u3068\u3060\u3063\u305f\u3002"
+            }
+        },
+        {
+            "iso_3166_1": "UA",
+            "iso_639_1": "uk",
+            "name": "\u0423\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0438\u0439",
+            "english_name": "Ukrainian",
+            "data": {
+                "name": "\u041f\u0456\u043b\u043e\u0442\u043d\u0430 \u0441\u0435\u0440\u0456\u044f",
+                "overview": "\u041a\u043e\u043b\u0438 \u0441\u043a\u0440\u043e\u043c\u043d\u0438\u0439 \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u0445\u0456\u043c\u0456\u0457 \u0432 \u0441\u0435\u0440\u0435\u0434\u043d\u0456\u0439 \u0448\u043a\u043e\u043b\u0456 \u0432\u0438\u044f\u0432\u043b\u044f\u0454, \u0449\u043e \u0443 \u043d\u044c\u043e\u0433\u043e \u0440\u0456\u0434\u043a\u0456\u0441\u043d\u0430 \u0444\u043e\u0440\u043c\u0430 \u0440\u0430\u043a\u0443 \u043b\u0435\u0433\u0435\u043d\u0456\u0432, \u0432\u0456\u043d \u0432\u0438\u0440\u0456\u0448\u0443\u0454 \u043e\u0431\u2019\u0454\u0434\u043d\u0430\u0442\u0438\u0441\u044f \u0437 \u043a\u043e\u043b\u0438\u0448\u043d\u0456\u043c \u0443\u0447\u043d\u0435\u043c \u0456 \u0441\u0442\u0432\u043e\u0440\u044e\u0432\u0430\u0442\u0438 \u043f\u0435\u0440\u0448\u043e\u043a\u043b\u0430\u0441\u043d\u0438\u0439 \u043a\u0440\u0438\u0441\u0442\u0430\u043b\u0456\u0447\u043d\u0438\u0439 \u043c\u0435\u0442\u0430\u043c\u0444\u0435\u0442\u0430\u043c\u0456\u043d \u0443 \u0432\u0436\u0438\u0432\u0430\u043d\u043e\u043c\u0443 \u0430\u0432\u0442\u043e\u0444\u0443\u0440\u0433\u043e\u043d\u0456, \u0449\u043e\u0431 \u0437\u0430\u0431\u0435\u0437\u043f\u0435\u0447\u0438\u0442\u0438 \u0441\u0456\u043c\u2019\u044e, \u043a\u043e\u043b\u0438 \u0439\u043e\u0433\u043e \u043d\u0435 \u0441\u0442\u0430\u043d\u0435."
+            }
+        },
+        {
+            "iso_3166_1": "SE",
+            "iso_639_1": "sv",
+            "name": "svenska",
+            "english_name": "Swedish",
+            "data": {
+                "name": "",
+                "overview": "En kemil\u00e4rare p\u00e5 high school b\u00f6rjar s\u00e4lja droger f\u00f6r att f\u00f6rs\u00f6rja sin familj."
+            }
+        },
+        {
+            "iso_3166_1": "BS",
+            "iso_639_1": "bs",
+            "name": "Bosanski",
+            "english_name": "Bosnian",
+            "data": {
+                "name": "Pilot",
+                "overview": "Walter White (Bryan Cranston) svojedobno je bio uspje\u0161an kemi\u010dar i radio u presti\u017enom dr\u017eavnom laboratoriju. No zavr\u0161io je kao predava\u010d apati\u010dnim srednjo\u0161kolcima u Albuquerqueju te obavlja dopunski posao u praonici automobila kako bi spojio kraj s krajem. Sa suprugom Skyler (Anna Gunn), koja je ostvarila pristojnu karijeru prodaju\u0107i i kupuju\u0107i stvari na eBayu, odgaja sina Waltera Ml.( RJ Mitte), tvrdoglavog sedamnaestogodi\u0161njaka s \u010dijom se cerebralnom paralizom bori cijela obitelj. No sve su to sitni problemi u odnosu na najnovije Walterovo otkri\u0107e. Dan nakon proslave pedesetog ro\u0111endana, na kojoj su glavna atrakcija anegdote o \u017eustroj borbe protiv droga njegova \u0161ogora policajca za narkotike, Hanka Welda, Walteru odjednom pozli. Zavr\u0161ava na hitnoj slu\u017ebi gdje mu dijagnosticiraju rak i procjenjuju da mu je ostalo jo\u0161 dvije godine \u017eivota. On zadr\u017eava tu vijest za sebe. Razmi\u0161ljaju\u0107i ponajprije o budu\u0107nosti vlastite obitelji, Walter prihva\u0107a poziv da se pridru\u017ei Hanku na raciji jednog laboratorija za meth. Nakon \u0161to gotovo svjedo\u010di uhi\u0107enju svoga biv\u0161eg u\u010denika Jesseja Leeja Pinkmana u tro\u0161nom narkolaboratoriju, prisjeti se Hankovih pri\u010da o koli\u010dinama droge zaplijenjenim na racijama. Walter prilazi skepti\u010dnom Jesseu s ponudom da postanu partneri. Nakon \u0161to iz \u0161kole ukrade ne\u0161to vrhunske opreme, uzima u\u0161te\u0111evinu i kupuje rabljeno kampersko vozilo koje \u0107e koristiti kao pokretni laboratorij koji \u0107e djelovati izvan vidokruga radoznalih susjeda, konkurencije i policije"
+            }
+        },
+        {
+            "iso_3166_1": "HR",
+            "iso_639_1": "hr",
+            "name": "Hrvatski",
+            "english_name": "Croatian",
+            "data": {
+                "name": "",
+                "overview": "Neko\u0107 uspje\u0161an kemi\u010dar u vladinom laboratoriju, Walter White mora podu\u010davati srednjo\u0161kolce u Albuquerqueu dok radi na pola radnog vremena u autopraonici kako bi spojio kraj s krajem. Sa suprugom Skyler, koja ima skromnu karijeru kupnje i prodaje artikala na eBayu, odgaja Waltera Jr., 17-g. \u010dija je cerebralna paraliza izazov za obitelj. Sve te pote\u0161ko\u0107e blijede u usporedbi s Walterovim otkri\u0107em."
+            }
+        },
+        {
+            "iso_3166_1": "LT",
+            "iso_639_1": "lt",
+            "name": "Lietuvi\u0173",
+            "english_name": "Lithuanian",
+            "data": {
+                "name": "",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "EE",
+            "iso_639_1": "et",
+            "name": "Eesti",
+            "english_name": "Estonian",
+            "data": {
+                "name": "",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "SA",
+            "iso_639_1": "ar",
+            "name": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629",
+            "english_name": "Arabic",
+            "data": {
+                "name": "\u062d\u0644\u0642\u0629 \u062a\u062c\u0631\u064a\u0628\u064a\u0629",
+                "overview": "\u0639\u0646\u062f\u0645\u0627 \u064a\u0643\u062a\u0634\u0641 \u0645\u062f\u0631\u0633 \u0643\u064a\u0645\u064a\u0627\u0621 \u0645\u062a\u0648\u0627\u0636\u0639 \u0641\u064a \u0627\u0644\u0645\u062f\u0631\u0633\u0629 \u0627\u0644\u062b\u0627\u0646\u0648\u064a\u0629 \u0623\u0646\u0647 \u0645\u0635\u0627\u0628 \u0628\u0646\u0648\u0639 \u0646\u0627\u062f\u0631 \u0645\u0646 \u0633\u0631\u0637\u0627\u0646 \u0627\u0644\u0631\u0626\u0629 \u060c \u0642\u0631\u0631 \u0623\u0646 \u064a\u062a\u0639\u0627\u0648\u0646 \u0645\u0639 \u0637\u0627\u0644\u0628 \u0633\u0627\u0628\u0642 \u0648\u064a\u0635\u0646\u0639 \u0623\u0639\u0644\u0649 \u0645\u0633\u062a\u0648\u0649 \u0645\u0646 \u0627\u0644\u0645\u064a\u062b\u0627\u0645\u0641\u064a\u062a\u0627\u0645\u064a\u0646 \u0627\u0644\u0643\u0631\u064a\u0633\u062a\u0627\u0644\u064a \u0641\u064a \u0639\u0631\u0628\u0629 \u0633\u0643\u0646 \u0645\u062a\u0646\u0642\u0644\u0629 \u0645\u0633\u062a\u0639\u0645\u0644\u0629 \u060c \u0644\u0625\u0639\u0627\u0644\u0629 \u0623\u0633\u0631\u062a\u0647 \u0628\u0645\u062c\u0631\u062f \u0631\u062d\u064a\u0644\u0647."
+            }
+        },
+        {
+            "iso_3166_1": "IR",
+            "iso_639_1": "fa",
+            "name": "\u0641\u0627\u0631\u0633\u06cc",
+            "english_name": "Persian",
+            "data": {
+                "name": "\u0633\u0631\u0628\u0631\u0646\u0627\u0645\u0647",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "FI",
+            "iso_639_1": "fi",
+            "name": "suomi",
+            "english_name": "Finnish",
+            "data": {
+                "name": "Kaidalta polulta",
+                "overview": "Walter White saa tiet\u00e4\u00e4 sairastavansa parantumatonta keuhkosy\u00f6p\u00e4\u00e4. Perheen taloudellisen tulevaisuuden turvaaminen on Waltille t\u00e4rkeint\u00e4, joten h\u00e4n kehitt\u00e4\u00e4 rahakkaan suunnitelman. Valitettavasti kaikki ei vain suju aivan toivotulla tavalla."
+            }
+        },
+        {
+            "iso_3166_1": "TH",
+            "iso_639_1": "th",
+            "name": "\u0e20\u0e32\u0e29\u0e32\u0e44\u0e17\u0e22",
+            "english_name": "Thai",
+            "data": {
+                "name": "\u0e15\u0e2d\u0e19\u0e19\u0e33\u0e23\u0e48\u0e2d\u0e07",
+                "overview": "\u0e40\u0e21\u0e37\u0e48\u0e2d\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e01\u0e32\u0e23\u0e27\u0e34\u0e19\u0e34\u0e08\u0e09\u0e31\u0e22\u0e27\u0e48\u0e32\u0e40\u0e1b\u0e47\u0e19\u0e21\u0e30\u0e40\u0e23\u0e47\u0e07\u0e1b\u0e2d\u0e14\u0e23\u0e30\u0e22\u0e30\u0e2a\u0e38\u0e14\u0e17\u0e49\u0e32\u0e22 \u0e04\u0e23\u0e39\u0e42\u0e23\u0e07\u0e40\u0e23\u0e35\u0e22\u0e19\u0e21\u0e31\u0e18\u0e22\u0e21\u0e08\u0e36\u0e07\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e1c\u0e25\u0e34\u0e15\u0e41\u0e25\u0e30\u0e02\u0e32\u0e22\u0e22\u0e32\u0e44\u0e2d\u0e0b\u0e4c\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e2b\u0e32\u0e40\u0e07\u0e34\u0e19\u0e21\u0e32\u0e08\u0e38\u0e19\u0e40\u0e08\u0e37\u0e2d\u0e04\u0e23\u0e2d\u0e1a\u0e04\u0e23\u0e31\u0e27"
+            }
+        },
+        {
+            "iso_3166_1": "BR",
+            "iso_639_1": "pt",
+            "name": "Portugu\u00eas",
+            "english_name": "Portuguese",
+            "data": {
+                "name": "Piloto",
+                "overview": "Um professor de qu\u00edmica do ensino m\u00e9dio come\u00e7a a vender drogas para sustentar sua fam\u00edlia."
+            }
+        },
+        {
+            "iso_3166_1": "CA",
+            "iso_639_1": "fr",
+            "name": "Fran\u00e7ais",
+            "english_name": "French",
+            "data": {
+                "name": "Pilote",
+                "overview": "Atteint d'un cancer en phase terminale, un prof de chimie se lance dans la fabrication et la vente de m\u00e9thamph\u00e9tamines pour assurer l'avenir financier de sa famille."
+            }
+        },
+        {
+            "iso_3166_1": "MX",
+            "iso_639_1": "es",
+            "name": "Espa\u00f1ol",
+            "english_name": "Spanish",
+            "data": {
+                "name": "Principio del fin",
+                "overview": "Un profesor de qu\u00edmica de escuela secundaria recurre a la venta de drogas para mantener a su familia."
+            }
+        },
+        {
+            "iso_3166_1": "RS",
+            "iso_639_1": "sr",
+            "name": "Srpski",
+            "english_name": "Serbian",
+            "data": {
+                "name": "",
+                "overview": "\u041a\u0430\u0434\u0430 \u043d\u0430\u0438\u0437\u0433\u043b\u0435\u0434 \u043e\u0431\u0438\u0447\u0430\u043d \u0441\u0440\u0435\u0434\u045a\u043e\u0448\u043a\u043e\u043b\u0441\u043a\u0438 \u043f\u0440\u043e\u0444\u0435\u0441\u043e\u0440 \u0445\u0435\u043c\u0438\u0458\u0435 \u0441\u0430\u0437\u043d\u0430 \u0434\u0430 \u0438\u043c\u0430 \u0440\u0435\u0434\u0430\u043a \u043e\u0431\u043b\u0438\u043a \u0440\u0430\u043a\u0430 \u043f\u043b\u0443\u045b\u0430, \u043e\u0434\u043b\u0443\u0447\u0443\u0458\u0435 \u0434\u0430 \u0441\u0435 \u0443\u0434\u0440\u0443\u0436\u0438 \u0441\u0430 \u0431\u0438\u0432\u0448\u0438\u043c \u0443\u0447\u0435\u043d\u0438\u043a\u043e\u043c. \u0423 \u043f\u043e\u043b\u043e\u0432\u043d\u043e\u043c \u043a\u0430\u043c\u043f\u0435\u0440\u0443, \u045a\u0438\u0445 \u0434\u0432\u043e\u0458\u0438\u0446\u0430 \u043f\u043e\u0447\u0438\u045a\u0443 \u0434\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0435 \u043a\u0440\u0438\u0441\u0442\u0430\u043b\u043d\u0438 \u043c\u0435\u0442 \u0432\u0440\u0445\u0443\u043d\u0441\u043a\u043e\u0433 \u043a\u0432\u0430\u043b\u0438\u0442\u0435\u0442\u0430, \u043a\u0430\u043a\u043e \u0431\u0438 \u043e\u043d \u043c\u043e\u0433\u0430\u043e \u0434\u0430 \u043e\u0431\u0435\u0437\u0431\u0435\u0434\u0438 \u043f\u043e\u0440\u043e\u0434\u0438\u0446\u0443 \u043a\u0430\u0434\u0430 \u0433\u0430 \u0432\u0438\u0448\u0435 \u043d\u0435 \u0431\u0443\u0434\u0435."
+            }
+        },
+        {
+            "iso_3166_1": "TW",
+            "iso_639_1": "zh",
+            "name": "\u666e\u901a\u8bdd",
+            "english_name": "Mandarin",
+            "data": {
+                "name": "\u5316\u5b78\u7684\u85dd\u8853\uff08\u8a66\u64ad\u96c6\uff09",
+                "overview": "\u4e00\u540d\u9ad8\u4e2d\u5316\u5b78\u8001\u5e2b\u88ab\u8a3a\u65b7\u51fa\u80ba\u764c\u672b\u671f\u5f8c\uff0c\u70ba\u4e86\u990a\u5bb6\u6d3b\u53e3\uff0c\u6c7a\u5b9a\u633a\u800c\u8d70\u96aa\uff0c\u958b\u59cb\u88fd\u4f5c\u4e26\u8ca9\u552e\u51b0\u6bd2\u3002"
+            }
+        },
+        {
+            "iso_3166_1": "VN",
+            "iso_639_1": "vi",
+            "name": "Ti\u1ebfng Vi\u1ec7t",
+            "english_name": "Vietnamese",
+            "data": {
+                "name": "T\u1eadp th\u1eed nghi\u1ec7m",
+                "overview": "B\u1ecb ch\u1ea9n \u0111o\u00e1n m\u1eafc ung th\u01b0 ph\u1ed5i giai \u0111o\u1ea1n cu\u1ed1i, m\u1ed9t gi\u00e1o vi\u00ean d\u1ea1y h\u00f3a \u1edf tr\u01b0\u1eddng trung h\u1ecdc ph\u1ea3i vi\u1ec7n \u0111\u1ebfn c\u00e1ch ch\u1ebf bi\u1ebfn v\u00e0 b\u00e1n ma t\u00fay \u0111\u00e1 \u0111\u1ec3 nu\u00f4i gia \u0111\u00ecnh."
+            }
+        },
+        {
+            "iso_3166_1": "NO",
+            "iso_639_1": "no",
+            "name": "Norsk",
+            "english_name": "Norwegian",
+            "data": {
+                "name": "Pilotepisode",
+                "overview": "En kjemil\u00e6rer p\u00e5 videreg\u00e5ende tyr til narkotikasalg for \u00e5 kunne fors\u00f8rge familien."
+            }
+        },
+        {
+            "iso_3166_1": "ES",
+            "iso_639_1": "ca",
+            "name": "Catal\u00e0",
+            "english_name": "Catalan",
+            "data": {
+                "name": "Pilot",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "ID",
+            "iso_639_1": "id",
+            "name": "Bahasa indonesia",
+            "english_name": "Indonesian",
+            "data": {
+                "name": "",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "LV",
+            "iso_639_1": "lv",
+            "name": "Latvie\u0161u",
+            "english_name": "Latvian",
+            "data": {
+                "name": "",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "GE",
+            "iso_639_1": "ka",
+            "name": "\u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8",
+            "english_name": "Georgian",
+            "data": {
+                "name": "",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "SI",
+            "iso_639_1": "sl",
+            "name": "Sloven\u0161\u010dina",
+            "english_name": "Slovenian",
+            "data": {
+                "name": "",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "HK",
+            "iso_639_1": "zh",
+            "name": "\u666e\u901a\u8bdd",
+            "english_name": "Mandarin",
+            "data": {
+                "name": "\u5316\u5b78\u7684\u85dd\u8853\uff08\u8a66\u64ad\u96c6\uff09",
+                "overview": "\u4e00\u540d\u9ad8\u4e2d\u5316\u5b78\u8001\u5e2b\u88ab\u8a3a\u65b7\u51fa\u80ba\u764c\u672b\u671f\u5f8c\uff0c\u70ba\u4e86\u990a\u5bb6\u6d3b\u53e3\uff0c\u6c7a\u5b9a\u633a\u800c\u8d70\u96aa\uff0c\u958b\u59cb\u88fd\u4f5c\u4e26\u8ca9\u552e\u51b0\u6bd2\u3002"
+            }
+        },
+        {
+            "iso_3166_1": "MY",
+            "iso_639_1": "my",
+            "name": "",
+            "english_name": "Burmese",
+            "data": {
+                "name": "",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "UZ",
+            "iso_639_1": "uz",
+            "name": "ozbek",
+            "english_name": "Uzbek",
+            "data": {
+                "name": "",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "AE",
+            "iso_639_1": "ar",
+            "name": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629",
+            "english_name": "Arabic",
+            "data": {
+                "name": "\u062d\u0644\u0642\u0629 \u062a\u062c\u0631\u064a\u0628\u064a\u0629",
+                "overview": "\u0628\u0639\u062f \u0623\u0646 \u062a\u0645 \u062a\u0634\u062e\u064a\u0635 \u0625\u0635\u0627\u0628\u062a\u0647 \u0628\u0633\u0631\u0637\u0627\u0646 \u0627\u0644\u0631\u0626\u0629 \u0627\u0644\u0645\u0645\u064a\u062a\u060c \u064a\u0644\u062c\u0623 \u0645\u062f\u0631\u0633 \u0643\u064a\u0645\u064a\u0627\u0621 \u0641\u064a \u0645\u062f\u0631\u0633\u0629 \u062b\u0627\u0646\u0648\u064a\u0629 \u0625\u0644\u0649 \u0637\u0647\u064a \u0648\u0628\u064a\u0639 \u0639\u0642\u0627\u0631 \"\u0627\u0644\u0645\u064a\u062b\" \u0644\u0625\u0639\u0627\u0644\u0629 \u0623\u0633\u0631\u062a\u0647."
+            }
+        },
+        {
+            "iso_3166_1": "SG",
+            "iso_639_1": "zh",
+            "name": "\u666e\u901a\u8bdd",
+            "english_name": "Mandarin",
+            "data": {
+                "name": "\u8bd5\u64ad\u96c6",
+                "overview": "\u4e00\u4f4d\u9ad8\u4e2d\u5316\u5b66\u8001\u5e08\u88ab\u8bca\u65ad\u51fa\u60a3\u4e86\u665a\u671f\u80ba\u764c\uff0c\u4e3a\u4e86\u517b\u5bb6\uff0c\u4ed6\u5f00\u59cb\u5236\u9020\u548c\u9500\u552e\u6bd2\u54c1\u3002"
+            }
+        },
+        {
+            "iso_3166_1": "IN",
+            "iso_639_1": "hi",
+            "name": "\u0939\u093f\u0928\u094d\u0926\u0940",
+            "english_name": "Hindi",
+            "data": {
+                "name": "\u092a\u093e\u092f\u0932\u091f",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "MY",
+            "iso_639_1": "ms",
+            "name": "Bahasa melayu",
+            "english_name": "Malay",
+            "data": {
+                "name": "Rintis",
+                "overview": ""
+            }
+        },
+        {
+            "iso_3166_1": "PH",
+            "iso_639_1": "tl",
+            "name": "",
+            "english_name": "Tagalog",
+            "data": {
+                "name": "Pilot",
+                "overview": ""
+            }
+        }
+    ]
+}

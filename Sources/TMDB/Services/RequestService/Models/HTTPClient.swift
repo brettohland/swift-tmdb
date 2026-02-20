@@ -51,14 +51,13 @@ extension DependencyValues {
 extension TMDB.HTTPClient: TestDependencyKey {
     static var testValue: TMDB.HTTPClient {
         TMDB.HTTPClient { request, _ throws in
-            try PathMatchingService.dataFromURLRequest(request)
+            try MockRouteResolver.data(for: request)
         }
     }
 
     static var previewValue: TMDB.HTTPClient {
         TMDB.HTTPClient { request, _ throws in
-            try await Task.sleep(for: .seconds(2))
-            return try PathMatchingService.dataFromURLRequest(request)
+            return try MockRouteResolver.data(for: request)
         }
     }
 }

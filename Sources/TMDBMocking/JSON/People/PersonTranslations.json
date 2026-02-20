@@ -1,0 +1,23 @@
+{
+  "id": 287,
+  "translations": [
+    {
+      "iso_3166_1": "US",
+      "iso_639_1": "en",
+      "name": "English",
+      "english_name": "English",
+      "data": {
+        "biography": "William Bradley Pitt (born December 18, 1963) is an American actor and film producer."
+      }
+    },
+    {
+      "iso_3166_1": "DE",
+      "iso_639_1": "de",
+      "name": "Deutsch",
+      "english_name": "German",
+      "data": {
+        "biography": "William Bradley Pitt (* 18. Dezember 1963 in Shawnee, Oklahoma) ist ein US-amerikanischer Schauspieler und Filmproduzent."
+      }
+    }
+  ]
+}

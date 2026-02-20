@@ -1,0 +1,160 @@
+{
+    "results": [
+        {
+            "descriptors": [],
+            "iso_3166_1": "DE",
+            "rating": "16"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "GB",
+            "rating": "18"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "US",
+            "rating": "TV-MA"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "FR",
+            "rating": "16"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "RU",
+            "rating": "18+"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "KR",
+            "rating": "19"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "BR",
+            "rating": "16"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "NL",
+            "rating": "16"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "PT",
+            "rating": "18"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "HU",
+            "rating": "16"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "LT",
+            "rating": "N-14"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "ES",
+            "rating": "16"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "SG",
+            "rating": "M18"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "IN",
+            "rating": "A"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "MX",
+            "rating": "C"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "TR",
+            "rating": "18+"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "MX",
+            "rating": "B-15"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "AU",
+            "rating": "MA 15+"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "ES",
+            "rating": "18"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "DK",
+            "rating": "15"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "PT",
+            "rating": "12AP"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "BR",
+            "rating": "18"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "SE",
+            "rating": "Fr\u00e5n 15 \u00e5r"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "CA",
+            "rating": "14+"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "AT",
+            "rating": "16"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "IE",
+            "rating": "18"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "CH",
+            "rating": "16"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "CZ",
+            "rating": "18+"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "RO",
+            "rating": "AP"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "FI",
+            "rating": "K16"
+        },
+        {
+            "descriptors": [],
+            "iso_3166_1": "NO",
+            "rating": "15"
+        }
+    ],
+    "id": 1396
+}

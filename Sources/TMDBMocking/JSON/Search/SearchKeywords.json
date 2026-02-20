@@ -1,0 +1,15 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "id": 825,
+      "name": "support group"
+    },
+    {
+      "id": 830,
+      "name": "dual identity"
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 2
+}

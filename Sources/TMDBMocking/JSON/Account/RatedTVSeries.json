@@ -1,0 +1,26 @@
+{
+  "page": 1,
+  "total_results": 1,
+  "total_pages": 1,
+  "results": [
+    {
+      "backdrop_path": null,
+      "genre_ids": [18, 80],
+      "id": 1399,
+      "original_language": "en",
+      "overview": "A rated TV series.",
+      "popularity": 90.0,
+      "poster_path": null,
+      "vote_average": 8.4,
+      "vote_count": 15000,
+      "name": "The Sopranos",
+      "original_name": "The Sopranos",
+      "origin_country": ["US"],
+      "first_air_date": "1999-01-10",
+      "account_rating": {
+        "created_at": "2024-04-20T08:30:00.000Z",
+        "value": 8.5
+      }
+    }
+  ]
+}

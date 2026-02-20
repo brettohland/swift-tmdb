@@ -6,7 +6,7 @@ protocol QueryValueRepresentable {
 
 extension Locale: QueryValueRepresentable {
     var queryValue: String {
-        identifier
+        identifier.replacingOccurrences(of: "_", with: "-")
     }
 }
 

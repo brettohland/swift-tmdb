@@ -1,16 +1,11 @@
-import Dependencies
 import Foundation
 import Testing
 @testable import TMDB
+import TMDBMocking
 
 struct CreditEndpointTests {
     @Test func details() async throws {
-        _ = try await withDependencies {
-            $0.httpClient.data = { _, _ in
-                try TMDB.Credits.Details.mockData()
-            }
-        } operation: {
-            try await TMDB.credits(forID: 0)
-        }
+        let details = try await TMDB.credits(forID: "52fe4250c3a36847f80149f3")
+        #expect(!details.id.isEmpty)
     }
 }

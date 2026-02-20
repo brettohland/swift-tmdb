@@ -1,0 +1,33 @@
+{
+  "adult": false,
+  "backdrop_path": "/44immBwzhDVyjn87b3x3l9mlhAD.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [],
+  "homepage": "",
+  "id": 1241874,
+  "imdb_id": "tt0000000",
+  "original_language": "en",
+  "original_title": "Latest Movie",
+  "overview": "This is the latest movie added to TMDB.",
+  "popularity": 0.6,
+  "poster_path": "/latestMoviePoster.jpg",
+  "production_companies": [],
+  "production_countries": [],
+  "release_date": "2024-01-15",
+  "revenue": 0,
+  "runtime": 90,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Latest Movie",
+  "video": false,
+  "vote_average": 0,
+  "vote_count": 0
+}

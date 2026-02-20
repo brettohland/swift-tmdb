@@ -1,0 +1,26 @@
+{
+  "page": 1,
+  "total_results": 1,
+  "total_pages": 1,
+  "results": [
+    {
+      "id": 1234,
+      "name": "My Favorites",
+      "description": "A collection of my favorite movies",
+      "poster_path": null,
+      "backdrop_path": null,
+      "number_of_items": 5,
+      "public": 1,
+      "average_rating": 8.5,
+      "runtime": 650,
+      "iso_3166_1": "US",
+      "iso_639_1": "en",
+      "created_at": "2024-01-15T10:30:00.000Z",
+      "updated_at": "2024-06-20T14:45:00.000Z",
+      "account_object_id": "507f1f77bcf86cd799439011",
+      "revenue": "0",
+      "featured": 0,
+      "sort_by": 1
+    }
+  ]
+}

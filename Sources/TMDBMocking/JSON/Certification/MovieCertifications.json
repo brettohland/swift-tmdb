@@ -1,0 +1,58 @@
+{
+  "certifications": {
+    "US": [
+      {
+        "certification": "G",
+        "meaning": "All ages admitted. Nothing that would offend parents for viewing by children.",
+        "order": 1
+      },
+      {
+        "certification": "PG",
+        "meaning": "Some material may not be suitable for children. Parents urged to give \"parental guidance\". May contain some material parents might not like for their young children.",
+        "order": 2
+      },
+      {
+        "certification": "PG-13",
+        "meaning": "Some material may be inappropriate for children under 13. Parents are urged to be cautious. Some material may be inappropriate for pre-teenagers.",
+        "order": 3
+      },
+      {
+        "certification": "R",
+        "meaning": "Under 17 requires accompanying parent or adult guardian. Contains some adult material. Parents are urged to learn more about the film before taking their young children with them.",
+        "order": 4
+      },
+      {
+        "certification": "NC-17",
+        "meaning": "No One 17 and Under Admitted. Clearly adult. Children are not admitted.",
+        "order": 5
+      }
+    ],
+    "GB": [
+      {
+        "certification": "U",
+        "meaning": "All ages admitted. Nothing that would offend parents for viewing by children.",
+        "order": 1
+      },
+      {
+        "certification": "PG",
+        "meaning": "Parental Guidance. General viewing, but some scenes may be unsuitable for young children.",
+        "order": 2
+      },
+      {
+        "certification": "12A",
+        "meaning": "Cinema release suitable for 12 years and over. No-one younger than 12 may see a 12A film in a cinema unless accompanied by an adult.",
+        "order": 3
+      },
+      {
+        "certification": "15",
+        "meaning": "Only those over 15 years are admitted. Nobody younger than 15 can rent or buy a 15-rated film.",
+        "order": 4
+      },
+      {
+        "certification": "18",
+        "meaning": "Only adults are admitted. Nobody younger than 18 can rent or buy an 18-rated film.",
+        "order": 5
+      }
+    ]
+  }
+}

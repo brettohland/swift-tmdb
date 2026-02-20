@@ -1,0 +1,27 @@
+{
+  "dates": {
+    "maximum": "2024-03-20",
+    "minimum": "2024-02-28"
+  },
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/oqP1qEZccq5AD9TVTIaO6IGUj7o.jpg",
+      "genre_ids": [28, 878],
+      "id": 693134,
+      "original_language": "en",
+      "original_title": "Dune: Part Two",
+      "overview": "Follow the mythic journey of Paul Atreides as he unites with Chani and the Fremen.",
+      "popularity": 1862.233,
+      "poster_path": "/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg",
+      "release_date": "2024-02-27",
+      "title": "Dune: Part Two",
+      "video": false,
+      "vote_average": 8.36,
+      "vote_count": 536
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 1
+}

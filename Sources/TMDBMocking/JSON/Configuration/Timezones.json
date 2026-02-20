@@ -1,0 +1,54 @@
+[
+  {
+    "iso_3166_1": "US",
+    "zones": [
+      "America/New_York",
+      "America/Chicago",
+      "America/Denver",
+      "America/Los_Angeles",
+      "America/Anchorage",
+      "Pacific/Honolulu"
+    ]
+  },
+  {
+    "iso_3166_1": "GB",
+    "zones": [
+      "Europe/London"
+    ]
+  },
+  {
+    "iso_3166_1": "FR",
+    "zones": [
+      "Europe/Paris"
+    ]
+  },
+  {
+    "iso_3166_1": "DE",
+    "zones": [
+      "Europe/Berlin"
+    ]
+  },
+  {
+    "iso_3166_1": "JP",
+    "zones": [
+      "Asia/Tokyo"
+    ]
+  },
+  {
+    "iso_3166_1": "AU",
+    "zones": [
+      "Australia/Sydney",
+      "Australia/Melbourne",
+      "Australia/Brisbane",
+      "Australia/Perth"
+    ]
+  },
+  {
+    "iso_3166_1": "CA",
+    "zones": [
+      "America/Toronto",
+      "America/Vancouver",
+      "America/Edmonton"
+    ]
+  }
+]

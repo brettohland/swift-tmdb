@@ -1,0 +1,27 @@
+{
+  "dates": {
+    "maximum": "2024-02-14",
+    "minimum": "2024-01-03"
+  },
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/hZkgoQYus5dXo3H8T7CYV1GOkRY.jpg",
+      "genre_ids": [28, 12, 878],
+      "id": 572802,
+      "original_language": "en",
+      "original_title": "Aquaman and the Lost Kingdom",
+      "overview": "Black Manta seeks revenge on Aquaman for his father's death.",
+      "popularity": 2315.356,
+      "poster_path": "/7lTnXOy0iNtBAdRP3TZvaKJ77F6.jpg",
+      "release_date": "2023-12-20",
+      "title": "Aquaman and the Lost Kingdom",
+      "video": false,
+      "vote_average": 6.93,
+      "vote_count": 1056
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 1
+}

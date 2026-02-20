@@ -1,0 +1,45 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "id": 550,
+      "media_type": "movie",
+      "title": "Fight Club",
+      "original_title": "Fight Club",
+      "overview": "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy.",
+      "poster_path": "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+      "backdrop_path": "/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg",
+      "popularity": 61.416,
+      "vote_average": 8.433,
+      "vote_count": 26280,
+      "release_date": "1999-10-15",
+      "adult": false,
+      "genre_ids": [18, 53, 35]
+    },
+    {
+      "id": 94605,
+      "media_type": "tv",
+      "name": "Arcane",
+      "original_name": "Arcane",
+      "overview": "Amid the stark discord of twin cities Piltover and Zaun, two sisters fight on rival sides of a war between magic technologies and clashing convictions.",
+      "poster_path": "/fqldf2t8ztc9aiwn3k6mlX3tvRT.jpg",
+      "backdrop_path": "/rkB4LyZHo1NHXFEDHl9vSD9r1lI.jpg",
+      "popularity": 183.693,
+      "vote_average": 8.746,
+      "vote_count": 3310,
+      "first_air_date": "2021-11-06",
+      "genre_ids": [16, 10765, 10759, 18]
+    },
+    {
+      "id": 1245,
+      "media_type": "person",
+      "name": "Scarlett Johansson",
+      "profile_path": "/6NsMbJXRlDZuDzatN2akFdGuTvx.jpg",
+      "popularity": 156.789,
+      "known_for_department": "Acting",
+      "adult": false
+    }
+  ],
+  "total_pages": 500,
+  "total_results": 10000
+}

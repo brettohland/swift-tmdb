@@ -1,0 +1,23 @@
+{
+  "page": 1,
+  "total_results": 1,
+  "total_pages": 1,
+  "results": [
+    {
+      "poster_path": null,
+      "adult": false,
+      "overview": "A movie on the watchlist.",
+      "release_date": "2014-11-05",
+      "genre_ids": [12, 18, 878],
+      "id": 157336,
+      "original_title": "Interstellar",
+      "original_language": "en",
+      "title": "Interstellar",
+      "backdrop_path": null,
+      "popularity": 55.0,
+      "vote_count": 28000,
+      "video": false,
+      "vote_average": 8.6
+    }
+  ]
+}

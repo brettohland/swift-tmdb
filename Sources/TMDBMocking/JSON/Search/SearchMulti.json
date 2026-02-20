@@ -1,0 +1,51 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/hZkgoQYus5dXo3H8T7CYV1GOkRY.jpg",
+      "genre_ids": [18, 53],
+      "id": 550,
+      "media_type": "movie",
+      "original_language": "en",
+      "original_title": "Fight Club",
+      "overview": "A ticking-time bomb of a movie about an insomniac office worker.",
+      "popularity": 69.934,
+      "poster_path": "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+      "release_date": "1999-10-15",
+      "title": "Fight Club",
+      "video": false,
+      "vote_average": 8.433,
+      "vote_count": 27104
+    },
+    {
+      "adult": false,
+      "id": 287,
+      "media_type": "person",
+      "name": "Brad Pitt",
+      "popularity": 40.431,
+      "profile_path": "/cckcYc2v0yh1tc9QjRelptcOBko.jpg",
+      "known_for_department": "Acting",
+      "gender": 2,
+      "known_for": [
+        {
+          "adult": false,
+          "backdrop_path": "/hZkgoQYus5dXo3H8T7CYV1GOkRY.jpg",
+          "genre_ids": [18],
+          "id": 550,
+          "media_type": "movie",
+          "original_title": "Fight Club",
+          "overview": "A ticking-time bomb of a movie.",
+          "popularity": 69.934,
+          "poster_path": "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+          "release_date": "1999-10-15",
+          "title": "Fight Club",
+          "vote_average": 8.433,
+          "vote_count": 27104
+        }
+      ]
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 2
+}
