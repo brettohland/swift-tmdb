@@ -9,4 +9,5 @@ DerivedData/
 .netrc
 .envrc
 .claude/
+CLAUDE.md
 swift-tmdb-Package.xctestplan
