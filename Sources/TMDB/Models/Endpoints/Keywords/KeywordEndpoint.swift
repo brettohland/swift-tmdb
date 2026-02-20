@@ -76,6 +76,9 @@ public extension TMDB {
     /// - Parameters:
     ///   - id: The keyword ID
     ///   - page: The page of results to return (default: 1)
+    ///   - includeAdult: Whether to include adult content in results (default: false)
+    ///   - language: The locale for translated content
+    ///   - region: The region for regional content
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverMovie``
     /// - Throws: ``TMDBRequestError``
     static func keywordMovies(

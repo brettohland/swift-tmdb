@@ -149,7 +149,9 @@ public extension TMDB {
     /// `/3/movie/{id}`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-details)
-    /// - Parameter id: `Int` TMDB's unique identifier for the movie
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the movie
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/Movie``
     /// - Throws: ``TMDBRequestError``
     static func movieDetails(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> Movie {
@@ -204,7 +206,9 @@ public extension TMDB {
     /// `/3/movie/{id}/credits`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-credits)
-    /// - Parameter id: `Int` TMDB's unique identifier for the movie
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the movie
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/MediaCredits``
     /// - Throws: ``TMDBRequestError``
     static func movieCredits(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> MediaCredits {
@@ -226,7 +230,9 @@ public extension TMDB {
     /// `/3/movie/{id}/images`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-images)
-    /// - Parameter id: `Int` TMDB's unique identifier for the movie
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the movie
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/ImageCollection``
     /// - Throws: ``TMDBRequestError``
     static func movieImages(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> ImageCollection {
@@ -248,7 +254,9 @@ public extension TMDB {
     /// `/3/movie/{id}/videos`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-videos)
-    /// - Parameter id: `Int` TMDB's unique identifier for the movie
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the movie
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/VideoCollection``
     /// - Throws: ``TMDBRequestError``
     static func movieVideos(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> VideoCollection {
@@ -270,7 +278,10 @@ public extension TMDB {
     /// `/3/movie/{id}/reviews`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-reviews)
-    /// - Parameter id: `Int` TMDB's unique identifier for the movie
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the movie
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Review``
     /// - Throws: ``TMDBRequestError``
     static func movieReviews(
@@ -319,7 +330,10 @@ public extension TMDB {
     /// `/3/movie/{id}/similar`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-similar)
-    /// - Parameter id: `Int` TMDB's unique identifier for the movie
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the movie
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverMovie``
     /// - Throws: ``TMDBRequestError``
     static func similarMovies(
@@ -346,7 +360,10 @@ public extension TMDB {
     /// `/3/movie/{id}/recommendations`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-recommendations)
-    /// - Parameter id: `Int` TMDB's unique identifier for the movie
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the movie
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverMovie``
     /// - Throws: ``TMDBRequestError``
     static func movieRecommendations(
@@ -463,7 +480,11 @@ public extension TMDB {
     /// `/3/movie/{id}/changes`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/movie-changes)
-    /// - Parameter id: `Int` TMDB's unique identifier for the movie
+    /// - Parameters:
+    ///   - id: `Int` TMDB's unique identifier for the movie
+    ///   - startDate: Filter changes after this date
+    ///   - endDate: Filter changes before this date
+    ///   - page: The page of results to return (default: 1)
     /// - Returns: ``TMDB/ChangeCollection``
     /// - Throws: ``TMDBRequestError``
     static func movieChanges(

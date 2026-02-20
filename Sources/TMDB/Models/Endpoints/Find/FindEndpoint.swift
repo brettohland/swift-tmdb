@@ -47,6 +47,7 @@ public extension TMDB {
     /// - Parameters:
     ///   - externalID: The external ID to search for
     ///   - source: The ``TMDB/ExternalSource`` to search by
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/FindResult``
     /// - Throws: ``TMDBRequestError``
     static func find(

@@ -358,7 +358,7 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, authe
 ### Configuration Response Types
 
 - ``TMDB/ConfigurationResponse``
-- ``TMDB/Configuration/ImageConfiguration``
+- ``TMDB/ImageConfiguration``
 - ``TMDB/Configuration/ImageSize``
 - ``TMDB/Configuration/ChangeKey``
 - ``TMDB/Configuration/JobDepartment``

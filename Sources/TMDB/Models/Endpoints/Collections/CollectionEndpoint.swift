@@ -31,7 +31,9 @@ public extension TMDB {
     /// `/3/collection/{id}`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/collection-details)
-    /// - Parameter id: The collection ID
+    /// - Parameters:
+    ///   - id: The collection ID
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/Collection``
     /// - Throws: ``TMDBRequestError``
     static func collectionDetails(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> Collection {
@@ -53,7 +55,9 @@ public extension TMDB {
     /// `/3/collection/{id}/images`
     ///
     /// [API Documentation on TMDB](https://developer.themoviedb.org/reference/collection-images)
-    /// - Parameter id: The collection ID
+    /// - Parameters:
+    ///   - id: The collection ID
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/ImageCollection``
     /// - Throws: ``TMDBRequestError``
     static func collectionImages(id: Int, language: Locale? = nil) async throws(TMDBRequestError) -> ImageCollection {

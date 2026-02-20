@@ -4,8 +4,9 @@
            ▝▀▚▖█▄█▄█ █ ▐▛▀▘▐▌        █  ▐▌  ▐▌▐▌  █ ▐▛▀▚▖
           ▗▄▄▞▘      █ ▐▌  ▐▌        █  ▐▌  ▐▌▐▙▄▄▀ ▐▙▄▞▘
                            ▐▌
-          
+
 ```
+
 # `swift-tmdb`: A Modern TMDB Swift Package
 
 A TMDB SDK that targets iOS/iPadOS 26 and uses Swift 6.2 and provides automatic mocked responses during unit testing
@@ -19,13 +20,13 @@ and in SwiftUI Previews.
 
 The package provides five targets across four library products:
 
-| Product | Targets | Description |
-|---------|---------|-------------|
-| **`TMDB`** | `TMDB` + `TMDBMocking` | Full experience with automatic mocked responses in tests and SwiftUI Previews |
-| **`TMDBCore`** | `TMDB` only | Smaller bundle without mock data. Use `withDependencies` to provide your own test doubles |
-| **`TMDBSwiftUI`** | `TMDBSwiftUI` | SwiftUI authentication view modifier (`.tmdbAuthentication(isPresented:onComplete:)`) |
-| **`TMDBUIKit`** | `TMDBUIKit` | UIKit authentication (`TMDB.authenticate(presentationAnchor:)`) |
-| **`TMDBDependencies`** | `TMDBDependencies` | [PointFree Dependencies](https://github.com/pointfreeco/swift-dependencies) client wrappers |
+| Product                | Targets                | Description                                                                                 |
+| ---------------------- | ---------------------- | ------------------------------------------------------------------------------------------- |
+| **`TMDB`**             | `TMDB` + `TMDBMocking` | Full experience with automatic mocked responses in tests and SwiftUI Previews               |
+| **`TMDBCore`**         | `TMDB` only            | Smaller bundle without mock data. Use `withDependencies` to provide your own test doubles   |
+| **`TMDBSwiftUI`**      | `TMDBSwiftUI`          | SwiftUI authentication view modifier (`.tmdbAuthentication(isPresented:onComplete:)`)       |
+| **`TMDBUIKit`**        | `TMDBUIKit`            | UIKit authentication (`TMDB.authenticate(presentationAnchor:)`)                             |
+| **`TMDBDependencies`** | `TMDBDependencies`     | [PointFree Dependencies](https://github.com/pointfreeco/swift-dependencies) client wrappers |
 
 ```swift
 // Full experience (automatic mocking):
@@ -70,26 +71,22 @@ easy display of data coming from the TMDB API.
 
 ---
 
-## Testing
+## Makefile
 
-### Unit Tests
-
-All 148 endpoints have unit tests that verify decoding against mock JSON fixtures. No network access required.
-
-```bash
-swift test --filter TMDBTests
-```
+| Command                 | Description                                 |
+| ----------------------- | ------------------------------------------- |
+| `make test`             | Run unit tests (mock data, no network)      |
+| `make integration-test` | Run integration tests against live TMDB API |
+| `make docs`             | Generate static DocC site into `docs/`      |
+| `make preview-docs`     | Preview documentation locally in browser    |
+| `make format`           | Run SwiftFormat                             |
 
 ### Integration Tests
 
-A separate `TMDBIntegrationTests` target hits the live TMDB API to verify response models decode correctly. Tests skip gracefully when no API key is set.
+Integration tests require a `TMDB_API_KEY` environment variable. Tests skip gracefully when no API key is set.
 
 ```bash
-# Run with API key
-TMDB_API_KEY=<your-key> swift test --filter TMDBIntegrationTests
-
-# Without key (tests skip, not fail)
-swift test --filter TMDBIntegrationTests
+TMDB_API_KEY=<your-key> make integration-test
 ```
 
 Integration tests run weekly via GitHub Actions and can be triggered manually.
@@ -98,19 +95,19 @@ Integration tests run weekly via GitHub Actions and can be triggered manually.
 
 ## Roadmap
 
-| Feature | Endpoints | Status |
-|---------|-----------|--------|
-| Configuration, Genres, Trending, Watch Providers | 15 | Done |
-| Movies (details, credits, lists, images, etc.) | 20 | Done |
-| Search, Find, Keywords, Collections | 12 | Done |
-| Language, Region & Query Parameter Support | -- | Done |
-| TV Series, Seasons, Episodes, Episode Groups | 41 | Done |
-| People, Companies, Networks | 12 | Done |
-| Auth & Session Infrastructure (v3 + v4) | 5 | Done |
-| Account Read & Write (favorites, watchlist, ratings) | 15 | Done |
-| Lists v4 CRUD | 9 | Done |
-| Guest Sessions | 10 | Done |
-| Integration Test Suite | 102 tests | Done |
+| Feature                                              | Endpoints | Status |
+| ---------------------------------------------------- | --------- | ------ |
+| Configuration, Genres, Trending, Watch Providers     | 15        | Done   |
+| Movies (details, credits, lists, images, etc.)       | 20        | Done   |
+| Search, Find, Keywords, Collections                  | 12        | Done   |
+| Language, Region & Query Parameter Support           | --        | Done   |
+| TV Series, Seasons, Episodes, Episode Groups         | 41        | Done   |
+| People, Companies, Networks                          | 12        | Done   |
+| Auth & Session Infrastructure (v3 + v4)              | 5         | Done   |
+| Account Read & Write (favorites, watchlist, ratings) | 15        | Done   |
+| Lists v4 CRUD                                        | 9         | Done   |
+| Guest Sessions                                       | 10        | Done   |
+| Integration Test Suite                               | 102 tests | Done   |
 
 ---
 

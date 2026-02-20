@@ -95,6 +95,8 @@ public extension TMDB {
     ///   - includeAdult: Whether to include adult content in results (default: false)
     ///   - year: Filter results by release year
     ///   - primaryReleaseYear: Filter results by primary release year
+    ///   - language: The locale for translated content
+    ///   - region: The region for regional content
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverMovie``
     /// - Throws: ``TMDBRequestError``
     static func searchMovies(
@@ -138,6 +140,7 @@ public extension TMDB {
     ///   - page: The page of results to return (default: 1)
     ///   - includeAdult: Whether to include adult content in results (default: false)
     ///   - firstAirDateYear: Filter results by first air date year
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/Discover/DiscoverTV``
     /// - Throws: ``TMDBRequestError``
     static func searchTV(
@@ -175,6 +178,7 @@ public extension TMDB {
     ///   - query: The search query string
     ///   - page: The page of results to return (default: 1)
     ///   - includeAdult: Whether to include adult content in results (default: false)
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/SearchPerson``
     /// - Throws: ``TMDBRequestError``
     static func searchPeople(
@@ -210,6 +214,7 @@ public extension TMDB {
     ///   - query: The search query string
     ///   - page: The page of results to return (default: 1)
     ///   - includeAdult: Whether to include adult content in results (default: false)
+    ///   - language: The locale for translated content
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/MultiSearchResult``
     /// - Throws: ``TMDBRequestError``
     static func searchMulti(
@@ -244,6 +249,9 @@ public extension TMDB {
     /// - Parameters:
     ///   - query: The search query string
     ///   - page: The page of results to return (default: 1)
+    ///   - includeAdult: Whether to include adult content in results (default: false)
+    ///   - language: The locale for translated content
+    ///   - region: The region for regional content
     /// - Returns: ``TMDB/Discover/PaginatedResponse`` of ``TMDB/SearchCollection``
     /// - Throws: ``TMDBRequestError``
     static func searchCollections(

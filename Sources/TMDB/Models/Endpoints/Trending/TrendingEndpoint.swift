@@ -50,7 +50,10 @@ extension TMDB.V3Endpoints.Trending: EndpointFactory {
 public extension TMDB {
     /// `/3/trending/all/{time_window}`
     /// [API Documentation](https://developer.themoviedb.org/reference/trending-all)
-    /// - Parameter timeWindow: Time window (day or week)
+    /// - Parameters:
+    ///   - timeWindow: Time window (day or week)
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: The locale for translated content
     /// - Returns: Paginated list of trending media
     static func trendingAll(
         timeWindow: TrendingTimeWindow,
@@ -71,7 +74,10 @@ public extension TMDB {
 
     /// `/3/trending/movie/{time_window}`
     /// [API Documentation](https://developer.themoviedb.org/reference/trending-movies)
-    /// - Parameter timeWindow: Time window (day or week)
+    /// - Parameters:
+    ///   - timeWindow: Time window (day or week)
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: The locale for translated content
     /// - Returns: Paginated list of trending movies
     static func trendingMovies(
         timeWindow: TrendingTimeWindow,
@@ -92,7 +98,10 @@ public extension TMDB {
 
     /// `/3/trending/tv/{time_window}`
     /// [API Documentation](https://developer.themoviedb.org/reference/trending-tv)
-    /// - Parameter timeWindow: Time window (day or week)
+    /// - Parameters:
+    ///   - timeWindow: Time window (day or week)
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: The locale for translated content
     /// - Returns: Paginated list of trending TV shows
     static func trendingTV(
         timeWindow: TrendingTimeWindow,
@@ -113,7 +122,10 @@ public extension TMDB {
 
     /// `/3/trending/person/{time_window}`
     /// [API Documentation](https://developer.themoviedb.org/reference/trending-people)
-    /// - Parameter timeWindow: Time window (day or week)
+    /// - Parameters:
+    ///   - timeWindow: Time window (day or week)
+    ///   - page: The page of results to return (default: 1)
+    ///   - language: The locale for translated content
     /// - Returns: Paginated list of trending people
     static func trendingPeople(
         timeWindow: TrendingTimeWindow,
