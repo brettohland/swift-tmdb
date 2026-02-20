@@ -13,7 +13,13 @@ public struct ISO8601YMD: Equatable, Sendable {
 extension ISO8601YMD: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        let stringValue = try container.decode(String.self)
+        guard
+            let stringValue = try? container.decode(String.self),
+            stringValue.isEmpty == false
+        else {
+            wrappedValue = nil
+            return
+        }
         wrappedValue = try Date(stringValue, strategy: .iso8601.year().month().day())
     }
 }

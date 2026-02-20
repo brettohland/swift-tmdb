@@ -330,7 +330,6 @@ Integration tests hit the **live TMDB API** to verify response models decode cor
 - **CI**: GitHub Actions workflow (`.github/workflows/integration.yml`) — manual dispatch + weekly Sunday schedule
 - **Pattern**: Each test suite uses `@Suite(.serialized, .enabled(if: TMDBCredential.isAvailable))` and wraps calls in `withLiveTMDB { ... }` to override dependencies with live URLSession + real API key
 - **Scope**: All read-only GET endpoints. Auth, account, list, and guest session endpoints are excluded (require authentication or have side effects)
-- **Excluded endpoints**: `latestMovie()`/`latestTVSeries()` (unpredictable content with null non-optional fields), `credits(forID:)` (parameter type mismatch — takes `Int` but TMDB expects string credit IDs)
 
 #### Known Integration Test Failures
 

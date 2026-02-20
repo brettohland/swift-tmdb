@@ -5,13 +5,7 @@ import TMDBMocking
 
 struct CreditEndpointTests {
     @Test func details() async throws {
-        let details = try await TMDB.credits(forID: 0)
-        #expect(!details.id.isEmpty)
-    }
-
-    @Test func detailsForMovie() async throws {
-        let movie = try TMDB.Movie.mock()
-        let details = try await TMDB.credits(forMovie: movie)
+        let details = try await TMDB.credits(forID: "52fe4250c3a36847f80149f3")
         #expect(!details.id.isEmpty)
     }
 }

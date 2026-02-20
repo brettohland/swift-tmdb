@@ -104,9 +104,12 @@ struct MovieIntegrationTests {
         }
     }
 
-    // Note: latestMovie() is excluded because the latest movie entry often has null values
-    // for non-optional fields (e.g. backdropPath) causing decode failures. This is a known
-    // schema limitation with unpredictable /movie/latest content.
+    @Test func latestMovie() async throws {
+        try await withLiveTMDB {
+            let movie = try await TMDB.latestMovie()
+            #expect(movie.id > 0)
+        }
+    }
 
     @Test func moviesNowPlaying() async throws {
         try await withLiveTMDB {

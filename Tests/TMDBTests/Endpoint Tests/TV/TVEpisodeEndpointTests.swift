@@ -2,6 +2,7 @@ import Dependencies
 import Foundation
 import Testing
 @testable import TMDB
+import TMDBMocking
 
 struct TVEpisodeEndpointTests {
     @Test func tvEpisodeDetails() async throws {

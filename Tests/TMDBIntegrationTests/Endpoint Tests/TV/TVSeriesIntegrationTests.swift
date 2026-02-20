@@ -123,9 +123,12 @@ struct TVSeriesIntegrationTests {
         }
     }
 
-    // Note: latestTVSeries() is excluded because the latest TV entry often has null values
-    // for non-optional fields causing decode failures. This is a known schema limitation
-    // with unpredictable /tv/latest content.
+    @Test func latestTVSeries() async throws {
+        try await withLiveTMDB {
+            let series = try await TMDB.latestTVSeries()
+            #expect(series.id > 0)
+        }
+    }
 
     @Test func tvSeriesAiringToday() async throws {
         try await withLiveTMDB {

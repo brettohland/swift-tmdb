@@ -37,7 +37,7 @@ public extension TMDB {
         @LanguageArray
         public var spokenLanguages: [Locale.Language]
         public let status: String
-        public let tagline: String
+        public let tagline: String?
         public let type: String
         public let voteAverage: Double
         public let voteCount: Int
@@ -71,7 +71,7 @@ public extension TMDB {
             seasons: [SeasonOverview],
             spokenLanguages: [Locale.Language],
             status: String,
-            tagline: String,
+            tagline: String?,
             type: String,
             voteAverage: Double,
             voteCount: Int,

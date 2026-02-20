@@ -153,7 +153,6 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, authe
 ### Credits
 
 - ``TMDB/credits(forID:)``
-- ``TMDB/credits(forMovie:)``
 
 ### Configuration
 

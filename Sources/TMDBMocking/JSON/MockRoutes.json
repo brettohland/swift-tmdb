@@ -9,7 +9,7 @@
   { "pattern": "^/3/certification/movie/list$", "file": "MovieCertifications" },
   { "pattern": "^/3/certification/tv/list$", "file": "TVCertifications" },
 
-  { "pattern": "^/3/credit/\\d+$", "file": "CreditDetails" },
+  { "pattern": "^/3/credit/[a-f0-9]+$", "file": "CreditDetails" },
 
   { "pattern": "^/3/discover/movie$", "file": "DiscoverMovieResponse" },
   { "pattern": "^/3/discover/tv$", "file": "DiscoverTVResponse" },

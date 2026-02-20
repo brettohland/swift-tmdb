@@ -2,6 +2,7 @@ import Dependencies
 import Foundation
 import Testing
 @testable import TMDB
+import TMDBMocking
 
 struct FindEndpointTests {
     @Test func findByExternalID() async throws {
