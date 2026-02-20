@@ -83,8 +83,13 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:swift-tmdb-Package.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -93,6 +98,16 @@
                BlueprintIdentifier = "TMDBTests"
                BuildableName = "TMDBTests"
                BlueprintName = "TMDBTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TMDBIntegrationTests"
+               BuildableName = "TMDBIntegrationTests"
+               BlueprintName = "TMDBIntegrationTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>

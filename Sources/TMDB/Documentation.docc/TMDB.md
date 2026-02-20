@@ -6,7 +6,7 @@ A Swift 6.2 wrapper around the TMDB API. Engineered for simplicity.
 
 `swift-tmdb` provides type-safe access to [The Movie Database](https://www.themoviedb.org) API using async/await and typed throws. All endpoints return mock data automatically in unit tests and SwiftUI previews via [PointFree's Dependencies](https://github.com/pointfreeco/swift-dependencies).
 
-Supports movies, TV series, seasons, episodes, search, discover, trending, and more. See <doc:Usage> to get started.
+Supports movies, TV series, seasons, episodes, search, discover, trending, authentication, account management, lists, guest sessions, and more. See <doc:Usage> to get started.
 
 ## Topics
 
@@ -41,11 +41,11 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, and m
 
 ### TV Series
 
-- ``TMDB/tvSeriesDetails(id:)``
-- ``TMDB/tvSeriesCredits(id:)``
-- ``TMDB/tvSeriesAggregateCredits(id:)``
-- ``TMDB/tvSeriesImages(id:)``
-- ``TMDB/tvSeriesVideos(id:)``
+- ``TMDB/tvSeriesDetails(id:language:)``
+- ``TMDB/tvSeriesCredits(id:language:)``
+- ``TMDB/tvSeriesAggregateCredits(id:language:)``
+- ``TMDB/tvSeriesImages(id:language:)``
+- ``TMDB/tvSeriesVideos(id:language:)``
 - ``TMDB/tvSeriesReviews(id:page:language:)``
 - ``TMDB/tvSeriesKeywords(id:)``
 - ``TMDB/similarTVSeries(id:page:language:)``
@@ -59,31 +59,31 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, and m
 - ``TMDB/tvSeriesScreenedTheatrically(id:)``
 - ``TMDB/tvSeriesChanges(id:startDate:endDate:page:)``
 - ``TMDB/latestTVSeries(language:)``
-- ``TMDB/tvSeriesAiringToday(page:language:region:)``
-- ``TMDB/tvSeriesOnTheAir(page:language:region:)``
+- ``TMDB/tvSeriesAiringToday(page:language:)``
+- ``TMDB/tvSeriesOnTheAir(page:language:)``
 - ``TMDB/popularTVSeries(page:language:region:)``
-- ``TMDB/topRatedTVSeries(page:language:region:)``
+- ``TMDB/topRatedTVSeries(page:language:)``
 
 ### TV Seasons
 
-- ``TMDB/tvSeasonDetails(seriesID:seasonNumber:)``
-- ``TMDB/tvSeasonCredits(seriesID:seasonNumber:)``
-- ``TMDB/tvSeasonAggregateCredits(seriesID:seasonNumber:)``
+- ``TMDB/tvSeasonDetails(seriesID:seasonNumber:language:)``
+- ``TMDB/tvSeasonCredits(seriesID:seasonNumber:language:)``
+- ``TMDB/tvSeasonAggregateCredits(seriesID:seasonNumber:language:)``
 - ``TMDB/tvSeasonExternalIDs(seriesID:seasonNumber:)``
-- ``TMDB/tvSeasonImages(seriesID:seasonNumber:)``
+- ``TMDB/tvSeasonImages(seriesID:seasonNumber:language:)``
 - ``TMDB/tvSeasonTranslations(seriesID:seasonNumber:)``
-- ``TMDB/tvSeasonVideos(seriesID:seasonNumber:)``
+- ``TMDB/tvSeasonVideos(seriesID:seasonNumber:language:)``
 - ``TMDB/tvSeasonWatchProviders(seriesID:seasonNumber:)``
 - ``TMDB/tvSeasonChanges(seasonID:startDate:endDate:page:)``
 
 ### TV Episodes
 
-- ``TMDB/tvEpisodeDetails(seriesID:seasonNumber:episodeNumber:)``
-- ``TMDB/tvEpisodeCredits(seriesID:seasonNumber:episodeNumber:)``
+- ``TMDB/tvEpisodeDetails(seriesID:seasonNumber:episodeNumber:language:)``
+- ``TMDB/tvEpisodeCredits(seriesID:seasonNumber:episodeNumber:language:)``
 - ``TMDB/tvEpisodeExternalIDs(seriesID:seasonNumber:episodeNumber:)``
-- ``TMDB/tvEpisodeImages(seriesID:seasonNumber:episodeNumber:)``
+- ``TMDB/tvEpisodeImages(seriesID:seasonNumber:episodeNumber:language:)``
 - ``TMDB/tvEpisodeTranslations(seriesID:seasonNumber:episodeNumber:)``
-- ``TMDB/tvEpisodeVideos(seriesID:seasonNumber:episodeNumber:)``
+- ``TMDB/tvEpisodeVideos(seriesID:seasonNumber:episodeNumber:language:)``
 - ``TMDB/tvEpisodeChanges(episodeID:startDate:endDate:page:)``
 - ``TMDB/episodeGroupDetails(id:)``
 
@@ -110,6 +110,27 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, and m
 - ``TMDB/trendingMovies(timeWindow:page:language:)``
 - ``TMDB/trendingTV(timeWindow:page:language:)``
 - ``TMDB/trendingPeople(timeWindow:page:language:)``
+
+### People
+
+- ``TMDB/personDetails(id:language:)``
+- ``TMDB/personMovieCredits(id:language:)``
+- ``TMDB/personTVCredits(id:language:)``
+- ``TMDB/personCombinedCredits(id:language:)``
+- ``TMDB/personExternalIDs(id:)``
+- ``TMDB/personImages(id:)``
+- ``TMDB/personTranslations(id:)``
+- ``TMDB/popularPeople(page:language:)``
+
+### Companies
+
+- ``TMDB/companyDetails(id:)``
+- ``TMDB/companyImages(id:)``
+
+### Networks
+
+- ``TMDB/networkDetails(id:)``
+- ``TMDB/networkImages(id:)``
 
 ### Find
 
@@ -159,6 +180,60 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, and m
 - ``TMDB/movieWatchProviders(language:)``
 - ``TMDB/tvWatchProviders(language:)``
 
+### Authentication
+
+- ``TMDB/createRequestToken(redirectTo:)``
+- ``TMDB/createAccessToken(requestToken:)``
+- ``TMDB/deleteAccessToken(_:)``
+- ``TMDB/convertToV3Session(accessToken:)``
+- ``TMDB/deleteV3Session(sessionID:)``
+- ``TMDB/AuthenticationCoordinator``
+
+### Account
+
+- ``TMDB/accountLists(page:)``
+- ``TMDB/favoriteMovies(sortBy:page:language:)``
+- ``TMDB/favoriteTVSeries(sortBy:page:language:)``
+- ``TMDB/ratedMovies(sortBy:page:language:)``
+- ``TMDB/ratedTVSeries(sortBy:page:language:)``
+- ``TMDB/accountMovieRecommendations(page:language:)``
+- ``TMDB/accountTVRecommendations(page:language:)``
+- ``TMDB/watchlistMovies(page:)``
+- ``TMDB/watchlistTVSeries(page:)``
+- ``TMDB/setFavorite(mediaType:mediaID:favorite:)``
+- ``TMDB/setWatchlist(mediaType:mediaID:watchlist:)``
+- ``TMDB/rateMovie(id:rating:)``
+- ``TMDB/deleteMovieRating(id:)``
+- ``TMDB/rateTVSeries(id:rating:)``
+- ``TMDB/deleteTVSeriesRating(id:)``
+- ``TMDB/rateTVEpisode(seriesID:seasonNumber:episodeNumber:rating:)``
+- ``TMDB/deleteTVEpisodeRating(seriesID:seasonNumber:episodeNumber:)``
+
+### Lists
+
+- ``TMDB/listDetails(listID:page:sortBy:)``
+- ``TMDB/listItemStatus(listID:mediaType:mediaID:)``
+- ``TMDB/createList(name:description:languageCode:regionCode:isPublic:)``
+- ``TMDB/updateList(listID:name:description:isPublic:sortBy:)``
+- ``TMDB/deleteList(listID:)``
+- ``TMDB/addItemsToList(listID:items:)``
+- ``TMDB/updateListItems(listID:items:)``
+- ``TMDB/removeItemsFromList(listID:items:)``
+- ``TMDB/clearList(listID:)``
+
+### Guest Sessions
+
+- ``TMDB/createGuestSession()``
+- ``TMDB/guestRatedMovies(sessionID:sortBy:page:language:)``
+- ``TMDB/guestRatedTV(sessionID:sortBy:page:language:)``
+- ``TMDB/guestRatedEpisodes(sessionID:sortBy:page:language:)``
+- ``TMDB/guestRateMovie(id:rating:guestSessionID:)``
+- ``TMDB/guestDeleteMovieRating(id:guestSessionID:)``
+- ``TMDB/guestRateTVSeries(id:rating:guestSessionID:)``
+- ``TMDB/guestDeleteTVSeriesRating(id:guestSessionID:)``
+- ``TMDB/guestRateTVEpisode(seriesID:seasonNumber:episodeNumber:rating:guestSessionID:)``
+- ``TMDB/guestDeleteTVEpisodeRating(seriesID:seasonNumber:episodeNumber:guestSessionID:)``
+
 ### Errors
 
 - ``TMDBAPIError``
@@ -192,6 +267,22 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, and m
 - ``TMDB/EpisodeGroupDetails``
 - ``TMDB/ScreenedTheatricallyResult``
 
+### People Response Types
+
+- ``TMDB/Person``
+- ``TMDB/Person/Gender``
+- ``TMDB/PersonMovieCredits``
+- ``TMDB/PersonTVCredits``
+- ``TMDB/PersonCombinedCredits``
+- ``TMDB/PersonImages``
+- ``TMDB/PopularPerson``
+
+### Company & Network Response Types
+
+- ``TMDB/Company``
+- ``TMDB/Network``
+- ``TMDB/LogoCollection``
+
 ### Search Response Types
 
 - ``TMDB/MultiSearchResult``
@@ -203,6 +294,45 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, and m
 
 - ``TMDB/TrendingResult``
 - ``TMDB/TrendingPerson``
+
+### Auth Response Types
+
+- ``TMDB/Auth``
+- ``TMDB/Auth/RequestToken``
+- ``TMDB/Auth/AccessToken``
+- ``TMDB/Auth/V3Session``
+- ``TMDB/Auth/DeleteResult``
+- ``TMDB/Auth/GuestSession``
+- ``TMDB/AuthSession``
+
+### Account Response Types
+
+- ``TMDB/Account``
+- ``TMDB/Account/SortOrder``
+- ``TMDB/Account/MediaType``
+- ``TMDB/Account/AccountList``
+- ``TMDB/Account/RatedMovie``
+- ``TMDB/Account/RatedTV``
+- ``TMDB/Account/AccountRating``
+- ``TMDB/Account/WriteResult``
+
+### List Response Types
+
+- ``TMDB/List``
+- ``TMDB/List/Details``
+- ``TMDB/List/Item``
+- ``TMDB/List/Creator``
+- ``TMDB/List/ItemStatus``
+- ``TMDB/List/CreateResult``
+- ``TMDB/List/ItemsResult``
+- ``TMDB/List/ItemResult``
+
+### Guest Session Response Types
+
+- ``TMDB/GuestSession``
+- ``TMDB/GuestSession/RatedMovie``
+- ``TMDB/GuestSession/RatedTV``
+- ``TMDB/GuestSession/RatedEpisode``
 
 ### Pagination
 

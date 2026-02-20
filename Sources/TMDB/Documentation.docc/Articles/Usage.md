@@ -130,6 +130,13 @@ Available clients:
 | `TVSeriesClient` | `\.tmdbTVSeries` | All TV series endpoints |
 | `TVSeasonsClient` | `\.tmdbTVSeasons` | All TV season endpoints |
 | `TVEpisodesClient` | `\.tmdbTVEpisodes` | All TV episode endpoints |
+| `PeopleClient` | `\.tmdbPeople` | All people endpoints |
+| `CompanyClient` | `\.tmdbCompany` | Company details and images |
+| `NetworkClient` | `\.tmdbNetwork` | Network details and images |
+| `AuthClient` | `\.tmdbAuth` | Authentication token and session management |
+| `AccountClient` | `\.tmdbAccount` | Account lists, favorites, watchlist, ratings |
+| `ListsClient` | `\.tmdbLists` | List CRUD and item management |
+| `GuestSessionClient` | `\.tmdbGuestSession` | Guest session creation and rated content |
 
 The `swift-dependencies` module is re-exported when importing `TMDBDependencies`.
 
