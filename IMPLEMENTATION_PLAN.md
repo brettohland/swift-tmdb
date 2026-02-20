@@ -1,8 +1,8 @@
 # TMDB API v3 Read-Only Endpoints - Implementation Plan
 
-**Status:** Phase 8 Complete ✅ | Lists v4 CRUD done
-**Last Updated:** 2026-02-19
-**Target:** 138 total endpoints (109 read-only + 5 auth + 15 account + 9 lists)
+**Status:** Phase 9 Complete ✅ | Guest Sessions done
+**Last Updated:** 2026-02-20
+**Target:** 148 total endpoints (109 read-only + 5 auth + 15 account + 9 lists + 10 guest sessions)
 
 ---
 
@@ -33,7 +33,8 @@
 | **Phase 6** | 5 | ✅ Complete | v1.0.0 |
 | **Phase 7** | 15 | ✅ Complete | v1.0.0 |
 | **Phase 8** | 9 | ✅ Complete | v1.0.0 |
-| **Total** | **138** | **138/138 (100%)** | |
+| **Phase 9** | 10 | ✅ Complete | v1.1.0 |
+| **Total** | **148** | **148/148 (100%)** | |
 
 ---
 
@@ -981,7 +982,7 @@ swift test --filter MovieEndpointTests/movieCredits
 
 ### Auth infrastructure complete ✅
 
-138 endpoints implemented (109 read-only + 5 auth + 15 account + 9 lists). All planned phases are complete. Phase 9 (Guest Sessions) is an optional future addition.
+148 endpoints implemented (109 read-only + 5 auth + 15 account + 9 lists + 10 guest sessions). All phases are complete.
 
 ---
 
@@ -1334,23 +1335,38 @@ The following v3 list endpoints exist but are **not implemented** — v4 is the 
 
 ---
 
-## Phase 9: Guest Sessions (Optional)
+## Phase 9: Guest Sessions (COMPLETE ✅)
 
-**Priority:** LOW
-**Complexity:** LOW
-**Target Release:** v1.1.0
-**New Endpoints:** 4
+**Completed:** 2026-02-20
+**Endpoints Implemented:** 10 (4 read + 6 guest write variants)
+**Tests Added:** 17 (all passing)
 
-Guest sessions allow unauthenticated users to submit ratings without a full account. Useful for apps that want to offer ratings without requiring login.
+Guest sessions allow unauthenticated users to submit ratings without a full account. Guest write endpoints reuse the same URL paths as authenticated rating endpoints but use `guest_session_id` instead of `session_id`.
 
+### Read Endpoints (4)
 ```
-⏳ POST /3/authentication/guest_session/new     → GuestSession          TMDB.createGuestSession()
-⏳ GET  /3/guest_session/{id}/rated/movies      → PaginatedResponse<RatedMovie>  TMDB.guestRatedMovies(sessionID:)
-⏳ GET  /3/guest_session/{id}/rated/tv          → PaginatedResponse<RatedTV>     TMDB.guestRatedTV(sessionID:)
-⏳ GET  /3/guest_session/{id}/rated/tv/episodes → PaginatedResponse<RatedEpisode> TMDB.guestRatedEpisodes(sessionID:)
+✅ GET  /3/authentication/guest_session/new     → Auth.GuestSession                        TMDB.createGuestSession()
+✅ GET  /3/guest_session/{id}/rated/movies      → PaginatedResponse<GuestSession.RatedMovie>   TMDB.guestRatedMovies(sessionID:)
+✅ GET  /3/guest_session/{id}/rated/tv          → PaginatedResponse<GuestSession.RatedTV>       TMDB.guestRatedTV(sessionID:)
+✅ GET  /3/guest_session/{id}/rated/tv/episodes → PaginatedResponse<GuestSession.RatedEpisode>  TMDB.guestRatedEpisodes(sessionID:)
 ```
 
-Guest sessions expire after 60 minutes of inactivity or 24 hours. The same v3 rating write endpoints from Phase 7 are reused — they accept either a `session_id` or `guest_session_id` query parameter.
+### Guest Write Endpoints (6)
+```
+✅ POST   /3/movie/{id}/rating                                      TMDB.guestRateMovie(id:rating:guestSessionID:)
+✅ DELETE  /3/movie/{id}/rating                                      TMDB.guestDeleteMovieRating(id:guestSessionID:)
+✅ POST   /3/tv/{id}/rating                                         TMDB.guestRateTVSeries(id:rating:guestSessionID:)
+✅ DELETE  /3/tv/{id}/rating                                         TMDB.guestDeleteTVSeriesRating(id:guestSessionID:)
+✅ POST   /3/tv/{id}/season/{s}/episode/{e}/rating                   TMDB.guestRateTVEpisode(seriesID:seasonNumber:episodeNumber:rating:guestSessionID:)
+✅ DELETE  /3/tv/{id}/season/{s}/episode/{e}/rating                   TMDB.guestDeleteTVEpisodeRating(seriesID:seasonNumber:episodeNumber:guestSessionID:)
+```
+
+### Key Decisions
+- `createGuestSession` is **GET** (not POST) — matches TMDB API docs
+- Guest rated responses return `rating: Double` directly on each result (not nested `accountRating` object), requiring new response models (`GuestSession.RatedMovie`, `GuestSession.RatedTV`, `GuestSession.RatedEpisode`)
+- Guest write cases added to `V3Endpoints.AccountWrite` enum (same URL paths, different query param)
+- Added `guestSessionID` to `QueryItemKey` enum
+- `GuestSessionClient` dependency client wraps all 10 endpoints
 
 ---
 
@@ -1367,10 +1383,10 @@ Guest sessions expire after 60 minutes of inactivity or 24 hours. The same v3 ra
 | v0.6.0 | Phase 5 - People (12) | ✅ Ready |
 | v1.0.0-alpha | Phase 6 - Auth (5) | ✅ Ready |
 | v1.0.0 | Phase 7 - Account (15) + Phase 8 - Lists (9) | ✅ Ready |
-| v1.1.0 | Phase 9 - Guest Sessions (4) | 💡 Optional |
+| v1.1.0 | Phase 9 - Guest Sessions (10) | ✅ Ready |
 
 ---
 
-**Document Version:** 1.8
-**Last Updated:** 2026-02-19
-**Next Review:** Phase 9 (Guest Sessions) if needed
+**Document Version:** 1.9
+**Last Updated:** 2026-02-20
+**Next Review:** All phases complete

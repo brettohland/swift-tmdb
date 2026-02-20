@@ -11,6 +11,12 @@ extension TMDB.V3Endpoints {
         case deleteTVSeriesRating(id: Int, sessionID: String)
         case rateTVEpisode(seriesID: Int, seasonNumber: Int, episodeNumber: Int, sessionID: String)
         case deleteTVEpisodeRating(seriesID: Int, seasonNumber: Int, episodeNumber: Int, sessionID: String)
+        case guestRateMovie(id: Int, guestSessionID: String)
+        case guestDeleteMovieRating(id: Int, guestSessionID: String)
+        case guestRateTVSeries(id: Int, guestSessionID: String)
+        case guestDeleteTVSeriesRating(id: Int, guestSessionID: String)
+        case guestRateTVEpisode(seriesID: Int, seasonNumber: Int, episodeNumber: Int, guestSessionID: String)
+        case guestDeleteTVEpisodeRating(seriesID: Int, seasonNumber: Int, episodeNumber: Int, guestSessionID: String)
     }
 }
 
@@ -69,6 +75,44 @@ extension TMDB.V3Endpoints.AccountWrite: EndpointFactory {
             paths.append("\(episodeNumber)")
             paths.append("rating")
             queryItems.append(.sessionID, value: sessionID)
+        case .guestRateMovie(let id, let guestSessionID):
+            paths.append("movie")
+            paths.append("\(id)")
+            paths.append("rating")
+            queryItems.append(.guestSessionID, value: guestSessionID)
+        case .guestDeleteMovieRating(let id, let guestSessionID):
+            paths.append("movie")
+            paths.append("\(id)")
+            paths.append("rating")
+            queryItems.append(.guestSessionID, value: guestSessionID)
+        case .guestRateTVSeries(let id, let guestSessionID):
+            paths.append("tv")
+            paths.append("\(id)")
+            paths.append("rating")
+            queryItems.append(.guestSessionID, value: guestSessionID)
+        case .guestDeleteTVSeriesRating(let id, let guestSessionID):
+            paths.append("tv")
+            paths.append("\(id)")
+            paths.append("rating")
+            queryItems.append(.guestSessionID, value: guestSessionID)
+        case .guestRateTVEpisode(let seriesID, let seasonNumber, let episodeNumber, let guestSessionID):
+            paths.append("tv")
+            paths.append("\(seriesID)")
+            paths.append("season")
+            paths.append("\(seasonNumber)")
+            paths.append("episode")
+            paths.append("\(episodeNumber)")
+            paths.append("rating")
+            queryItems.append(.guestSessionID, value: guestSessionID)
+        case .guestDeleteTVEpisodeRating(let seriesID, let seasonNumber, let episodeNumber, let guestSessionID):
+            paths.append("tv")
+            paths.append("\(seriesID)")
+            paths.append("season")
+            paths.append("\(seasonNumber)")
+            paths.append("episode")
+            paths.append("\(episodeNumber)")
+            paths.append("rating")
+            queryItems.append(.guestSessionID, value: guestSessionID)
         }
         return URLFactory.makeURL(baseURL: baseURL, appending: paths, queryItems: queryItems)
     }

@@ -129,7 +129,12 @@
   { "pattern": "^/4/auth/request_token$", "file": "AuthRequestToken" },
   { "pattern": "^/4/auth/access_token$", "file": "AuthAccessToken" },
   { "pattern": "^/3/authentication/session/convert/4$", "file": "AuthV3Session" },
+  { "pattern": "^/3/authentication/guest_session/new$", "file": "AuthGuestSession" },
   { "pattern": "^/3/authentication/session$", "file": "AuthDeleteResult" },
+
+  { "pattern": "^/3/guest_session/[^/]+/rated/tv/episodes$", "file": "GuestRatedEpisodes" },
+  { "pattern": "^/3/guest_session/[^/]+/rated/tv$", "file": "GuestRatedTV" },
+  { "pattern": "^/3/guest_session/[^/]+/rated/movies$", "file": "GuestRatedMovies" },
 
   { "pattern": "^/3/account/[^/]+/favorite$", "file": "AccountWriteResult" },
   { "pattern": "^/3/account/[^/]+/watchlist$", "file": "AccountWriteResult" },

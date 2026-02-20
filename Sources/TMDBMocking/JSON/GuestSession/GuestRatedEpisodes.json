@@ -1,0 +1,22 @@
+{
+  "page": 1,
+  "total_results": 1,
+  "total_pages": 1,
+  "results": [
+    {
+      "air_date": "2013-09-29",
+      "episode_number": 16,
+      "id": 62161,
+      "name": "Felina",
+      "overview": "All bad things must come to an end.",
+      "production_code": "",
+      "runtime": 55,
+      "season_number": 5,
+      "show_id": 1396,
+      "still_path": null,
+      "vote_average": 9.1,
+      "vote_count": 250,
+      "rating": 10.0
+    }
+  ]
+}
