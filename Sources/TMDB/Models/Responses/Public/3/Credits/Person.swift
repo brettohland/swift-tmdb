@@ -10,7 +10,7 @@ public extension TMDB.Credits {
         public let popularity: Double
         public let gender: Int
         public let knownForDepartment: String
-        public let profilePath: URL
+        public let profilePath: String
 
         public init(
             isAdult: Bool,
@@ -21,7 +21,7 @@ public extension TMDB.Credits {
             popularity: Double,
             gender: Int,
             knownForDepartment: String,
-            profilePath: URL,
+            profilePath: String,
         ) {
             _isAdult = NilBoolean(wrappedValue: isAdult)
             self.id = id

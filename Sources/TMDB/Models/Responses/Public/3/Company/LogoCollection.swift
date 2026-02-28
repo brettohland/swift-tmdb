@@ -26,7 +26,7 @@ public extension TMDB {
     struct LogoDetail: Codable, Sendable {
         public let id: String
         public let aspectRatio: Double
-        public let filePath: URL
+        public let filePath: String
         public let height: Int
         public let width: Int
         public let fileType: String
@@ -36,7 +36,7 @@ public extension TMDB {
         public init(
             id: String,
             aspectRatio: Double,
-            filePath: URL,
+            filePath: String,
             height: Int,
             width: Int,
             fileType: String,

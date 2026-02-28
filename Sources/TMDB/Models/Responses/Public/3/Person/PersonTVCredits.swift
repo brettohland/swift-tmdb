@@ -22,8 +22,8 @@ public extension TMDB {
         public let episodeCount: Int
         public let firstAirDate: Date?
         public let overview: String
-        public let posterPath: URL?
-        public let backdropPath: URL?
+        public let posterPath: String?
+        public let backdropPath: String?
         public let popularity: Double
         public let voteAverage: Double
         public let voteCount: Int
@@ -42,8 +42,8 @@ public extension TMDB {
             episodeCount: Int,
             firstAirDate: Date?,
             overview: String,
-            posterPath: URL?,
-            backdropPath: URL?,
+            posterPath: String?,
+            backdropPath: String?,
             popularity: Double,
             voteAverage: Double,
             voteCount: Int,
@@ -82,8 +82,8 @@ public extension TMDB {
         public let episodeCount: Int
         public let firstAirDate: Date?
         public let overview: String
-        public let posterPath: URL?
-        public let backdropPath: URL?
+        public let posterPath: String?
+        public let backdropPath: String?
         public let popularity: Double
         public let voteAverage: Double
         public let voteCount: Int
@@ -103,8 +103,8 @@ public extension TMDB {
             episodeCount: Int,
             firstAirDate: Date?,
             overview: String,
-            posterPath: URL?,
-            backdropPath: URL?,
+            posterPath: String?,
+            backdropPath: String?,
             popularity: Double,
             voteAverage: Double,
             voteCount: Int,
@@ -174,8 +174,8 @@ extension TMDB.PersonTVCastCredit: Codable {
         }
 
         overview = try container.decodeIfPresent(String.self, forKey: .overview) ?? ""
-        posterPath = try container.decodeIfPresent(URL.self, forKey: .posterPath)
-        backdropPath = try container.decodeIfPresent(URL.self, forKey: .backdropPath)
+        posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
+        backdropPath = try container.decodeIfPresent(String.self, forKey: .backdropPath)
         popularity = try container.decodeIfPresent(Double.self, forKey: .popularity) ?? 0
         voteAverage = try container.decodeIfPresent(Double.self, forKey: .voteAverage) ?? 0
         voteCount = try container.decodeIfPresent(Int.self, forKey: .voteCount) ?? 0
@@ -248,8 +248,8 @@ extension TMDB.PersonTVCrewCredit: Codable {
         }
 
         overview = try container.decodeIfPresent(String.self, forKey: .overview) ?? ""
-        posterPath = try container.decodeIfPresent(URL.self, forKey: .posterPath)
-        backdropPath = try container.decodeIfPresent(URL.self, forKey: .backdropPath)
+        posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
+        backdropPath = try container.decodeIfPresent(String.self, forKey: .backdropPath)
         popularity = try container.decodeIfPresent(Double.self, forKey: .popularity) ?? 0
         voteAverage = try container.decodeIfPresent(Double.self, forKey: .voteAverage) ?? 0
         voteCount = try container.decodeIfPresent(Int.self, forKey: .voteCount) ?? 0

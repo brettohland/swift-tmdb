@@ -5,7 +5,7 @@ public extension TMDB {
         public let id: Int
         public let name: String
         public let overview: String
-        public let posterPath: URL?
+        public let posterPath: String?
         @ISO8601YMD
         public var airDate: Date?
         public let seasonNumber: Int
@@ -16,7 +16,7 @@ public extension TMDB {
             id: Int,
             name: String,
             overview: String,
-            posterPath: URL?,
+            posterPath: String?,
             airDate: Date?,
             seasonNumber: Int,
             voteAverage: Double,

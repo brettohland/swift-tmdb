@@ -8,7 +8,7 @@ public extension TMDB {
         public let episodeNumber: Int
         public let seasonNumber: Int
         public let airDate: Date?
-        public let stillPath: URL?
+        public let stillPath: String?
         public let voteAverage: Double
         public let voteCount: Int
         public let productionCode: String
@@ -24,7 +24,7 @@ public extension TMDB {
             episodeNumber: Int,
             seasonNumber: Int,
             airDate: Date?,
-            stillPath: URL?,
+            stillPath: String?,
             voteAverage: Double,
             voteCount: Int,
             productionCode: String,
@@ -81,7 +81,7 @@ extension TMDB.TVEpisode: Codable {
         } else {
             airDate = nil
         }
-        stillPath = try container.decodeIfPresent(URL.self, forKey: .stillPath)
+        stillPath = try container.decodeIfPresent(String.self, forKey: .stillPath)
         voteAverage = try container.decode(Double.self, forKey: .voteAverage)
         voteCount = try container.decode(Int.self, forKey: .voteCount)
         productionCode = try container.decodeIfPresent(String.self, forKey: .productionCode) ?? ""

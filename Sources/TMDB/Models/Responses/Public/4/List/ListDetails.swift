@@ -6,8 +6,8 @@ public extension TMDB.List {
         public let id: Int
         public let name: String
         public let description: String
-        public let posterPath: URL?
-        public let backdropPath: URL?
+        public let posterPath: String?
+        public let backdropPath: String?
         public let numberOfItems: Int
         public let isPublic: Int
         public let averageRating: Double
@@ -32,8 +32,8 @@ public extension TMDB.List {
             id: Int,
             name: String,
             description: String,
-            posterPath: URL?,
-            backdropPath: URL?,
+            posterPath: String?,
+            backdropPath: String?,
             numberOfItems: Int,
             isPublic: Int,
             averageRating: Double,

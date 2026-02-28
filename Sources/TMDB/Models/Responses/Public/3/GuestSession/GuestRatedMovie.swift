@@ -6,14 +6,14 @@ public extension TMDB.GuestSession {
 
         @NilBoolean
         public var isAdult: Bool
-        public let backdropPath: URL?
+        public let backdropPath: String?
         public let genreIDs: [Int]
         public let id: Int
         @LanguageCode
         public var originalLanguage: Locale.Language
         public let overview: String?
         public let popularity: Double?
-        public let posterPath: URL?
+        public let posterPath: String?
         @NilBoolean
         public var isVideo: Bool
         public let voteAverage: Double?
@@ -32,13 +32,13 @@ public extension TMDB.GuestSession {
 
         public init(
             isAdult: Bool,
-            backdropPath: URL?,
+            backdropPath: String?,
             genreIDs: [Int],
             id: Int,
             originalLanguage: Locale.Language,
             overview: String?,
             popularity: Double?,
-            posterPath: URL?,
+            posterPath: String?,
             isVideo: Bool,
             voteAverage: Double?,
             voteCount: Int?,

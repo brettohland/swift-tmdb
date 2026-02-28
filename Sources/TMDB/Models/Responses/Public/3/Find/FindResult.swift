@@ -34,7 +34,7 @@ public extension TMDB {
         public var isAdult: Bool
         public let gender: Int?
         public let popularity: Double?
-        public let profilePath: URL?
+        public let profilePath: String?
         public let knownForDepartment: String?
 
         public init(
@@ -43,7 +43,7 @@ public extension TMDB {
             isAdult: Bool,
             gender: Int?,
             popularity: Double?,
-            profilePath: URL?,
+            profilePath: String?,
             knownForDepartment: String?,
         ) {
             self.id = id
@@ -77,7 +77,7 @@ public extension TMDB {
         public let episodeNumber: Int
         public let seasonNumber: Int
         public let showID: Int
-        public let stillPath: URL?
+        public let stillPath: String?
 
         public init(
             id: Int,
@@ -89,7 +89,7 @@ public extension TMDB {
             episodeNumber: Int,
             seasonNumber: Int,
             showID: Int,
-            stillPath: URL?,
+            stillPath: String?,
         ) {
             self.id = id
             self.name = name
@@ -123,7 +123,7 @@ public extension TMDB {
         public let overview: String
         @ISO8601YMD
         public var airDate: Date?
-        public let posterPath: URL?
+        public let posterPath: String?
         public let seasonNumber: Int
         public let showID: Int
 
@@ -132,7 +132,7 @@ public extension TMDB {
             name: String,
             overview: String,
             airDate: Date?,
-            posterPath: URL?,
+            posterPath: String?,
             seasonNumber: Int,
             showID: Int,
         ) {

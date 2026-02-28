@@ -12,6 +12,8 @@ public enum TMDBRequestError: Error {
     case authenticationAlreadyInProgress
     /// No authenticated session is available
     case notAuthenticated
+    /// Image configuration has not been fetched — call `TMDB.initialize()` first
+    case imageConfigurationMissing
 }
 
 extension TMDBRequestError: Equatable {
@@ -26,6 +28,8 @@ extension TMDBRequestError: Equatable {
         case (.authenticationAlreadyInProgress, .authenticationAlreadyInProgress):
             true
         case (.notAuthenticated, .notAuthenticated):
+            true
+        case (.imageConfigurationMissing, .imageConfigurationMissing):
             true
         default:
             false

@@ -2,14 +2,14 @@ import Foundation
 
 public extension TMDB.Account {
     struct RatedTV: Codable, Sendable {
-        public let backdropPath: URL?
+        public let backdropPath: String?
         public let genreIDs: [Int]
         public let id: Int
         @LanguageCode
         public var originalLanguage: Locale.Language
         public let overview: String?
         public let popularity: Double?
-        public let posterPath: URL?
+        public let posterPath: String?
         public let voteAverage: Double?
         public let voteCount: Int?
         public let name: String?
@@ -20,13 +20,13 @@ public extension TMDB.Account {
         public let accountRating: TMDB.Account.AccountRating
 
         public init(
-            backdropPath: URL?,
+            backdropPath: String?,
             genreIDs: [Int],
             id: Int,
             originalLanguage: Locale.Language,
             overview: String?,
             popularity: Double?,
-            posterPath: URL?,
+            posterPath: String?,
             voteAverage: Double?,
             voteCount: Int?,
             name: String?,

@@ -8,6 +8,16 @@ internal import Dependencies
 /// This is because all requests to TMDB require an API key.
 @MainActor
 public enum TMDB {
+    /// The cached image configuration, auto-fetched during ``initialize(configuration:)`` or
+    /// ``initialize(apiKey:urlSessionConfiguration:)``.
+    ///
+    /// Use this to inspect available image sizes (e.g., ``ImageConfiguration/posterSizes``)
+    /// or to verify that initialization has completed. Returns `nil` before initialization.
+    public internal(set) nonisolated(unsafe) static var imageConfiguration: ImageConfiguration?
+
+    /// The cached list of change keys, auto-fetched during initialization.
+    public internal(set) nonisolated(unsafe) static var changeKeys: [Configuration.ChangeKey] = []
+
     /// Initializes the `swift-tmdb` module with a given configuration value
     /// - Parameter configuration: Allows for customization over various aspects of the framework
     /// - Throws: ``TMDBInitializationError``
@@ -23,6 +33,14 @@ public enum TMDB {
             throw TMDBInitializationError.alreadyInitialized
         case .none:
             await Dependency(\.sdkConfigurationStore).wrappedValue.setConfiguration(newConfiguration: configuration)
+        }
+
+        do {
+            let configResponse = try await TMDB.configurationDetails()
+            TMDB.imageConfiguration = configResponse.images
+            TMDB.changeKeys = configResponse.changeKeys
+        } catch {
+            throw .configurationFetchFailed(error)
         }
     }
 

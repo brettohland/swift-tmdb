@@ -5,10 +5,10 @@ public extension TMDB {
         public let id: Int
         public let name: String
         public let overview: String
-        public let posterPath: URL?
-        public let backdropPath: URL?
+        public let posterPath: String?
+        public let backdropPath: String?
 
-        public init(id: Int, name: String, overview: String, posterPath: URL?, backdropPath: URL?) {
+        public init(id: Int, name: String, overview: String, posterPath: String?, backdropPath: String?) {
             self.id = id
             self.name = name
             self.overview = overview

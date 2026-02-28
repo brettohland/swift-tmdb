@@ -4,7 +4,7 @@ public extension TMDB {
     /// Supported image configuration details
     struct ImageConfiguration: Codable, Sendable {
         public let baseUrl: URL?
-        public let secureBaseUrl: URL?
+        public let secureBaseUrl: URL
         public let backdropSizes: [TMDB.Configuration.ImageSize]
         public let logoSizes: [TMDB.Configuration.ImageSize]
         public let posterSizes: [TMDB.Configuration.ImageSize]
@@ -13,7 +13,7 @@ public extension TMDB {
 
         public init(
             baseUrl: URL?,
-            secureBaseUrl: URL?,
+            secureBaseUrl: URL,
             backdropSizes: [TMDB.Configuration.ImageSize],
             logoSizes: [TMDB.Configuration.ImageSize],
             posterSizes: [TMDB.Configuration.ImageSize],

@@ -233,6 +233,15 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, authe
 - ``TMDB/guestRateTVEpisode(seriesID:seasonNumber:episodeNumber:rating:guestSessionID:)``
 - ``TMDB/guestDeleteTVEpisodeRating(seriesID:seasonNumber:episodeNumber:guestSessionID:)``
 
+### Image URL Construction
+
+- ``PosterImageProviding``
+- ``BackdropImageProviding``
+- ``ProfileImageProviding``
+- ``LogoImageProviding``
+- ``StillImageProviding``
+- ``ImageURLProviding``
+
 ### Errors
 
 - ``TMDBAPIError``
@@ -357,6 +366,8 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, authe
 
 ### Configuration Response Types
 
+- ``TMDB/imageConfiguration``
+- ``TMDB/changeKeys``
 - ``TMDB/ConfigurationResponse``
 - ``TMDB/ImageConfiguration``
 - ``TMDB/Configuration/ImageSize``

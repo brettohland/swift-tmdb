@@ -9,7 +9,7 @@ public extension TMDB {
         public let gender: Int?
         public let knownForDepartment: String?
         public let popularity: Double?
-        public let profilePath: URL?
+        public let profilePath: String?
         public let knownFor: [MultiSearchResult]
 
         public init(
@@ -19,7 +19,7 @@ public extension TMDB {
             gender: Int?,
             knownForDepartment: String?,
             popularity: Double?,
-            profilePath: URL?,
+            profilePath: String?,
             knownFor: [MultiSearchResult],
         ) {
             self.id = id

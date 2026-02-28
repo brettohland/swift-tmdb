@@ -5,7 +5,7 @@ public extension TMDB {
     struct TrendingPerson: Codable, Sendable, Discoverable {
         public let id: Int
         public let name: String
-        public let profilePath: URL?
+        public let profilePath: String?
         public let popularity: Double
         public let knownForDepartment: String?
         @NilBoolean public var isAdult: Bool
@@ -13,7 +13,7 @@ public extension TMDB {
         public init(
             id: Int,
             name: String,
-            profilePath: URL?,
+            profilePath: String?,
             popularity: Double,
             knownForDepartment: String?,
             isAdult: Bool,

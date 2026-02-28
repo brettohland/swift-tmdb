@@ -19,7 +19,7 @@ public extension TMDB {
         public let name: String
         public let placeOfBirth: String?
         public let popularity: Double
-        public let profilePath: URL?
+        public let profilePath: String?
 
         public init(
             isAdult: Bool,
@@ -35,7 +35,7 @@ public extension TMDB {
             name: String,
             placeOfBirth: String?,
             popularity: Double,
-            profilePath: URL?,
+            profilePath: String?,
         ) {
             _isAdult = NilBoolean(wrappedValue: isAdult)
             self.alsoKnownAs = alsoKnownAs
@@ -121,7 +121,7 @@ extension TMDB.Person: Codable {
         name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
         placeOfBirth = try container.decodeIfPresent(String.self, forKey: .placeOfBirth)
         popularity = try container.decodeIfPresent(Double.self, forKey: .popularity) ?? 0
-        profilePath = try container.decodeIfPresent(URL.self, forKey: .profilePath)
+        profilePath = try container.decodeIfPresent(String.self, forKey: .profilePath)
     }
 
     public func encode(to encoder: any Encoder) throws {

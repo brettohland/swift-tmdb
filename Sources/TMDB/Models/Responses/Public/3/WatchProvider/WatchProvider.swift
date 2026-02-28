@@ -5,10 +5,10 @@ public extension TMDB {
     struct WatchProvider: Codable, Identifiable, Sendable {
         public let id: Int
         public let name: String
-        public let logoPath: URL
+        public let logoPath: String
         public let displayPriority: Int
 
-        public init(id: Int, name: String, logoPath: URL, displayPriority: Int) {
+        public init(id: Int, name: String, logoPath: String, displayPriority: Int) {
             self.id = id
             self.name = name
             self.logoPath = logoPath
