@@ -39,12 +39,16 @@ public extension StillImageProviding {
     /// - Parameter size: The desired image size (e.g., `.setWidth(300)` or `.original`).
     /// - Returns: A fully-qualified image URL, or `nil` if ``stillPath`` is `nil`.
     /// - Throws: ``TMDBRequestError/imageConfigurationMissing`` if ``TMDB/initialize(configuration:)``
-    ///   has not been called.
+    ///   has not been called, or ``TMDBRequestError/unsupportedImageSize(requested:supported:)`` if
+    ///   the size is not in ``TMDB/ImageConfiguration/stillSizes``.
     func stillImageURL(
         size: TMDB.Configuration.ImageSize,
     ) throws(TMDBRequestError) -> URL? {
         guard let configuration = TMDB.imageConfiguration else {
             throw .imageConfigurationMissing
+        }
+        guard configuration.stillSizes.contains(size) else {
+            throw .unsupportedImageSize(requested: size, supported: configuration.stillSizes)
         }
         guard let stillPath else { return nil }
         return URL(string: configuration.secureBaseUrl.absoluteString + size.rawValue + stillPath)

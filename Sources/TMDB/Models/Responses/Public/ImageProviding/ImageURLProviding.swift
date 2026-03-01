@@ -16,8 +16,9 @@ import Foundation
 /// ```swift
 /// let images = try await TMDB.movieImages(id: 550)
 ///
-/// for backdrop in images.backdrops {
-///     if let url = try backdrop.imageURL(size: .setWidth(780)) {
+/// if let config = TMDB.imageConfiguration {
+///     for backdrop in images.backdrops {
+///         let url = try backdrop.imageURL(size: .setWidth(780), supportedSizes: config.backdropSizes)
 ///         // Use url to load the image
 ///     }
 /// }
@@ -25,8 +26,8 @@ import Foundation
 ///
 /// ## Choosing the Right Size
 ///
-/// Since the image type depends on context, use the corresponding size array from
-/// ``TMDB/imageConfiguration``:
+/// Since the image type depends on context, pass the corresponding size array from
+/// ``TMDB/imageConfiguration`` as `supportedSizes`:
 /// - Posters: ``TMDB/ImageConfiguration/posterSizes``
 /// - Backdrops: ``TMDB/ImageConfiguration/backdropSizes``
 /// - Profiles: ``TMDB/ImageConfiguration/profileSizes``
@@ -41,15 +42,23 @@ public extension ImageURLProviding {
     /// Constructs a full image URL by combining the cached image configuration's secure base URL,
     /// the specified size, and this instance's ``filePath``.
     ///
-    /// - Parameter size: The desired image size (e.g., `.setWidth(500)` or `.original`).
+    /// - Parameters:
+    ///   - size: The desired image size (e.g., `.setWidth(500)` or `.original`).
+    ///   - supportedSizes: The array of valid sizes for this image type (e.g.,
+    ///     ``TMDB/ImageConfiguration/backdropSizes`` for backdrop images).
     /// - Returns: A fully-qualified image URL.
     /// - Throws: ``TMDBRequestError/imageConfigurationMissing`` if ``TMDB/initialize(configuration:)``
-    ///   has not been called.
+    ///   has not been called, or ``TMDBRequestError/unsupportedImageSize(requested:supported:)`` if
+    ///   the size is not in `supportedSizes`.
     func imageURL(
         size: TMDB.Configuration.ImageSize,
+        supportedSizes: [TMDB.Configuration.ImageSize],
     ) throws(TMDBRequestError) -> URL {
         guard let configuration = TMDB.imageConfiguration else {
             throw .imageConfigurationMissing
+        }
+        guard supportedSizes.contains(size) else {
+            throw .unsupportedImageSize(requested: size, supported: supportedSizes)
         }
         return URL(string: configuration.secureBaseUrl.absoluteString + size.rawValue + filePath)!
     }

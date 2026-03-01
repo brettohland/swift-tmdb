@@ -55,12 +55,16 @@ public extension TMDB.Credits.Person {
     /// - Parameter size: The desired image size (e.g., `.setWidth(185)` or `.original`).
     /// - Returns: A fully-qualified image URL.
     /// - Throws: ``TMDBRequestError/imageConfigurationMissing`` if ``TMDB/initialize(configuration:)``
-    ///   has not been called.
+    ///   has not been called, or ``TMDBRequestError/unsupportedImageSize(requested:supported:)`` if
+    ///   the size is not in ``TMDB/ImageConfiguration/profileSizes``.
     func profileImageURL(
         size: TMDB.Configuration.ImageSize,
     ) throws(TMDBRequestError) -> URL {
         guard let configuration = TMDB.imageConfiguration else {
             throw .imageConfigurationMissing
+        }
+        guard configuration.profileSizes.contains(size) else {
+            throw .unsupportedImageSize(requested: size, supported: configuration.profileSizes)
         }
         return URL(string: configuration.secureBaseUrl.absoluteString + size.rawValue + profilePath)!
     }

@@ -37,12 +37,16 @@ public extension PosterImageProviding {
     /// - Parameter size: The desired image size (e.g., `.setWidth(500)` or `.original`).
     /// - Returns: A fully-qualified image URL, or `nil` if ``posterPath`` is `nil`.
     /// - Throws: ``TMDBRequestError/imageConfigurationMissing`` if ``TMDB/initialize(configuration:)``
-    ///   has not been called.
+    ///   has not been called, or ``TMDBRequestError/unsupportedImageSize(requested:supported:)`` if
+    ///   the size is not in ``TMDB/ImageConfiguration/posterSizes``.
     func posterImageURL(
         size: TMDB.Configuration.ImageSize,
     ) throws(TMDBRequestError) -> URL? {
         guard let configuration = TMDB.imageConfiguration else {
             throw .imageConfigurationMissing
+        }
+        guard configuration.posterSizes.contains(size) else {
+            throw .unsupportedImageSize(requested: size, supported: configuration.posterSizes)
         }
         guard let posterPath else { return nil }
         return URL(string: configuration.secureBaseUrl.absoluteString + size.rawValue + posterPath)

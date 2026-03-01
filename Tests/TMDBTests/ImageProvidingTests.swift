@@ -57,7 +57,7 @@ struct ImageProvidingTests {
                 secureBaseUrl: URL(string: "https://image.tmdb.org/t/p/")!,
                 backdropSizes: [],
                 logoSizes: [],
-                posterSizes: [],
+                posterSizes: [.setWidth(92), .setWidth(154), .setWidth(500), .original],
                 profileSizes: [],
                 stillSizes: [],
             )
@@ -84,11 +84,26 @@ struct ImageProvidingTests {
             #expect(url == URL(string: "https://image.tmdb.org/t/p/original/abc123.jpg"))
         }
 
-        @Test("Uses height-based size")
-        func heightSize() throws {
+        @Test("Throws unsupportedImageSize for invalid size")
+        func unsupportedSize() {
             let mock = MockPoster(posterPath: "/abc123.jpg")
-            let url = try mock.posterImageURL(size: .setHeight(632))
-            #expect(url == URL(string: "https://image.tmdb.org/t/p/h632/abc123.jpg"))
+            #expect(throws: TMDBRequestError.unsupportedImageSize(
+                requested: .setWidth(999),
+                supported: [.setWidth(92), .setWidth(154), .setWidth(500), .original],
+            )) {
+                try mock.posterImageURL(size: .setWidth(999))
+            }
+        }
+
+        @Test("Throws unsupportedImageSize for height-based size not in poster sizes")
+        func unsupportedHeightSize() {
+            let mock = MockPoster(posterPath: "/abc123.jpg")
+            #expect(throws: TMDBRequestError.unsupportedImageSize(
+                requested: .setHeight(632),
+                supported: [.setWidth(92), .setWidth(154), .setWidth(500), .original],
+            )) {
+                try mock.posterImageURL(size: .setHeight(632))
+            }
         }
     }
 
@@ -104,7 +119,7 @@ struct ImageProvidingTests {
             TMDB.imageConfiguration = TMDB.ImageConfiguration(
                 baseUrl: nil,
                 secureBaseUrl: URL(string: "https://image.tmdb.org/t/p/")!,
-                backdropSizes: [],
+                backdropSizes: [.setWidth(300), .setWidth(780), .setWidth(1_280), .original],
                 logoSizes: [],
                 posterSizes: [],
                 profileSizes: [],
@@ -125,6 +140,17 @@ struct ImageProvidingTests {
             let url = try mock.backdropImageURL(size: .setWidth(780))
             #expect(url == nil)
         }
+
+        @Test("Throws unsupportedImageSize for invalid size")
+        func unsupportedSize() {
+            let mock = MockBackdrop(backdropPath: "/backdrop.jpg")
+            #expect(throws: TMDBRequestError.unsupportedImageSize(
+                requested: .setWidth(999),
+                supported: [.setWidth(300), .setWidth(780), .setWidth(1_280), .original],
+            )) {
+                try mock.backdropImageURL(size: .setWidth(999))
+            }
+        }
     }
 
     // MARK: - ProfileImageProviding
@@ -142,7 +168,7 @@ struct ImageProvidingTests {
                 backdropSizes: [],
                 logoSizes: [],
                 posterSizes: [],
-                profileSizes: [],
+                profileSizes: [.setWidth(45), .setWidth(185), .setHeight(632), .original],
                 stillSizes: [],
             )
         }
@@ -160,6 +186,17 @@ struct ImageProvidingTests {
             let url = try mock.profileImageURL(size: .setWidth(185))
             #expect(url == nil)
         }
+
+        @Test("Throws unsupportedImageSize for invalid size")
+        func unsupportedSize() {
+            let mock = MockProfile(profilePath: "/profile.jpg")
+            #expect(throws: TMDBRequestError.unsupportedImageSize(
+                requested: .setWidth(999),
+                supported: [.setWidth(45), .setWidth(185), .setHeight(632), .original],
+            )) {
+                try mock.profileImageURL(size: .setWidth(999))
+            }
+        }
     }
 
     // MARK: - LogoImageProviding
@@ -175,7 +212,7 @@ struct ImageProvidingTests {
                 baseUrl: nil,
                 secureBaseUrl: URL(string: "https://image.tmdb.org/t/p/")!,
                 backdropSizes: [],
-                logoSizes: [],
+                logoSizes: [.setWidth(45), .setWidth(154), .setWidth(500), .original],
                 posterSizes: [],
                 profileSizes: [],
                 stillSizes: [],
@@ -195,6 +232,17 @@ struct ImageProvidingTests {
             let url = try mock.logoImageURL(size: .setWidth(154))
             #expect(url == nil)
         }
+
+        @Test("Throws unsupportedImageSize for invalid size")
+        func unsupportedSize() {
+            let mock = MockLogo(logoPath: "/logo.png")
+            #expect(throws: TMDBRequestError.unsupportedImageSize(
+                requested: .setWidth(999),
+                supported: [.setWidth(45), .setWidth(154), .setWidth(500), .original],
+            )) {
+                try mock.logoImageURL(size: .setWidth(999))
+            }
+        }
     }
 
     // MARK: - StillImageProviding
@@ -213,7 +261,7 @@ struct ImageProvidingTests {
                 logoSizes: [],
                 posterSizes: [],
                 profileSizes: [],
-                stillSizes: [],
+                stillSizes: [.setWidth(92), .setWidth(185), .setWidth(300), .original],
             )
         }
 
@@ -230,6 +278,17 @@ struct ImageProvidingTests {
             let url = try mock.stillImageURL(size: .setWidth(300))
             #expect(url == nil)
         }
+
+        @Test("Throws unsupportedImageSize for invalid size")
+        func unsupportedSize() {
+            let mock = MockStill(stillPath: "/still.jpg")
+            #expect(throws: TMDBRequestError.unsupportedImageSize(
+                requested: .setWidth(999),
+                supported: [.setWidth(92), .setWidth(185), .setWidth(300), .original],
+            )) {
+                try mock.stillImageURL(size: .setWidth(999))
+            }
+        }
     }
 
     // MARK: - ImageURLProviding
@@ -239,6 +298,10 @@ struct ImageProvidingTests {
         struct MockImage: ImageURLProviding {
             var filePath: String
         }
+
+        let supportedSizes: [TMDB.Configuration.ImageSize] = [
+            .setWidth(300), .setWidth(780), .setWidth(1_280), .original,
+        ]
 
         init() {
             TMDB.imageConfiguration = TMDB.ImageConfiguration(
@@ -255,15 +318,26 @@ struct ImageProvidingTests {
         @Test("Constructs correct image URL from filePath")
         func constructsURL() throws {
             let mock = MockImage(filePath: "/image.jpg")
-            let url = try mock.imageURL(size: .original)
+            let url = try mock.imageURL(size: .original, supportedSizes: supportedSizes)
             #expect(url == URL(string: "https://image.tmdb.org/t/p/original/image.jpg"))
         }
 
         @Test("Uses width-based size")
         func widthSize() throws {
             let mock = MockImage(filePath: "/image.jpg")
-            let url = try mock.imageURL(size: .setWidth(500))
-            #expect(url == URL(string: "https://image.tmdb.org/t/p/w500/image.jpg"))
+            let url = try mock.imageURL(size: .setWidth(780), supportedSizes: supportedSizes)
+            #expect(url == URL(string: "https://image.tmdb.org/t/p/w780/image.jpg"))
+        }
+
+        @Test("Throws unsupportedImageSize for invalid size")
+        func unsupportedSize() {
+            let mock = MockImage(filePath: "/image.jpg")
+            #expect(throws: TMDBRequestError.unsupportedImageSize(
+                requested: .setWidth(999),
+                supported: supportedSizes,
+            )) {
+                try mock.imageURL(size: .setWidth(999), supportedSizes: supportedSizes)
+            }
         }
     }
 }

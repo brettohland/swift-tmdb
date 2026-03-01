@@ -14,6 +14,8 @@ public enum TMDBRequestError: Error {
     case notAuthenticated
     /// Image configuration has not been fetched — call `TMDB.initialize()` first
     case imageConfigurationMissing
+    /// The requested image size is not supported by the TMDB CDN for this image type
+    case unsupportedImageSize(requested: TMDB.Configuration.ImageSize, supported: [TMDB.Configuration.ImageSize])
 }
 
 extension TMDBRequestError: Equatable {
@@ -31,6 +33,11 @@ extension TMDBRequestError: Equatable {
             true
         case (.imageConfigurationMissing, .imageConfigurationMissing):
             true
+        case (
+            .unsupportedImageSize(let lhsRequested, let lhsSupported),
+            .unsupportedImageSize(let rhsRequested, let rhsSupported),
+        ):
+            lhsRequested == rhsRequested && lhsSupported == rhsSupported
         default:
             false
         }

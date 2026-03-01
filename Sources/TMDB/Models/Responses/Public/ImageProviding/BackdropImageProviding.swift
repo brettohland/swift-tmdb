@@ -36,12 +36,16 @@ public extension BackdropImageProviding {
     /// - Parameter size: The desired image size (e.g., `.setWidth(780)` or `.original`).
     /// - Returns: A fully-qualified image URL, or `nil` if ``backdropPath`` is `nil`.
     /// - Throws: ``TMDBRequestError/imageConfigurationMissing`` if ``TMDB/initialize(configuration:)``
-    ///   has not been called.
+    ///   has not been called, or ``TMDBRequestError/unsupportedImageSize(requested:supported:)`` if
+    ///   the size is not in ``TMDB/ImageConfiguration/backdropSizes``.
     func backdropImageURL(
         size: TMDB.Configuration.ImageSize,
     ) throws(TMDBRequestError) -> URL? {
         guard let configuration = TMDB.imageConfiguration else {
             throw .imageConfigurationMissing
+        }
+        guard configuration.backdropSizes.contains(size) else {
+            throw .unsupportedImageSize(requested: size, supported: configuration.backdropSizes)
         }
         guard let backdropPath else { return nil }
         return URL(string: configuration.secureBaseUrl.absoluteString + size.rawValue + backdropPath)
