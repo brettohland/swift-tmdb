@@ -160,6 +160,7 @@ Available clients:
 | `TVSeasonsClient` | `\.tmdbTVSeasons` | All TV season endpoints |
 | `TVEpisodesClient` | `\.tmdbTVEpisodes` | All TV episode endpoints |
 | `PeopleClient` | `\.tmdbPeople` | All people endpoints |
+| `ConfigurationClient` | `\.tmdbConfiguration` | Image configuration and change keys |
 | `CompanyClient` | `\.tmdbCompany` | Company details and images |
 | `NetworkClient` | `\.tmdbNetwork` | Network details and images |
 | `AuthClient` | `\.tmdbAuth` | Authentication token and session management |
