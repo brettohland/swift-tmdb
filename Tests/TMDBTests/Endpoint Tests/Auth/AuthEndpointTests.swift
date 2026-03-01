@@ -37,6 +37,12 @@ struct AuthEndpointTests {
         #expect(result.success)
     }
 
+    // MARK: - Logout
+
+    @Test func logout() async throws {
+        try await TMDB.logout()
+    }
+
     // MARK: - URL Generation
 
     @Test func createRequestTokenURL() {
