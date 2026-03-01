@@ -3,7 +3,7 @@ import Foundation
 public extension TMDB.Discover {
     /// Filters which can be included in the ``TMDB/discoverTV(filters:)`` method to filter your TMDB API request
     ///
-    /// See [TMDB's developer documentation](https://developer.themoviedb.org/reference/discover-movie) for details.
+    /// See [TMDB's developer documentation](https://developer.themoviedb.org/reference/discover-tv) for details.
     ///
     /// The filters will be added as URL query parameters in the order they're included in the parameter list.
     ///
@@ -14,8 +14,8 @@ public extension TMDB.Discover {
     /// For example, both of these filter lists will result in a final url query parameter of
     /// `with_release_type=4,5`
     /// ```swift
-    /// try await TMDB.discoverMovie(filters: .withReleaseType([.and(.digital), .and(.physical)]))
-    /// try await TMDB.discoverMovie(filters: .withReleaseType([.or(.digital), .and(.physical)]))
+    /// try await TMDB.discoverTV(filters: .withReleaseType([.and(.digital), .and(.physical)]))
+    /// try await TMDB.discoverTV(filters: .withReleaseType([.or(.digital), .and(.physical)]))
     /// ```
     enum TVFilter {
 

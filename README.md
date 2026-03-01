@@ -48,7 +48,7 @@ The package provides five targets across four library products:
 ## Dependencies
 
 Internally, the package uses [Point Free's Dependencies](https://github.com/pointfreeco/swift-dependencies) in order
-to support the ability for the TMDB framework to provide real data when run in Testing or SwiftUI Preview environments.
+to support the ability for the TMDB framework to provide mock data when run in Testing or SwiftUI Preview environments.
 
 ## Advanced Usage
 
