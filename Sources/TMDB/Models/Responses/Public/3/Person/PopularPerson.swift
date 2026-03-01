@@ -6,7 +6,7 @@ public extension TMDB {
         public let name: String
         public let gender: Person.Gender
         public let knownForDepartment: String
-        public let profilePath: URL?
+        public let profilePath: String?
         public let popularity: Double
         @NilBoolean
         public var isAdult: Bool
@@ -17,7 +17,7 @@ public extension TMDB {
             name: String,
             gender: Person.Gender,
             knownForDepartment: String,
-            profilePath: URL?,
+            profilePath: String?,
             popularity: Double,
             isAdult: Bool,
             knownFor: [MultiSearchResult],
@@ -54,7 +54,7 @@ extension TMDB.PopularPerson: Codable {
         name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
         gender = try container.decodeIfPresent(TMDB.Person.Gender.self, forKey: .gender) ?? .unspecified
         knownForDepartment = try container.decodeIfPresent(String.self, forKey: .knownForDepartment) ?? ""
-        profilePath = try container.decodeIfPresent(URL.self, forKey: .profilePath)
+        profilePath = try container.decodeIfPresent(String.self, forKey: .profilePath)
         popularity = try container.decodeIfPresent(Double.self, forKey: .popularity) ?? 0
         _isAdult = try container.decodeIfPresent(NilBoolean.self, forKey: .isAdult) ?? NilBoolean(wrappedValue: false)
         knownFor = try container.decodeIfPresent([TMDB.MultiSearchResult].self, forKey: .knownFor) ?? []

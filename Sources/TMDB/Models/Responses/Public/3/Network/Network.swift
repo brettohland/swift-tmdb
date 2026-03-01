@@ -6,7 +6,7 @@ public extension TMDB {
         public let name: String
         public let headquarters: String
         public let homepage: String
-        public let logoPath: URL?
+        public let logoPath: String?
         public let originCountry: Locale.Region
 
         public init(
@@ -14,7 +14,7 @@ public extension TMDB {
             name: String,
             headquarters: String,
             homepage: String,
-            logoPath: URL?,
+            logoPath: String?,
             originCountry: Locale.Region,
         ) {
             self.id = id

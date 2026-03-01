@@ -4,7 +4,7 @@ public extension TMDB {
     struct TVSeries: Sendable {
         @NilBoolean
         public var isAdult: Bool
-        public let backdropPath: URL?
+        public let backdropPath: String?
         public let createdBy: [Creator]
         public let episodeRunTime: [Int]
         @ISO8601YMD
@@ -29,7 +29,7 @@ public extension TMDB {
         public let originalName: String
         public let overview: String
         public let popularity: Double
-        public let posterPath: URL?
+        public let posterPath: String?
         public let productionCompanies: [ProductionCompany]
         @RegionArray
         public var productionCountries: [Locale.Region]
@@ -44,7 +44,7 @@ public extension TMDB {
 
         public init(
             isAdult: Bool,
-            backdropPath: URL?,
+            backdropPath: String?,
             createdBy: [Creator],
             episodeRunTime: [Int],
             firstAirDate: Date?,
@@ -65,7 +65,7 @@ public extension TMDB {
             originalName: String,
             overview: String,
             popularity: Double,
-            posterPath: URL?,
+            posterPath: String?,
             productionCompanies: [ProductionCompany],
             productionCountries: [Locale.Region],
             seasons: [SeasonOverview],
@@ -121,9 +121,9 @@ public extension TMDB.TVSeries {
         public let name: String
         public let originalName: String
         public let gender: Int
-        public let profilePath: URL?
+        public let profilePath: String?
 
-        public init(id: Int, creditID: String, name: String, originalName: String, gender: Int, profilePath: URL?) {
+        public init(id: Int, creditID: String, name: String, originalName: String, gender: Int, profilePath: String?) {
             self.id = id
             self.creditID = creditID
             self.name = name
@@ -145,10 +145,10 @@ public extension TMDB.TVSeries {
     struct Network: Codable, Identifiable, Sendable {
         public let id: Int
         public let name: String
-        public let logoPath: URL?
+        public let logoPath: String?
         public let originCountry: String
 
-        public init(id: Int, name: String, logoPath: URL?, originCountry: String) {
+        public init(id: Int, name: String, logoPath: String?, originCountry: String) {
             self.id = id
             self.name = name
             self.logoPath = logoPath
@@ -167,7 +167,7 @@ public extension TMDB.TVSeries {
         public let id: Int
         public let name: String
         public let overview: String
-        public let posterPath: URL?
+        public let posterPath: String?
         @ISO8601YMD
         public var airDate: Date?
         public let episodeCount: Int
@@ -178,7 +178,7 @@ public extension TMDB.TVSeries {
             id: Int,
             name: String,
             overview: String,
-            posterPath: URL?,
+            posterPath: String?,
             airDate: Date?,
             episodeCount: Int,
             seasonNumber: Int,
@@ -214,7 +214,7 @@ public extension TMDB.TVSeries {
         public let seasonNumber: Int
         @ISO8601YMD
         public var airDate: Date?
-        public let stillPath: URL?
+        public let stillPath: String?
         public let voteAverage: Double
         public let voteCount: Int
         public let runtime: Int?
@@ -228,7 +228,7 @@ public extension TMDB.TVSeries {
             episodeNumber: Int,
             seasonNumber: Int,
             airDate: Date?,
-            stillPath: URL?,
+            stillPath: String?,
             voteAverage: Double,
             voteCount: Int,
             runtime: Int?,

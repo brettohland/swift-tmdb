@@ -118,6 +118,35 @@ let action = try await TMDB.discoverMovie(filters: [.withGenres([.and("28")]), .
 
 Calling these methods is safe from SwiftUI Previews and unit tests. `swift-tmdb` uses [PointFree's Dependencies](https://github.com/pointfreeco/swift-dependencies) to provide mock data automatically.
 
+## Image URLs
+
+Image configuration is auto-fetched and cached during ``TMDB/initialize(configuration:)`` (or ``TMDB/initialize(apiKey:urlSessionConfiguration:)``). Response types that include image paths provide convenience methods to construct full image URLs without any manual configuration fetch:
+
+```swift
+let movie = try await TMDB.movieDetails(id: 550)
+
+// Construct a poster URL
+if let posterURL = try movie.posterImageURL(size: .setWidth(500)) {
+    // Use posterURL to load the image
+}
+
+// Construct a backdrop URL
+if let backdropURL = try movie.backdropImageURL(size: .setWidth(780)) {
+    // Use backdropURL to load the image
+}
+```
+
+To inspect which image sizes are available, use ``TMDB/imageConfiguration``:
+
+```swift
+if let config = TMDB.imageConfiguration {
+    print(config.posterSizes)   // e.g., [w92, w154, w185, w342, w500, w780, original]
+    print(config.backdropSizes) // e.g., [w300, w780, w1280, original]
+}
+```
+
+The cached ``TMDB/changeKeys`` array is also available after initialization.
+
 ### (Optional) Using Dependency Clients
 
 The `TMDBDependencies` module provides `@Dependency`-based clients for use with PointFree's [swift-dependencies](https://github.com/pointfreeco/swift-dependencies) package.
@@ -131,6 +160,7 @@ Available clients:
 | `TVSeasonsClient` | `\.tmdbTVSeasons` | All TV season endpoints |
 | `TVEpisodesClient` | `\.tmdbTVEpisodes` | All TV episode endpoints |
 | `PeopleClient` | `\.tmdbPeople` | All people endpoints |
+| `ConfigurationClient` | `\.tmdbConfiguration` | Image configuration and change keys |
 | `CompanyClient` | `\.tmdbCompany` | Company details and images |
 | `NetworkClient` | `\.tmdbNetwork` | Network details and images |
 | `AuthClient` | `\.tmdbAuth` | Authentication token and session management |

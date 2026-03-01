@@ -10,7 +10,7 @@ public extension TMDB {
         public let name: String
         public let originalName: String
         public let popularity: Double
-        public let profilePath: URL?
+        public let profilePath: String?
         public let creditID: String
         public let department: String
         public let job: String
@@ -23,7 +23,7 @@ public extension TMDB {
             name: String,
             originalName: String,
             popularity: Double,
-            profilePath: URL?,
+            profilePath: String?,
             creditID: String,
             department: String,
             job: String,

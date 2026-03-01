@@ -3,13 +3,13 @@ import Foundation
 public extension TMDB.Credits {
     struct Media: Codable, Identifiable, Sendable {
         @NilBoolean public var isAdult: Bool
-        public let backdropPath: URL?
+        public let backdropPath: String?
         public let id: Int
         public let mediaType: String
         @LanguageCode
         public var originalLanguage: Locale.Language
         public let overview: String
-        public let posterPath: URL?
+        public let posterPath: String?
         public let genreIDs: [Int]
         public let popularity: Double
         public let voteAverage: Double
@@ -31,12 +31,12 @@ public extension TMDB.Credits {
 
         public init(
             isAdult: Bool,
-            backdropPath: URL?,
+            backdropPath: String?,
             id: Int,
             mediaType: String,
             originalLanguage: Locale.Language,
             overview: String,
-            posterPath: URL?,
+            posterPath: String?,
             genreIDs: [Int],
             popularity: Double,
             voteAverage: Double,
@@ -97,12 +97,12 @@ public extension TMDB.Credits {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             _isAdult = try container
                 .decodeIfPresent(NilBoolean.self, forKey: .isAdult) ?? NilBoolean(wrappedValue: false)
-            backdropPath = try container.decodeIfPresent(URL.self, forKey: .backdropPath)
+            backdropPath = try container.decodeIfPresent(String.self, forKey: .backdropPath)
             id = try container.decode(Int.self, forKey: .id)
             mediaType = try container.decode(String.self, forKey: .mediaType)
             _originalLanguage = try container.decode(LanguageCode.self, forKey: .originalLanguage)
             overview = try container.decode(String.self, forKey: .overview)
-            posterPath = try container.decodeIfPresent(URL.self, forKey: .posterPath)
+            posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
             genreIDs = try container.decode([Int].self, forKey: .genreIDs)
             popularity = try container.decode(Double.self, forKey: .popularity)
             voteAverage = try container.decode(Double.self, forKey: .voteAverage)

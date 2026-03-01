@@ -11,7 +11,7 @@ public extension TMDB.GuestSession {
         public let runtime: Int?
         public let seasonNumber: Int
         public let showID: Int
-        public let stillPath: URL?
+        public let stillPath: String?
         public let voteAverage: Double?
         public let voteCount: Int?
         public let rating: Double
@@ -26,7 +26,7 @@ public extension TMDB.GuestSession {
             runtime: Int?,
             seasonNumber: Int,
             showID: Int,
-            stillPath: URL?,
+            stillPath: String?,
             voteAverage: Double?,
             voteCount: Int?,
             rating: Double,

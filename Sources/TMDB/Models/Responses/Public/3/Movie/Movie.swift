@@ -3,7 +3,7 @@ import Foundation
 public extension TMDB {
     struct Movie: Sendable {
         public let isAdult: Bool
-        public let backdropPath: URL?
+        public let backdropPath: String?
         public let belongsToCollection: TitleCollection?
         public let budget: Int
         public let genres: [Genre]
@@ -15,7 +15,7 @@ public extension TMDB {
         public let originalTitle: String
         public let overview: String
         public let popularity: Double
-        public let posterPath: URL?
+        public let posterPath: String?
         public let productionCompanies: [ProductionCompany]
         @RegionArray
         public var productionCountries: [Locale.Region]
@@ -35,7 +35,7 @@ public extension TMDB {
 
         public init(
             isAdult: Bool,
-            backdropPath: URL?,
+            backdropPath: String?,
             belongsToCollection: TitleCollection?,
             budget: Int,
             genres: [Genre],
@@ -46,7 +46,7 @@ public extension TMDB {
             originalTitle: String,
             overview: String,
             popularity: Double,
-            posterPath: URL?,
+            posterPath: String?,
             productionCompanies: [ProductionCompany],
             productionCountries: [Locale.Region],
             releaseDate: Date?,

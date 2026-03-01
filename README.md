@@ -62,6 +62,19 @@ These filters are first-class value types in framework and can be composited eas
 - [Movie Filters Documentation](https://brettohland.github.io/swift-tmdb/documentation/tmdb/tmdb/discover/moviefilter)
 - [TV Filters Documentation](https://brettohland.github.io/swift-tmdb/documentation/tmdb/tmdb/discover/tvfilter)
 
+### Image URLs
+
+Image configuration is cached automatically during initialization — no manual fetch needed. Response types that include image paths provide convenience methods:
+
+```swift
+let movie = try await TMDB.movieDetails(id: 550)
+if let posterURL = try movie.posterImageURL(size: .setWidth(500)) {
+    // Use posterURL to load the image
+}
+```
+
+See the [Image URL Construction documentation](https://brettohland.github.io/swift-tmdb/documentation/tmdb/) for available protocols and sizes.
+
 ### Format Styles
 
 Custom [Format Style](https://developer.apple.com/documentation/Foundation/FormatStyle) implementations which allow for

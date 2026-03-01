@@ -22,7 +22,7 @@ public extension TMDB {
         public let name: String
         public let originalName: String
         public let popularity: Double
-        public let profilePath: URL?
+        public let profilePath: String?
         public let roles: [Role]
         public let totalEpisodeCount: Int
         public let order: Int
@@ -35,7 +35,7 @@ public extension TMDB {
             name: String,
             originalName: String,
             popularity: Double,
-            profilePath: URL?,
+            profilePath: String?,
             roles: [Role],
             totalEpisodeCount: Int,
             order: Int,
@@ -95,7 +95,7 @@ public extension TMDB {
         public let name: String
         public let originalName: String
         public let popularity: Double
-        public let profilePath: URL?
+        public let profilePath: String?
         public let department: String
         public let jobs: [Job]
         public let totalEpisodeCount: Int
@@ -108,7 +108,7 @@ public extension TMDB {
             name: String,
             originalName: String,
             popularity: Double,
-            profilePath: URL?,
+            profilePath: String?,
             department: String,
             jobs: [Job],
             totalEpisodeCount: Int,

@@ -7,7 +7,7 @@ public extension TMDB {
         public let description: String
         public let headquarters: String
         public let homepage: String
-        public let logoPath: URL?
+        public let logoPath: String?
         public let originCountry: Locale.Region
         public let parentCompany: ParentCompany?
 
@@ -17,7 +17,7 @@ public extension TMDB {
             description: String,
             headquarters: String,
             homepage: String,
-            logoPath: URL?,
+            logoPath: String?,
             originCountry: Locale.Region,
             parentCompany: ParentCompany?,
         ) {
@@ -39,9 +39,9 @@ public extension TMDB.Company {
     struct ParentCompany: Codable, Identifiable, Sendable {
         public let id: Int
         public let name: String
-        public let logoPath: URL?
+        public let logoPath: String?
 
-        public init(id: Int, name: String, logoPath: URL?) {
+        public init(id: Int, name: String, logoPath: String?) {
             self.id = id
             self.name = name
             self.logoPath = logoPath
