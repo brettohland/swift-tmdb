@@ -13,6 +13,11 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, authe
 ### Getting Started
 
 - <doc:Usage>
+- <doc:AuthenticationGuide>
+- <doc:ErrorHandling>
+- <doc:TestingAndPreviews>
+- <doc:AccountAndLists>
+- <doc:DiscoverFilters>
 - ``TMDB``
 - ``TMDBConfiguration``
 
@@ -186,6 +191,9 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, authe
 - ``TMDB/deleteAccessToken(_:)``
 - ``TMDB/convertToV3Session(accessToken:)``
 - ``TMDB/deleteV3Session(sessionID:)``
+- ``TMDB/logout()``
+- ``TMDB/isAuthenticated``
+- ``TMDB/currentSession``
 - ``TMDB/AuthenticationCoordinator``
 
 ### Account
@@ -388,6 +396,7 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, authe
 - ``TMDB/TVCertifications``
 - ``TMDB/WatchProvider``
 - ``TMDB/WatchProviderRegion``
+- ``TMDB/WatchProviderList``
 - ``TMDB/Credits/Details``
 - ``TMDB/ProductionCompany``
 - ``TMDB/TitleCollection``
@@ -396,6 +405,7 @@ Supports movies, TV series, seasons, episodes, search, discover, trending, authe
 
 - ``TMDB/TrendingTimeWindow``
 - ``TMDB/ExternalSource``
+- ``TMDB/LoggingLevel``
 
 ### Codable Property Wrappers
 

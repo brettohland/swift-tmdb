@@ -113,7 +113,7 @@ let results = try await TMDB.searchMovies(query: "Inception")
 let trending = try await TMDB.trendingAll(timeWindow: .week)
 
 // Discover with filters
-let action = try await TMDB.discoverMovie(filters: [.withGenres([.and("28")]), .sortBy(.popularity, .descending)])
+let action = try await TMDB.discoverMovie(filters: .withGenres([.and("28")]), .sortBy(.popularity, .descending))
 ```
 
 Calling these methods is safe from SwiftUI Previews and unit tests. `swift-tmdb` uses [PointFree's Dependencies](https://github.com/pointfreeco/swift-dependencies) to provide mock data automatically.
