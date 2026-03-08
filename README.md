@@ -1,16 +1,21 @@
 ```
-           ▗▄▄▖▄   ▄ ▄ ▗▞▀▀▘■      ▗▄▄▄▖▗▖  ▗▖▗▄▄▄  ▗▄▄▖
-          ▐▌   █ ▄ █ ▄ ▐▌▗▄▟▙▄▖      █  ▐▛▚▞▜▌▐▌  █ ▐▌ ▐▌
-           ▝▀▚▖█▄█▄█ █ ▐▛▀▘▐▌        █  ▐▌  ▐▌▐▌  █ ▐▛▀▚▖
-          ▗▄▄▞▘      █ ▐▌  ▐▌        █  ▐▌  ▐▌▐▙▄▄▀ ▐▙▄▞▘
-                           ▐▌
-
+ ▗▄▄▖▄   ▄ ▄ ▗▞▀▀▘■      ▗▄▄▄▖▗▖  ▗▖▗▄▄▄  ▗▄▄▖
+▐▌   █ ▄ █ ▄ ▐▌▗▄▟▙▄▖      █  ▐▛▚▞▜▌▐▌  █ ▐▌ ▐▌
+ ▝▀▚▖█▄█▄█ █ ▐▛▀▘▐▌        █  ▐▌  ▐▌▐▌  █ ▐▛▀▚▖
+▗▄▄▞▘      █ ▐▌  ▐▌        █  ▐▌  ▐▌▐▙▄▄▀ ▐▙▄▞▘
+                 ▐▌
 ```
 
 # `swift-tmdb`: A Modern TMDB Swift Package
 
 A TMDB SDK that targets iOS/iPadOS 26 and uses Swift 6.2 and provides automatic mocked responses during unit testing
 and in SwiftUI Previews.
+
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrettohland%2Fswift-tmdb%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/brettohland/swift-tmdb)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrettohland%2Fswift-tmdb%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/brettohland/swift-tmdb)
+
+[![CI](https://github.com/brettohland/swift-tmdb/actions/workflows/ci.yml/badge.svg)](https://github.com/brettohland/swift-tmdb/actions/workflows/ci.yml)
+[![Integration Tests](https://github.com/brettohland/swift-tmdb/actions/workflows/integration.yml/badge.svg)](https://github.com/brettohland/swift-tmdb/actions/workflows/integration.yml)
 
 [swift-tmdb Documentation](https://brettohland.github.io/swift-tmdb/documentation/tmdb/)
 
