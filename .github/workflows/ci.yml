@@ -33,6 +33,7 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 15
     strategy:
+      fail-fast: false
       matrix:
         include:
           - platform: iOS
@@ -58,4 +59,5 @@ jobs:
           xcodebuild build \
             -scheme swift-tmdb-Package \
             -destination '${{ matrix.destination }}' \
-            -derivedDataPath .build/DerivedData
+            -derivedDataPath .build/DerivedData \
+            -skipMacroValidation
