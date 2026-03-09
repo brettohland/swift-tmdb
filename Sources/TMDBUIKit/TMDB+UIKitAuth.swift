@@ -18,7 +18,7 @@ public extension TMDB {
             callbackURL = try await withCheckedThrowingContinuation { continuation in
                 let session = ASWebAuthenticationSession(
                     url: approvalURL,
-                    callback: .customScheme("tmdb-sdk"),
+                    callback: .customScheme(TMDB.callbackScheme),
                     completionHandler: { url, error in
                         if let error {
                             continuation.resume(throwing: error)

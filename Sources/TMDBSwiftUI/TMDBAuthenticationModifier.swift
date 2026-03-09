@@ -29,7 +29,7 @@ struct TMDBAuthenticationModifier: ViewModifier {
 
             let callbackURL = try await webAuthenticationSession.authenticate(
                 using: approvalURL,
-                callback: .customScheme("tmdb-sdk"),
+                callback: .customScheme(TMDB.callbackScheme),
                 additionalHeaderFields: [:],
             )
 

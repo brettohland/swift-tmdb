@@ -2,6 +2,10 @@ internal import Dependencies
 import Foundation
 
 public extension TMDB {
+    nonisolated static let callbackScheme = "tmdb-sdk"
+}
+
+public extension TMDB {
     actor AuthenticationCoordinator {
         private var inProgress = false
 
@@ -10,7 +14,7 @@ public extension TMDB {
         public init() {}
 
         public func createRequestToken(
-            redirectTo: String = "tmdb-sdk://auth",
+            redirectTo: String = "\(TMDB.callbackScheme)://auth",
         ) async throws(TMDBRequestError) -> (requestToken: String, approvalURL: URL) {
             let result = try await TMDB.createRequestToken(redirectTo: redirectTo)
             let approvalURL = URL(
