@@ -18,6 +18,7 @@ public extension TMDB {
             let session = ASWebAuthenticationSession(
                 url: approvalURL,
                 callback: .customScheme("tmdb-sdk"),
+                completionHandler: { _, _ in }, // unused: result handled via session.start() async
             )
             session.presentationContextProvider = PresentationContextProvider(anchor: presentationAnchor)
             callbackURL = try await session.start()
