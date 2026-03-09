@@ -1,7 +1,7 @@
 import AuthenticationServices
 import TMDB
 
-#if canImport(UIKit)
+#if os(iOS) || targetEnvironment(macCatalyst)
 import UIKit
 
 public extension TMDB {
@@ -15,13 +15,23 @@ public extension TMDB {
 
         let callbackURL: URL
         do {
-            let session = ASWebAuthenticationSession(
-                url: approvalURL,
-                callback: .customScheme("tmdb-sdk"),
-                completionHandler: { _, _ in }, // unused: result handled via session.start() async
-            )
-            session.presentationContextProvider = PresentationContextProvider(anchor: presentationAnchor)
-            callbackURL = try await session.start()
+            callbackURL = try await withCheckedThrowingContinuation { continuation in
+                let session = ASWebAuthenticationSession(
+                    url: approvalURL,
+                    callback: .customScheme("tmdb-sdk"),
+                    completionHandler: { url, error in
+                        if let error {
+                            continuation.resume(throwing: error)
+                        } else if let url {
+                            continuation.resume(returning: url)
+                        } else {
+                            continuation.resume(throwing: URLError(.badServerResponse))
+                        }
+                    },
+                )
+                session.presentationContextProvider = PresentationContextProvider(anchor: presentationAnchor)
+                session.start()
+            }
         } catch {
             let nsError = error as NSError
             if nsError.domain == ASWebAuthenticationSessionError.errorDomain,
@@ -50,4 +60,4 @@ private final class PresentationContextProvider: NSObject, ASWebAuthenticationPr
     }
 }
 
-#endif
+#endif // os(iOS) || targetEnvironment(macCatalyst)
