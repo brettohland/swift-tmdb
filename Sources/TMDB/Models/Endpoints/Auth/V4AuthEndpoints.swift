@@ -32,8 +32,10 @@ public extension TMDB {
     /// - Parameter redirectTo: The URL to redirect to after the user approves the request token
     /// - Returns: ``TMDB/Auth/RequestToken``
     /// - Throws: ``TMDBRequestError``
-    static func createRequestToken(redirectTo: String = "tmdb-sdk://auth") async throws(TMDBRequestError) -> Auth
-    .RequestToken {
+    static func createRequestToken(redirectTo: String = "\(TMDB.callbackScheme)://auth") async throws(TMDBRequestError)
+        -> Auth
+        .RequestToken
+    {
         let endpoint = Endpoint<RequestTokenBody, Auth.RequestToken>(
             endpoint: V4Endpoints.Auth.createRequestToken,
             httpMethod: .post,
